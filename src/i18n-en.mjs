@@ -855,3 +855,5 @@ Object.assign(EN,{
 });
 
 Object.assign(EN,{'夜市开张，街坊到酒楼前等热食。':'The night market opens; neighbors gather at the restaurant for something warm.','大家先找好观赏位置，再看一场短短的花火。':'The neighbors find their places for a short fireworks show.','晚市':'Evening market'});
+
+Object.assign(EN,{'送信时刻，邮差与送信人沿街核对门牌、分送信件，街坊留意来信':'A postal round: carriers check addresses along the lanes, while neighbors look out for letters.'});

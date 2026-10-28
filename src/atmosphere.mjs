@@ -1,10 +1,11 @@
 export const ATMOSPHERE_QUESTIONS={
   "intent": {
     "type": "choice",
-    "instructions": "User is speaking to an artistic miniature town. Read wishes, moods and poetic evocations as invitations, even without imperative verbs or named objects. Pure compliments, past recollections, explicit keep-as-is and hypothetical questions are not invitations. Concrete action commands belong to the literal controller.",
+    "instructions": "User speaks to an artistic miniature town. Emotional wishes, moods and poetic evocations are invitations even without imperative verbs. Emotion transformed into imagery is a metaphor, not a demand to manufacture its imaginary objects. Pure compliments, past recollections, keep-as-is and hypothetical questions are not invitations. Choose literal if a concrete supported activity/time/weather/person/object is the meaning of the wish; poetic adjectives alone do not make it mixed. Choose mixed for a concrete request PLUS a separately desired town-wide feeling. Choose mood for a feeling or evocative metaphor without a concrete supported command.",
     "criteria": {
       "mood": "An implied or explicit invitation to evoke an atmosphere",
-      "literal": "A concrete action/weather/object request",
+      "literal": "A specific action, communal activity, time, weather or object request, including poetic phrasing",
+      "mixed": "Both specific actions AND an independent invitation for the whole town to evoke a mood",
       "no_change": "Only praise, memory, hypothetical or explicit leave unchanged",
       "unclear": "No coherent direction can be inferred"
     }
@@ -31,4 +32,21 @@ export const ATMOSPHERES={
  quiet:{label:'让脚步和风都慢一点，留一会儿安静。',changes:{occasion:'quiet',light:'soft',breeze:'calm'}},
  hopeful:{label:'让街巷亮起来，把新的好心情传开。',changes:{occasion:'market',light:'bright',breeze:'gentle'}}
 };
-export function atmospherePlan(answers){const intent=answers.mood_intent,mood=answers.atmosphere;if(intent?.choice!=='mood'||!ATMOSPHERES[mood?.choice]||(intent.probabilities?.mood||0)<.6||(mood.probabilities?.[mood.choice]||0)<.5)return null;const preset=ATMOSPHERES[mood.choice];return{status:'change',items:Object.entries(preset.changes).map(([target,action])=>({kind:'macro',target,action,field:target,label:preset.label,target_label:'氛围'})),skipped:[],summary:preset.label,resolution:{source:'jev-atmosphere',choice:mood.choice,confidence:mood.probabilities[mood.choice]}};}
+export function atmospherePlan(answers){const intent=answers.mood_intent,mood=answers.atmosphere;if(!['mood','mixed'].includes(intent?.choice)||!ATMOSPHERES[mood?.choice]||((intent.probabilities?.mood||0)+(intent.probabilities?.mixed||0))<.6||(mood.probabilities?.[mood.choice]||0)<.5)return null;const preset=ATMOSPHERES[mood.choice];return{status:'change',items:Object.entries(preset.changes).map(([target,action])=>({kind:'macro',target,action,field:target,label:preset.label,target_label:'氛围'})),skipped:[],summary:preset.label,resolution:{source:'jev-atmosphere',choice:mood.choice,confidence:mood.probabilities[mood.choice]}};}
+
+// Concrete choices cannot be erased by the less-specific mood interpretation.
+// Only an independently requested mood may add compatible, unmentioned fields.
+export function composeAtmosphere(literal, answers){
+ const mood=atmospherePlan(answers);if(!mood)return literal;
+ if(!literal.items.length){
+  if(answers.mood_intent.choice==='mixed'||['no_change','clarify','partial'].includes(literal.status))return literal;
+  return {...mood,literalPlan:literal};
+ }
+ if(answers.mood_intent.choice!=='mixed')return literal;
+ const foreground=new Set(['weather','festival','occasion']);
+ const targets=new Set(literal.items.filter(i=>i.kind==='macro').map(i=>i.target));
+ const hasScene=[...targets].some(t=>foreground.has(t));
+ const additions=mood.items.filter(i=>!targets.has(i.target)&&!(hasScene&&foreground.has(i.target)));
+ if(!additions.length)return literal;
+ return {...literal,items:[...literal.items,...additions],resolution:{...mood.resolution,source:'jev-composed'},summary:literal.summary+'；'+mood.summary};
+}
