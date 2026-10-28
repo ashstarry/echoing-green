@@ -1,11 +1,11 @@
-import {createPavingSupport} from './foot-support.mjs?v=cp28-1336fccff9e2';
-import {createPassengerView} from './passenger-view.mjs?v=cp28-1336fccff9e2';
-import {createObjectActionView} from './object-action-view.mjs?v=cp28-1336fccff9e2';
-import {createResidentActionView} from './resident-action-view.mjs?v=cp28-1336fccff9e2';
+import {createPavingSupport} from './foot-support.mjs?v=cp28-3fa06914ee4d';
+import {createPassengerView} from './passenger-view.mjs?v=cp28-3fa06914ee4d';
+import {createObjectActionView} from './object-action-view.mjs?v=cp28-3fa06914ee4d';
+import {createResidentActionView} from './resident-action-view.mjs?v=cp28-3fa06914ee4d';
 import * as THREE from 'three';
-import {legPose,railPose,sampleRail,ease,sampleClip} from './motion.mjs?v=cp28-1336fccff9e2';
-import {createIntentView} from './intent-view.mjs?v=cp28-1336fccff9e2';
-import {createFireworks} from './fireworks.mjs?v=cp28-1336fccff9e2';
+import {legPose,railPose,sampleRail,ease,sampleClip} from './motion.mjs?v=cp28-3fa06914ee4d';
+import {createIntentView} from './intent-view.mjs?v=cp28-3fa06914ee4d';
+import {createFireworks} from './fireworks.mjs?v=cp28-3fa06914ee4d';
 const X=new THREE.Vector3(1,0,0),Y=new THREE.Vector3(0,1,0),BZ=new THREE.Vector3(0,0,-1),q=new THREE.Quaternion(),v=new THREE.Vector3();
 export function createLifeView({scene,entities,parts,registry,lights,weatherSupport,renderer,camera,activities,nav}){
  const originals=new Map(),partBase=new Map(),emissive=[],stars=[],byId=new Map(registry.entities.map(e=>[e.id,e])),headAngles=new Map(),curtainAmounts=new Map();

@@ -1,5 +1,5 @@
-import {writeText,t,initializeI18n} from './i18n.mjs?v=cp28-1336fccff9e2';
-import {scoreStep,musicMood,MUSIC_TITLES,STEP_SECONDS} from './chiptune-score.mjs?v=cp28-1336fccff9e2';
+import {writeText,t,initializeI18n} from './i18n.mjs?v=cp28-3fa06914ee4d';
+import {scoreStep,musicMood,MUSIC_TITLES,STEP_SECONDS} from './chiptune-score.mjs?v=cp28-3fa06914ee4d';
 const waves=new WeakMap();
 export function scheduleTone(context,destination,note,time){const osc=context.createOscillator(),env=context.createGain(),length=note.beats*STEP_SECONDS;
  if(note.voice==='lead'){let wave=waves.get(context);if(!wave){const real=new Float32Array(8),imag=new Float32Array(8);imag[1]=1;imag[3]=.12;imag[5]=.035;imag[7]=.012;wave=context.createPeriodicWave(real,imag);waves.set(context,wave);}osc.setPeriodicWave(wave);}else osc.type='triangle';

@@ -1,12 +1,24 @@
-import {stableUnit} from './cadence.mjs?v=cp28-1336fccff9e2';
-import {stimulateTown} from './town-response.mjs?v=cp28-1336fccff9e2';
-import {navigationGraph} from './navigation.mjs?v=cp28-1336fccff9e2';
-import {moverBlocks} from './motion.mjs?v=cp28-1336fccff9e2';
+import {stableUnit} from './cadence.mjs?v=cp28-3fa06914ee4d';
+import {stimulateTown} from './town-response.mjs?v=cp28-3fa06914ee4d';
+import {navigationGraph} from './navigation.mjs?v=cp28-3fa06914ee4d';
+import {moverBlocks} from './motion.mjs?v=cp28-3fa06914ee4d';
 
 export const EVENT_TIMING={snow:{gather:0,active:38,closing:7},rain:{gather:0,active:42,closing:7},festival:{gather:36,active:24,closing:7},market:{gather:26,active:30,closing:8},supper:{gather:26,active:30,closing:8},reunion:{gather:14,active:28,closing:7},delivery:{gather:3,active:28,closing:5},quiet:{gather:3,active:28,closing:5}};
 const live=j=>!['done','failed','cancelled'].includes(j.status);
 const distance=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
-export function ensureSceneEvents(s){if(!Object.hasOwn(s,'sceneEvent'))s.sceneEvent=null;s.eventSequence??=0;s.eventWeather??={rain:s.weather==='rain'?1:0,snow:s.weather==='snow'?1:0,cover:0};}
+export function ensureSceneEvents(s){
+ if(!Object.hasOwn(s,'sceneEvent')){
+  const kind=['rain','snow'].includes(s.weather)?s.weather:s.worldEvent?.kind==='festival'?'festival':Object.hasOwn(EVENT_TIMING,s.occasion)?s.occasion:null;
+  s.sceneEvent=null;
+  if(kind){const old=s.worldEvent,show=kind==='festival'&&old.phase==='show'&&old.until>s.time,phase=kind==='festival'&&!show?'gather':'active';
+   s.sceneEvent={id:'legacy-'+s.tick,kind,phase,phaseAt:s.time,started:s.time,until:show?old.until:s.time+(phase==='gather'?EVENT_TIMING[kind].gather:EVENT_TIMING[kind].active),slots:{},ready:0,next:null,protectedIds:s.actors.filter(a=>a.manual).map(a=>a.id),explicitDay:true};
+   s.weather=['rain','snow'].includes(kind)?kind:'clear';s.occasion=['rain','snow','festival'].includes(kind)?'ordinary':kind;s.lastWeather=s.weather;s.lastOccasion=s.occasion;s.planRevision++;
+   if(kind!=='festival'){s.worldEvent={kind:'ordinary',phase:'ongoing',started:s.time,until:0,revision:old.revision+1};s.festivalUntil=0;s.festivalStop=s.time;}
+   else if(!show){s.worldEvent={kind:'festival',phase:'prepare',started:s.time,until:s.sceneEvent.until,revision:old.revision+1};s.festivalUntil=0;}
+  }
+ }
+ s.eventSequence??=0;s.eventWeather??={rain:s.weather==='rain'?1:0,snow:s.weather==='snow'?1:0,cover:0};
+}
 export function eventKind(d){if(d.festival==='fireworks')return 'festival';if(d.weather==='snow'||d.weather==='rain')return d.weather;if(EVENT_TIMING[d.occasion])return d.occasion;return null;}
 function clearPulse(s){s.townResponse=null;for(const a of s.actors){a.responseUntil=0;a.responseDestination=null;a.responseReplan=false;}}
 function finishSky(s){if(s.festivalUntil>s.time){s.festivalStop=s.time;s.festivalUntil=Math.min(s.festivalUntil,s.time+5.5);}s.worldEvent={kind:'ordinary',phase:'ongoing',started:s.time,until:0,revision:s.worldEvent.revision+1};}
