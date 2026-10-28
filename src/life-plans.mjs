@@ -1,3 +1,4 @@
+import {eventKind} from './scene-events.mjs';
 import {stimulateTown} from './town-response.mjs';
 import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs';
 import {requestPassengerAction} from './passengers.mjs';
@@ -29,11 +30,12 @@ export function queueIntent(s,items,{id=`local-plan-${s.revision+1}-${s.intentRu
   if(object.kind==='instrument'){owner='resident.musician';goal=item.action==='play'?'play_music':'rest_music';}
   if(object.kind==='seat'&&item.target.includes('dining_chair')){owner='resident.upper_diner_'+item.target.at(-1);goal=item.action==='pull_out'?'inside':'dine';}
   if(owner){if(!supportsResident(owner,goal))throw Error('这个物件尚未连接到使用者动作');return{...item,origin_object:item.target,kind:'resident',target:owner,action:goal};}return item;});
+ if(source==='words'&&s.sceneEvent){for(const item of items)if(item.kind==='resident'){if(!s.sceneEvent.protectedIds.includes(item.target))s.sceneEvent.protectedIds.push(item.target);delete s.sceneEvent.slots[item.target];}}
  s.intentRuntime.seen.push(id);s.intentRuntime.seen=s.intentRuntime.seen.slice(-50);
  const receipt={id,source,started:s.time,targets:items.map(x=>x.target),count:items.length};
  for(const item of items){for(const j of s.intentRuntime.jobs)if(j.target===item.target&&!['done','cancelled','failed'].includes(j.status))j.status='cancelled';const definition=LIFE_PLANS[item.action];s.intentRuntime.jobs.push({...item,id:`${id}/${++s.intentRuntime.sequence}`,requestId:id,status:'pending',step:0,steps:definition?structuredClone(definition.steps):[item.action],started:s.time,updated:s.time,source,reason:'等当前动作安全结束'});}
  s.intentRuntime.jobs=s.intentRuntime.jobs.filter(j=>!['done','cancelled','failed'].includes(j.status)||s.time-j.updated<90).slice(-80);
- if(source!=='day_rhythm'){s.intentRuntime.lastReceipt=receipt;s.revision++;stimulateTown(s,items,{id});}return{accepted:true,receipt};
+ if(source!=='day_rhythm'){s.intentRuntime.lastReceipt=receipt;s.revision++;if(!eventKind(Object.fromEntries(items.filter(i=>i.kind==='macro').map(i=>[i.target,i.action]))))stimulateTown(s,items,{id});}return{accepted:true,receipt};
 }
 function startResident(s,j,action,apply){const id=j.target;
  if(['inside','dine'].includes(action)){const d=s.diners[id];d.manualPolicy=action;d.policy=action;d.effectivePolicy=action;d.wait=Math.min(d.wait,1.0);return{type:'diner',value:action==='inside'?'inside':'dine'};}
@@ -50,7 +52,11 @@ function complete(s,j){const m=j.monitor;if(!m)return false;if(m.type==='immedia
 export function advanceIntentRuntime(s,nav,dt,apply,emit){
  const runtime=s.intentRuntime,catalog=nav.activities.objectCatalog||{};
  if(s.day_phase!==runtime.lastDay){runtime.lastDay=s.day_phase;const jobs=s.day_phase==='night'?[['resident.quiet_reader','close_book'],['resident.elder','sip_tea'],['resident.upper_diner_0','inside']]:s.day_phase==='dawn'?[['resident.gardener','inspect_leaf'],['resident.vendor_bread','wipe_counter'],['resident.quiet_reader','read_pages']]:s.day_phase==='day'?[['resident.gardener','water_plants'],['resident.vendor_flower','offer_food']]:[['resident.musician','play_music'],['resident.vendor_lamp','greet']];runtime.daily=jobs.map(([target,action],i)=>({target,action,at:s.time+2+i*2.8}));}
- for(const item of runtime.daily){if(item.done||s.time<item.at)continue;if(s.weather==='rain'||s.residentActions[item.target]?.requested||s.residentActions[item.target]?.queuedByUser||runtime.jobs.some(j=>j.target===item.target&&!['done','failed','cancelled'].includes(j.status))){item.done=true;continue;}queueIntent(s,[{...item,kind:'resident'}],{source:'day_rhythm'},catalog);item.done=true;}
+ for(const item of runtime.daily){if(item.done||s.time<item.at)continue;if(s.sceneEvent&&s.sceneEvent.phase!=='release'||s.weather==='rain'||s.residentActions[item.target]?.requested||s.residentActions[item.target]?.queuedByUser||runtime.jobs.some(j=>j.target===item.target&&!['done','failed','cancelled'].includes(j.status))){item.done=true;continue;}queueIntent(s,[{...item,kind:'resident'}],{source:'day_rhythm'},catalog);item.done=true;}
+ // Apply the macros from one utterance atomically: the event policy sees the
+ // complete request, rather than treating each field as another new event.
+ const groups=new Map();for(const j of runtime.jobs)if(j.kind==='macro'&&j.status==='pending'&&j.step===0){if(!groups.has(j.requestId))groups.set(j.requestId,[]);groups.get(j.requestId).push(j);}
+ for(const[id,jobs]of groups){const revision=s.revision;try{apply(s,Object.fromEntries(jobs.map(j=>[j.target,j.action])),{id:'macro-batch:'+id,expectedRevision:revision});for(const j of jobs){j.status='done';j.step=j.steps.length;j.updated=s.time;}}catch(e){for(const j of jobs){j.status='failed';j.reason=e.message;}}finally{s.revision=revision;}}
  for(const j of runtime.jobs){if(['done','cancelled','failed'].includes(j.status))continue;
   if(j.status==='running'){if(!complete(s,j)){if(s.time-j.updated>220){j.status='failed';j.reason='当前路径或动作尚未完成，取消后续步骤';emit('有一项安排暂时没有完成，小镇会继续自己的生活。');}continue;}j.step++;j.monitor=null;j.status='pending';j.updated=s.time;}
   if(j.step>=j.steps.length){j.status='done';j.updated=s.time;j.reason='这一段生活已经完成';continue;}

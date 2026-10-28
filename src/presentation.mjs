@@ -6,6 +6,7 @@ export function interpolateWorld(previous,current,alpha){
  if(!previous||previous.tick===current.tick)return current;
  const t=Math.max(0,Math.min(1,alpha));
  const p={...current,time:mix(previous.time,current.time,t),windPhase:mix(previous.windPhase,current.windPhase,t)};
+ if(previous.eventWeather&&current.eventWeather)p.eventWeather=Object.fromEntries(Object.entries(current.eventWeather).map(([k,v])=>[k,mix(previous.eventWeather[k],v,t)]));
  p.actors=current.actors.map((b,i)=>{const a=previous.actors[i];return !a||a.id!==b.id?b:{...b,p:vec(a.p,b.p,t),yaw:angleMix(a.yaw,b.yaw,t),walked:mix(a.walked,b.walked,t),gaitWeight:mix(a.gaitWeight,b.gaitWeight,t),speed:mix(a.speed,b.speed,t)};});
  p.movers=Object.fromEntries(Object.entries(current.movers).map(([id,b])=>{const a=previous.movers[id];return[id,a?{...b,p:vec(a.p,b.p,t),yaw:angleMix(a.yaw,b.yaw,t),pitch:mix(a.pitch||0,b.pitch||0,t),bank:mix(a.bank||0,b.bank||0,t),distance:mix(a.distance,b.distance,t),footDown:mix(a.footDown||0,b.footDown||0,t),strideWeight:mix(a.strideWeight??1,b.strideWeight??1,t),speed:mix(a.speed,b.speed,t)}:b]}));
  if(current.train&&previous.train)p.train={...current.train,distance:mix(previous.train.distance,current.train.distance,t),speed:mix(previous.train.speed,current.train.speed,t),doorOpen:mix(previous.train.doorOpen||0,current.train.doorOpen||0,t)};

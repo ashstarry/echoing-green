@@ -27,7 +27,7 @@ export function stimulateTown(s,items,{id='opening',opening=false}={}){
   const role=PROFILES[a.id],cycle=s.residents[a.id].cycle;
   // A new town-wide event supersedes earlier mobile errands, not same-request
   // explicit exceptions or fixed-role residents. Carried gestures finish safely.
-  if(!opening&&['rain','festival'].includes(theme)){
+  if(!opening&&['rain','snow','festival','market','supper','reunion'].includes(theme)){
    for(const j of s.intentRuntime.jobs)if(j.target===a.id&&live(j)){j.status='cancelled';j.updated=s.time;j.reason='跟随最新的全镇活动';}
    const r=s.residentActions[a.id];r.requested=false;r.queuedByUser=false;r.queued=null;
    if(RESIDENT_ACTIONS[r.action]?.navTask){r.action=null;r.clock=0;}
@@ -35,14 +35,14 @@ export function stimulateTown(s,items,{id='opening',opening=false}={}){
   }
 
   let task=theme==='rain'?'shelter':theme==='festival'?'fireworks':theme==='quiet'?'lotus':theme==='snow'?'snow':null;
-  if(!task&&['market','supper'].includes(theme))task=a.id.includes('customer')||a.id.includes('browser')?'browse':a.id.includes('postman')||a.id.includes('courier')?'mail':['stroll','chat','listen'][n%3];
+  if(!task&&['market','supper'].includes(theme))task='browse';
   if(!task&&theme==='reunion')task='chat';if(!task&&theme==='delivery'&&/postman|courier/.test(a.id))task='mail';
   if(!task&&theme==='music')task='listen';
   if(!task)task=role.routine[(cycle+1+n)%role.routine.length];
   if(task==='rest')task='stroll';
-  if(a.id==='resident.kite_child'&&!['rain','festival'].includes(theme))task='kite';
-  if(a.id==='resident.child_parent'&&!['rain','festival','reunion'].includes(theme))task='follow';
-  pending.push({id:a.id,task,revisit:s.occasion==='market',at:s.time+.10+n++*(['rain','festival'].includes(theme)?.12:.22),done:false});
+  if(a.id==='resident.kite_child'&&!['rain','snow','festival','market','supper','reunion'].includes(theme))task='kite';
+  if(a.id==='resident.child_parent'&&!['rain','festival','market','supper','reunion'].includes(theme))task='follow';
+  pending.push({id:a.id,task,revisit:s.occasion==='market',at:s.time+.10+n++*(['rain','snow','festival','market','supper','reunion'].includes(theme)?.12:.22),done:false});
  }
  const actions=theme==='rain'?[
   ['quiet_reader','close_book'],['vendor_bread','cover_food'],['water_companion','umbrella_open'],['water_visitor','converse'],['porch_resident','return_porch']

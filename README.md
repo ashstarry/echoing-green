@@ -4,7 +4,7 @@ A living, cut-paper miniature town. Current scene: Borrowed Wind Town / 借风�
 
 English is the first-visit default. Music is enabled by default; browser autoplay rules may require your first click or keypress. Language and sound choices are saved locally.
 
-The town simulates life in your browser and pauses when you leave. Use weather buttons, the Town journal and selectable actions to explore. Free-text wishes use a separately hosted secure Jev proxy; no provider credentials are included in this repository or in GitHub Pages.
+The town simulates life in your browser and pauses when you leave. Snow, rain, fireworks and market gatherings are short events with arrivals, a main scene, and a gentle closing. A new large event replaces the pending one after the current scene has wound down. Use weather buttons, the Town journal and selectable actions to explore. Free-text wishes use a separately hosted secure Jev proxy; no provider credentials are included in this repository or in GitHub Pages.
 
 ## Run locally
 

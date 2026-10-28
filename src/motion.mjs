@@ -47,7 +47,7 @@ export function advanceDiners(s,config,dt,emit){for(const[id,d]of Object.entries
 
 export function moverBlocks(p,m,clip,actorRadius=.43){if(clip.motion==='ride'){const dx=p[0]-m.p[0],dy=p[1]-m.p[1],c=Math.cos(m.yaw),n=Math.sin(m.yaw),u=dx*c+dy*n,v=-dx*n+dy*c;return Math.hypot(u-clamp(u,-.75,.75),v)<actorRadius+(m.footDown>.1?.52:.29)+.025;}return Math.hypot(p[0]-m.p[0],p[1]-m.p[1])<actorRadius+(clip.dynamic_clearance||clip.radius||.5)+.02;}
 function advanceCycle(s,id,m,clip,dt){
- const held=s.cycling==='rest'||s.weather==='rain'||s.worldEvent?.kind==='festival';m.stopIndex??=0;m.stopWait??=0;m.footDown??=0;m.completedStops??=0;const stops=clip.stops||[];
+ const held=s.cycling==='rest'||s.weather==='rain'||s.worldEvent?.kind==='festival'||['festival','market','supper'].includes(s.sceneEvent?.kind);m.stopIndex??=0;m.stopWait??=0;m.footDown??=0;m.completedStops??=0;const stops=clip.stops||[];
  if(!stops.length)return false;
  if(m.stopWait>0||m.tripState==='parked'){
   m.stopWait=Math.max(0,m.stopWait-dt);m.speed=0;m.intent=stops[(m.stopIndex+stops.length-1)%stops.length].label;m.tripState='parked';m.footDown+=Math.min(1,dt*3)*(1-m.footDown);

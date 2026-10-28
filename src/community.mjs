@@ -1,3 +1,4 @@
+import {advanceSceneEvent,requestSceneEvent,sceneTask} from './scene-events.mjs';
 import {CADENCE,varied,stableUnit} from './cadence.mjs';
 export const ACTIVITIES={
  hop:{label:'找一块空地跳两下',range:[3,6],zone:'playground'},follow:{label:'跟着孩子换个位置',range:[4,8],zone:'family'},
@@ -11,32 +12,22 @@ export const PROFILES=Object.fromEntries(Object.entries(data).map(([id,[label,ro
 export const OCCASIONS={ordinary:'各自的日常',market:'热闹晚市',supper:'晚餐时间',reunion:'邻里相聚',delivery:'送信时光',quiet:'安静晚风'};
 export function createCommunity(nav){return Object.fromEntries(Object.entries(PROFILES).map(([id,p])=>[id,{activity:p.routine[0],reason:'按自己的习惯过晚间生活',started:0,until:varied(ACTIVITIES[p.routine[0]].range,id),cycle:0,lookTarget:p.look,lookYaw:0,gesture:0,gesturePhase:0,umbrellaOpen:0,needs:{social:stableUnit(id),curiosity:.4,rest:.3}}]));}
 export function requestFestival(s){if(s.worldEvent?.phase==='show'){s.worldEvent.until=Math.max(s.worldEvent.until,s.time+18);s.festivalUntil=s.worldEvent.until;s.planRevision++;return;}s.worldEvent={kind:'festival',phase:s.weather==='rain'?'postponed':'prepare',started:s.time,until:s.time+varied(CADENCE.festivalPrepare,'festival',s.revision),revision:(s.worldEvent?.revision||0)+1};s.planRevision++;s.festivalUntil=0;}
-export function updateDirector(s,dt,emit){
- if(s.weather!==s.lastWeather){s.planRevision++;s.weatherChangedAt=s.time;if(s.weather==='rain'){
-  s.rainActive=true;if(s.worldEvent.kind==='festival'){s.worldEvent.phase='postponed';s.festivalStop=s.time;s.festivalUntil=Math.min(s.festivalUntil,s.time+6);}emit('雨来了，街上的人开始找地方避雨。');
- }else if(s.lastWeather==='rain'){s.rainActive=false;s.afterRainUntil=s.time+10;emit('雨停了，大家先收好雨具，再慢慢回到街上。');if(s.worldEvent.phase==='postponed'){s.worldEvent.phase='prepare';s.worldEvent.started=s.time+8;s.worldEvent.until=s.time+24;}}
- s.lastWeather=s.weather;}
- const e=s.worldEvent;
- if(e.kind==='festival'&&s.weather!=='rain'){
-  if(e.phase==='prepare'&&s.time>=e.until&&(s.actors.filter(a=>a.task==='fireworks'&&a.mode==='idle'&&a.reservation!==null).length>=3||s.time>=e.until+8)){e.phase='show';e.started=s.time;e.until=s.time+24;s.festivalStarted=s.time;s.festivalUntil=e.until;s.festivalStop=null;s.planRevision++;emit('花火升上夜空，街上的人抬起头。');}
-  else if(e.phase==='show'&&s.time>=e.until){e.phase='linger';e.started=s.time;e.until=s.time+varied(CADENCE.festivalLinger,'linger',e.revision);s.planRevision++;emit('花火落尽，有人鼓掌，有人和身边的人聊起来。');}
-  else if(e.phase==='linger'&&s.time>=e.until){s.worldEvent={kind:'ordinary',phase:'ongoing',started:s.time,until:0,revision:e.revision+1};s.planRevision++;s.festivalNextAt=s.time+varied(CADENCE.ambientFestivalGap,'festival',e.revision);emit('人们慢慢散开，继续各自的晚间生活。');}
- }
- if(s.festivalAuto&&(!s.day_phase||['dusk','night'].includes(s.day_phase))&&s.time>=s.festivalNextAt&&s.worldEvent.kind!=='festival'&&s.weather!=='rain'){requestFestival(s);emit('有人提起今晚的花火，居民开始寻找看得清的空位。');}
- if(s.occasion!==s.lastOccasion){s.lastOccasion=s.occasion;s.occasionUntil=s.time+varied([45,85],s.occasion,s.revision);s.planRevision++;emit(OCCASIONS[s.occasion]+'开始了，居民各自作出回应。');}
- if(s.occasion!=='ordinary'&&s.time>s.occasionUntil){s.occasion='ordinary';s.lastOccasion='ordinary';s.planRevision++;emit('这一阵热闹渐渐过去，小镇回到日常。');}
- s.effectiveMusic=s.weather==='rain'&&!s.musicManual?'rest':s.music;
- for(const [id,d]of Object.entries(s.diners)){const policy=d.manualPolicy|| (s.dining!=='auto'?s.dining:s.weather==='rain'?'inside':s.occasion==='supper'?'dine':'auto');if(d.effectivePolicy!==policy){d.effectivePolicy=policy;d.policy=policy;d.wait=Math.min(d.wait,varied([1,4],id,s.planRevision));}}
+export function updateDirector(s,dt,emit,nav){
+ advanceSceneEvent(s,nav,dt,emit);
+ if(s.festivalAuto&&!s.sceneEvent&&['dusk','night'].includes(s.day_phase)&&s.time>=s.festivalNextAt)requestSceneEvent(s,{festival:'fireworks'},emit,{automatic:true});
+ s.effectiveMusic=s.weather==='rain'&&!s.musicManual||s.sceneEvent?.kind==='festival'&&s.sceneEvent.phase==='active'?'rest':s.music;
+ for(const[id,d]of Object.entries(s.diners)){const festival=s.sceneEvent?.kind==='festival'&&['gather','active'].includes(s.sceneEvent.phase);const policy=d.manualPolicy||(s.dining!=='auto'?s.dining:s.weather==='rain'?'inside':festival||s.occasion==='supper'?'dine':'auto');if(d.effectivePolicy!==policy){d.effectivePolicy=policy;d.policy=policy;d.wait=Math.min(d.wait,varied([1,4],id,s.planRevision));}}
 }
 export function wantedTask(s,a){
  if(a.manual)return a.intent==='quiet'?'rest':a.intent==='gather'?'listen':'stroll';
+ const foreground=sceneTask(s,a);if(foreground)return foreground;
  if(s.weather==='rain')return 'shelter';
  if(a.manualActivity&&s.time<a.activityUntil)return a.manualActivity;
  if(a.responseTask&&s.time<a.responseUntil)return a.responseTask;
  if(s.worldEvent.kind==='festival')return s.worldEvent.phase==='linger'?'chat':'fireworks';
  if(s.time<s.afterRainUntil)return 'shelter';
  if(s.weather==='snow')return 'snow';
- if(s.occasion==='market'||s.occasion==='supper'){if(a.id.includes('customer')||a.id==='resident.market_browser')return 'browse';if(['resident.postman','resident.courier'].includes(a.id))return 'mail';return s.occasion==='market'?'stroll':'listen';}
+ if(s.occasion==='market'||s.occasion==='supper')return 'browse';
  if(s.occasion==='reunion')return a.id==='resident.postman'?'mail':'chat';
  if(s.occasion==='delivery'&&['resident.postman','resident.courier'].includes(a.id))return 'mail';
  if(s.occasion==='quiet')return ['resident.market_browser','resident.strolling_parent','resident.child_runner'].includes(a.id)?'lotus':a.id.includes('customer')?'listen':'rest';
@@ -55,6 +46,7 @@ export function updateResidents(s,nav,dt){
    else if(s.weather==='rain'){next=p.role==='vendor'?'tidy':p.role==='musician'?'rest':'shelter';reason=p.role==='vendor'?'下雨了，先照看摊上的东西':'等雨小一些，留意身边的人';}
    else if(s.worldEvent.kind==='festival'&&['prepare','show','linger'].includes(s.worldEvent.phase)){next=s.worldEvent.phase==='linger'?'applaud':'fireworks';reason='听见花火的动静，在自己的位置看夜空';}
    else if(s.train.mode==='dwell'&&s.time-s.train.arrivedAt<4&&p.role==='station'){next='signal';reason='电车进站，和车上的人打个招呼';}
+   else if(p.role==='vendor'&&s.sceneEvent?.phase==='closing'&&['market','supper'].includes(s.sceneEvent.kind)){next='tidy';reason='收好餐具，和最后的客人道别';}
    else if(p.role==='vendor'){const guest=s.actors.find(a=>a.workstation===id&&a.task==='browse'&&!a.path.length&&Math.hypot(a.p[0]-(nav.activities.spaces.residents[id]?.position[0]||0),a.p[1]-(nav.activities.spaces.residents[id]?.position[1]||0))<2.6);next=guest?'serve':'tidy';reason=guest?'正在招呼'+PROFILES[guest.id].label:'趁没有客人，看看柜台和餐具';if(guest)r.lookTarget=guest.p.slice();}
    else if(p.role==='listen'&&s.effectiveMusic==='rest'){next='chat';reason='琴声歇了，和身边的人聊几句';}
    else if(p.role==='musician'){next=s.effectiveMusic==='play'?'play':'rest';reason=s.effectiveMusic==='play'?'给树下的人弹一段琴':'歇一会儿，听听街上的声音';}

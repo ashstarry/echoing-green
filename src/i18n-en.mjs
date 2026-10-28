@@ -831,3 +831,27 @@ Object.assign(EN,{'小镇会保持现在的安排，继续自己的生活。':'T
 Object.assign(EN,{'决策服务没有返回有效答案':'The decision service returned no valid answer','决策答案缺失或无效':'The decision response was incomplete or invalid','请输入1–600字':'Please enter between 1 and 600 characters','上一句还在判断，请稍候':'The previous wish is still being considered','心愿暂时没有送达':'The wish could not be delivered','私密配置文件权限不正确':'The local connection is not configured correctly','选中物件无效':'The selected object is invalid','输入太长':'The message is too long'});
 
 Object.assign(EN,{'探索借风町：试试下方的天气，或点开小镇手记。自由文本心愿将在安全接口连接后开放。':'Explore Borrowed Wind Town: try the weather below, or open the Town journal. Free-text wishes will open once the secure connection is ready.','公开预览 · 自由文本心愿暂未开放':'Public preview · free-text wishes coming soon'});
+
+Object.assign(EN,{
+ '雪势渐歇，屋顶的薄雪慢慢融化。':'The snow eases; the thin layer on the rooftops slowly melts.',
+ '雨势渐歇，居民收好雨具。':'The rain eases, and the neighbors put away their umbrellas.',
+ '最后一束花火散去，大家鼓掌道别。':'The last sparks fade; the neighbors applaud and say goodbye.',
+ '摊主收好餐具，最后的客人互相道别，晚市准备收摊。':'The vendors tidy their counters as the last guests say goodbye.',
+ '邻居们挥手道别，准备回到各自的日常。':'The neighbors wave goodbye and prepare to return to their day.',
+ '大一些的纸雪落下，屋檐和路边渐渐留下一层白。':'Large paper snowflakes fall, leaving a soft white dusting on the roofs and lanes.',
+ '雨来了，街坊收住手里的事，分头找地方等雨停。':'Rain arrives. Neighbors finish what they are doing and find a place to wait.',
+ '花火即将开始，街坊往广场空位聚拢。':'The fireworks are coming. Neighbors gather in the open square.',
+ '晚市开张，大家走向酒楼摊前，排队等一份热食。':'The evening market opens. Neighbors queue at the restaurant for something warm.',
+ '热饭端上柜台，街坊往餐厅聚拢。':'Hot food reaches the counters, and neighbors gather by the restaurant.',
+ '邻居们相约走近，找一处地方聊聊。':'The neighbors come together and find a place to talk.',
+ '邮差开始送信，街坊留意门前的动静。':'The post carrier begins a round, and neighbors look toward their doorways.',
+ '小镇放轻脚步，留一段安静的晚风。':'The town slows its steps for a quiet stretch of evening.',
+ '这场活动正在进行，大家继续留在自己的位置。':'This gathering is underway; the neighbors keep their places.',
+ '大家站定看向夜空，第一束红金花火升起。':'The neighbors turn toward the sky as the first red and gold fireworks rise.',
+ '摊前排起了小队，热食一份份递到客人手里。':'Little queues form as the vendors serve their guests.',
+ '这一场热闹结束，街坊分头散开，小镇回到日常。':'The gathering ends. Neighbors go their separate ways, and everyday life resumes.',
+ '已经在合适的位置，等邻居一起过来':'Waiting in a good spot for the neighbors to arrive',
+ '收好餐具，和最后的客人道别':'Tidying the counter and saying goodbye to the last guests'
+});
+
+Object.assign(EN,{'夜市开张，街坊到酒楼前等热食。':'The night market opens; neighbors gather at the restaurant for something warm.','大家先找好观赏位置，再看一场短短的花火。':'The neighbors find their places for a short fireworks show.','晚市':'Evening market'});
