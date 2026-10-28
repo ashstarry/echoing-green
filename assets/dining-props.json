@@ -1,0 +1,10 @@
+{
+  "resident.upper_diner_0": {
+    "cup": "cup.upper_table_0",
+    "food": "food.upper_table_0"
+  },
+  "resident.upper_diner_1": {
+    "cup": "cup.upper_table_1",
+    "food": "food.upper_table_1"
+  }
+}
