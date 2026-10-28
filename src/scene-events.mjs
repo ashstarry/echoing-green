@@ -1,7 +1,7 @@
-import {stableUnit} from './cadence.mjs';
-import {stimulateTown} from './town-response.mjs';
-import {navigationGraph} from './navigation.mjs';
-import {moverBlocks} from './motion.mjs';
+import {stableUnit} from './cadence.mjs?v=cp28-1336fccff9e2';
+import {stimulateTown} from './town-response.mjs?v=cp28-1336fccff9e2';
+import {navigationGraph} from './navigation.mjs?v=cp28-1336fccff9e2';
+import {moverBlocks} from './motion.mjs?v=cp28-1336fccff9e2';
 
 export const EVENT_TIMING={snow:{gather:0,active:38,closing:7},rain:{gather:0,active:42,closing:7},festival:{gather:36,active:24,closing:7},market:{gather:26,active:30,closing:8},supper:{gather:26,active:30,closing:8},reunion:{gather:14,active:28,closing:7},delivery:{gather:3,active:28,closing:5},quiet:{gather:3,active:28,closing:5}};
 const live=j=>!['done','failed','cancelled'].includes(j.status);

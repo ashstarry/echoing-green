@@ -1,9 +1,9 @@
-import {createDinerActionView} from './diner-action-view.mjs';
-import {makeArmSolver} from './arm-ik.mjs';
+import {createDinerActionView} from './diner-action-view.mjs?v=cp28-1336fccff9e2';
+import {makeArmSolver} from './arm-ik.mjs?v=cp28-1336fccff9e2';
 import * as THREE from 'three';
-import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES} from './resident-actions.mjs';
-import {PROFILES} from './community.mjs';
-import {ease,legPose} from './motion.mjs';
+import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES} from './resident-actions.mjs?v=cp28-1336fccff9e2';
+import {PROFILES} from './community.mjs?v=cp28-1336fccff9e2';
+import {ease,legPose} from './motion.mjs?v=cp28-1336fccff9e2';
 const X=new THREE.Vector3(1,0,0),Y=new THREE.Vector3(0,1,0),Z=new THREE.Vector3(0,0,-1);
 const mix=(a,b,t)=>a+(b-a)*t;
 export function createResidentActionView({scene,entities,parts,sockets,localRoutes,support,dinerGestures,diningProps}){

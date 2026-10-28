@@ -1,4 +1,4 @@
-import {CADENCE,varied} from './cadence.mjs';
+import {CADENCE,varied} from './cadence.mjs?v=cp28-1336fccff9e2';
 export const TAU=Math.PI*2;
 export const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 export const ease=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
