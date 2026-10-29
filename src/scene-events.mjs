@@ -1,9 +1,9 @@
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp30-life-0c6dd30e7c5b';
-import {eventGuestCandidates,ensureEventTravel} from './event-travel.mjs?v=cp30-life-0c6dd30e7c5b';
-import {stableUnit} from './cadence.mjs?v=cp30-life-0c6dd30e7c5b';
-import {stimulateTown} from './town-response.mjs?v=cp30-life-0c6dd30e7c5b';
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp30-life-0c6dd30e7c5b';
-import {moverBlocks} from './motion.mjs?v=cp30-life-0c6dd30e7c5b';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp30-life-e7bb14ab832f';
+import {eventGuestCandidates,ensureEventTravel} from './event-travel.mjs?v=cp30-life-e7bb14ab832f';
+import {stableUnit} from './cadence.mjs?v=cp30-life-e7bb14ab832f';
+import {stimulateTown} from './town-response.mjs?v=cp30-life-e7bb14ab832f';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp30-life-e7bb14ab832f';
+import {moverBlocks} from './motion.mjs?v=cp30-life-e7bb14ab832f';
 
 export const EVENT_TIMING={snow:{gather:0,active:38,closing:7},rain:{gather:0,active:42,closing:7},festival:{gather:80,active:28,closing:7},market:{gather:72,active:34,closing:8},supper:{gather:72,active:34,closing:8},reunion:{gather:70,active:28,closing:7},delivery:{gather:3,active:28,closing:5},quiet:{gather:3,active:28,closing:5}};
 const live=j=>!['done','failed','cancelled'].includes(j.status);

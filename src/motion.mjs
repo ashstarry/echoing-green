@@ -1,5 +1,5 @@
-import {makeRoom} from './event-travel.mjs?v=cp30-life-0c6dd30e7c5b';
-import {CADENCE,varied} from './cadence.mjs?v=cp30-life-0c6dd30e7c5b';
+import {makeRoom} from './event-travel.mjs?v=cp30-life-e7bb14ab832f';
+import {CADENCE,varied} from './cadence.mjs?v=cp30-life-e7bb14ab832f';
 export const TAU=Math.PI*2;
 export const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 export const ease=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
@@ -34,7 +34,7 @@ export function advanceMovers(s,activities,dt,nav=null){for(const[id,m]of Object
  if(clip.motion==='creature_walk'&&s.time>=m.nextPause&&s.time>=m.restUntil){m.pauses++;m.restUntil=s.time+varied([2.5,6],id,m.pauses);m.nextPause=m.restUntil+varied([3,7],id,m.pauses);}
  const eventRest=clip.motion==='creature_walk'&&['festival','market','supper','reunion'].includes(s.sceneEvent?.kind);
  const wantsRest=eventRest||policy==='rest'||s.time<m.restUntil||(clip.motion==='ride'&&(s.weather==='rain'||s.worldEvent?.kind==='festival'));
- if(clip.motion==='ride'&&advanceCycle(s,id,m,clip,dt))continue;
+ if(clip.motion==='ride'&&advanceCycle(s,id,m,clip,dt,nav))continue;
  const radius=clip.radius||.5,look=sampleClip(clip,(m.clock+.65*Math.max(.25,m.speed))%clip.duration);
  const nearActor=(p,extra=0)=>Object.values(s.eventGuests||{}).some(g=>g.active&&Math.hypot(g.p[0]-p[0],g.p[1]-p[1])<radius+.5+extra)||s.actors.some(a=>(!a.eventOnly||a.mobile||s.eventGuests?.[a.id]?.active)&&Math.hypot(a.p[0]-p[0],a.p[1]-p[1])<(a.mobile?(clip.dynamic_clearance||radius):radius)+.47+extra);
  const aheadBlocked=ground&&nearActor(look.p,.10);m.clearTime=aheadBlocked?0:m.clearTime+dt;
@@ -48,7 +48,7 @@ export function createDiners(config){return Object.fromEntries(Object.keys(confi
 export function advanceDiners(s,config,dt,emit){for(const[id,d]of Object.entries(s.diners||{})){const c=config[id];if(d.phase==='dine'&&s.residentActions?.[id]?.action){d.wait=Math.max(0,d.wait-dt);continue;}if(d.phase==='dine'||d.phase==='inside'){d.wait=Math.max(0,d.wait-dt);if(d.wait===0&&((d.phase==='dine'&&d.policy!=='dine')||(d.phase==='inside'&&d.policy!=='inside'))){d.phase=d.phase==='dine'?'exit':'turn';d.clock=0;emit(d.phase==='exit'?'二楼的客人推开椅子，走进门帘。':'二楼的客人准备回来用餐。');}}else{d.clock=Math.min(c.clips[d.phase].duration,d.clock+dt);if(d.clock>=c.clips[d.phase].duration){if(d.phase==='exit'){d.phase='inside';d.clock=0;d.wait=varied(d.policy==='dine'?CADENCE.reaction:CADENCE.inside,id,d.cycles);}else if(d.phase==='turn'){d.phase='enter';d.clock=0;}else{d.phase='dine';d.clock=0;d.wait=varied(d.policy==='inside'?CADENCE.reaction:CADENCE.meal,id,d.cycles);d.cycles++;emit('客人回到自己的座位，继续用餐。');}}}}}
 
 export function moverBlocks(p,m,clip,actorRadius=.43){if(clip.motion==='ride'){const dx=p[0]-m.p[0],dy=p[1]-m.p[1],c=Math.cos(m.yaw),n=Math.sin(m.yaw),u=dx*c+dy*n,v=-dx*n+dy*c;return Math.hypot(u-clamp(u,-.75,.75),v)<actorRadius+(m.footDown>.1?.52:.29)+.025;}return Math.hypot(p[0]-m.p[0],p[1]-m.p[1])<actorRadius+(clip.dynamic_clearance||clip.radius||.5)+.02;}
-function advanceCycle(s,id,m,clip,dt){
+function advanceCycle(s,id,m,clip,dt,nav){
  const eventParking=false;
  const held=s.cycling==='rest'||s.weather==='rain'||s.worldEvent?.kind==='festival'||['festival','market','supper','reunion'].includes(s.sceneEvent?.kind);m.stopIndex??=0;m.stopWait??=0;m.footDown??=0;m.completedStops??=0;const stops=clip.stops||[];
  if(!stops.length)return false;
@@ -60,7 +60,7 @@ function advanceCycle(s,id,m,clip,dt){
  const target=stops[m.stopIndex].clock,left=(target-m.clock+clip.duration)%clip.duration;
  const look=sampleClip(clip,(m.clock+.6*Math.max(.25,m.speed))%clip.duration),ahead=Object.values(s.eventGuests||{}).some(g=>g.active&&moverBlocks(g.p,{...m,...look},clip))||s.actors.some(a=>(!a.eventOnly||a.mobile||s.eventGuests?.[a.id]?.active)&&moverBlocks(a.p,{...m,...look},clip));
  const desired=ahead?0:Math.min(1,Math.sqrt(Math.max(0,left))*.85);m.speed=clamp(m.speed+clamp(desired-m.speed,-dt*1.3,dt*.55),0,1);
- const move=Math.min(left,dt*m.speed),clock=(m.clock+move)%clip.duration,candidate=sampleClip(clip,clock),blocked=Object.values(s.eventGuests||{}).some(g=>g.active&&moverBlocks(g.p,{...m,...candidate},clip))||s.actors.some(a=>(!a.eventOnly||a.mobile||s.eventGuests?.[a.id]?.active)&&moverBlocks(a.p,{...m,...candidate},clip));m.blocked=blocked||ahead;m.intent=m.blocked?'让行人先走':m.stopIndex===0?'去车站旁看看':'去池塘边歇脚';
+ const move=Math.min(left,dt*m.speed),clock=(m.clock+move)%clip.duration,candidate=sampleClip(clip,clock),blocked=Object.values(s.eventGuests||{}).some(g=>g.active&&moverBlocks(g.p,{...m,...candidate},clip))||s.actors.some(a=>(!a.eventOnly||a.mobile||s.eventGuests?.[a.id]?.active)&&moverBlocks(a.p,{...m,...candidate},clip));m.blocked=blocked||ahead;m.wait=m.blocked?(m.wait||0)+dt:0;if(m.wait>.7&&nav)makeRoom(s,nav,{id:'resident.cyclist',p:m.p},look.p);m.intent=m.blocked?'让行人先走':m.stopIndex===0?'去车站旁看看':'去池塘边歇脚';
  if(!blocked){m.distance+=Math.hypot(m.p[0]-candidate.p[0],m.p[1]-candidate.p[1]);m.clock=clock;Object.assign(m,candidate);}else m.speed=Math.max(0,m.speed-dt*1.3);
  if(left<.004||move>=left-.00001){m.clock=target;Object.assign(m,sampleClip(clip,target));m.stopIndex=(m.stopIndex+1)%stops.length;m.stopWait=varied([11,19],id,m.completedStops++);m.tripState='parked';m.speed=0;}
  return true;

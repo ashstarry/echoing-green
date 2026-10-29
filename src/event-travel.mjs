@@ -1,6 +1,6 @@
-import {moverBlocks} from './motion.mjs?v=cp30-life-0c6dd30e7c5b';
-import {pathTo,navigationGraph} from './navigation.mjs?v=cp30-life-0c6dd30e7c5b';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp30-life-0c6dd30e7c5b';
+import {moverBlocks} from './motion.mjs?v=cp30-life-e7bb14ab832f';
+import {pathTo,navigationGraph} from './navigation.mjs?v=cp30-life-e7bb14ab832f';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp30-life-e7bb14ab832f';
 const dist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 const turn=(a,b,n)=>a+Math.max(-n,Math.min(n,Math.atan2(Math.sin(b-a),Math.cos(b-a))));
 const live=j=>!['done','cancelled','failed'].includes(j.status);
@@ -53,7 +53,6 @@ export function advanceEventTravel(s,nav,dt){
   const desired=e&&kinds.has(e.kind)&&(!c.events||c.events.includes(e.kind))&&['gather','active'].includes(e.phase)&&!e.protectedIds?.includes(g.id)&&!personal&&!g.returnRequested;
   if(g.phase==='home'){
    if(!desired)continue;
-   const bicycle=s.movers?.['bicycle.street_bicycle'];if(bicycle&&bicycle.tripState!=='parked')continue;
    const walker=s.localWalkers?.[g.id];if(walker?.clip)continue;if(walker){g.startAnchor=walker.anchor;g.home=walker.root.slice();g.p=walker.root.slice(0,3);g.yaw=walker.root[3];}
    if(r.action){if(!['sip_tea','feed_pond','look_pond'].includes(r.action))r.cancelRemaining=r.cancelRemaining||.65;continue;}
    g.active=true;g.motionDirection=null;g.authorFeet=null;g.phase='prepare';g.eventId=e.id;g.readyAt=s.time+1.8+order++*.75;g.bookBefore=r.bookTarget;g.umbrellaBefore=r.umbrellaTarget;g.progress=0;g.returnRequested=false;g.path=[];g.blocked=0;r.bookTarget=0;r.umbrellaTarget=0;r.queued=null;r.nextAt=s.time+1;

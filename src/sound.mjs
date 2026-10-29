@@ -1,4 +1,4 @@
-import {writeText} from './i18n.mjs?v=cp30-life-0c6dd30e7c5b';
+import {writeText} from './i18n.mjs?v=cp30-life-e7bb14ab832f';
 
 // User-approved loop master, played unchanged. Keep the same track across events.
 export function createSound(button){

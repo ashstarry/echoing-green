@@ -1,4 +1,4 @@
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp30-life-0c6dd30e7c5b';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp30-life-e7bb14ab832f';
 import * as THREE from 'three';
 // One GPU draw for all rockets, glowing red/gold heads and curved trailing sparks.
 export function createFireworks(scene,camera,renderer){

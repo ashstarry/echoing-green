@@ -1,6 +1,6 @@
-import {writeText,t,initializeI18n} from './i18n.mjs?v=cp30-life-0c6dd30e7c5b';
+import {writeText,t,initializeI18n} from './i18n.mjs?v=cp30-life-e7bb14ab832f';
 import * as THREE from 'three';
-import {makeReaction,reactionStatus} from './reaction-plan.mjs?v=cp30-life-0c6dd30e7c5b';
+import {makeReaction,reactionStatus} from './reaction-plan.mjs?v=cp30-life-e7bb14ab832f';
 const phaseLabels={pending:'在听',waiting:'已经记下',active:'正在回应',done:'变化已发生',already:'已经在这样做',unavailable:'暂时没有变化',error:'这次没有生效'};
 export function createReactionFeedback({entities,camera,mode}){
  const root=document.createElement('div');root.id='reactionFeedback';root.setAttribute('role','status');root.setAttribute('aria-live','polite');root.innerHTML='<span class="reaction-phase"></span><strong></strong><p></p>';document.body.append(root);const phase=root.querySelector('span'),title=root.querySelector('strong'),body=root.querySelector('p');
