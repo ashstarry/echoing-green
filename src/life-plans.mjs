@@ -1,9 +1,9 @@
-import {eventKind} from './scene-events.mjs?v=cp30-life-e7bb14ab832f';
-import {stimulateTown} from './town-response.mjs?v=cp30-life-e7bb14ab832f';
-import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp30-life-e7bb14ab832f';
-import {requestPassengerAction} from './passengers.mjs?v=cp30-life-e7bb14ab832f';
-import {requestObjectAction} from './object-actions.mjs?v=cp30-life-e7bb14ab832f';
-import {validateDecision} from './catalog.mjs?v=cp30-life-e7bb14ab832f';
+import {eventKind} from './scene-events.mjs?v=cp31-sound-dea918b266ec';
+import {stimulateTown} from './town-response.mjs?v=cp31-sound-dea918b266ec';
+import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp31-sound-dea918b266ec';
+import {requestPassengerAction} from './passengers.mjs?v=cp31-sound-dea918b266ec';
+import {requestObjectAction} from './object-actions.mjs?v=cp31-sound-dea918b266ec';
+import {validateDecision} from './catalog.mjs?v=cp31-sound-dea918b266ec';
 
 // Compound goals reuse tested movements, with real completion/occupation checks between steps.
 export const LIFE_PLANS={

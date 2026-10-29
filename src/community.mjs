@@ -1,6 +1,6 @@
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp30-life-e7bb14ab832f';
-import {advanceSceneEvent,requestSceneEvent,sceneTask} from './scene-events.mjs?v=cp30-life-e7bb14ab832f';
-import {CADENCE,varied,stableUnit} from './cadence.mjs?v=cp30-life-e7bb14ab832f';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp31-sound-dea918b266ec';
+import {advanceSceneEvent,requestSceneEvent,sceneTask} from './scene-events.mjs?v=cp31-sound-dea918b266ec';
+import {CADENCE,varied,stableUnit} from './cadence.mjs?v=cp31-sound-dea918b266ec';
 export const ACTIVITIES={
  hop:{label:'找一块空地跳两下',range:[3,6],zone:'playground'},follow:{label:'跟着孩子换个位置',range:[4,8],zone:'family'},
  play:{label:'给街坊弹一段琴',range:[18,35]},

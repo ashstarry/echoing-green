@@ -1,11 +1,12 @@
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp30-life-e7bb14ab832f';
+import {FIREWORK_BURSTS,FIREWORK_FLIGHT} from './firework-score.mjs?v=cp31-sound-dea918b266ec';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp31-sound-dea918b266ec';
 import * as THREE from 'three';
 // One GPU draw for all rockets, glowing red/gold heads and curved trailing sparks.
 export function createFireworks(scene,camera,renderer){
  const effects=new THREE.Scene();
  const right=new THREE.Vector3(1,0,0).applyQuaternion(camera.quaternion),up=new THREE.Vector3(0,1,0).applyQuaternion(camera.quaternion),forward=camera.getWorldDirection(new THREE.Vector3());
  const center=(x,y)=>camera.position.clone().addScaledVector(forward,42).addScaledVector(right,x*(camera.right-camera.left)/2).addScaledVector(up,(y+1)*(camera.top-camera.bottom)/2+camera.bottom);
- const centers=[new THREE.Vector3(FIREWORK_FOCUS[0],FIREWORK_FOCUS[2],-FIREWORK_FOCUS[1])];const times=[1.2,2.9,5.3,6.8,9.2,11.0,13.0,15.4,17.0,17.4,18.1];
+ const centers=[new THREE.Vector3(FIREWORK_FOCUS[0],FIREWORK_FOCUS[2],-FIREWORK_FOCUS[1])];const times=FIREWORK_BURSTS;
  const arrays={position:[],ray:[],center:[],color:[],timing:[],size:[]};let seed=180026;const rnd=()=>{seed=(1664525*seed+1013904223)>>>0;return seed/4294967296;};
  function add(c,r,col,delay,trail,kind,speed,size){arrays.position.push(0,0,0);arrays.center.push(...c.toArray());arrays.ray.push(...r.toArray());arrays.color.push(...col);arrays.timing.push(delay,trail,kind,speed);arrays.size.push(size);}
  for(let burst=0;burst<times.length;burst++){
@@ -13,7 +14,7 @@ export function createFireworks(scene,camera,renderer){
   for(let j=0;j<count;j++){const theta=j*2.3999632297,z=1-2*(j+.5)/count,ring=Math.sqrt(Math.max(0,1-z*z));const r=right.clone().multiplyScalar(Math.cos(theta)*ring).addScaledVector(up,Math.sin(theta)*ring).addScaledVector(forward,z*.30);const speed=(1.65+rnd()*.35)*scale;const col=gold?[1,.30,.012]:(j%9===0?[1,.45,.018]:[1,.008+rnd()*.008,.004]);
    for(let k=0;k<18;k++)add(c,r,col,delay,k*.07,0,speed,k===0?6.5:4.5-k*.14);
   }
-  for(let j=0;j<28;j++)add(c,up,[1,.35,.012],delay-.95,j*.019,1,5.3,4.3);
+  for(let j=0;j<28;j++)add(c,up,[1,.35,.012],delay-FIREWORK_FLIGHT,j*.019,1,5.3,4.3);
  }
  const geometry=new THREE.BufferGeometry();for(const [name,size]of [['position',3],['ray',3],['center',3],['color',3],['timing',4],['size',1]])geometry.setAttribute(name,new THREE.Float32BufferAttribute(arrays[name],size));
  const material=new THREE.ShaderMaterial({transparent:true,depthWrite:false,depthTest:true,blending:THREE.NormalBlending,toneMapped:false,uniforms:{uTime:{value:0},uStop:{value:100},uPixel:{value:renderer.getPixelRatio()}},vertexShader:`

@@ -1,14 +1,17 @@
-import {writeText} from './i18n.mjs?v=cp30-life-e7bb14ab832f';
+import {createEventSfx} from './event-sfx.mjs?v=cp31-sound-dea918b266ec';
+import {writeText} from './i18n.mjs?v=cp31-sound-dea918b266ec';
 
 // User-approved loop master, played unchanged. Keep the same track across events.
 export function createSound(button){
+ const effects=createEventSfx();
  let enabled=true,audio=null,worldPaused=false,blocked=false,pending=null,shouldPlay=false;
  try{enabled=localStorage.getItem('echoing-green.sound.v1')!=='off';}catch{}
  function wanted(){return enabled&&!worldPaused&&!document.hidden;}
- function stop(){audio?.pause();}
+ function stop(){audio?.pause();effects.setEnabled(false);effects.stop();}
  function start(fromGesture=false){
   if(!wanted())return;
-  if(fromGesture)blocked=false;
+  if(fromGesture){blocked=false;effects.arm();}
+  effects.setEnabled(true);
   if(blocked||pending)return;
   if(!audio){audio=new window.Audio(new URL('../assets/lanterns-awake-loop.wav',import.meta.url).href);audio.loop=true;audio.preload='auto';audio.playbackRate=1;}
   if(!audio.paused)return;
@@ -22,8 +25,8 @@ export function createSound(button){
  show();shouldPlay=wanted();if(shouldPlay)start();
  return{
   sync(s){worldPaused=!!s.paused;const next=wanted();if(next!==shouldPlay){shouldPlay=next;if(next)start();else stop();}},
-  update(){},
+  update(s){effects.update(s);},
   muteNow(){shouldPlay=false;stop();},
-  status:()=>({enabled,state:!audio?'not_started':blocked?'awaiting_gesture':audio.paused?'paused':'playing',title:'灯火未眠',loop:true,playbackRate:1,currentTime:audio?.currentTime||0,theme:'lanterns-awake-game-loop',bgmIndependentOfGuitar:true})
+  status:()=>({enabled,state:!audio?'not_started':blocked?'awaiting_gesture':audio.paused?'paused':'playing',title:'灯火未眠',loop:true,playbackRate:1,currentTime:audio?.currentTime||0,theme:'lanterns-awake-game-loop',bgmIndependentOfGuitar:true,eventSounds:effects.status()})
  };
 }

@@ -1,13 +1,13 @@
-import {createEventProps} from './event-props.mjs?v=cp30-life-e7bb14ab832f';
-import {createEventTravelView} from './event-travel-view.mjs?v=cp30-life-e7bb14ab832f';
-import {createPavingSupport} from './foot-support.mjs?v=cp30-life-e7bb14ab832f';
-import {createPassengerView} from './passenger-view.mjs?v=cp30-life-e7bb14ab832f';
-import {createObjectActionView} from './object-action-view.mjs?v=cp30-life-e7bb14ab832f';
-import {createResidentActionView} from './resident-action-view.mjs?v=cp30-life-e7bb14ab832f';
+import {createEventProps} from './event-props.mjs?v=cp31-sound-dea918b266ec';
+import {createEventTravelView} from './event-travel-view.mjs?v=cp31-sound-dea918b266ec';
+import {createPavingSupport} from './foot-support.mjs?v=cp31-sound-dea918b266ec';
+import {createPassengerView} from './passenger-view.mjs?v=cp31-sound-dea918b266ec';
+import {createObjectActionView} from './object-action-view.mjs?v=cp31-sound-dea918b266ec';
+import {createResidentActionView} from './resident-action-view.mjs?v=cp31-sound-dea918b266ec';
 import * as THREE from 'three';
-import {legPose,railPose,sampleRail,ease,sampleClip} from './motion.mjs?v=cp30-life-e7bb14ab832f';
-import {createIntentView} from './intent-view.mjs?v=cp30-life-e7bb14ab832f';
-import {createFireworks} from './fireworks.mjs?v=cp30-life-e7bb14ab832f';
+import {legPose,railPose,sampleRail,ease,sampleClip} from './motion.mjs?v=cp31-sound-dea918b266ec';
+import {createIntentView} from './intent-view.mjs?v=cp31-sound-dea918b266ec';
+import {createFireworks} from './fireworks.mjs?v=cp31-sound-dea918b266ec';
 const X=new THREE.Vector3(1,0,0),Y=new THREE.Vector3(0,1,0),BZ=new THREE.Vector3(0,0,-1),q=new THREE.Quaternion(),v=new THREE.Vector3();
 export function createLifeView({scene,entities,parts,registry,lights,weatherSupport,renderer,camera,activities,nav}){
  const originals=new Map(),partBase=new Map(),emissive=[],stars=[],byId=new Map(registry.entities.map(e=>[e.id,e])),headAngles=new Map(),curtainAmounts=new Map();
