@@ -1,5 +1,5 @@
-import {advanceSceneEvent,requestSceneEvent,sceneTask} from './scene-events.mjs?v=cp29-f0be47cc26bf';
-import {CADENCE,varied,stableUnit} from './cadence.mjs?v=cp29-f0be47cc26bf';
+import {advanceSceneEvent,requestSceneEvent,sceneTask} from './scene-events.mjs?v=cp29-bgm-e015c44d7156';
+import {CADENCE,varied,stableUnit} from './cadence.mjs?v=cp29-bgm-e015c44d7156';
 export const ACTIVITIES={
  hop:{label:'找一块空地跳两下',range:[3,6],zone:'playground'},follow:{label:'跟着孩子换个位置',range:[4,8],zone:'family'},
  play:{label:'给街坊弹一段琴',range:[18,35]},

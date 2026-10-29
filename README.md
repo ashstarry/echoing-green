@@ -15,6 +15,7 @@ Serve this directory with any static HTTP server. No build step is required for 
 - The Chinese name draws on Mei Yaochen’s words recorded in Ouyang Xiu’s *Liuyi Shihua*: https://zh.wikisource.org/wiki/六一詩話
 - The English name draws on William Blake’s *The Echoing Green*: https://www.poetryfoundation.org/poems/56592/the-ecchoing-green
 - Three.js and its decoder libraries retain their bundled license notices under `vendor/`.
+- Default background music: the user-provided **灯火未眠 B — game loop**, played at its original speed and pitch.
 - Town models, scene design, behavior logic and original soft chiptune arrangements are project assets. No license grant is implied for these assets.
 
 ## Security
