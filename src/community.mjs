@@ -1,5 +1,6 @@
-import {advanceSceneEvent,requestSceneEvent,sceneTask} from './scene-events.mjs?v=cp29-bgm-e015c44d7156';
-import {CADENCE,varied,stableUnit} from './cadence.mjs?v=cp29-bgm-e015c44d7156';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp30-life-0c6dd30e7c5b';
+import {advanceSceneEvent,requestSceneEvent,sceneTask} from './scene-events.mjs?v=cp30-life-0c6dd30e7c5b';
+import {CADENCE,varied,stableUnit} from './cadence.mjs?v=cp30-life-0c6dd30e7c5b';
 export const ACTIVITIES={
  hop:{label:'找一块空地跳两下',range:[3,6],zone:'playground'},follow:{label:'跟着孩子换个位置',range:[4,8],zone:'family'},
  play:{label:'给街坊弹一段琴',range:[18,35]},
@@ -64,7 +65,7 @@ export function updateResidents(s,nav,dt){
   if(p.role==='diner'){const d=s.diners[id];r.activity=d.phase==='dine'?'dine':d.phase==='inside'?'inside':'stroll';r.reason=d.phase==='dine'?'坐下来用餐，吃完再走动':d.phase==='inside'?'在暖和的茶间歇一会儿':'推好椅子，经过门帘';}
   let target=p.role==='vendor'&&r.activity==='serve'?r.lookTarget:p.look;
   if(r.activity==='chat'&&p.buddy){const b=s.actors.find(x=>x.id===p.buddy);target=b?.p||nav.activities.spaces.residents[p.buddy]?.position||target;}
-  if(r.activity==='lotus')target=[8.2,-1.5,.7];if(r.activity==='fireworks'||r.activity==='applaud')target=[-.5,7,9];if(r.activity==='listen')target=[-2.47,-1.45,1.2];if(r.activity==='kite')target=[2.35,-.94,3.5];if(r.activity==='signal'||r.activity==='wait')target=[-.6,-6.9,1.4];
+  if(r.activity==='lotus')target=[8.2,-1.5,.7];if(r.activity==='fireworks'||r.activity==='applaud')target=FIREWORK_FOCUS.slice();if(r.activity==='listen')target=[-2.47,-1.45,1.2];if(r.activity==='kite')target=[2.35,-.94,3.5];if(r.activity==='signal'||r.activity==='wait')target=[-.6,-6.9,1.4];
   if(r.activity==='follow'){target=s.actors.find(b=>b.id==='resident.kite_child')?.p||target;if(a)a.lookTarget=target.slice();}
   else if(a?.lookTarget)target=a.lookTarget;
   r.lookTarget=target;const origin=s.localWalkers?.[id]?.root||a?.p||nav.activities.spaces.residents[id]?.position||[0,0,0],yaw=s.localWalkers?.[id]?.root?.[3]??a?.yaw??nav.activities.spaces.residents[id]?.yaw??0;const desired=Math.atan2(target[1]-origin[1],target[0]-origin[0])+Math.PI/2-yaw;r.lookYaw=Math.max(-.33,Math.min(.33,Math.atan2(Math.sin(desired),Math.cos(desired))));

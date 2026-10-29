@@ -1,9 +1,11 @@
-import {stableUnit} from './cadence.mjs?v=cp29-bgm-e015c44d7156';
-import {stimulateTown} from './town-response.mjs?v=cp29-bgm-e015c44d7156';
-import {navigationGraph} from './navigation.mjs?v=cp29-bgm-e015c44d7156';
-import {moverBlocks} from './motion.mjs?v=cp29-bgm-e015c44d7156';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp30-life-0c6dd30e7c5b';
+import {eventGuestCandidates,ensureEventTravel} from './event-travel.mjs?v=cp30-life-0c6dd30e7c5b';
+import {stableUnit} from './cadence.mjs?v=cp30-life-0c6dd30e7c5b';
+import {stimulateTown} from './town-response.mjs?v=cp30-life-0c6dd30e7c5b';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp30-life-0c6dd30e7c5b';
+import {moverBlocks} from './motion.mjs?v=cp30-life-0c6dd30e7c5b';
 
-export const EVENT_TIMING={snow:{gather:0,active:38,closing:7},rain:{gather:0,active:42,closing:7},festival:{gather:36,active:24,closing:7},market:{gather:26,active:30,closing:8},supper:{gather:26,active:30,closing:8},reunion:{gather:14,active:28,closing:7},delivery:{gather:3,active:28,closing:5},quiet:{gather:3,active:28,closing:5}};
+export const EVENT_TIMING={snow:{gather:0,active:38,closing:7},rain:{gather:0,active:42,closing:7},festival:{gather:80,active:28,closing:7},market:{gather:72,active:34,closing:8},supper:{gather:72,active:34,closing:8},reunion:{gather:70,active:28,closing:7},delivery:{gather:3,active:28,closing:5},quiet:{gather:3,active:28,closing:5}};
 const live=j=>!['done','failed','cancelled'].includes(j.status);
 const distance=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 export function ensureSceneEvents(s){
@@ -24,7 +26,7 @@ function clearPulse(s){s.townResponse=null;for(const a of s.actors){a.responseUn
 function finishSky(s){if(s.festivalUntil>s.time){s.festivalStop=s.time;s.festivalUntil=Math.min(s.festivalUntil,s.time+5.5);}s.worldEvent={kind:'ordinary',phase:'ongoing',started:s.time,until:0,revision:s.worldEvent.revision+1};}
 function closeEvent(s,e,emit,next=null){
  if(e.phase==='closing'){e.next=next;return;}
- e.phase='closing';e.phaseAt=s.time;e.until=s.time+(next?6:EVENT_TIMING[e.kind].closing);e.next=next;e.slots={};e.slotsAssigned=true;clearPulse(s);
+ e.phase='closing';e.phaseAt=s.time;e.until=s.time+(next?6:EVENT_TIMING[e.kind].closing);e.next=next;e.returnSlots=Object.fromEntries(Object.entries(e.slots).filter(([id])=>!s.eventGuests?.[id]));e.slots={};e.slotsAssigned=true;clearPulse(s);
  if(['rain','snow'].includes(e.kind)){s.weather='clear';s.rainActive=false;s.afterRainUntil=0;emit(e.kind==='snow'?'雪势渐歇，屋顶的薄雪慢慢融化。':'雨势渐歇，居民收好雨具。');}
  if(e.kind==='festival'){s.festivalStop=s.time;s.festivalUntil=Math.min(s.festivalUntil,s.time+5.5);s.worldEvent={kind:'festival',phase:'linger',started:s.time,until:e.until,revision:s.worldEvent.revision+1};emit('最后一束花火散去，大家鼓掌道别。');}
  if(['market','supper'].includes(e.kind))emit('摊主收好餐具，最后的客人互相道别，晚市准备收摊。');
@@ -77,35 +79,55 @@ function minimumAssignment(cost){
  const result=Array(n).fill(-1);for(let j=1;j<=m;j++)if(p[j])result[p[j]-1]=j-1;return result;
 }
 export function assignEventSlots(s,nav,e){
- const bike=s.movers?.['bicycle.street_bicycle'];
- if(e.slotsAssigned&&!e.openRideLane&&bike?.tripState==='parked'&&e.phase==='gather'&&['festival','market','supper'].includes(e.kind)){e.slotsAssigned=false;e.slots={};for(const a of s.actors)if(!e.protectedIds?.includes(a.id)){a.responseReplan=true;a.taskRevision=-1;a.reservation=null;}s.planRevision++;}
- if(!['festival','market','supper','reunion'].includes(e.kind)||e.slotsAssigned)return;if(['festival','market','supper'].includes(e.kind)&&bike?.tripState!=='parked'&&s.time-e.phaseAt<7)return;e.slotsAssigned=true;e.openRideLane=bike?.tripState==='parked'&&['festival','market','supper'].includes(e.kind);s.planRevision++;
- const allowed=p=>Object.entries(nav.activities.clips||{}).filter(([,c])=>['creature_walk','ride'].includes(c.motion)).every(([id,c])=>c.motion==='ride'&&e.openRideLane?!moverBlocks(p,{...s.movers[id],footDown:1},c,nav.radius):!c.samples.some((q,k)=>k%8===0&&distance(p,q)<(c.motion==='ride'?.72:(c.dynamic_clearance||c.radius||.3)+.50)));
+ const bike=s.movers?.['bicycle.street_bicycle'],parked=bike?.tripState==='parked';
+ if(e.slotsAssigned&&!e.openRideLane&&parked&&e.phase==='gather'&&['festival','market','supper','reunion'].includes(e.kind)){e.slotsAssigned=false;e.slots={};for(const a of s.actors)if(!e.protectedIds?.includes(a.id)){a.responseReplan=true;a.taskRevision=-1;a.reservation=null;}s.planRevision++;}
+ if(!['festival','market','supper','reunion'].includes(e.kind)||e.slotsAssigned)return;if(['festival','market','supper','reunion'].includes(e.kind)&&!parked&&s.time-e.phaseAt<7)return;e.slotsAssigned=true;e.openRideLane=parked&&['festival','market','supper','reunion'].includes(e.kind);s.planRevision++;
+ const allowed=p=>Object.entries(nav.activities.clips||{}).filter(([,c])=>['creature_walk','ride'].includes(c.motion)).every(([id,c])=>(c.motion==='creature_walk'||c.motion==='ride'&&e.openRideLane)?!moverBlocks(p,{...s.movers[id],footDown:1},c,nav.radius):!c.samples.some((q,k)=>k%8===0&&distance(p,q)<(c.motion==='ride'?.72:(c.dynamic_clearance||c.radius||.3)+.50)));
+ const portalClear=p=>Object.values(nav.activities.eventTrips||{}).every(c=>distance(p,nav.nodes[c.portal])>1.65&&c.entry.every(q=>Math.abs(p[2]-q[2])>1.4||distance(p,q)>.94));
  const standing=new Set(nav.nodes.flatMap((p,i)=>!nav.noStopping.has(i)||e.openRideLane&&allowed(p)?[i]:[]));
- const actors=s.actors.filter(a=>a.mobile&&!e.protectedIds?.includes(a.id)),kite=actors.find(a=>a.id==='resident.kite_child');
+ const candidates=eventGuestCandidates(s,nav,e),candidateIds=new Set(candidates.map(a=>a.id));const actors=[...s.actors.filter(a=>a.mobile&&!a.eventOnly&&!candidateIds.has(a.id)&&!e.protectedIds?.includes(a.id)),...candidates],kite=actors.find(a=>a.id==='resident.kite_child');
  const graph=navigationGraph(nav),used=[],pool=[];
- if(kite){e.slots[kite.id]=kite.node;used.push(nav.nodes[kite.node]);}
- const rest=actors.filter(a=>a!==kite);if(!rest.length)return;const points=e.kind==='festival'||e.kind==='reunion'?festivalSpots:marketSpots;
+ if(kite){const k=nav.nodes.map((p,i)=>({p,i})).filter(({p,i})=>graph.components[i]===graph.components[kite.node]&&p[0]>2.3&&p[0]<3.8&&p[1]>-1.7&&p[1]<.65).sort((a,b)=>distance(a.p,[2.55,-1.35])-distance(b.p,[2.55,-1.35]))[0]?.i??kite.node;e.slots[kite.id]=k;used.push(nav.nodes[k]);}
+ const guestHints={'resident.water_companion':[2.4,1.4],'resident.water_visitor':[2.4,.15],'resident.assistant_gardener':[2.4,2.75],'resident.gardener':[.55,3.1],'resident.quiet_reader':[1.6,4.0],'resident.returning_resident':[-.7,2.4],'resident.child_listener':[-3.5,-1.7],'resident.listener':[-.5,-2.8]};
+ for(const a of actors.filter(a=>s.eventGuests?.[a.id])){const hint=guestHints[a.id]||a.p;const candidate=nav.nodes.map((p,i)=>({p,i,score:distance(p,hint)})).filter(({p,i})=>graph.components[i]===graph.components[a.node]&&standing.has(i)&&portalClear(p)&&used.every(q=>distance(p,q)>1.10)).sort((a,b)=>a.score-b.score)[0];if(candidate){e.slots[a.id]=candidate.i;used.push(candidate.p);}}
+ const rest=actors.filter(a=>a!==kite&&!s.eventGuests?.[a.id]);if(!rest.length)return;const points=[...(e.kind==='festival'||e.kind==='reunion'?festivalSpots:festivalSpots.map(([x,y])=>[x-.2,y+(nav.activities.marketLayoutForward??.65)])),...Array.from({length:30},(_,i)=>[-4.0+(i%6)*1.25,-2.8+Math.floor(i/6)*1.2])];
  for(const hint of points){
-  const candidates=nav.nodes.map((p,i)=>({p,i,score:distance(p,hint)})).filter(({p,i})=>graph.components[i]===graph.components[rest[0]?.node]&&standing.has(i)&&used.every(q=>distance(p,q)>1.28)&&Object.values(s.localWalkers||{}).every(w=>Math.abs(w.root[2]-p[2])>1.4||distance(p,w.root)>1.15));
+  const candidates=nav.nodes.map((p,i)=>({p,i,score:distance(p,hint)})).filter(({p,i})=>graph.components[i]===graph.components[rest[0]?.node]&&standing.has(i)&&p[0]<1.0&&p[1]<2.6&&portalClear(p)&&used.every(q=>distance(p,q)>1.08)&&Object.values(s.localWalkers||{}).every(w=>Math.abs(w.root[2]-p[2])>1.4||distance(p,w.root)>1.15));
   candidates.sort((a,b)=>a.score-b.score);if(candidates[0]){pool.push(candidates[0].i);used.push(candidates[0].p);}if(pool.length>=rest.length)break;
  }
  if(pool.length<rest.length)return;
  const chosen=minimumAssignment(rest.map(a=>pool.map(i=>distance(a.p,nav.nodes[i]))));
  for(let i=0;i<rest.length;i++)e.slots[rest[i].id]=pool[chosen[i]];
 }
-export function sceneTask(s,a){const e=s.sceneEvent;if(!e||e.protectedIds?.includes(a.id)||e.phase==='release')return null;
+function adaptGathering(s,nav,e){
+ if(!['gather','active'].includes(e.phase)||s.time-e.started<9||s.time<(e.nextAdapt||0))return;e.nextAdapt=s.time+1.5;
+ const market=['market','supper'].includes(e.kind),inZone=p=>market?((p[0]+1)*.8+(p[1]-2)*.6>-4.5&&(p[0]+1)*.8+(p[1]-2)*.6<4.5&&(p[0]+1)*.6-(p[1]-2)*.8>-.65&&(p[0]+1)*.6-(p[1]-2)*.8<4.4):distance(p,[-.3,-.6])<4;
+ for(const a of s.actors){if(!a.mobile||e.slots[a.id]===undefined||a.id==='resident.kite_child'||a.node===e.slots[a.id]&&a.reservation===a.node&&!a.path.length)continue;
+  const c=nav.nodes[a.node],others=s.actors.filter(b=>b!==a&&Math.abs(b.p[2]-a.p[2])<1.4);
+  const clear=p=>(s.eventGuests?.[a.id]||p[0]<1.0&&p[1]<2.6)&&Object.entries(e.slots).every(([id,n])=>id===a.id||distance(p,nav.nodes[n])>1.02)&&Object.entries(s.movers).every(([id,m])=>!['creature_walk','ride'].includes(nav.activities.clips[id].motion)||!moverBlocks(p,m,nav.activities.clips[id],nav.radius))&&others.every(b=>distance(p,b.p)>nav.radius*2+.02)&&Object.values(nav.activities.eventTrips||{}).every(t=>distance(p,nav.nodes[t.portal])>1.65&&t.entry.every(q=>Math.abs(q[2]-p[2])>1.4||distance(q,p)>.93));
+  // A physically reached, clear nearby place can replace an obstructed reserved
+  // spot. The resident is never teleported or counted as arriving off screen.
+  if(inZone(a.p)&&distance(a.p,c)<.16&&clear(a.p)&&(a.blocked>.3||!a.path.length||s.time-e.started>16)){
+   e.slots[a.id]=a.node;a.reservation=a.node;a.path=[];a.target=null;a.wait=.4;a.mode='idle';a.task=e.kind==='festival'?'fireworks':'browse';a.lookTarget=e.kind==='festival'?FIREWORK_FOCUS.slice():[-1,3,1.4];s.residents[a.id].activity=a.task;s.residents[a.id].reason='在这里也看得清，给后来的人留一条路';continue;
+  }
+  if(a.blocked<.3&&a.path.length)continue;
+  const blocked=new Set(nav.nodes.flatMap((p,i)=>others.some(b=>distance(p,b.p)<.96)?[i]:[]));blocked.delete(a.node);
+  const candidates=nav.nodes.map((p,i)=>({p,i})).filter(({p,i})=>inZone(p)&&clear(p)&&navigationGraph(nav).components[i]===navigationGraph(nav).components[a.node]).sort((x,y)=>distance(x.p,a.p)-distance(y.p,a.p));
+  for(const c of candidates.slice(0,16)){const path=pathTo(nav,a.node,c.i,blocked);if(path.length<2)continue;e.slots[a.id]=c.i;a.reservation=null;a.responseDestination=c.i;a.taskRevision=-1;a.responseReplan=true;a.path=[];a.wait=.15;break;}
+ }
+}
+export function sceneTask(s,a){const e=s.sceneEvent;if(!e||e.protectedIds?.includes(a.id))return null;if(e.phase==='release')return e.returnSlots?.[a.id]!==undefined?'chat':null;
  if(e.phase==='gather'&&!e.slotsAssigned)return a.task;
  if(e.phase==='closing')return e.kind==='festival'?'fireworks':['market','supper'].includes(e.kind)?'browse':null;
  return e.kind==='festival'?'fireworks':['market','supper'].includes(e.kind)?'browse':e.kind==='reunion'?'chat':e.kind==='snow'?'snow':e.kind==='rain'?'shelter':null;
 }
-export function holdsEventPlace(s,a){const e=s.sceneEvent;return !!(e&&['gather','active','closing'].includes(e.phase)&&e.slots[a.id]!==undefined&&a.reservation===e.slots[a.id]&&a.node===e.slots[a.id]&&!a.path.length);}
+export function holdsEventPlace(s,a){if(a.guestReturnNode!==undefined&&a.node===a.guestReturnNode&&!a.path.length)return true;const e=s.sceneEvent;if(e&&['closing','release'].includes(e.phase)&&e.returnSlots?.[a.id]!==undefined&&a.node===e.returnSlots[a.id]&&!a.path.length)return true;return !!(e&&['gather','active','closing'].includes(e.phase)&&e.slots[a.id]!==undefined&&a.reservation===e.slots[a.id]&&a.node===e.slots[a.id]&&!a.path.length);}
 export function advanceSceneEvent(s,nav,dt,emit){
  ensureSceneEvents(s);const w=s.eventWeather;w.rain+=(Number(s.weather==='rain')-w.rain)*Math.min(1,dt*(s.weather==='rain'?1.4:.65));w.snow+=(Number(s.weather==='snow')-w.snow)*Math.min(1,dt*(s.weather==='snow'?1.1:.55));w.cover=Math.max(0,Math.min(.58,w.cover+(s.weather==='snow'?.022:-.055)*dt));
- const e=s.sceneEvent;if(!e)return;assignEventSlots(s,nav,e);
+ const e=s.sceneEvent;if(!e)return;assignEventSlots(s,nav,e);adaptGathering(s,nav,e);
  if(e.phase==='gather'){
-  const ids=Object.keys(e.slots);e.ready=ids.filter(id=>{const a=s.actors.find(a=>a.id===id);return !a.path.length&&a.reservation===e.slots[id]&&distance(a.p,nav.nodes[e.slots[id]])<.18;}).length;
-  const enough=ids.length&&e.ready>=Math.ceil(ids.length*.72);
+  const ids=Object.keys(e.slots);e.ready=ids.filter(id=>{const a=s.actors.find(a=>a.id===id),g=s.eventGuests?.[id];return a?!a.path.length&&a.reservation===e.slots[id]&&distance(a.p,nav.nodes[e.slots[id]])<.18:g?.phase==='hold'&&distance(g.p,nav.nodes[e.slots[id]])<.18;}).length;
+  const farGuests=['resident.quiet_reader','resident.water_visitor','resident.water_companion'].filter(id=>ids.includes(id));const enough=ids.length&&e.ready>=Math.ceil(ids.length*.80)&&farGuests.every(id=>s.eventGuests?.[id]?.phase==='hold');
   if((s.time-e.phaseAt>=8&&enough)||s.time>=e.until){e.phase='active';e.phaseAt=s.time;e.until=s.time+EVENT_TIMING[e.kind].active;s.planRevision++;
    if(e.kind==='festival'){s.worldEvent={kind:'festival',phase:'show',started:s.time,until:e.until,revision:s.worldEvent.revision+1};s.festivalStarted=s.time;s.festivalUntil=e.until;s.festivalStop=null;emit('大家站定看向夜空，第一束红金花火升起。');}
    else if(['market','supper'].includes(e.kind))emit('摊前排起了小队，热食一份份递到客人手里。');
@@ -114,6 +136,6 @@ export function advanceSceneEvent(s,nav,dt,emit){
  else if(e.phase==='closing'&&s.time>=e.until){if(e.next){startEvent(s,e.next,emit);return;}finishSky(s);s.weather='clear';s.lastWeather='clear';s.occasion='ordinary';s.lastOccasion='ordinary';s.afterRainUntil=0;e.phase='release';e.phaseAt=s.time;e.until=s.time+13;clearPulse(s);s.planRevision++;
   for(const a of s.actors){if(e.protectedIds?.includes(a.id))continue;a.taskRevision=-1;a.reservation=null;a.responseReplan=true;a.wait=.15+stableUnit(a.id)*2.7;}
   stimulateTown(s,[],{id:e.id+'-return',opening:true});emit('这一场热闹结束，街坊分头散开，小镇回到日常。');
- }else if(e.phase==='release'&&s.time>=e.until){s.sceneEvent=null;s.festivalNextAt=s.time+180;}
+ }else if(e.phase==='release'&&s.time>=e.until){if(Object.values(s.eventGuests||{}).some(g=>g.active)&&s.time-e.phaseAt<30){e.until=s.time+1;return;}for(const g of Object.values(s.eventGuests||{}))if(g.active)g.returnRequested=true;s.sceneEvent=null;s.festivalNextAt=s.time+180;s.planRevision++;for(const a of s.actors)if(a.mobile){a.taskRevision=-1;a.reservation=null;a.wait=.2+stableUnit(a.id)*1.5;}stimulateTown(s,[],{id:e.id+'-daily',opening:true});}
 }
-export function validateSceneEvents(s,nav){ensureSceneEvents(s);const e=s.sceneEvent;if(e&&(!Object.hasOwn(EVENT_TIMING,e.kind)||!['gather','active','closing','release'].includes(e.phase)||![e.phaseAt,e.started,e.until].every(Number.isFinite)||!e.slots||e.next&&!Object.hasOwn(EVENT_TIMING,e.next.kind)))throw Error('Scene event save is invalid');if(e&&Object.entries(e.slots).some(([id,n])=>!s.actors.some(a=>a.id===id)||!Number.isInteger(n)||!nav.nodes[n]))throw Error('Scene event slot is invalid');if(Object.values(s.eventWeather).some(x=>!Number.isFinite(x)||x<0||x>1))throw Error('Weather blend save is invalid');}
+export function validateSceneEvents(s,nav){ensureSceneEvents(s);const e=s.sceneEvent;if(e&&(!Object.hasOwn(EVENT_TIMING,e.kind)||!['gather','active','closing','release'].includes(e.phase)||![e.phaseAt,e.started,e.until].every(Number.isFinite)||!e.slots||e.next&&!Object.hasOwn(EVENT_TIMING,e.next.kind)))throw Error('Scene event save is invalid');if(e&&Object.entries(e.slots).some(([id,n])=>!s.actors.some(a=>a.id===id)&&!s.eventGuests?.[id]||!Number.isInteger(n)||!nav.nodes[n]))throw Error('Scene event slot is invalid');if(Object.values(s.eventWeather).some(x=>!Number.isFinite(x)||x<0||x>1))throw Error('Weather blend save is invalid');}

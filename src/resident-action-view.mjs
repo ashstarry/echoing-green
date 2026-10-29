@@ -1,9 +1,9 @@
-import {createDinerActionView} from './diner-action-view.mjs?v=cp29-bgm-e015c44d7156';
-import {makeArmSolver} from './arm-ik.mjs?v=cp29-bgm-e015c44d7156';
+import {createDinerActionView} from './diner-action-view.mjs?v=cp30-life-0c6dd30e7c5b';
+import {makeArmSolver} from './arm-ik.mjs?v=cp30-life-0c6dd30e7c5b';
 import * as THREE from 'three';
-import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES} from './resident-actions.mjs?v=cp29-bgm-e015c44d7156';
-import {PROFILES} from './community.mjs?v=cp29-bgm-e015c44d7156';
-import {ease,legPose} from './motion.mjs?v=cp29-bgm-e015c44d7156';
+import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES} from './resident-actions.mjs?v=cp30-life-0c6dd30e7c5b';
+import {PROFILES} from './community.mjs?v=cp30-life-0c6dd30e7c5b';
+import {ease,legPose} from './motion.mjs?v=cp30-life-0c6dd30e7c5b';
 const X=new THREE.Vector3(1,0,0),Y=new THREE.Vector3(0,1,0),Z=new THREE.Vector3(0,0,-1);
 const mix=(a,b,t)=>a+(b-a)*t;
 export function createResidentActionView({scene,entities,parts,sockets,localRoutes,support,dinerGestures,diningProps}){
@@ -49,7 +49,7 @@ export function createResidentActionView({scene,entities,parts,sockets,localRout
    if(pose==='talk'){arm(id,'right',-.16*w,-(.17+.10*slow)*w*amp,-(.4+.2*slow)*w);}
    if(pose==='stretch'){arm(id,'left',-.16*w,-.38*w,-.34*w);arm(id,'right',-.16*w,.38*w,-.34*w);}
    if(pose==='warm'||pose==='clap'){const k=pose==='clap'?.08*Math.sin(clock*8):.025*Math.sin(clock*11);arm(id,'left',-.18*w,-(.08+k)*w,-1.0*w);arm(id,'right',-.18*w,(.08+k)*w,-1.0*w);}
-   if(pose==='sky'||pose==='shade'){arm(id,'right',-.30*w,-.20*w*amp,-1.3*w);rot(id,'anim_head',X,-.16*w);}
+   if(pose==='sky'||pose==='shade'){arm(id,'right',-.30*w,-.20*w*amp,-1.3*w);rot(id,'anim_head',X,(id==='resident.station_traveler'&&s.passengers?.[id]?.phase!=='waiting'?0:['resident.porch_resident','resident.station_traveler'].includes(id)?-.12:-.46)*w);}
    if(pose==='sip'){arm(id,'right',-.24*w,-.03*w,-1.35*w);}
    if(pose==='eat'){arm(id,'right',-.20*w,.08*w,-1.1*w);}
    if(pose==='offer'){arm(id,'left',-.18*w,-.18*w,-.70*w);arm(id,'right',-.08*w,-.18*w,-.30*w);}
@@ -102,9 +102,9 @@ export function createResidentActionView({scene,entities,parts,sockets,localRout
   }
   if(!a&&!['cycle','diner'].includes(profile.role)){root.position.copy(roots.get(id).p);root.quaternion.copy(roots.get(id).q);}
   if(id==='resident.water_visitor'&&['feed','pond'].includes(pose)){const turn=ease((clock-.8)/1.3)*ease((duration-clock-1)/1.2);root.quaternion.copy(roots.get(id).q).premultiply(new THREE.Quaternion().setFromAxisAngle(Y,-3.03*turn));fitBridgeFeet(id,root,w);}
-  if(localRoutes?.[id]||id==='resident.water_visitor'&&!['feed','pond'].includes(pose))for(const side of ['left','right'])for(const k of ['leg','knee','ankle']){const key=id+'/anim_'+k+'_'+side,p=parts.get(key),b=base.get(key);if(p&&b)p.quaternion.copy(b.q);}
+  if(!s.eventGuests?.[id]?.active&&(localRoutes?.[id]||id==='resident.water_visitor'&&!['feed','pond'].includes(pose)))for(const side of ['left','right'])for(const k of ['leg','knee','ankle']){const key=id+'/anim_'+k+'_'+side,p=parts.get(key),b=base.get(key);if(p&&b)p.quaternion.copy(b.q);}
   for(const side of ['left','right'])if(pose!=='tap')rot(id,'tap_foot_'+side,X,0);
-  if(s.localWalkers?.[id]){const walker=s.localWalkers[id],p=walker.root,yaw=p[3];point.set(p[0],p[2],-p[1]);if(root.parent)root.parent.worldToLocal(point);root.position.copy(point);root.quaternion.copy(roots.get(id).q).premultiply(new THREE.Quaternion().setFromAxisAngle(Y,yaw-sockets[id].yaw));
+  if(s.localWalkers?.[id]&&!s.eventGuests?.[id]?.active){const walker=s.localWalkers[id],p=walker.root,yaw=p[3];point.set(p[0],p[2],-p[1]);if(root.parent)root.parent.worldToLocal(point);root.position.copy(point);root.quaternion.copy(roots.get(id).q).premultiply(new THREE.Quaternion().setFromAxisAngle(Y,yaw-sockets[id].yaw));
    for(const side of ['left','right']){const[hip,knee,ankle,roll]=walker.legs[side];rot(id,'anim_leg_'+side,Z,roll);parts.get(id+'/anim_leg_'+side)?.quaternion.multiply(new THREE.Quaternion().setFromAxisAngle(X,hip));rot(id,'anim_knee_'+side,X,knee);rot(id,'anim_ankle_'+side,X,ankle);parts.get(id+'/anim_ankle_'+side)?.quaternion.multiply(new THREE.Quaternion().setFromAxisAngle(Z,-roll));if(walker.clip)arm(id,side,-.08-Math.sin(walker.clock*4+(side==='left'?0:Math.PI))*.025,side==='left'?-.18:.18,-.35);}
   }
 

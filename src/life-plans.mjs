@@ -1,9 +1,9 @@
-import {eventKind} from './scene-events.mjs?v=cp29-bgm-e015c44d7156';
-import {stimulateTown} from './town-response.mjs?v=cp29-bgm-e015c44d7156';
-import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp29-bgm-e015c44d7156';
-import {requestPassengerAction} from './passengers.mjs?v=cp29-bgm-e015c44d7156';
-import {requestObjectAction} from './object-actions.mjs?v=cp29-bgm-e015c44d7156';
-import {validateDecision} from './catalog.mjs?v=cp29-bgm-e015c44d7156';
+import {eventKind} from './scene-events.mjs?v=cp30-life-0c6dd30e7c5b';
+import {stimulateTown} from './town-response.mjs?v=cp30-life-0c6dd30e7c5b';
+import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp30-life-0c6dd30e7c5b';
+import {requestPassengerAction} from './passengers.mjs?v=cp30-life-0c6dd30e7c5b';
+import {requestObjectAction} from './object-actions.mjs?v=cp30-life-0c6dd30e7c5b';
+import {validateDecision} from './catalog.mjs?v=cp30-life-0c6dd30e7c5b';
 
 // Compound goals reuse tested movements, with real completion/occupation checks between steps.
 export const LIFE_PLANS={
@@ -60,6 +60,7 @@ export function advanceIntentRuntime(s,nav,dt,apply,emit){
  for(const j of runtime.jobs){if(['done','cancelled','failed'].includes(j.status))continue;
   if(j.status==='running'){if(!complete(s,j)){if(s.time-j.updated>220){j.status='failed';j.reason='当前路径或动作尚未完成，取消后续步骤';emit('有一项安排暂时没有完成，小镇会继续自己的生活。');}continue;}j.step++;j.monitor=null;j.status='pending';j.updated=s.time;}
   if(j.step>=j.steps.length){j.status='done';j.updated=s.time;j.reason='这一段生活已经完成';continue;}
+  if(j.kind==='resident'&&s.eventGuests?.[j.target]?.active){s.eventGuests[j.target].returnRequested=true;j.status='waiting';j.reason='先走回适合完成这件事的位置';continue;}
   const action=j.steps[j.step];
   if(typeof action==='object'){j.monitor={type:'wait',until:s.time+action.wait};j.status='running';j.updated=s.time;continue;}
   if(s.weather==='rain'&&j.kind==='resident'&&blockedInRain.has(action)){j.status='waiting';j.reason='等雨停后继续';if(s.time-j.started>240){j.status='cancelled';j.reason='等待过久，保留当前日常';}continue;}

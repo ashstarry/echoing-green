@@ -1,4 +1,5 @@
-import {CADENCE,varied} from './cadence.mjs?v=cp29-bgm-e015c44d7156';
+import {makeRoom} from './event-travel.mjs?v=cp30-life-0c6dd30e7c5b';
+import {CADENCE,varied} from './cadence.mjs?v=cp30-life-0c6dd30e7c5b';
 export const TAU=Math.PI*2;
 export const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 export const ease=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
@@ -28,13 +29,14 @@ export function stepTrain(s,path,dt,emit){const tr=s.train;if(!tr||!path)return;
 }
 export function sampleClip(clip,clock){const n=clip.samples.length-1,at=clamp(clock/clip.duration*n,0,n),i=Math.floor(at),j=Math.min(n,i+1),u=at-i,a=clip.samples[i],b=clip.samples[j],da=Math.atan2(Math.sin(b[3]-a[3]),Math.cos(b[3]-a[3]));return {p:a.slice(0,3).map((v,k)=>v+(b[k]-v)*u),yaw:a[3]+da*u,pitch:(a[4]||0)+((b[4]||0)-(a[4]||0))*u,bank:(a[5]||0)+((b[5]||0)-(a[5]||0))*u};}
 export function createMovers(activities){return Object.fromEntries(Object.entries(activities?.clips||{}).map(([id,c])=>[id,{clock:0,distance:0,footDown:0,stopWait:0,stopIndex:0,completedStops:0,tripState:'ride',blocked:false,wait:0,speed:1,strideWeight:1,clearTime:0,restUntil:0,nextPause:varied([3,7],id),pauses:0,intent:c.motion==='creature_walk'?'explore':c.motion,...sampleClip(c,0)}]));}
-export function advanceMovers(s,activities,dt){for(const[id,m]of Object.entries(s.movers||{})){
+export function advanceMovers(s,activities,dt,nav=null){for(const[id,m]of Object.entries(s.movers||{})){
  const clip=activities.clips[id],ground=['creature_walk','ride'].includes(clip.motion),policy=clip.motion==='fly'?s.birds:clip.motion==='ride'?s.cycling:clip.motion==='swim'?s.pond:s.animals;
  if(clip.motion==='creature_walk'&&s.time>=m.nextPause&&s.time>=m.restUntil){m.pauses++;m.restUntil=s.time+varied([2.5,6],id,m.pauses);m.nextPause=m.restUntil+varied([3,7],id,m.pauses);}
- const wantsRest=policy==='rest'||s.time<m.restUntil||(clip.motion==='ride'&&(s.weather==='rain'||s.worldEvent?.kind==='festival'));
+ const eventRest=clip.motion==='creature_walk'&&['festival','market','supper','reunion'].includes(s.sceneEvent?.kind);
+ const wantsRest=eventRest||policy==='rest'||s.time<m.restUntil||(clip.motion==='ride'&&(s.weather==='rain'||s.worldEvent?.kind==='festival'));
  if(clip.motion==='ride'&&advanceCycle(s,id,m,clip,dt))continue;
  const radius=clip.radius||.5,look=sampleClip(clip,(m.clock+.65*Math.max(.25,m.speed))%clip.duration);
- const nearActor=(p,extra=0)=>s.actors.some(a=>Math.hypot(a.p[0]-p[0],a.p[1]-p[1])<(a.mobile?(clip.dynamic_clearance||radius):radius)+.47+extra);
+ const nearActor=(p,extra=0)=>Object.values(s.eventGuests||{}).some(g=>g.active&&Math.hypot(g.p[0]-p[0],g.p[1]-p[1])<radius+.5+extra)||s.actors.some(a=>(!a.eventOnly||a.mobile||s.eventGuests?.[a.id]?.active)&&Math.hypot(a.p[0]-p[0],a.p[1]-p[1])<(a.mobile?(clip.dynamic_clearance||radius):radius)+.47+extra);
  const aheadBlocked=ground&&nearActor(look.p,.10);m.clearTime=aheadBlocked?0:m.clearTime+dt;
  const feeding=s.pondFeeding&&s.time>=s.pondFeeding.started&&s.time<s.pondFeeding.until&&['fish.','animal.duck_'].some(prefix=>id.startsWith(prefix))&&Math.hypot(m.p[0]-s.pondFeeding.target[0],m.p[1]-s.pondFeeding.target[1])<.78;m.feeding=!!feeding;
  const override=s.objectControls?.[id];const desired=wantsRest&& !override||aheadBlocked||(m.blocked&&m.clearTime<.7)?0:override?override.value:feeding?.12:1;m.speed=clamp(m.speed+clamp(desired-m.speed,-.9*dt,.55*dt),0,1);
@@ -47,17 +49,18 @@ export function advanceDiners(s,config,dt,emit){for(const[id,d]of Object.entries
 
 export function moverBlocks(p,m,clip,actorRadius=.43){if(clip.motion==='ride'){const dx=p[0]-m.p[0],dy=p[1]-m.p[1],c=Math.cos(m.yaw),n=Math.sin(m.yaw),u=dx*c+dy*n,v=-dx*n+dy*c;return Math.hypot(u-clamp(u,-.75,.75),v)<actorRadius+(m.footDown>.1?.52:.29)+.025;}return Math.hypot(p[0]-m.p[0],p[1]-m.p[1])<actorRadius+(clip.dynamic_clearance||clip.radius||.5)+.02;}
 function advanceCycle(s,id,m,clip,dt){
- const held=s.cycling==='rest'||s.weather==='rain'||s.worldEvent?.kind==='festival'||['festival','market','supper'].includes(s.sceneEvent?.kind);m.stopIndex??=0;m.stopWait??=0;m.footDown??=0;m.completedStops??=0;const stops=clip.stops||[];
+ const eventParking=false;
+ const held=s.cycling==='rest'||s.weather==='rain'||s.worldEvent?.kind==='festival'||['festival','market','supper','reunion'].includes(s.sceneEvent?.kind);m.stopIndex??=0;m.stopWait??=0;m.footDown??=0;m.completedStops??=0;const stops=clip.stops||[];
  if(!stops.length)return false;
  if(m.stopWait>0||m.tripState==='parked'){
-  m.stopWait=Math.max(0,m.stopWait-dt);m.speed=0;m.intent=stops[(m.stopIndex+stops.length-1)%stops.length].label;m.tripState='parked';m.footDown+=Math.min(1,dt*3)*(1-m.footDown);
-  if(m.stopWait<=0&&!held){m.tripState='depart';m.intent='准备去下一处';}return true;
+  if(eventParking&&m.stopIndex===1)m.stopWait=Math.min(m.stopWait,1.2);m.stopWait=Math.max(0,m.stopWait-dt);m.speed=0;m.intent=stops[(m.stopIndex+stops.length-1)%stops.length].label;m.tripState='parked';m.footDown+=Math.min(1,dt*3)*(1-m.footDown);
+  if(m.stopWait<=0&&(!held||eventParking&&m.stopIndex===1)){m.tripState='depart';m.intent='准备去下一处';}return true;
  }
  if(m.tripState==='depart'){m.footDown=Math.max(0,m.footDown-dt*1.5);if(m.footDown>.01)return true;m.tripState='ride';}
  const target=stops[m.stopIndex].clock,left=(target-m.clock+clip.duration)%clip.duration;
- const look=sampleClip(clip,(m.clock+.6*Math.max(.25,m.speed))%clip.duration),ahead=s.actors.some(a=>moverBlocks(a.p,{...m,...look},clip));
+ const look=sampleClip(clip,(m.clock+.6*Math.max(.25,m.speed))%clip.duration),ahead=Object.values(s.eventGuests||{}).some(g=>g.active&&moverBlocks(g.p,{...m,...look},clip))||s.actors.some(a=>(!a.eventOnly||a.mobile||s.eventGuests?.[a.id]?.active)&&moverBlocks(a.p,{...m,...look},clip));
  const desired=ahead?0:Math.min(1,Math.sqrt(Math.max(0,left))*.85);m.speed=clamp(m.speed+clamp(desired-m.speed,-dt*1.3,dt*.55),0,1);
- const move=Math.min(left,dt*m.speed),clock=(m.clock+move)%clip.duration,candidate=sampleClip(clip,clock),blocked=s.actors.some(a=>moverBlocks(a.p,{...m,...candidate},clip));m.blocked=blocked||ahead;m.intent=m.blocked?'让行人先走':m.stopIndex===0?'去车站旁看看':'去池塘边歇脚';
+ const move=Math.min(left,dt*m.speed),clock=(m.clock+move)%clip.duration,candidate=sampleClip(clip,clock),blocked=Object.values(s.eventGuests||{}).some(g=>g.active&&moverBlocks(g.p,{...m,...candidate},clip))||s.actors.some(a=>(!a.eventOnly||a.mobile||s.eventGuests?.[a.id]?.active)&&moverBlocks(a.p,{...m,...candidate},clip));m.blocked=blocked||ahead;m.intent=m.blocked?'让行人先走':m.stopIndex===0?'去车站旁看看':'去池塘边歇脚';
  if(!blocked){m.distance+=Math.hypot(m.p[0]-candidate.p[0],m.p[1]-candidate.p[1]);m.clock=clock;Object.assign(m,candidate);}else m.speed=Math.max(0,m.speed-dt*1.3);
  if(left<.004||move>=left-.00001){m.clock=target;Object.assign(m,sampleClip(clip,target));m.stopIndex=(m.stopIndex+1)%stops.length;m.stopWait=varied([11,19],id,m.completedStops++);m.tripState='parked';m.speed=0;}
  return true;

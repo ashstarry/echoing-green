@@ -1,11 +1,13 @@
-import {createPavingSupport} from './foot-support.mjs?v=cp29-bgm-e015c44d7156';
-import {createPassengerView} from './passenger-view.mjs?v=cp29-bgm-e015c44d7156';
-import {createObjectActionView} from './object-action-view.mjs?v=cp29-bgm-e015c44d7156';
-import {createResidentActionView} from './resident-action-view.mjs?v=cp29-bgm-e015c44d7156';
+import {createEventProps} from './event-props.mjs?v=cp30-life-0c6dd30e7c5b';
+import {createEventTravelView} from './event-travel-view.mjs?v=cp30-life-0c6dd30e7c5b';
+import {createPavingSupport} from './foot-support.mjs?v=cp30-life-0c6dd30e7c5b';
+import {createPassengerView} from './passenger-view.mjs?v=cp30-life-0c6dd30e7c5b';
+import {createObjectActionView} from './object-action-view.mjs?v=cp30-life-0c6dd30e7c5b';
+import {createResidentActionView} from './resident-action-view.mjs?v=cp30-life-0c6dd30e7c5b';
 import * as THREE from 'three';
-import {legPose,railPose,sampleRail,ease,sampleClip} from './motion.mjs?v=cp29-bgm-e015c44d7156';
-import {createIntentView} from './intent-view.mjs?v=cp29-bgm-e015c44d7156';
-import {createFireworks} from './fireworks.mjs?v=cp29-bgm-e015c44d7156';
+import {legPose,railPose,sampleRail,ease,sampleClip} from './motion.mjs?v=cp30-life-0c6dd30e7c5b';
+import {createIntentView} from './intent-view.mjs?v=cp30-life-0c6dd30e7c5b';
+import {createFireworks} from './fireworks.mjs?v=cp30-life-0c6dd30e7c5b';
 const X=new THREE.Vector3(1,0,0),Y=new THREE.Vector3(0,1,0),BZ=new THREE.Vector3(0,0,-1),q=new THREE.Quaternion(),v=new THREE.Vector3();
 export function createLifeView({scene,entities,parts,registry,lights,weatherSupport,renderer,camera,activities,nav}){
  const originals=new Map(),partBase=new Map(),emissive=[],stars=[],byId=new Map(registry.entities.map(e=>[e.id,e])),headAngles=new Map(),curtainAmounts=new Map();
@@ -17,6 +19,7 @@ export function createLifeView({scene,entities,parts,registry,lights,weatherSupp
  const passengerView=createPassengerView({entities,parts,activities});
  const objectView=createObjectActionView({entities,parts,registry});
  const residentView=createResidentActionView({scene,entities,parts,sockets:activities.sockets,localRoutes:activities.localRoutes,support:activities.localSupport,dinerGestures:activities.dinerGestures,diningProps:activities.diningProps});
+ const eventProps=createEventProps(scene),eventTravelView=createEventTravelView({entities,parts,sockets:activities.sockets,seated:activities.seatedRigs,support:activities.eventSupport});
  const paving=createPavingSupport(activities.paving),footContactCache=new Map();
  const authoredYaw=id=>activities.origins?.[id]?.yaw??byId.get(id)?.runtime_yaw??0;
  function rotate(id,axis,amount){const p=parts.get(id),base=partBase.get(id);if(p&&base)p.quaternion.copy(base.q).multiply(q.setFromAxisAngle(axis,amount));}
@@ -69,12 +72,12 @@ export function createLifeView({scene,entities,parts,registry,lights,weatherSupp
    const panels=id.endsWith('0')?[[0,-1],[1,1]]:[[4,-1],[5,1]];
    for(const[index,side]of panels){const key=`curtain.restaurant_upper_noren/panel_0${index}`,node=parts.get(key),base=partBase.get(key);if(!node||!base)continue;node.position.copy(base.p).addScaledVector(X,side*.42*open);node.scale.copy(base.s);node.scale.x*=1-.90*open;}
   }
-  intents.frame(s,dt);residentView.frame(s,dt);
+  intents.frame(s,dt);residentView.frame(s,dt);eventTravelView.frame(s,dt);eventProps.frame(s,dt);
   holder?.updateWorldMatrix(true,true);
   if(kiteTether){const kt=kiteTether,hand=kt.grip?kt.grip.localToWorld(kt.gripAnchor.clone()):holder.localToWorld(kt.holderAnchor.clone()),direction=kt.direction.clone().applyAxisAngle(X,Math.sin(t*.85)*.10*wind/.35*(s.objectControls['kite.plaza_kite']?.value??1)*(s.weather==='rain'?.12:1)).applyAxisAngle(Y,Math.sin(t*.65)*.12*wind/.35*(s.objectControls['kite.plaza_kite']?.value??1)*(s.weather==='rain'?.12:1)),tip=hand.clone().add(direction);placeWorld(kite,kt.base.clone().add(tip.clone().sub(kt.tip)));tether.updateWorldMatrix(true,true);const attr=kt.line.geometry.attributes.position;for(let j=0;j<17;j++){const u=j/16,p=hand.clone().lerp(tip,u);p.y-=Math.sin(Math.PI*u)*.025;tether.worldToLocal(p);attr.setXYZ(j,p.x,p.y,p.z);}attr.needsUpdate=true;kt.line.geometry.computeBoundingSphere();}
   for(const e of emissive)e.m.emissiveIntensity=e.base*light;for(const e of stars)e.m.emissiveIntensity=e.base*light*(.70+.30*Math.sin(t*1.2+e.index*1.7));for(const l of lights)l.intensity=l.userData.baseIntensity*light;
   rain.visible=rainAmount>.01;rain.material.opacity=rainAmount*.55;for(let j=0;j<160;j++){const b=j*.381966%1;dummy.position.set(-11+(j*.618%1)*22,weatherSupport.snow[j]+(1-(t*.72+b)%1)*(7.4-weatherSupport.snow[j]),-7+(j*.731%1)*13);dummy.rotation.set(0,0,-wind*.15);dummy.scale.setScalar(1);dummy.updateMatrix();rain.setMatrixAt(j,dummy.matrix);}rain.instanceMatrix.needsUpdate=true;
   snow.visible=snowAmount>.01;snow.material.opacity=snowAmount*.92;for(let j=0;j<400;j++){const column=j%160,f=(t*(.075+(j%5)*.009)+j*.47)%1,floor=weatherSupport.snow[column];dummy.position.set(-11+(column*.618%1)*22+Math.sin(t*.5+j)*.12,floor+(1-f)*(8.2-floor),-7+(column*.731%1)*13);dummy.rotation.set(t*.25+j,t*.3,0);dummy.scale.setScalar((.75+(j%4)*.18)*Math.min(1,f*10,(1-f)*10));dummy.updateMatrix();snow.setMatrixAt(j,dummy.matrix);}snow.instanceMatrix.needsUpdate=true;fire.update(s);objectView.frame(s);passengerView.frame(s);
  }
- return {frame,residentView,runtimeBindings:()=>({props:[...residentView.props].map(([key,o])=>({id:o.userData.runtime_effect_id,owner:o.userData.owner_entity,kind:key.split('/').at(-1)})),umbrellas:[...intents.umbrellas.keys()],effects:['effect.paper_rain','effect.paper_snow','effect.festival_fireworks','effect.garden_watering','effect.pond_food']}),effectsState:()=>({rain:rainAmount,snow:snowAmount,light,...intents.signals()}),fireworks:fire,renderEffects:()=>fire.render(),diagnostics:()=>{if(!kiteTether)return {};const kt=kiteTether;kt.line.updateWorldMatrix(true,false);const start=new THREE.Vector3().fromBufferAttribute(kt.line.geometry.attributes.position,0).applyMatrix4(kt.line.matrixWorld),hand=kt.grip?kt.grip.localToWorld(kt.gripAnchor.clone()):holder.localToWorld(kt.holderAnchor.clone());return {kiteHandGap:start.distanceTo(hand),fireworkParticles:fire.particleCount};}};
+ return {frame,residentView,runtimeBindings:()=>({props:[...residentView.props].map(([key,o])=>({id:o.userData.runtime_effect_id,owner:o.userData.owner_entity,kind:key.split('/').at(-1)})),umbrellas:[...intents.umbrellas.keys()],effects:[...eventProps.ids,'effect.paper_rain','effect.paper_snow','effect.festival_fireworks','effect.garden_watering','effect.pond_food']}),effectsState:()=>({rain:rainAmount,snow:snowAmount,light,...intents.signals()}),eventProps,eventTravelView,fireworks:fire,renderEffects:()=>fire.render(),diagnostics:()=>{if(!kiteTether)return {};const kt=kiteTether;kt.line.updateWorldMatrix(true,false);const start=new THREE.Vector3().fromBufferAttribute(kt.line.geometry.attributes.position,0).applyMatrix4(kt.line.matrixWorld),hand=kt.grip?kt.grip.localToWorld(kt.gripAnchor.clone()):holder.localToWorld(kt.holderAnchor.clone());return {kiteHandGap:start.distanceTo(hand),fireworkParticles:fire.particleCount};}};
 }

@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {passengerPose} from './passengers.mjs?v=cp29-bgm-e015c44d7156';
+import {passengerPose} from './passengers.mjs?v=cp30-life-0c6dd30e7c5b';
 const X=new THREE.Vector3(1,0,0),Y=new THREE.Vector3(0,1,0),Z=new THREE.Vector3(0,0,-1);
 export function createPassengerView({entities,parts,activities}){const c=activities.boarding;if(!c)return{frame(){}};const actor=entities.get(c.actor),car=entities.get(c.vehicle),q0=actor.quaternion.clone(),base=new Map([...parts].map(([id,p])=>[id,{q:p.quaternion.clone(),p:p.position.clone()}])),door=parts.get(c.vehicle+'/passenger_door'),ramp=parts.get(c.vehicle+'/boarding_ramp');
  let lastPhase=null;

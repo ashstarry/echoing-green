@@ -3736,8 +3736,8 @@
       "kind": "light",
       "blender_object": "street_lantern_05",
       "position": [
-        3.992788314819336,
-        1.3242321014404297,
+        4.699999809265137,
+        2.049999952316284,
         0.6699987053871155
       ],
       "actions": [
@@ -3864,8 +3864,8 @@
       "kind": "light",
       "blender_object": "street_lantern_07",
       "position": [
-        4.069486141204834,
-        3.388978958129883,
+        8.149999618530273,
+        3.25,
         0.6700006127357483
       ],
       "actions": [
@@ -6547,8 +6547,8 @@
       "kind": "plant",
       "blender_object": "CP07 garden cluster 066",
       "position": [
-        2.6443183422088623,
-        3.7641117572784424,
+        8.550000190734863,
+        3.0,
         0.6100000143051147
       ],
       "actions": [
@@ -7417,8 +7417,8 @@
       "kind": "plant",
       "blender_object": "CP07 garden cluster 1009",
       "position": [
-        4.679052352905273,
-        3.9593515396118164,
+        8.5,
+        3.6500000953674316,
         0.6100000143051147
       ],
       "actions": [
@@ -7765,8 +7765,8 @@
       "kind": "plant",
       "blender_object": "garden_planter_00",
       "position": [
-        3.6012122631073,
-        3.24381947517395,
+        8.850000381469727,
+        3.25,
         0.6100006103515625
       ],
       "actions": [
@@ -7852,8 +7852,8 @@
       "kind": "plant",
       "blender_object": "garden_planter_01",
       "position": [
-        3.9202795028686523,
-        3.308492660522461,
+        8.949999809265137,
+        3.799999952316284,
         0.6100006103515625
       ],
       "actions": [
@@ -8461,8 +8461,8 @@
       "kind": "plant",
       "blender_object": "garden_planter_08",
       "position": [
-        4.440566062927246,
-        -1.7995738983154297,
+        5.050000190734863,
+        -3.0,
         0.6100006103515625
       ],
       "actions": [
@@ -11332,6 +11332,42 @@
           "blender_object": "elder__anim_elbow_right",
           "control": "rigid_hinge",
           "axis": "X"
+        },
+        {
+          "id": "event_hip_left",
+          "blender_object": "CP30_elder__event_hip_left",
+          "control": "rigid_hinge",
+          "axis": "X"
+        },
+        {
+          "id": "event_knee_left",
+          "blender_object": "CP30_elder__event_knee_left",
+          "control": "rigid_hinge",
+          "axis": "X"
+        },
+        {
+          "id": "event_ankle_left",
+          "blender_object": "CP30_elder__event_ankle_left",
+          "control": "rigid_hinge",
+          "axis": "X"
+        },
+        {
+          "id": "event_hip_right",
+          "blender_object": "CP30_elder__event_hip_right",
+          "control": "rigid_hinge",
+          "axis": "X"
+        },
+        {
+          "id": "event_knee_right",
+          "blender_object": "CP30_elder__event_knee_right",
+          "control": "rigid_hinge",
+          "axis": "X"
+        },
+        {
+          "id": "event_ankle_right",
+          "blender_object": "CP30_elder__event_ankle_right",
+          "control": "rigid_hinge",
+          "axis": "X"
         }
       ],
       "state": {
@@ -12008,6 +12044,42 @@
         {
           "id": "anim_elbow_right",
           "blender_object": "listener__anim_elbow_right",
+          "control": "rigid_hinge",
+          "axis": "X"
+        },
+        {
+          "id": "event_hip_left",
+          "blender_object": "CP30_listener__event_hip_left",
+          "control": "rigid_hinge",
+          "axis": "X"
+        },
+        {
+          "id": "event_knee_left",
+          "blender_object": "CP30_listener__event_knee_left",
+          "control": "rigid_hinge",
+          "axis": "X"
+        },
+        {
+          "id": "event_ankle_left",
+          "blender_object": "CP30_listener__event_ankle_left",
+          "control": "rigid_hinge",
+          "axis": "X"
+        },
+        {
+          "id": "event_hip_right",
+          "blender_object": "CP30_listener__event_hip_right",
+          "control": "rigid_hinge",
+          "axis": "X"
+        },
+        {
+          "id": "event_knee_right",
+          "blender_object": "CP30_listener__event_knee_right",
+          "control": "rigid_hinge",
+          "axis": "X"
+        },
+        {
+          "id": "event_ankle_right",
+          "blender_object": "CP30_listener__event_ankle_right",
           "control": "rigid_hinge",
           "axis": "X"
         }
@@ -12835,6 +12907,42 @@
         {
           "id": "anim_elbow_right",
           "blender_object": "quiet_reader__anim_elbow_right",
+          "control": "rigid_hinge",
+          "axis": "X"
+        },
+        {
+          "id": "event_hip_left",
+          "blender_object": "CP30_quiet_reader__event_hip_left",
+          "control": "rigid_hinge",
+          "axis": "X"
+        },
+        {
+          "id": "event_knee_left",
+          "blender_object": "CP30_quiet_reader__event_knee_left",
+          "control": "rigid_hinge",
+          "axis": "X"
+        },
+        {
+          "id": "event_ankle_left",
+          "blender_object": "CP30_quiet_reader__event_ankle_left",
+          "control": "rigid_hinge",
+          "axis": "X"
+        },
+        {
+          "id": "event_hip_right",
+          "blender_object": "CP30_quiet_reader__event_hip_right",
+          "control": "rigid_hinge",
+          "axis": "X"
+        },
+        {
+          "id": "event_knee_right",
+          "blender_object": "CP30_quiet_reader__event_knee_right",
+          "control": "rigid_hinge",
+          "axis": "X"
+        },
+        {
+          "id": "event_ankle_right",
+          "blender_object": "CP30_quiet_reader__event_ankle_right",
           "control": "rigid_hinge",
           "axis": "X"
         }
@@ -14243,6 +14351,42 @@
           "blender_object": "waiting_passenger__anim_elbow_right",
           "control": "rigid_hinge",
           "axis": "X"
+        },
+        {
+          "id": "event_hip_left",
+          "blender_object": "CP30_waiting_passenger__event_hip_left",
+          "control": "rigid_hinge",
+          "axis": "X"
+        },
+        {
+          "id": "event_knee_left",
+          "blender_object": "CP30_waiting_passenger__event_knee_left",
+          "control": "rigid_hinge",
+          "axis": "X"
+        },
+        {
+          "id": "event_ankle_left",
+          "blender_object": "CP30_waiting_passenger__event_ankle_left",
+          "control": "rigid_hinge",
+          "axis": "X"
+        },
+        {
+          "id": "event_hip_right",
+          "blender_object": "CP30_waiting_passenger__event_hip_right",
+          "control": "rigid_hinge",
+          "axis": "X"
+        },
+        {
+          "id": "event_knee_right",
+          "blender_object": "CP30_waiting_passenger__event_knee_right",
+          "control": "rigid_hinge",
+          "axis": "X"
+        },
+        {
+          "id": "event_ankle_right",
+          "blender_object": "CP30_waiting_passenger__event_ankle_right",
+          "control": "rigid_hinge",
+          "axis": "X"
         }
       ],
       "state": {
@@ -14389,6 +14533,42 @@
         {
           "id": "anim_elbow_right",
           "blender_object": "waiting_passenger_2__anim_elbow_right",
+          "control": "rigid_hinge",
+          "axis": "X"
+        },
+        {
+          "id": "event_hip_left",
+          "blender_object": "CP30_waiting_passenger_2__event_hip_left",
+          "control": "rigid_hinge",
+          "axis": "X"
+        },
+        {
+          "id": "event_knee_left",
+          "blender_object": "CP30_waiting_passenger_2__event_knee_left",
+          "control": "rigid_hinge",
+          "axis": "X"
+        },
+        {
+          "id": "event_ankle_left",
+          "blender_object": "CP30_waiting_passenger_2__event_ankle_left",
+          "control": "rigid_hinge",
+          "axis": "X"
+        },
+        {
+          "id": "event_hip_right",
+          "blender_object": "CP30_waiting_passenger_2__event_hip_right",
+          "control": "rigid_hinge",
+          "axis": "X"
+        },
+        {
+          "id": "event_knee_right",
+          "blender_object": "CP30_waiting_passenger_2__event_knee_right",
+          "control": "rigid_hinge",
+          "axis": "X"
+        },
+        {
+          "id": "event_ankle_right",
+          "blender_object": "CP30_waiting_passenger_2__event_ankle_right",
           "control": "rigid_hinge",
           "axis": "X"
         }
@@ -18391,9 +18571,9 @@
       "kind": "book",
       "blender_object": "CP19 terrace reading book",
       "position": [
-        4.086142063140869,
-        7.321904182434082,
-        2.511199951171875
+        4.086141586303711,
+        7.321903705596924,
+        2.511199712753296
       ],
       "actions": [
         {
@@ -18459,9 +18639,9 @@
       "blender_object": "CP22 cup.upper_table_0",
       "label": "餐桌茶杯",
       "position": [
-        -2.6139559745788574,
-        2.5103604793548584,
-        3.2674002647399902
+        -2.6139557361602783,
+        2.5103602409362793,
+        3.267400026321411
       ],
       "parent_entity": "workstation.upper_dining_table_0",
       "parts": [],
@@ -18483,9 +18663,9 @@
       "blender_object": "CP22 food.upper_table_0",
       "label": "餐桌点心",
       "position": [
-        -2.5334324836730957,
-        2.420783042907715,
-        3.2674002647399902
+        -2.5334322452545166,
+        2.4207828044891357,
+        3.267400026321411
       ],
       "parent_entity": "workstation.upper_dining_table_0",
       "parts": [],
@@ -18507,9 +18687,9 @@
       "blender_object": "CP22 cup.upper_table_1",
       "label": "餐桌茶杯",
       "position": [
-        -0.095748670399189,
-        4.007282257080078,
-        3.2674002647399902
+        -0.0957486629486084,
+        4.00728178024292,
+        3.267400026321411
       ],
       "parent_entity": "workstation.upper_dining_table_1",
       "parts": [],
@@ -18531,9 +18711,9 @@
       "blender_object": "CP22 food.upper_table_1",
       "label": "餐桌点心",
       "position": [
-        -0.15966065227985382,
-        4.109377384185791,
-        3.2674002647399902
+        -0.15966063737869263,
+        4.109376907348633,
+        3.267400026321411
       ],
       "parent_entity": "workstation.upper_dining_table_1",
       "parts": [],
@@ -19060,7 +19240,7 @@
     "tree.terrace_sakura_1",
     "tree.terrace_sakura_2"
   ],
-  "parts_count": 466,
+  "parts_count": 496,
   "preserved_cp09_entity_ids": 184,
   "cp10_new_entity_ids": [],
   "source_geometry_checkpoint": "CP10 layout; CP12 two new water lanterns",

@@ -1,0 +1,42 @@
+{
+  "resident.elder": {
+    "hip": 0.43,
+    "upper": 0.235,
+    "lower": 0.33,
+    "ankle": 0.1,
+    "standingRise": 0.235,
+    "seatedFootForward": 0.235
+  },
+  "resident.listener": {
+    "hip": 0.43,
+    "upper": 0.235,
+    "lower": 0.33,
+    "ankle": 0.1,
+    "standingRise": 0.235,
+    "seatedFootForward": 0.235
+  },
+  "resident.quiet_reader": {
+    "hip": 0.43,
+    "upper": 0.235,
+    "lower": 0.33,
+    "ankle": 0.1,
+    "standingRise": 0.235,
+    "seatedFootForward": 0.235
+  },
+  "resident.waiting_passenger": {
+    "hip": 0.43,
+    "upper": 0.235,
+    "lower": 0.33,
+    "ankle": 0.1,
+    "standingRise": 0.235,
+    "seatedFootForward": 0.235
+  },
+  "resident.waiting_passenger_2": {
+    "hip": 0.43,
+    "upper": 0.235,
+    "lower": 0.33,
+    "ankle": 0.1,
+    "standingRise": 0.235,
+    "seatedFootForward": 0.235
+  }
+}
