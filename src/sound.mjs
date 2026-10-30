@@ -1,5 +1,5 @@
-import {createEventSfx} from './event-sfx.mjs?v=cp32-events-e037ba401068';
-import {writeText} from './i18n.mjs?v=cp32-events-e037ba401068';
+import {createEventSfx} from './event-sfx.mjs?v=cp33-stability-cf73c211622a';
+import {writeText} from './i18n.mjs?v=cp33-stability-cf73c211622a';
 
 // User-approved loop master, played unchanged. Keep the same track across events.
 export function createSound(button){
@@ -10,7 +10,8 @@ export function createSound(button){
  function stop(){audio?.pause();effects.setEnabled(false);effects.stop();}
  function start(fromGesture=false){
   if(!wanted())return;
-  if(fromGesture){blocked=false;effects.arm();}
+  if(fromGesture)blocked=false;
+  effects.arm(fromGesture);
   effects.setEnabled(true);
   if(blocked||pending)return;
   if(!audio){audio=new window.Audio(new URL('../assets/lanterns-awake-loop.wav',import.meta.url).href);audio.loop=true;audio.preload='auto';audio.playbackRate=1;}

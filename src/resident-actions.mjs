@@ -1,6 +1,6 @@
-import {requestLocalDestination} from './local-walkers.mjs?v=cp32-events-e037ba401068';
-import {PROFILES} from './community.mjs?v=cp32-events-e037ba401068';
-import {stableUnit,varied} from './cadence.mjs?v=cp32-events-e037ba401068';
+import {requestLocalDestination} from './local-walkers.mjs?v=cp33-stability-cf73c211622a';
+import {PROFILES} from './community.mjs?v=cp33-stability-cf73c211622a';
+import {stableUnit,varied} from './cadence.mjs?v=cp33-stability-cf73c211622a';
 // Counts refer to distinct, executable intentions, not interpolation frames or body parts.
 export const RESIDENT_ACTIONS={
  walk_street:{label:'沿街走到另一处',duration:60,navTask:'stroll'},

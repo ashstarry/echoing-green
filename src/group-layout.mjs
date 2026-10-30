@@ -1,5 +1,5 @@
-import {pathTo,navigationGraph} from './navigation.mjs?v=cp32-events-e037ba401068';
-import {moverBlocks,sampleClip} from './motion.mjs?v=cp32-events-e037ba401068';
+import {pathTo,navigationGraph} from './navigation.mjs?v=cp33-stability-cf73c211622a';
+import {moverBlocks,sampleClip} from './motion.mjs?v=cp33-stability-cf73c211622a';
 export const GROUP_KINDS=new Set(['festival','market','supper','reunion']);
 const D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 const queues=[
@@ -14,7 +14,7 @@ export function groupPlaces(nav,kind,s){
  return result;
 }
 export function assignGroup(s,nav,e,candidates){
- let places=groupPlaces(nav,e.kind,s);if(['market','supper'].includes(e.kind))places.sort((a,b)=>a.index-b.index||a.lane-b.lane);places=places.slice(0,candidates.length);const pairs=[];e.queue={};
+ let places=groupPlaces(nav,e.kind,s);e.placePool=places.map(({node,lane,index})=>({node,index,...(lane===undefined?{}:{lane})}));if(['market','supper'].includes(e.kind))places.sort((a,b)=>a.index-b.index||a.lane-b.lane);places=places.slice(0,candidates.length);const pairs=[];e.queue={};
  const graph=navigationGraph(nav),access=new Map();for(const a of candidates){const distances=new Float64Array(nav.nodes.length).fill(Infinity),queue=[a.node];distances[a.node]=0;for(let j=0;j<queue.length;j++){const n=queue[j];for(const k of graph.edges[n])if(!Number.isFinite(distances[k])){distances[k]=distances[n]+1;queue.push(k);}}access.set(a.id,distances);}
  const costFor=(a,p)=>access.get(a.id)[p.node]*nav.step+(a.id==='resident.kite_child'&&!(p.p[0]>1.9&&p.p[0]<4.1&&p.p[1]>-2.4&&p.p[1]<1.0)?100:0);
  if(['market','supper'].includes(e.kind)){const remaining=new Set(candidates.map(a=>a.id));for(const p of places){const ranked=candidates.filter(a=>remaining.has(a.id)).map(a=>({a,cost:costFor(a,p)+(s.eventGuests?.[a.id]?.phase==='home'?(nav.activities.eventTrips[a.id]?.outFrames.at(-1).time||0)*.8:0)})).sort((a,b)=>a.cost-b.cost);if(!ranked.length)break;const a=ranked[0].a;remaining.delete(a.id);e.slots[a.id]=p.node;e.queue[a.id]={lane:p.lane,index:p.index,vendor:['resident.vendor_bread','resident.vendor_flower','resident.vendor_lamp'][p.lane]};}return{actors:candidates.length-remaining.size,places:places.length};}
