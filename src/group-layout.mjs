@@ -1,6 +1,6 @@
-import {pathTo,navigationGraph} from './navigation.mjs?v=cp34-art-a447e84106f5';
-import {moverBlocks,sampleClip} from './motion.mjs?v=cp34-art-a447e84106f5';
-export const GROUP_KINDS=new Set(['festival','market','supper','reunion']);
+import {pathTo,navigationGraph} from './navigation.mjs?v=cp35-lantern-f3a6f95a814b';
+import {moverBlocks,sampleClip} from './motion.mjs?v=cp35-lantern-f3a6f95a814b';
+export const GROUP_KINDS=new Set(['festival','market','supper','reunion','lantern']);
 const D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 const queues=[
  [[-2.4,1.6],[-3.02,1.10],[-3.65,.61],[-4.30,.20],[-4.0,-.47],[-3.3,-.65]],
@@ -23,4 +23,4 @@ export function assignGroup(s,nav,e,candidates){
  for(const {a,i,p}of pairs){if(actors.has(a.id)||used.has(i))continue;actors.add(a.id);used.add(i);e.slots[a.id]=p.node;if(p.lane!==undefined)e.queue[a.id]={lane:p.lane,index:p.index,vendor:['resident.vendor_bread','resident.vendor_flower','resident.vendor_lamp'][p.lane]};if(actors.size===candidates.length)break;}
  return{actors:actors.size,places:places.length};
 }
-export function eventPose(s,a,nav){const e=s.sceneEvent,n=e?.slots?.[a.id];if(n===undefined||!GROUP_KINDS.has(e.kind)||!['gather','active','closing'].includes(e.phase))return null;const target=e.kind==='festival'?[-4.6,2.8,6.8]:e.queue?.[a.id]?nav.activities.spaces.residents[e.queue[a.id].vendor].position:[-.27,-.54,1.3];return{node:n,target,standing:!a.path.length&&D(a.p,nav.nodes[n])<.20,task:e.kind==='festival'?'fireworks':e.kind==='reunion'?'chat':'browse'};}
+export function eventPose(s,a,nav){const e=s.sceneEvent,n=e?.slots?.[a.id];if(n===undefined||!GROUP_KINDS.has(e.kind)||!['gather','active','closing'].includes(e.phase))return null;const target=e.kind==='festival'?[-4.6,2.8,6.8]:e.queue?.[a.id]?nav.activities.spaces.residents[e.queue[a.id].vendor].position:[-.27,-.54,1.3];return{node:n,target,standing:!a.path.length&&D(a.p,nav.nodes[n])<.20,task:e.kind==='festival'?'fireworks':['reunion','lantern'].includes(e.kind)?'chat':'browse'};}

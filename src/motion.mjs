@@ -1,5 +1,5 @@
-import {makeRoom} from './event-travel.mjs?v=cp34-art-a447e84106f5';
-import {CADENCE,varied} from './cadence.mjs?v=cp34-art-a447e84106f5';
+import {makeRoom} from './event-travel.mjs?v=cp35-lantern-f3a6f95a814b';
+import {CADENCE,varied} from './cadence.mjs?v=cp35-lantern-f3a6f95a814b';
 export const TAU=Math.PI*2;
 export const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 export const ease=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
@@ -32,7 +32,7 @@ export function createMovers(activities){return Object.fromEntries(Object.entrie
 export function advanceMovers(s,activities,dt,nav=null){for(const[id,m]of Object.entries(s.movers||{})){
  const clip=activities.clips[id];if(id==='animal.garden_fox'&&advanceEventFox(s,m,clip,dt))continue;const ground=['creature_walk','ride'].includes(clip.motion),policy=clip.motion==='fly'?s.birds:clip.motion==='ride'?s.cycling:clip.motion==='swim'?s.pond:s.animals;
  if(clip.motion==='creature_walk'&&s.time>=m.nextPause&&s.time>=m.restUntil){m.pauses++;m.restUntil=s.time+varied([2.5,6],id,m.pauses);m.nextPause=m.restUntil+varied([3,7],id,m.pauses);}
- const eventRest=clip.motion==='creature_walk'&&['festival','market','supper','reunion'].includes(s.sceneEvent?.kind);
+ const eventRest=clip.motion==='creature_walk'&&['festival','market','supper','reunion','lantern'].includes(s.sceneEvent?.kind);
  const wantsRest=eventRest||policy==='rest'||s.time<m.restUntil||(clip.motion==='ride'&&(s.weather==='rain'||s.worldEvent?.kind==='festival'));
  if(clip.motion==='ride'&&advanceCycle(s,id,m,clip,dt,nav))continue;
  const radius=clip.radius||.5,look=sampleClip(clip,(m.clock+.65*Math.max(.25,m.speed))%clip.duration);
@@ -49,7 +49,7 @@ export function advanceDiners(s,config,dt,emit){for(const[id,d]of Object.entries
 
 export function moverBlocks(p,m,clip,actorRadius=.43){if(clip.motion==='ride'){const dx=p[0]-m.p[0],dy=p[1]-m.p[1],c=Math.cos(m.yaw),n=Math.sin(m.yaw),u=dx*c+dy*n,v=-dx*n+dy*c;return Math.hypot(u-clamp(u,-.75,.75),v)<actorRadius+(m.footDown>.1&&actorRadius>.35?.52:.29)+.025;}return Math.hypot(p[0]-m.p[0],p[1]-m.p[1])<actorRadius+(clip.dynamic_clearance||clip.radius||.5)+.02;}
 function advanceCycle(s,id,m,clip,dt,nav){
- const eventParking=['festival','market','supper','reunion'].includes(s.sceneEvent?.kind)||Object.values(s.eventGuests||{}).some(g=>g.active);
+ const eventParking=['festival','market','supper','reunion','lantern'].includes(s.sceneEvent?.kind)||Object.values(s.eventGuests||{}).some(g=>g.active);
  const held=s.cycling==='rest'||s.weather==='rain'||eventParking&&m.stopIndex===0;m.stopIndex??=0;m.stopWait??=0;m.footDown??=0;m.completedStops??=0;const stops=clip.stops||[];
  if(!stops.length)return false;
  if(m.stopWait>0||m.tripState==='parked'){
@@ -68,7 +68,7 @@ function advanceCycle(s,id,m,clip,dt,nav){
 }
 
 function advanceEventFox(s,m,clip,dt){
- const active=['festival','market','supper','reunion'].includes(s.sceneEvent?.kind)&&['gather','active','closing'].includes(s.sceneEvent.phase);
+ const active=['festival','market','supper','reunion','lantern'].includes(s.sceneEvent?.kind)&&['gather','active','closing'].includes(s.sceneEvent.phase);
  if(s.objectControls?.['animal.garden_fox']?.target===0){m.speed=0;m.strideWeight+=(0-m.strideWeight)*Math.min(1,dt*8);m.intent='rest';return true;}
  if(active&&!m.eventHome)m.eventHome={p:m.p.slice(),yaw:m.yaw};
  if(!m.eventHome)return false;const target=active?[5.15,1.7,.624]:m.eventHome.p,dx=target[0]-m.p[0],dy=target[1]-m.p[1],d=Math.hypot(dx,dy),move=Math.min(d,.72*dt),candidate=m.p.map((x,k)=>x+(target[k]-x)*move/(d||1));if(s.actors.some(a=>Math.abs(a.p[2]-candidate[2])<1&&Math.hypot(a.p[0]-candidate[0],a.p[1]-candidate[1])<.78&&Math.hypot(a.p[0]-candidate[0],a.p[1]-candidate[1])<Math.hypot(a.p[0]-m.p[0],a.p[1]-m.p[1])-1e-6)){m.speed=0;m.strideWeight+=(0-m.strideWeight)*Math.min(1,dt*8);m.intent='yield';return true;}m.speed=d>.05?1:0;m.strideWeight+=(Number(d>.05)-m.strideWeight)*Math.min(1,dt*8);m.intent=active?'head_for_garden':'return_to_garden';if(d>.005){m.p=m.p.map((x,k)=>x+(target[k]-x)*move/d);m.distance+=move;const yaw=Math.atan2(dy,dx);m.yaw+=clamp(Math.atan2(Math.sin(yaw-m.yaw),Math.cos(yaw-m.yaw)),-dt*3,dt*3);}else if(!active){m.p=m.eventHome.p;m.yaw=m.eventHome.yaw;delete m.eventHome;}return true;

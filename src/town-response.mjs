@@ -1,6 +1,6 @@
-import {PROFILES} from './community.mjs?v=cp34-art-a447e84106f5';
-import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp34-art-a447e84106f5';
-import {stableUnit} from './cadence.mjs?v=cp34-art-a447e84106f5';
+import {PROFILES} from './community.mjs?v=cp35-lantern-f3a6f95a814b';
+import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp35-lantern-f3a6f95a814b';
+import {stableUnit} from './cadence.mjs?v=cp35-lantern-f3a6f95a814b';
 
 const live=j=>!['done','failed','cancelled'].includes(j.status);
 const safeToBlend=action=>action&&!RESIDENT_ACTIONS[action]?.route&&!RESIDENT_ACTIONS[action]?.navTask&&!['sip_tea','taste_food','feed_pond','look_pond'].includes(action);

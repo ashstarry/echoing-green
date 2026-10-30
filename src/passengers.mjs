@@ -1,9 +1,9 @@
-import {ease,legPose,railPose,stationDistance} from './motion.mjs?v=cp34-art-a447e84106f5';
+import {ease,legPose,railPose,stationDistance} from './motion.mjs?v=cp35-lantern-f3a6f95a814b';
 const mix=(a,b,t)=>a+(b-a)*t;const angle=(a,b,t)=>a+Math.atan2(Math.sin(b-a),Math.cos(b-a))*t;const lerp=(a,b,t)=>a.map((x,i)=>mix(x,b[i],t));
 export function createPassengers(config){if(!config)return{};return{[config.actor]:{phase:'waiting',mode:'auto',clock:0,door:0,ramp:0,vehicle:null,exitArrival:0,nextTripAt:15,completedTrips:0,requested:false}};}
 export function requestPassengerAction(s,id,action){const p=s.passengers?.[id];if(!p)throw Error('这个乘车流程还未开放');if(action==='ride_once'){if(p.phase!=='waiting')throw Error('旅客已经在这趟行程中');p.mode='once';p.requested=true;p.nextTripAt=s.time;const hands=s.residentActions[id];if(hands?.action)hands.cancelRemaining=.65;}else if(action==='stay'){p.mode='stay';p.requested=false;if(p.phase==='prepare_board')p.phase='close_exit';else if(p.phase==='board'||p.phase==='secure')p.cancelTrip=true;else if(p.phase==='riding')p.exitArrival=s.train.arrivals+(s.train.mode==='dwell'?0:1);}else if(action==='alight'){if(p.phase==='waiting')throw Error('旅客已经在站台上');if(p.phase==='prepare_board'){p.phase='close_exit';p.mode='stay';return;}if(p.phase==='board'||p.phase==='secure')p.cancelTrip=true;p.mode='once';p.exitArrival=s.train.arrivals+(s.train.mode==='dwell'?0:1);}else throw Error('未开放的乘车动作');s.revision++;}
 export function advancePassengers(s,activities,dt){const config=activities?.boarding;if(!config)return;const p=s.passengers[config.actor],tr=s.train;tr.passengerHold=false;
- if(p.phase==='waiting'&&(s.eventGuests?.[config.actor]?.active||['festival','market','supper','reunion'].includes(s.sceneEvent?.kind))){p.nextTripAt=s.time+12;return;}
+ if(p.phase==='waiting'&&(s.eventGuests?.[config.actor]?.active||['festival','market','supper','reunion','lantern'].includes(s.sceneEvent?.kind))){p.nextTripAt=s.time+12;return;}
  const waitingForHands=!!s.residentActions[config.actor]?.action;
  if(p.phase==='waiting'&&p.mode!=='stay'&&s.time>=p.nextTripAt&&tr.mode==='dwell'){p.phase='prepare_board';p.clock=0;}
  const open=['prepare_board','board','prepare_exit','alight'].includes(p.phase);p.door+=Math.max(-dt*1.5,Math.min(dt*1.5,Number(open)-p.door));p.ramp+=Math.max(-dt*.8,Math.min(dt*.8,Number(open&&p.door>.98)-p.ramp));

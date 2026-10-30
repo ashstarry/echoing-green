@@ -1,15 +1,15 @@
-import {moverBlocks} from './motion.mjs?v=cp34-art-a447e84106f5';
-import {pathTo,navigationGraph} from './navigation.mjs?v=cp34-art-a447e84106f5';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp34-art-a447e84106f5';
+import {moverBlocks} from './motion.mjs?v=cp35-lantern-f3a6f95a814b';
+import {pathTo,navigationGraph} from './navigation.mjs?v=cp35-lantern-f3a6f95a814b';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp35-lantern-f3a6f95a814b';
 const dist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 const turn=(a,b,n)=>a+Math.max(-n,Math.min(n,Math.atan2(Math.sin(b-a),Math.cos(b-a))));
 const live=j=>!['done','cancelled','failed'].includes(j.status);
-const kinds=new Set(['festival','market','supper','reunion']);
+const kinds=new Set(['festival','market','supper','reunion','lantern']);
 export function ensureEventTravel(s,nav){
  s.eventGuests??={};for(const[id,c]of Object.entries(nav.activities?.eventTrips||{}))if(!s.eventGuests[id])s.eventGuests[id]={id,phase:'home',active:false,p:c.home.slice(0,3),yaw:c.home[3],stand:0,walked:0,gaitWeight:0,progress:0,path:[],segment:0,blocked:0,returnRequested:false,readyAt:0,goal:null,eventId:null,bookBefore:1,umbrellaBefore:1};
 }
 export function eventGuestPositions(s){return [];}
-export function eventGuestCandidates(s,nav,e){ensureEventTravel(s,nav);return Object.values(s.eventGuests).filter(g=>(!nav.activities.eventTrips[g.id].events||nav.activities.eventTrips[g.id].events.includes(e.kind))&&!e.protectedIds?.includes(g.id)&&(!s.passengers?.[g.id]||s.passengers[g.id].phase==='waiting')&&!s.intentRuntime.jobs.some(j=>j.target===g.id&&live(j))).map(g=>({id:g.id,p:g.p,node:nav.activities.eventTrips[g.id].portal}));}
+export function eventGuestCandidates(s,nav,e){ensureEventTravel(s,nav);return Object.values(s.eventGuests).filter(g=>(!nav.activities.eventTrips[g.id].events||nav.activities.eventTrips[g.id].events.includes(e.kind==='lantern'?'reunion':e.kind))&&!e.protectedIds?.includes(g.id)&&(!s.passengers?.[g.id]||s.passengers[g.id].phase==='waiting')&&!s.intentRuntime.jobs.some(j=>j.target===g.id&&live(j))).map(g=>({id:g.id,p:g.p,node:nav.activities.eventTrips[g.id].portal}));}
 function obstacle(s,g,p){
  const separation=['resident.listener','resident.child_listener'].includes(g.id)?.46:.48;
  return s.actors.some(a=>a.id!==g.id&&Math.abs(a.p[2]-p[2])<1.4&&dist(a.p,p)<separation&&dist(a.p,p)<dist(a.p,g.p)-1e-7)||Object.values(s.eventGuests).some(o=>o!==g&&o.active&&Math.abs(o.p[2]-p[2])<1.4&&dist(o.p,p)<separation&&dist(o.p,p)<dist(o.p,g.p)-1e-7)||Object.entries(s.localWalkers||{}).some(([id,w])=>id!==g.id&&!s.eventGuests?.[id]?.active&&Math.abs(w.root[2]-p[2])<1.4&&dist(w.root,p)<.48&&dist(w.root,p)<dist(w.root,g.p)-1e-7);
@@ -19,7 +19,7 @@ export function makeRoom(s,nav,g,target){
  const b=blocks.find(b=>Math.abs(b.p[2]-target[2])<1.4&&dist(b.p,target)<(g.id==='resident.cyclist'?1.9:.97));if(!b||s.time<(b.actor?.eventYieldUntil||b.guest?.yieldUntil||0)||s.sceneEvent?.protectedIds?.includes(b.id)||s.intentRuntime.jobs.some(j=>j.target===b.id&&live(j)))return;
  const start=nearest(nav,b.p),people=[...s.actors.filter(a=>a.id!==b.id).map(a=>a.p),...Object.values(s.eventGuests).filter(o=>o.id!==b.id&&o.active).map(o=>o.p)],blocked=new Set(nav.nodes.flatMap((p,i)=>people.some(q=>Math.abs(q[2]-p[2])<1.4&&dist(p,q)<.97)?[i]:[]));blocked.delete(start);
  const candidates=nav.nodes.map((p,i)=>({p,i})).filter(({p,i})=>!blocked.has(i)&&Object.entries(nav.activities.eventTrips||{}).filter(([id])=>s.eventGuests?.[id]?.active).every(([,c])=>c.entry.every(q=>Math.abs(p[2]-q[2])>1.4||dist(p,q)>1.0))&&(g.id!=='resident.cyclist'||!nav.noStopping.has(i))&&Object.entries(s.movers).every(([id,m])=>!['creature_walk','ride'].includes(nav.activities.clips[id].motion)||!moverBlocks(p,m,nav.activities.clips[id],nav.radius))&&dist(p,b.p)>.55&&dist(p,b.p)<2.3&&dist(p,g.p)>1.15&&navigationGraph(nav).components[i]===navigationGraph(nav).components[start]&&(!b.actor||b.id!=='resident.kite_child'||p[0]>2.3&&p[0]<3.8&&p[1]>-1.7&&p[1]<.65)).sort((a,c)=>dist(a.p,b.p)-dist(c.p,b.p));
- for(const c of candidates){let path=pathTo(nav,start,c.i,blocked);if(path.length<2)path=pathTo(nav,start,c.i,new Set(),blocked);if(path.length<2)continue;if(b.actor){const a=b.actor;a.path=path;a.segment=0;a.target=c.i;a.detouring=true;a.reservation=s.sceneEvent?.slots[a.id]??a.reservation;a.responseDestination=a.reservation;a.wait=0;a.localActionUntil=0;a.mode='walk';a.taskRevision=s.planRevision;a.responseReplan=false;a.eventYieldUntil=s.time+5;if(!(['festival','market','supper','reunion'].includes(s.sceneEvent?.kind)&&['gather','active'].includes(s.sceneEvent.phase))){a.courtesyDestination=c.i;a.courtesyExpires=s.time+5;a.courtesyArrivedAt=null;}s.residentActions[a.id].cancelRemaining=.65;s.residents[a.id].reason='侧身让远处赶来的邻居先过去';}else{const o=b.guest;o.phase='make_room';o.path=path;o.segment=0;o.yieldUntil=s.time+5;}return;}
+ for(const c of candidates){let path=pathTo(nav,start,c.i,blocked);if(path.length<2)path=pathTo(nav,start,c.i,new Set(),blocked);if(path.length<2)continue;if(b.actor){const a=b.actor;a.path=path;a.segment=0;a.target=c.i;a.detouring=true;a.reservation=s.sceneEvent?.slots[a.id]??a.reservation;a.responseDestination=a.reservation;a.wait=0;a.localActionUntil=0;a.mode='walk';a.taskRevision=s.planRevision;a.responseReplan=false;a.eventYieldUntil=s.time+5;if(!(['festival','market','supper','reunion','lantern'].includes(s.sceneEvent?.kind)&&['gather','active'].includes(s.sceneEvent.phase))){a.courtesyDestination=c.i;a.courtesyExpires=s.time+5;a.courtesyArrivedAt=null;}s.residentActions[a.id].cancelRemaining=.65;s.residents[a.id].reason='侧身让远处赶来的邻居先过去';}else{const o=b.guest;o.phase='make_room';o.path=path;o.segment=0;o.yieldUntil=s.time+5;}return;}
 }
 function nearest(nav,p){let best=-1,score=Infinity;const graph=navigationGraph(nav),main=graph.components[nav.actors[0].entry.at(-1)];for(let i=0;i<nav.nodes.length;i++)if(graph.components[i]===main){const d=dist(nav.nodes[i],p);if(d<score){score=d;best=i;}}return best;}
 function routeGround(s,nav,g,destination){
@@ -51,7 +51,7 @@ export function advanceEventTravel(s,nav,dt){
   const original=nav.activities.eventTrips[g.id],c=original.paths&&g.startAnchor?{...original,entry:original.paths[g.startAnchor],outFrames:original.outFramePaths[g.startAnchor],backFrames:original.backFramePaths[g.startAnchor]}:original,r=s.residentActions[g.id],personal=s.intentRuntime.jobs.some(j=>j.target===g.id&&live(j));
   if(g.active&&g.id==='resident.water_companion'&&s.weather==='rain'){const n=nearest(nav,g.p);r.umbrellaTarget=['hold','aside'].includes(g.phase)&&nav.activities.spaces.nodes[n]?.umbrellaClear?1:0;}
   if(e?.slots?.[g.id]!==undefined){g.destination=e.slots[g.id];if(g.eventId!==e.id){g.eventId=e.id;g.returnRequested=false;}}
-  const desired=e&&e.slots?.[g.id]!==undefined&&kinds.has(e.kind)&&(!c.events||c.events.includes(e.kind))&&['gather','active'].includes(e.phase)&&!e.protectedIds?.includes(g.id)&&!personal&&!g.returnRequested;
+  const desired=e&&e.slots?.[g.id]!==undefined&&kinds.has(e.kind)&&(!c.events||c.events.includes(e.kind==='lantern'?'reunion':e.kind))&&['gather','active'].includes(e.phase)&&!e.protectedIds?.includes(g.id)&&!personal&&!g.returnRequested;
   if(g.phase==='home'){
    if(!desired)continue;
    if(c.waitForBicycleBay){const b=s.movers['bicycle.street_bicycle'];if(b.tripState!=='parked'||b.stopIndex!==0)continue;}

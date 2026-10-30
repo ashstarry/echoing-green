@@ -1,8 +1,8 @@
-import {makeRoom} from './event-travel.mjs?v=cp34-art-a447e84106f5';
-import {groupPlaces} from './group-layout.mjs?v=cp34-art-a447e84106f5';
-import {pathTo,navigationGraph} from './navigation.mjs?v=cp34-art-a447e84106f5';
-import {moverBlocks} from './motion.mjs?v=cp34-art-a447e84106f5';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp34-art-a447e84106f5';
+import {makeRoom} from './event-travel.mjs?v=cp35-lantern-f3a6f95a814b';
+import {groupPlaces} from './group-layout.mjs?v=cp35-lantern-f3a6f95a814b';
+import {pathTo,navigationGraph} from './navigation.mjs?v=cp35-lantern-f3a6f95a814b';
+import {moverBlocks} from './motion.mjs?v=cp35-lantern-f3a6f95a814b';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp35-lantern-f3a6f95a814b';
 const D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 const angle=(a,b)=>Math.atan2(Math.sin(b-a),Math.cos(b-a));
@@ -13,11 +13,11 @@ function turn(a,target,dt){const want=Math.atan2(target[1]-a.p[1],target[0]-a.p[
 function clearSegment(nav,from,to,blocked){const a=nav.nodes[from],b=nav.nodes[to],n=Math.ceil(D(a,b)/(.5*nav.step)),graph=navigationGraph(nav);let prior=from;for(let j=1;j<=n;j++){const p=[a[0]+(b[0]-a[0])*j/n,a[1]+(b[1]-a[1])*j/n],id=nodeAt(nav,p);if(id===undefined||blocked.has(id)||id!==prior&&!graph.edges[prior].includes(id))return false;prior=id;}return true;}
 function smoothRoute(nav,path,blocked){if(path.length<3)return path;const route=[path[0]];let i=0;while(i<path.length-1){let j=Math.min(path.length-1,i+14);while(j>i+1&&!clearSegment(nav,path[i],path[j],blocked))j--;route.push(path[j]);i=j;}return route;}
 export function advanceGroupCrowd(s,nav,dt){
- for(const a of s.actors)if(a.courtesyDestination!==undefined&&((['festival','market','supper','reunion'].includes(s.sceneEvent?.kind)&&['gather','active'].includes(s.sceneEvent.phase))||s.time>=a.courtesyExpires||a.courtesyArrivedAt!==null&&s.time-a.courtesyArrivedAt>.65)){delete a.courtesyDestination;delete a.courtesyExpires;delete a.courtesyArrivedAt;a.detouring=false;a.reservation=null;a.path=[];a.target=null;a.taskRevision=-1;a.wait=.3;}
+ for(const a of s.actors)if(a.courtesyDestination!==undefined&&((['festival','market','supper','reunion','lantern'].includes(s.sceneEvent?.kind)&&['gather','active'].includes(s.sceneEvent.phase))||s.time>=a.courtesyExpires||a.courtesyArrivedAt!==null&&s.time-a.courtesyArrivedAt>.65)){delete a.courtesyDestination;delete a.courtesyExpires;delete a.courtesyArrivedAt;a.detouring=false;a.reservation=null;a.path=[];a.target=null;a.taskRevision=-1;a.wait=.3;}
  const crowd=s.actors.filter(a=>a.mobile&&targetOf(s,a)!==undefined),graph=navigationGraph(nav);
  const moverClear=p=>Object.entries(s.movers).every(([id,m])=>!['ride','creature_walk'].includes(nav.activities.clips[id].motion)||!moverBlocks(p,m,nav.activities.clips[id],.24));
  // Plan against actual bodies and static terrain. A nearby free point is never substituted for a queue position.
- for(const a of crowd){const goal=targetOf(s,a),target=nav.nodes[goal],g=s.eventGuests?.[a.id],e=s.sceneEvent;const home=a.guestReturnNode!==undefined;a.groupDrivenTick=s.tick;a.segment=0;a.reservation=goal;a.responseDestination=goal;a.localActionUntil=0;a.manualActivity=null;a.wait=0;a.task=home?'stroll':e?.kind==='festival'?'fireworks':e?.kind==='reunion'?'chat':'browse';a.lookTarget=home?target:e?.kind==='festival'?FIREWORK_FOCUS:e?.queue?.[a.id]?nav.activities.spaces.residents[e.queue[a.id].vendor].position:[-.27,-.54,1.3];s.residents[a.id].activity=a.task;s.residents[a.id].lookTarget=a.lookTarget;
+ for(const a of crowd){const goal=targetOf(s,a),target=nav.nodes[goal],g=s.eventGuests?.[a.id],e=s.sceneEvent;const home=a.guestReturnNode!==undefined;a.groupDrivenTick=s.tick;a.segment=0;a.reservation=goal;a.responseDestination=goal;a.localActionUntil=0;a.manualActivity=null;a.wait=0;a.task=home?'stroll':e?.kind==='festival'?'fireworks':['reunion','lantern'].includes(e?.kind)?'chat':'browse';a.lookTarget=home?target:e?.kind==='festival'?FIREWORK_FOCUS:e?.queue?.[a.id]?nav.activities.spaces.residents[e.queue[a.id].vendor].position:[-.27,-.54,1.3];s.residents[a.id].activity=a.task;s.residents[a.id].lookTarget=a.lookTarget;
   if(e?.queue?.[a.id])a.workstation=e.queue[a.id].vendor;
   if(D(a.p,target)<.035){if(a.courtesyDestination!==undefined&&a.courtesyArrivedAt===null)a.courtesyArrivedAt=s.time;if(a.crowdArrivedGoal!==goal){s.stats.completed++;a.crowdArrivedGoal=goal;}a.crowdV=[0,0];a.p[0]=target[0];a.p[1]=target[1];a.node=goal;a.path=[];a.target=null;a.mode='idle';a.actualSpeed=0;a.speed=0;a.gaitWeight+=(0-a.gaitWeight)*Math.min(1,dt*10);turn(a,a.lookTarget,dt);continue;}
   a.crowd??={goal:null,route:[],at:0,blocked:0,replan:0};const c=a.crowd;

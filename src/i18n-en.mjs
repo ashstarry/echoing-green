@@ -826,6 +826,12 @@ Object.assign(EN,Object.fromEntries(`
 风放轻了脚步=The breeze grows lighter
 风车转得轻快了=The windmill turns more briskly
 骑行活动存档无效=The saved cycling activity is invalid
+
+纸灯沿街亮起，街坊提灯相聚=Paper lanterns light the lanes as neighbors gather with their lamps
+纸灯沿街依次亮起，街坊提灯走向树下。=Lanterns light up along the lanes; neighbors bring their lamps to the tree.
+灯下聚起了街坊，提灯与暖窗照亮安静的夜晚。=Neighbors gather in the lamplight, surrounded by warm windows and paper lanterns.
+纸灯轻轻收起，街坊道别，暖窗继续陪着夜色。=The paper lanterns settle as neighbors say goodbye; warm windows remain in the night.
+街巷点灯，邻居提灯走来=Lanterns glow as neighbors come together
 `.trim().split('\n').map(s=>{const i=s.indexOf('=');return[s.slice(0,i),s.slice(i+1)];})));
 Object.assign(EN,{'小镇会保持现在的安排，继续自己的生活。':'The town will keep its current intentions and continue its day.','小镇继续自己的生活':'Life continues in the town'});
 Object.assign(EN,{'决策服务没有返回有效答案':'The decision service returned no valid answer','决策答案缺失或无效':'The decision response was incomplete or invalid','请输入1–600字':'Please enter between 1 and 600 characters','上一句还在判断，请稍候':'The previous wish is still being considered','心愿暂时没有送达':'The wish could not be delivered','私密配置文件权限不正确':'The local connection is not configured correctly','选中物件无效':'The selected object is invalid','输入太长':'The message is too long'});

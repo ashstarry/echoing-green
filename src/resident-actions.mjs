@@ -1,6 +1,6 @@
-import {requestLocalDestination} from './local-walkers.mjs?v=cp34-art-a447e84106f5';
-import {PROFILES} from './community.mjs?v=cp34-art-a447e84106f5';
-import {stableUnit,varied} from './cadence.mjs?v=cp34-art-a447e84106f5';
+import {requestLocalDestination} from './local-walkers.mjs?v=cp35-lantern-f3a6f95a814b';
+import {PROFILES} from './community.mjs?v=cp35-lantern-f3a6f95a814b';
+import {stableUnit,varied} from './cadence.mjs?v=cp35-lantern-f3a6f95a814b';
 // Counts refer to distinct, executable intentions, not interpolation frames or body parts.
 export const RESIDENT_ACTIONS={
  walk_street:{label:'沿街走到另一处',duration:60,navTask:'stroll'},
@@ -98,6 +98,7 @@ function choose(s,id,r){const p=PROFILES[id],cap=RESIDENT_CAPABILITIES[id];let c
  else if(s.weather==='snow')candidates=['warm_hands','watch_sky','brush_coat'];
  else if(s.worldEvent?.phase==='show')candidates=['watch_sky'];
  else if(['market','supper'].includes(s.sceneEvent?.kind)&&s.sceneEvent.phase!=='release'&&(p.role==='vendor'||s.actors.some(a=>a.id===id&&a.mobile)))candidates=s.sceneEvent.phase==='closing'?(p.role==='vendor'?['wipe_counter','greet']:['greet','converse']):p.role==='vendor'?['offer_food','greet','wipe_counter']:['taste_food','converse','greet'];
+ else if(s.sceneEvent?.kind==='lantern'&&s.sceneEvent.phase!=='release')candidates=['greet','converse','tap_music'];
  else if(p.role==='station'&&s.train.mode==='dwell')candidates=['signal_train','greet'];
  else if(p.role==='read')candidates=r.bookManualUntil>s.time&&r.bookTarget===0?['sip_tea','watch_sky','greet','tap_music']:['read_pages','read_pages','close_book','sip_tea'];
  else if(id==='resident.returning_resident')candidates=['stair_round','stair_round','shade_eyes','greet'];
