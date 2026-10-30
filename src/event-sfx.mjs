@@ -1,33 +1,32 @@
-import {createCueTracker} from './sound-cues.mjs?v=cp33-stability-cf73c211622a';
+import {renderFirework} from './firework-timbre.mjs?v=cp34-art-a447e84106f5';
+import {createCueTracker} from './sound-cues.mjs?v=cp34-art-a447e84106f5';
 
-const noiseCache=new WeakMap();
-function paperNoise(ctx){
- if(noiseCache.has(ctx))return noiseCache.get(ctx);
- const buffer=ctx.createBuffer(1,Math.ceil(ctx.sampleRate*1.6),ctx.sampleRate),data=buffer.getChannelData(0);let seed=19031,soft=0;
- for(let i=0;i<data.length;i++){seed=(1664525*seed+1013904223)>>>0;soft=.65*soft+.35*(seed/4294967296*2-1);data[i]=soft;}
- noiseCache.set(ctx,buffer);return buffer;
+const fireworkCache=new WeakMap();
+function fireworkBuffer(ctx,cue){
+ let cache=fireworkCache.get(ctx);if(!cache){cache=new Map();fireworkCache.set(ctx,cache);}
+ const key=cue.type+':'+(cue.variant%3);if(!cache.has(key)){
+  const rendered=renderFirework(cue.type,cue.variant,ctx.sampleRate),buffer=ctx.createBuffer(2,rendered.channels[0].length,ctx.sampleRate);
+  rendered.channels.forEach((data,i)=>buffer.getChannelData(i).set(data));cache.set(key,buffer);
+ }return cache.get(key);
 }
 
-// Small synthesized paper/wood sounds, not recordings or imitations of a song.
+// Original soft market bells and spacious fireworks; no changes to the BGM.
 // All voices have soft attacks and finite tails; this also works in OfflineAudioContext.
 export function scheduleCue(ctx,destination,cue,at=ctx.currentTime){
  const voices=[],nodes=[];
+ if(cue.type.startsWith('firework')){
+  const source=ctx.createBufferSource(),gain=ctx.createGain();source.buffer=fireworkBuffer(ctx,cue);gain.gain.value=cue.type==='firework_launch'?1.6:1.15;source.connect(gain);gain.connect(destination);source.start(at);source.stop(at+source.buffer.length/ctx.sampleRate+.03);source.onended=()=>{source.disconnect();gain.disconnect();};
+  return{voices:[source],stop(){gain.gain.cancelScheduledValues(ctx.currentTime);gain.gain.setTargetAtTime(0,ctx.currentTime,.015);try{source.stop(ctx.currentTime+.08);}catch{}}};
+ }
  function envelope(source,volume,delay,duration,attack=.025,filter=null){
-  const start=at+delay,gain=ctx.createGain();gain.gain.setValueAtTime(0,start);gain.gain.linearRampToValueAtTime(volume*(cue.type.startsWith('firework')?1.5:1),start+attack);gain.gain.exponentialRampToValueAtTime(.0001,start+duration);gain.gain.linearRampToValueAtTime(0,start+duration+.025);
+  const start=at+delay,gain=ctx.createGain();gain.gain.setValueAtTime(0,start);gain.gain.linearRampToValueAtTime(volume,start+attack);gain.gain.exponentialRampToValueAtTime(.0001,start+duration);gain.gain.linearRampToValueAtTime(0,start+duration+.025);
   if(filter){source.connect(filter);filter.connect(gain);nodes.push(filter);}else source.connect(gain);gain.connect(destination);nodes.push(gain);voices.push(source);source.start(start);source.stop(start+duration+.035);source.onended=()=>{source.disconnect();gain.disconnect();filter?.disconnect();};return source;
  }
  function tone(frequency,volume,delay,duration,type='sine',end=frequency){const o=ctx.createOscillator();o.type=type;o.frequency.setValueAtTime(frequency,at+delay);o.frequency.exponentialRampToValueAtTime(end,at+delay+duration*.85);return envelope(o,volume,delay,duration);}
- function hush(volume,duration,low,high,attack=.06){const n=ctx.createBufferSource();n.buffer=paperNoise(ctx);const f=ctx.createBiquadFilter();f.type='lowpass';f.Q.value=.55;f.frequency.setValueAtTime(low,at);f.frequency.exponentialRampToValueAtTime(high,at+duration);envelope(n,volume,0,duration,attack,f);}
- const variation=1+(cue.variant%3-1)*.035;
  if(cue.type==='market_open'){
   tone(523.25,.15,0,.68);tone(1046.5,.025,0,.38);tone(783.99,.115,.22,.82);tone(1567.98,.016,.22,.4);
  }else if(cue.type==='market_close'){
   tone(392,.12,0,.58);tone(784,.018,0,.28);
- }else if(cue.type==='firework_launch'){
-  hush(.17,.62,900,2200);tone(560*variation,.045,0,.66,'sine',980*variation);
- }else if(cue.type==='firework_bloom'){
-  tone(235*variation,.25,0,.48,'triangle',155*variation);tone(110*variation,.16,0,.60,'sine',78*variation);hush(.38,.92,2600,650,.018);
-  tone(784*variation,.022,.16,.75);tone(1175*variation,.012,.27,.7);
  }
  return{voices,stop(){for(const o of voices){try{o.stop(ctx.currentTime+.035);}catch{}}for(const n of nodes)if(n.gain){n.gain.cancelScheduledValues(ctx.currentTime);n.gain.setTargetAtTime(0,ctx.currentTime,.008);}}};
 }

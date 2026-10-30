@@ -1,16 +1,17 @@
-import {createSnowCover} from './snow-cover.mjs?v=cp33-stability-cf73c211622a';
-import {writeText,writeAttribute,t,initializeI18n} from './i18n.mjs?v=cp33-stability-cf73c211622a';
-import {API_BASE} from './deployment-config.mjs?v=cp33-stability-cf73c211622a';
+import {applyResidentWardrobe} from './resident-wardrobe.mjs?v=cp34-art-a447e84106f5';
+import {createSnowCover} from './snow-cover.mjs?v=cp34-art-a447e84106f5';
+import {writeText,writeAttribute,t,initializeI18n} from './i18n.mjs?v=cp34-art-a447e84106f5';
+import {API_BASE} from './deployment-config.mjs?v=cp34-art-a447e84106f5';
 const apiPath=path=>API_BASE?new URL(path,API_BASE).href:path;
-import {createResponseMarkers} from './response-markers.mjs?v=cp33-stability-cf73c211622a';
-import {QUICK_WISHES,quickWishItems} from './quick-wishes.mjs?v=cp33-stability-cf73c211622a';
-import {stimulateTown} from './town-response.mjs?v=cp33-stability-cf73c211622a';
-import {LIFE_PLANS,queueIntent,cancelIntentJobs} from './life-plans.mjs?v=cp33-stability-cf73c211622a';
-import {createEnvironmentView} from './environment-view.mjs?v=cp33-stability-cf73c211622a';
-import {createViewDirector} from './view-director.mjs?v=cp33-stability-cf73c211622a';
-import {requestPassengerAction} from './passengers.mjs?v=cp33-stability-cf73c211622a';
-import {objectCatalog,requestObjectAction} from './object-actions.mjs?v=cp33-stability-cf73c211622a';
-import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,availableResidentActions,requestResidentAction} from './resident-actions.mjs?v=cp33-stability-cf73c211622a';
+import {createResponseMarkers} from './response-markers.mjs?v=cp34-art-a447e84106f5';
+import {QUICK_WISHES,quickWishItems} from './quick-wishes.mjs?v=cp34-art-a447e84106f5';
+import {stimulateTown} from './town-response.mjs?v=cp34-art-a447e84106f5';
+import {LIFE_PLANS,queueIntent,cancelIntentJobs} from './life-plans.mjs?v=cp34-art-a447e84106f5';
+import {createEnvironmentView} from './environment-view.mjs?v=cp34-art-a447e84106f5';
+import {createViewDirector} from './view-director.mjs?v=cp34-art-a447e84106f5';
+import {requestPassengerAction} from './passengers.mjs?v=cp34-art-a447e84106f5';
+import {objectCatalog,requestObjectAction} from './object-actions.mjs?v=cp34-art-a447e84106f5';
+import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,availableResidentActions,requestResidentAction} from './resident-actions.mjs?v=cp34-art-a447e84106f5';
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
@@ -18,16 +19,16 @@ import {DRACOLoader} from 'three/addons/loaders/DRACOLoader.js';
 import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
 import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
 import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
-import {createWorld,step,applyDecision,serialize,restore,DT,event,captureIntent,captureControls,restoreControls} from './simulation.mjs?v=cp33-stability-cf73c211622a';
-import {DOMAINS,labels,ACTOR_DOMAINS,CHOICE_LABELS} from './catalog.mjs?v=cp33-stability-cf73c211622a';
-import {createSound} from './sound.mjs?v=cp33-stability-cf73c211622a';
-import {PROFILES,ACTIVITIES} from './community.mjs?v=cp33-stability-cf73c211622a';
-import {interpolateWorld} from './presentation.mjs?v=cp33-stability-cf73c211622a';
-import {createLifeView} from './life-view.mjs?v=cp33-stability-cf73c211622a';
-import {ACTION_LIBRARY,beginAction} from './actions.mjs?v=cp33-stability-cf73c211622a';
+import {createWorld,step,applyDecision,serialize,restore,DT,event,captureIntent,captureControls,restoreControls} from './simulation.mjs?v=cp34-art-a447e84106f5';
+import {DOMAINS,labels,ACTOR_DOMAINS,CHOICE_LABELS} from './catalog.mjs?v=cp34-art-a447e84106f5';
+import {createSound} from './sound.mjs?v=cp34-art-a447e84106f5';
+import {PROFILES,ACTIVITIES} from './community.mjs?v=cp34-art-a447e84106f5';
+import {interpolateWorld} from './presentation.mjs?v=cp34-art-a447e84106f5';
+import {createLifeView} from './life-view.mjs?v=cp34-art-a447e84106f5';
+import {ACTION_LIBRARY,beginAction} from './actions.mjs?v=cp34-art-a447e84106f5';
 import {GTAOPass} from 'three/addons/postprocessing/GTAOPass.js';
-import {createReactionFeedback} from './reaction-feedback.mjs?v=cp33-stability-cf73c211622a';
-import {createArtDirection} from './art-direction.mjs?v=cp33-stability-cf73c211622a';
+import {createReactionFeedback} from './reaction-feedback.mjs?v=cp34-art-a447e84106f5';
+import {createArtDirection} from './art-direction.mjs?v=cp34-art-a447e84106f5';
 import {OutputPass} from 'three/addons/postprocessing/OutputPass.js';
 initializeI18n();
 let viewDirector=null;
@@ -38,21 +39,22 @@ const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false,powerPreferen
 const scene=new THREE.Scene();scene.background=new THREE.Color('#27242d');
 const loader=new GLTFLoader();const draco=new DRACOLoader();draco.setDecoderPath('./vendor/three/examples/jsm/libs/draco/gltf/');loader.setDRACOLoader(draco);
 const boardingCandidate=true;
- const registry=await fetch('./assets/runtime-registry.json?v=cp33-stability-cf73c211622a').then(r=>r.json());
+ const registry=await fetch('./assets/runtime-registry.json?v=cp34-art-a447e84106f5').then(r=>r.json());
 const movableCatalog=objectCatalog(registry);
- const nav=await fetch('./assets/navigation.json?v=cp33-stability-cf73c211622a').then(r=>r.json());const activities=await fetch('./assets/motion-activities.json?v=cp33-stability-cf73c211622a').then(r=>r.json());activities.rail=await fetch('./assets/rail-path.json?v=cp33-stability-cf73c211622a').then(r=>r.json());activities.diners=await fetch('./assets/diner-clips.json?v=cp33-stability-cf73c211622a').then(r=>r.json());activities.spaces=await fetch('./assets/activity-spaces.json?v=cp33-stability-cf73c211622a').then(r=>r.json());activities.cycleStopPose=await fetch('./assets/cycle-stop-pose.json?v=cp33-stability-cf73c211622a').then(r=>r.json());activities.dinerGestures=await fetch('./assets/diner-gestures.json?v=cp33-stability-cf73c211622a').then(r=>r.json());activities.diningProps=await fetch('./assets/dining-props.json?v=cp33-stability-cf73c211622a').then(r=>r.json());activities.paving=await fetch('./assets/paving-support.json?v=cp33-stability-cf73c211622a').then(r=>r.json());activities.localSupport=await fetch('./assets/local-support.json?v=cp33-stability-cf73c211622a').then(r=>r.json());activities.sockets=await fetch('./assets/actor-sockets.json?v=cp33-stability-cf73c211622a').then(r=>r.json());activities.localRoutes=await fetch('./assets/local-routes.json?v=cp33-stability-cf73c211622a').then(r=>r.json());activities.eventTrips=await fetch('./assets/event-trips.json?v=cp33-stability-cf73c211622a').then(r=>r.json());activities.seatedRigs=await fetch('./assets/seated-rigs.json?v=cp33-stability-cf73c211622a').then(r=>r.json());activities.eventSupport=await fetch('./assets/event-support.json?v=cp33-stability-cf73c211622a').then(r=>r.json());if(boardingCandidate)activities.boarding=await fetch('./assets/boarding-config.json?v=cp33-stability-cf73c211622a').then(r=>r.json());nav.activities=activities;activities.objectCatalog=movableCatalog;for(const a of nav.actors){const r=registry.entities.find(e=>e.id===a.id);if(r)r.runtime_yaw=a.yaw;}
+ const nav=await fetch('./assets/navigation.json?v=cp34-art-a447e84106f5').then(r=>r.json());const activities=await fetch('./assets/motion-activities.json?v=cp34-art-a447e84106f5').then(r=>r.json());activities.rail=await fetch('./assets/rail-path.json?v=cp34-art-a447e84106f5').then(r=>r.json());activities.diners=await fetch('./assets/diner-clips.json?v=cp34-art-a447e84106f5').then(r=>r.json());activities.spaces=await fetch('./assets/activity-spaces.json?v=cp34-art-a447e84106f5').then(r=>r.json());activities.cycleStopPose=await fetch('./assets/cycle-stop-pose.json?v=cp34-art-a447e84106f5').then(r=>r.json());activities.dinerGestures=await fetch('./assets/diner-gestures.json?v=cp34-art-a447e84106f5').then(r=>r.json());activities.diningProps=await fetch('./assets/dining-props.json?v=cp34-art-a447e84106f5').then(r=>r.json());activities.paving=await fetch('./assets/paving-support.json?v=cp34-art-a447e84106f5').then(r=>r.json());activities.localSupport=await fetch('./assets/local-support.json?v=cp34-art-a447e84106f5').then(r=>r.json());activities.sockets=await fetch('./assets/actor-sockets.json?v=cp34-art-a447e84106f5').then(r=>r.json());activities.localRoutes=await fetch('./assets/local-routes.json?v=cp34-art-a447e84106f5').then(r=>r.json());activities.eventTrips=await fetch('./assets/event-trips.json?v=cp34-art-a447e84106f5').then(r=>r.json());activities.seatedRigs=await fetch('./assets/seated-rigs.json?v=cp34-art-a447e84106f5').then(r=>r.json());activities.eventSupport=await fetch('./assets/event-support.json?v=cp34-art-a447e84106f5').then(r=>r.json());if(boardingCandidate)activities.boarding=await fetch('./assets/boarding-config.json?v=cp34-art-a447e84106f5').then(r=>r.json());nav.activities=activities;activities.objectCatalog=movableCatalog;for(const a of nav.actors){const r=registry.entities.find(e=>e.id===a.id);if(r)r.runtime_yaw=a.yaw;}
 const SAVE='borrowed-wind-cp24-v2';let state=createWorld(nav);try{const saved=localStorage.getItem(SAVE);if(saved)state=restore(saved,nav);}catch{localStorage.removeItem(SAVE);}
 stimulateTown(state,[],{id:'visit-'+state.tick,opening:true});
-const gltf=await loader.loadAsync('./assets/town.glb?v=cp33-stability-cf73c211622a',e=>{if(e.total)writeText(document.querySelector('#loadText'),`展开模型 ${Math.round(e.loaded/e.total*100)}%`);});scene.add(gltf.scene);const camera=gltf.cameras[0];camera.updateMatrixWorld(true);const sourceCamera={position:camera.position.clone(),quaternion:camera.quaternion.clone(),left:camera.left,right:camera.right,top:camera.top,bottom:camera.bottom};
+const gltf=await loader.loadAsync('./assets/town.glb?v=cp34-art-a447e84106f5',e=>{if(e.total)writeText(document.querySelector('#loadText'),`展开模型 ${Math.round(e.loaded/e.total*100)}%`);});scene.add(gltf.scene);const camera=gltf.cameras[0];camera.updateMatrixWorld(true);const sourceCamera={position:camera.position.clone(),quaternion:camera.quaternion.clone(),left:camera.left,right:camera.right,top:camera.top,bottom:camera.bottom};
 const controls=new OrbitControls(camera,renderer.domElement);controls.enableRotate=false;controls.enableDamping=true;controls.dampingFactor=.12;controls.minZoom=.9;controls.maxZoom=innerWidth<650?8:4;controls.screenSpacePanning=true;controls.mouseButtons.LEFT=THREE.MOUSE.PAN;controls.touches.ONE=THREE.TOUCH.PAN;controls.touches.TWO=THREE.TOUCH.DOLLY_PAN;const look=camera.getWorldDirection(new THREE.Vector3());controls.target.copy(camera.position).addScaledVector(look,camera.position.y/Math.max(.1,-look.y));const sourceTarget=controls.target.clone();controls.update();
 const entities=new Map(),parts=new Map();gltf.scene.traverse(o=>{if(o.userData.entity_id)entities.set(o.userData.entity_id,o);if(o.userData.part_id)parts.set(`${o.userData.owner_entity}/${o.userData.part_id}`,o);if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});
+const wardrobe=applyResidentWardrobe({entities,parts});
 const art=createArtDirection({scene,asset:gltf.scene,renderer,rail:activities.rail,registry});const localLights=art.lights;
 const composer=new EffectComposer(renderer);composer.renderTarget1.samples=4;composer.renderTarget2.samples=4;composer.addPass(new RenderPass(scene,camera));const ao=new GTAOPass(scene,camera,innerWidth,innerHeight);ao.blendIntensity=art.preset.ao;ao.updateGtaoMaterial({radius:.40,distanceExponent:1.6,thickness:.18});ao.updatePdMaterial({radius:7});composer.addPass(ao);const bloom=new UnrealBloomPass(new THREE.Vector2(innerWidth,innerHeight),art.preset.bloom,.40,art.preset.threshold);composer.addPass(bloom);composer.addPass(new OutputPass());
 function resize(){controls.maxZoom=innerWidth<650?8:4;camera.zoom=Math.min(camera.zoom,controls.maxZoom);renderer.setSize(innerWidth,innerHeight);composer.setSize(innerWidth,innerHeight);const aspect=innerWidth/innerHeight;const width=29.4*Math.max(1,aspect/1.80);camera.left=-width/2;camera.right=width/2;camera.top=width/aspect*.55;camera.bottom=-width/aspect*.45;camera.updateProjectionMatrix();if(viewDirector?.state().follow)viewDirector.focus(viewDirector.state().follow);}
 resize();addEventListener('resize',resize);
 function setRenderQuality(value){renderQuality=value;const ratio=Math.min(devicePixelRatio,value==='fine'?1.25:1);renderer.setPixelRatio(ratio);composer.setPixelRatio(ratio);resize();for(const b of document.querySelectorAll('[data-quality]'))b.setAttribute('aria-pressed',String(b.dataset.quality===value));try{localStorage.setItem('borrowed-wind-cp24-render-quality',value);}catch{}}
 for(const b of document.querySelectorAll('[data-quality]')){b.setAttribute('aria-pressed',String(b.dataset.quality===renderQuality));b.onclick=()=>setRenderQuality(b.dataset.quality);}
-const weatherSupport=await fetch('./assets/weather-support.json?v=cp33-stability-cf73c211622a').then(r=>r.json());
+const weatherSupport=await fetch('./assets/weather-support.json?v=cp34-art-a447e84106f5').then(r=>r.json());
 const life=createLifeView({scene,entities,parts,registry,lights:localLights,weatherSupport,renderer,camera,activities,nav});
 const environment=createEnvironmentView({scene,art,entities,camera});
 const snowCover=createSnowCover({scene,asset:gltf.scene,renderer});

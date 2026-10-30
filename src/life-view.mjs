@@ -1,14 +1,14 @@
-import {createGroupView} from './group-view.mjs?v=cp33-stability-cf73c211622a';
-import {createEventProps} from './event-props.mjs?v=cp33-stability-cf73c211622a';
-import {createEventTravelView} from './event-travel-view.mjs?v=cp33-stability-cf73c211622a';
-import {createPavingSupport} from './foot-support.mjs?v=cp33-stability-cf73c211622a';
-import {createPassengerView} from './passenger-view.mjs?v=cp33-stability-cf73c211622a';
-import {createObjectActionView} from './object-action-view.mjs?v=cp33-stability-cf73c211622a';
-import {createResidentActionView} from './resident-action-view.mjs?v=cp33-stability-cf73c211622a';
+import {createGroupView} from './group-view.mjs?v=cp34-art-a447e84106f5';
+import {createEventProps} from './event-props.mjs?v=cp34-art-a447e84106f5';
+import {createEventTravelView} from './event-travel-view.mjs?v=cp34-art-a447e84106f5';
+import {createPavingSupport} from './foot-support.mjs?v=cp34-art-a447e84106f5';
+import {createPassengerView} from './passenger-view.mjs?v=cp34-art-a447e84106f5';
+import {createObjectActionView} from './object-action-view.mjs?v=cp34-art-a447e84106f5';
+import {createResidentActionView} from './resident-action-view.mjs?v=cp34-art-a447e84106f5';
 import * as THREE from 'three';
-import {legPose,railPose,sampleRail,ease,sampleClip} from './motion.mjs?v=cp33-stability-cf73c211622a';
-import {createIntentView} from './intent-view.mjs?v=cp33-stability-cf73c211622a';
-import {createFireworks} from './fireworks.mjs?v=cp33-stability-cf73c211622a';
+import {legPose,railPose,sampleRail,ease,sampleClip} from './motion.mjs?v=cp34-art-a447e84106f5';
+import {createIntentView} from './intent-view.mjs?v=cp34-art-a447e84106f5';
+import {createFireworks} from './fireworks.mjs?v=cp34-art-a447e84106f5';
 const X=new THREE.Vector3(1,0,0),Y=new THREE.Vector3(0,1,0),BZ=new THREE.Vector3(0,0,-1),q=new THREE.Quaternion(),v=new THREE.Vector3();
 export function createLifeView({scene,entities,parts,registry,lights,weatherSupport,renderer,camera,activities,nav}){
  const originals=new Map(),partBase=new Map(),emissive=[],stars=[],byId=new Map(registry.entities.map(e=>[e.id,e])),headAngles=new Map(),curtainAmounts=new Map();

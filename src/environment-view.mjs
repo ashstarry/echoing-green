@@ -1,7 +1,7 @@
 import * as THREE from 'three';
-import {celestialVisibility} from './celestial-phase.mjs?v=cp33-stability-cf73c211622a';
+import {celestialVisibility} from './celestial-phase.mjs?v=cp34-art-a447e84106f5';
 export function createEnvironmentView({scene,art,entities,camera}){
- const themes={dawn:['#39313e','#756061','#49414c'],day:['#49434a','#938577','#625a5a'],dusk:art.preset.background,night:['#201f2a','#403a4c','#2c2937']};
+ const themes={dawn:['#514651','#8c7376','#665962'],day:['#625c63','#a39886','#81747a'],dusk:art.preset.background,night:['#302f3d','#51475b','#3d3a4c']};
  const textures=Object.fromEntries(Object.entries(themes).map(([key,colors])=>[key,key==='dusk'?scene.background:art.backgroundFactory(colors)]));
  const uniforms=Object.fromEntries(Object.entries(textures).map(([key,value])=>['t_'+key,{value}]));
  for(const key of Object.keys(themes))uniforms['w_'+key]={value:key==='dusk'?1:0};

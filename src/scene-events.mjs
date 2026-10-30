@@ -1,10 +1,10 @@
-import {assignGroup,GROUP_KINDS} from './group-layout.mjs?v=cp33-stability-cf73c211622a';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp33-stability-cf73c211622a';
-import {eventGuestCandidates,ensureEventTravel} from './event-travel.mjs?v=cp33-stability-cf73c211622a';
-import {stableUnit} from './cadence.mjs?v=cp33-stability-cf73c211622a';
-import {stimulateTown} from './town-response.mjs?v=cp33-stability-cf73c211622a';
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp33-stability-cf73c211622a';
-import {moverBlocks} from './motion.mjs?v=cp33-stability-cf73c211622a';
+import {assignGroup,GROUP_KINDS} from './group-layout.mjs?v=cp34-art-a447e84106f5';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp34-art-a447e84106f5';
+import {eventGuestCandidates,ensureEventTravel} from './event-travel.mjs?v=cp34-art-a447e84106f5';
+import {stableUnit} from './cadence.mjs?v=cp34-art-a447e84106f5';
+import {stimulateTown} from './town-response.mjs?v=cp34-art-a447e84106f5';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp34-art-a447e84106f5';
+import {moverBlocks} from './motion.mjs?v=cp34-art-a447e84106f5';
 
 export const EVENT_TIMING={snow:{gather:0,active:38,closing:7},rain:{gather:0,active:42,closing:7},festival:{gather:24,active:38,closing:7},market:{gather:22,active:38,closing:8},supper:{gather:22,active:38,closing:8},reunion:{gather:22,active:34,closing:7},delivery:{gather:3,active:28,closing:5},quiet:{gather:3,active:28,closing:5}};
 const live=j=>!['done','failed','cancelled'].includes(j.status);

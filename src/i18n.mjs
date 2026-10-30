@@ -1,4 +1,4 @@
-import {EN} from './i18n-en.mjs?v=cp33-stability-cf73c211622a';
+import {EN} from './i18n-en.mjs?v=cp34-art-a447e84106f5';
 let locale='en';try{const saved=localStorage.getItem('afterwords.locale.v1');if(saved==='zh'||saved==='en')locale=saved;}catch{}
 const cache=new Map(),keys=Object.keys(EN).sort((a,b)=>b.length-a.length),listeners=new Set();
 export const getLocale=()=>locale;
