@@ -1,5 +1,5 @@
-import {makeRoom} from './event-travel.mjs?v=cp32-events-dea0a76ba5ff';
-import {CADENCE,varied} from './cadence.mjs?v=cp32-events-dea0a76ba5ff';
+import {makeRoom} from './event-travel.mjs?v=cp32-events-e037ba401068';
+import {CADENCE,varied} from './cadence.mjs?v=cp32-events-e037ba401068';
 export const TAU=Math.PI*2;
 export const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 export const ease=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
@@ -68,7 +68,8 @@ function advanceCycle(s,id,m,clip,dt,nav){
 }
 
 function advanceEventFox(s,m,clip,dt){
- const active=['festival','market','supper','reunion'].includes(s.sceneEvent?.kind)&&['gather','active'].includes(s.sceneEvent.phase);
+ const active=['festival','market','supper','reunion'].includes(s.sceneEvent?.kind)&&['gather','active','closing'].includes(s.sceneEvent.phase);
+ if(s.objectControls?.['animal.garden_fox']?.target===0){m.speed=0;m.strideWeight+=(0-m.strideWeight)*Math.min(1,dt*8);m.intent='rest';return true;}
  if(active&&!m.eventHome)m.eventHome={p:m.p.slice(),yaw:m.yaw};
- if(!m.eventHome)return false;const target=active?[5.15,1.7,.624]:m.eventHome.p,dx=target[0]-m.p[0],dy=target[1]-m.p[1],d=Math.hypot(dx,dy),move=Math.min(d,.72*dt);m.strideWeight+=(Number(d>.05)-m.strideWeight)*Math.min(1,dt*8);m.intent=active?'head_for_garden':'return_to_garden';if(d>.005){m.p=m.p.map((x,k)=>x+(target[k]-x)*move/d);m.distance+=move;const yaw=Math.atan2(dy,dx);m.yaw+=clamp(Math.atan2(Math.sin(yaw-m.yaw),Math.cos(yaw-m.yaw)),-dt*3,dt*3);}else if(!active){m.p=m.eventHome.p;m.yaw=m.eventHome.yaw;delete m.eventHome;}return true;
+ if(!m.eventHome)return false;const target=active?[5.15,1.7,.624]:m.eventHome.p,dx=target[0]-m.p[0],dy=target[1]-m.p[1],d=Math.hypot(dx,dy),move=Math.min(d,.72*dt),candidate=m.p.map((x,k)=>x+(target[k]-x)*move/(d||1));if(s.actors.some(a=>Math.abs(a.p[2]-candidate[2])<1&&Math.hypot(a.p[0]-candidate[0],a.p[1]-candidate[1])<.78&&Math.hypot(a.p[0]-candidate[0],a.p[1]-candidate[1])<Math.hypot(a.p[0]-m.p[0],a.p[1]-m.p[1])-1e-6)){m.speed=0;m.strideWeight+=(0-m.strideWeight)*Math.min(1,dt*8);m.intent='yield';return true;}m.speed=d>.05?1:0;m.strideWeight+=(Number(d>.05)-m.strideWeight)*Math.min(1,dt*8);m.intent=active?'head_for_garden':'return_to_garden';if(d>.005){m.p=m.p.map((x,k)=>x+(target[k]-x)*move/d);m.distance+=move;const yaw=Math.atan2(dy,dx);m.yaw+=clamp(Math.atan2(Math.sin(yaw-m.yaw),Math.cos(yaw-m.yaw)),-dt*3,dt*3);}else if(!active){m.p=m.eventHome.p;m.yaw=m.eventHome.yaw;delete m.eventHome;}return true;
 }

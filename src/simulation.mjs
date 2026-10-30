@@ -1,20 +1,20 @@
-import {advanceGroupCrowd} from './group-crowd.mjs?v=cp32-events-dea0a76ba5ff';
-import {eventPose} from './group-layout.mjs?v=cp32-events-dea0a76ba5ff';
-import {ensureEventTravel,advanceEventTravel,eventGuestPositions,syncGuestActors,makeRoom,validateEventTravel} from './event-travel.mjs?v=cp32-events-dea0a76ba5ff';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp32-events-dea0a76ba5ff';
-import {requestSceneEvent,sceneTask,holdsEventPlace,validateSceneEvents} from './scene-events.mjs?v=cp32-events-dea0a76ba5ff';
-import {eventCenter,eventScore} from './event-space.mjs?v=cp32-events-dea0a76ba5ff';
-import {stimulateTown,advanceTownResponse,validateTownResponse} from './town-response.mjs?v=cp32-events-dea0a76ba5ff';
-import {createIntentRuntime,advanceIntentRuntime,validateIntentRuntime} from './life-plans.mjs?v=cp32-events-dea0a76ba5ff';
-import {createPassengers,advancePassengers,validatePassengers,requestPassengerAction} from './passengers.mjs?v=cp32-events-dea0a76ba5ff';
-import {advanceObjectControls,validateObjectControls} from './object-actions.mjs?v=cp32-events-dea0a76ba5ff';
-import {createLocalWalkers,advanceLocalWalkers,validateLocalWalkers} from './local-walkers.mjs?v=cp32-events-dea0a76ba5ff';
-import {createResidentActions,advanceResidentActions,validateResidentActions} from './resident-actions.mjs?v=cp32-events-dea0a76ba5ff';
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp32-events-dea0a76ba5ff';
-import {createCommunity,updateDirector,updateResidents,wantedTask,routineTask,setResidentTask,ACTIVITIES,PROFILES,requestFestival} from './community.mjs?v=cp32-events-dea0a76ba5ff';
-import {CADENCE,varied,stableUnit} from './cadence.mjs?v=cp32-events-dea0a76ba5ff';
-import {createTrain,stepTrain,clamp,createMovers,advanceMovers,createDiners,advanceDiners,moverBlocks} from './motion.mjs?v=cp32-events-dea0a76ba5ff';
-import {validateDecision,labels,ACTOR_DOMAINS} from './catalog.mjs?v=cp32-events-dea0a76ba5ff';
+import {advanceGroupCrowd} from './group-crowd.mjs?v=cp32-events-e037ba401068';
+import {eventPose} from './group-layout.mjs?v=cp32-events-e037ba401068';
+import {ensureEventTravel,advanceEventTravel,eventGuestPositions,syncGuestActors,makeRoom,validateEventTravel} from './event-travel.mjs?v=cp32-events-e037ba401068';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp32-events-e037ba401068';
+import {requestSceneEvent,sceneTask,holdsEventPlace,validateSceneEvents,EVENT_TIMING} from './scene-events.mjs?v=cp32-events-e037ba401068';
+import {eventCenter,eventScore} from './event-space.mjs?v=cp32-events-e037ba401068';
+import {stimulateTown,advanceTownResponse,validateTownResponse} from './town-response.mjs?v=cp32-events-e037ba401068';
+import {createIntentRuntime,advanceIntentRuntime,validateIntentRuntime} from './life-plans.mjs?v=cp32-events-e037ba401068';
+import {createPassengers,advancePassengers,validatePassengers,requestPassengerAction} from './passengers.mjs?v=cp32-events-e037ba401068';
+import {advanceObjectControls,validateObjectControls} from './object-actions.mjs?v=cp32-events-e037ba401068';
+import {createLocalWalkers,advanceLocalWalkers,validateLocalWalkers} from './local-walkers.mjs?v=cp32-events-e037ba401068';
+import {createResidentActions,advanceResidentActions,validateResidentActions} from './resident-actions.mjs?v=cp32-events-e037ba401068';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp32-events-e037ba401068';
+import {createCommunity,updateDirector,updateResidents,wantedTask,routineTask,setResidentTask,ACTIVITIES,PROFILES,requestFestival} from './community.mjs?v=cp32-events-e037ba401068';
+import {CADENCE,varied,stableUnit} from './cadence.mjs?v=cp32-events-e037ba401068';
+import {createTrain,stepTrain,clamp,createMovers,advanceMovers,createDiners,advanceDiners,moverBlocks} from './motion.mjs?v=cp32-events-e037ba401068';
+import {validateDecision,labels,ACTOR_DOMAINS} from './catalog.mjs?v=cp32-events-e037ba401068';
 export const VERSION=13, DT=.05;
 const distance=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 export function createWorld(nav,seed=62417){
@@ -101,6 +101,7 @@ export function restore(raw,nav){const s=typeof raw==='string'?JSON.parse(raw):s
   s.version=VERSION;s.navSignature=nav.nodes.length;s.planRevision++;
   if(s.sceneEvent){s.sceneEvent.slots={};s.sceneEvent.slotsAssigned=false;s.sceneEvent.returnSlots={};s.sceneEvent.queue={};}
  }
+ if(s.sceneEvent?.kind==='festival'&&['gather','active'].includes(s.sceneEvent.phase)&&s.sceneEvent.until>s.time&&s.festivalUntil<=s.time){const e=s.sceneEvent;if(e.phase==='gather'){e.phaseAt=s.time;e.until=Math.min(e.until,s.time+EVENT_TIMING.festival.gather);}s.festivalStarted=s.time;s.festivalStop=null;s.festivalUntil=e.until+(e.phase==='gather'?EVENT_TIMING.festival.active:0)+5.5;}
  if(s.version!==VERSION||s.navSignature!==nav.nodes.length||!Array.isArray(s.actors)||s.actors.length>nav.actors.length)throw Error('存档版本不匹配');if(s.actors.length!==nav.actors.length||!Number.isInteger(s.seed)||!Number.isInteger(s.tick)||!Number.isFinite(s.windPhase)||!Number.isFinite(s.windSpeed)||!Array.isArray(s.events)||!Array.isArray(s.commands)||!s.stats)throw Error('存档结构不完整');const ids=new Set();for(const a of s.actors){if(a.manualActivity&&(!Object.hasOwn(ACTIVITIES,a.manualActivity)||!Number.isFinite(a.activityUntil)))throw Error('试玩活动存档无效');if(!['wander','gather','quiet'].includes(a.intent)||!Number.isInteger(a.segment)||a.segment<0||(a.path.length&&a.segment>=a.path.length)||!Number.isFinite(a.phase)||!Number.isFinite(a.wait)||!Number.isFinite(a.blocked)||typeof a.mobile!=='boolean')throw Error('存档动作无效');if(!nav.actors.some(x=>x.id===a.id)||ids.has(a.id)||!a.p?.every(Number.isFinite)||!Number.isFinite(a.yaw)||!a.path?.every(i=>Number.isInteger(i)&&nav.nodes[i])||!Number.isInteger(a.node)||!nav.nodes[a.node])throw Error('存档内容无效');ids.add(a.id);}if(['weather','breeze','light','music','street','birds'].some(k=>s[k]==='keep'))throw Error('存档状态无效');validateDecision(Object.fromEntries(['weather','breeze','light','music','street','birds','dining','pond','animals','cycling','occasion','day_phase'].map(k=>[k,s[k]])));if(!Number.isFinite(s.time)||!Number.isFinite(s.tick)||s.tick<0)throw Error('存档时钟无效');
  validateDecision({train:s.trainPolicy,dining:s.dining,pond:s.pond,animals:s.animals,cycling:s.cycling});
  if(typeof s.festivalAuto!=='boolean')throw Error('存档节庆状态无效');

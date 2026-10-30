@@ -1,6 +1,6 @@
-import {moverBlocks} from './motion.mjs?v=cp32-events-dea0a76ba5ff';
-import {pathTo,navigationGraph} from './navigation.mjs?v=cp32-events-dea0a76ba5ff';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp32-events-dea0a76ba5ff';
+import {moverBlocks} from './motion.mjs?v=cp32-events-e037ba401068';
+import {pathTo,navigationGraph} from './navigation.mjs?v=cp32-events-e037ba401068';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp32-events-e037ba401068';
 const dist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 const turn=(a,b,n)=>a+Math.max(-n,Math.min(n,Math.atan2(Math.sin(b-a),Math.cos(b-a))));
 const live=j=>!['done','cancelled','failed'].includes(j.status);
@@ -11,8 +11,8 @@ export function ensureEventTravel(s,nav){
 export function eventGuestPositions(s){return [];}
 export function eventGuestCandidates(s,nav,e){ensureEventTravel(s,nav);return Object.values(s.eventGuests).filter(g=>(!nav.activities.eventTrips[g.id].events||nav.activities.eventTrips[g.id].events.includes(e.kind))&&!e.protectedIds?.includes(g.id)&&(!s.passengers?.[g.id]||s.passengers[g.id].phase==='waiting')&&!s.intentRuntime.jobs.some(j=>j.target===g.id&&live(j))).map(g=>({id:g.id,p:g.p,node:nav.activities.eventTrips[g.id].portal}));}
 function obstacle(s,g,p){
- const separation=['resident.listener','resident.child_listener'].includes(g.id)?.46:.54;
- return s.actors.some(a=>a.id!==g.id&&Math.abs(a.p[2]-p[2])<1.4&&dist(a.p,p)<separation&&dist(a.p,p)<dist(a.p,g.p)-1e-7)||Object.values(s.eventGuests).some(o=>o!==g&&o.active&&Math.abs(o.p[2]-p[2])<1.4&&dist(o.p,p)<separation&&dist(o.p,p)<dist(o.p,g.p)-1e-7)||Object.entries(s.localWalkers||{}).some(([id,w])=>id!==g.id&&!s.eventGuests?.[id]?.active&&Math.abs(w.root[2]-p[2])<1.4&&dist(w.root,p)<.54&&dist(w.root,p)<dist(w.root,g.p)-1e-7);
+ const separation=['resident.listener','resident.child_listener'].includes(g.id)?.46:.48;
+ return s.actors.some(a=>a.id!==g.id&&Math.abs(a.p[2]-p[2])<1.4&&dist(a.p,p)<separation&&dist(a.p,p)<dist(a.p,g.p)-1e-7)||Object.values(s.eventGuests).some(o=>o!==g&&o.active&&Math.abs(o.p[2]-p[2])<1.4&&dist(o.p,p)<separation&&dist(o.p,p)<dist(o.p,g.p)-1e-7)||Object.entries(s.localWalkers||{}).some(([id,w])=>id!==g.id&&!s.eventGuests?.[id]?.active&&Math.abs(w.root[2]-p[2])<1.4&&dist(w.root,p)<.48&&dist(w.root,p)<dist(w.root,g.p)-1e-7);
 }
 export function makeRoom(s,nav,g,target){
  const blocks=s.actors.filter(a=>a.id!==g.id&&a.mobile&&s.eventGuests?.[a.id]?.phase!=='hold'&&!(s.sceneEvent?.slots?.[a.id]===a.node&&!a.path.length)).map(a=>({id:a.id,p:a.p,actor:a}));
@@ -40,7 +40,8 @@ function followEntry(s,g,c,dt,direction,nav){
  if(g.motionDirection!==direction){g.motionDirection=direction;g.entryClock=null;g.authorFeet=null;}
  if(g.entryClock===null){const first=frames[0].root;if(dist(g.p,first)>.014||Math.abs(g.p[2]-first[2])>.015){toward(s,g,first,dt,.65,nav);return false;}g.yaw=turn(g.yaw,first[3],dt*2.6);if(Math.abs(Math.atan2(Math.sin(g.yaw-first[3]),Math.cos(g.yaw-first[3])))>.03)return false;g.entryClock=0;}
  const time=Math.min(frames.at(-1).time,direction>0&&c.departGateTime!==undefined&&!departureReady(s,c)?Math.min(c.departGateTime,g.entryClock+dt):g.entryClock+dt);let lo=0,hi=frames.length-1;while(lo<hi){const mid=(lo+hi)>>1;if(frames[mid].time<time)lo=mid+1;else hi=mid;}const b=frames[lo],a=frames[Math.max(0,lo-1)],u=b.time===a.time?0:(time-a.time)/(b.time-a.time),p=a.root.slice(0,3).map((x,k)=>x+(b.root[k]-x)*u);
- if(obstacle(s,g,p)){g.blocked+=dt;if(g.blocked>.6)makeRoom(s,nav,g,p);g.gaitWeight*=Math.max(0,1-dt*8);return false;}
+ const clearingPortal=direction>0&&dist(g.p,frames.at(-1).root)<.10&&s.actors.every(a=>a.id===g.id||Math.abs(a.p[2]-p[2])>.9||dist(a.p,p)>.42);
+ if(obstacle(s,g,p)&&!clearingPortal){g.blocked+=dt;if(g.blocked>.6)makeRoom(s,nav,g,p);g.gaitWeight*=Math.max(0,1-dt*8);return false;}
  const travel=dist(g.p,p);g.blocked=0;g.walked+=travel;g.gaitWeight+=(Number(travel>.001)-g.gaitWeight)*Math.min(1,dt*8);g.p=p;g.yaw=a.root[3]+Math.atan2(Math.sin(b.root[3]-a.root[3]),Math.cos(b.root[3]-a.root[3]))*u;g.authorFeet=Object.fromEntries(['left','right'].map(side=>[side,a.feet[side].map((x,k)=>x+(b.feet[side][k]-x)*u)]));g.entryClock=time;g.progress=Math.round((direction>0?time/frames.at(-1).time:1-time/frames.at(-1).time)*(c.entry.length-1));return time>=frames.at(-1).time;
 }
 export function advanceEventTravel(s,nav,dt){

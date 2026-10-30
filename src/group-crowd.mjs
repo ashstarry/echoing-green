@@ -1,6 +1,6 @@
-import {pathTo,navigationGraph} from './navigation.mjs?v=cp32-events-dea0a76ba5ff';
-import {moverBlocks} from './motion.mjs?v=cp32-events-dea0a76ba5ff';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp32-events-dea0a76ba5ff';
+import {pathTo,navigationGraph} from './navigation.mjs?v=cp32-events-e037ba401068';
+import {moverBlocks} from './motion.mjs?v=cp32-events-e037ba401068';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp32-events-e037ba401068';
 const D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 function nodeAt(nav,p){const x=Math.round((p[0]-nav.origin[0])/nav.step),y=Math.round((p[1]-nav.origin[1])/nav.step);return nav.grid[x+','+y];}
@@ -22,7 +22,7 @@ export function advanceGroupCrowd(s,nav,dt){
   while(c.at<c.route.length-1&&D(a.p,nav.nodes[c.route[c.at]])<.18)c.at++;
   const next=nav.nodes[c.route[c.at]],yaw=Math.atan2(next[1]-a.p[1],next[0]-a.p[0]),baseSpeed=Math.min(1.0,Math.max(.22,D(a.p,target)*1.8)),people=s.actors.filter(b=>b!==a&&Math.abs(b.p[2]-a.p[2])<1.0&&D(b.p,a.p)<1.5);let best=null;
   for(const offset of [0,.30,-.30,.60,-.60,.95,-.95,1.3,-1.3,1.7,-1.7,2.2,-2.2,Math.PI])for(const factor of [1,.55]){
-   const theta=yaw+offset,velocity=[Math.cos(theta)*baseSpeed*factor,Math.sin(theta)*baseSpeed*factor],p=[a.p[0]+velocity[0]*dt,a.p[1]+velocity[1]*dt,a.p[2]],probe=[a.p[0]+velocity[0]*.22,a.p[1]+velocity[1]*.22,a.p[2]],n=nodeAt(nav,p),nn=nodeAt(nav,probe);if(n===undefined||nn===undefined||graph.components[n]!==graph.components[a.node]||Math.abs(nav.nodes[n][2]-a.p[2])>.17||(!moverClear(p)&&moverClear(a.p)))continue;
+   const theta=yaw+offset,alignment=Math.max(.08,Math.cos(theta+Math.PI/2-a.yaw)),velocity=[Math.cos(theta)*baseSpeed*factor*alignment,Math.sin(theta)*baseSpeed*factor*alignment],p=[a.p[0]+velocity[0]*dt,a.p[1]+velocity[1]*dt,a.p[2]],probe=[a.p[0]+velocity[0]*.22,a.p[1]+velocity[1]*.22,a.p[2]],n=nodeAt(nav,p),nn=nodeAt(nav,probe);if(n===undefined||nn===undefined||graph.components[n]!==graph.components[a.node]||Math.abs(nav.nodes[n][2]-a.p[2])>.17||(!moverClear(p)&&moverClear(a.p)))continue;
    let collision=false,near=0;for(const b of people){const gap=.23*(a.scale+b.scale)+.015,now=D(a.p,b.p),after=D(p,b.p),future=D(probe,[b.p[0]+(b.crowdV?.[0]||0)*.12,b.p[1]+(b.crowdV?.[1]||0)*.12]);if(after<gap&&after<now-.00001){collision=true;break;}near+=Math.max(0,.56-future)*.6;}
    if(collision)continue;const score=D(probe,next)+Math.abs(offset)*.04+(1-factor)*.04+near;if(!best||score<best.score)best={p,n,velocity,score};
   }

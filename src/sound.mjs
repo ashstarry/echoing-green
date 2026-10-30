@@ -1,5 +1,5 @@
-import {createEventSfx} from './event-sfx.mjs?v=cp32-events-dea0a76ba5ff';
-import {writeText} from './i18n.mjs?v=cp32-events-dea0a76ba5ff';
+import {createEventSfx} from './event-sfx.mjs?v=cp32-events-e037ba401068';
+import {writeText} from './i18n.mjs?v=cp32-events-e037ba401068';
 
 // User-approved loop master, played unchanged. Keep the same track across events.
 export function createSound(button){

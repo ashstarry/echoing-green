@@ -1,6 +1,6 @@
-import {PROFILES} from './community.mjs?v=cp32-events-dea0a76ba5ff';
-import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp32-events-dea0a76ba5ff';
-import {stableUnit} from './cadence.mjs?v=cp32-events-dea0a76ba5ff';
+import {PROFILES} from './community.mjs?v=cp32-events-e037ba401068';
+import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp32-events-e037ba401068';
+import {stableUnit} from './cadence.mjs?v=cp32-events-e037ba401068';
 
 const live=j=>!['done','failed','cancelled'].includes(j.status);
 const safeToBlend=action=>action&&!RESIDENT_ACTIONS[action]?.route&&!RESIDENT_ACTIONS[action]?.navTask&&!['sip_tea','taste_food','feed_pond','look_pond'].includes(action);

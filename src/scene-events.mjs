@@ -1,10 +1,10 @@
-import {assignGroup,GROUP_KINDS} from './group-layout.mjs?v=cp32-events-dea0a76ba5ff';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp32-events-dea0a76ba5ff';
-import {eventGuestCandidates,ensureEventTravel} from './event-travel.mjs?v=cp32-events-dea0a76ba5ff';
-import {stableUnit} from './cadence.mjs?v=cp32-events-dea0a76ba5ff';
-import {stimulateTown} from './town-response.mjs?v=cp32-events-dea0a76ba5ff';
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp32-events-dea0a76ba5ff';
-import {moverBlocks} from './motion.mjs?v=cp32-events-dea0a76ba5ff';
+import {assignGroup,GROUP_KINDS} from './group-layout.mjs?v=cp32-events-e037ba401068';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp32-events-e037ba401068';
+import {eventGuestCandidates,ensureEventTravel} from './event-travel.mjs?v=cp32-events-e037ba401068';
+import {stableUnit} from './cadence.mjs?v=cp32-events-e037ba401068';
+import {stimulateTown} from './town-response.mjs?v=cp32-events-e037ba401068';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp32-events-e037ba401068';
+import {moverBlocks} from './motion.mjs?v=cp32-events-e037ba401068';
 
 export const EVENT_TIMING={snow:{gather:0,active:38,closing:7},rain:{gather:0,active:42,closing:7},festival:{gather:24,active:38,closing:7},market:{gather:22,active:38,closing:8},supper:{gather:22,active:38,closing:8},reunion:{gather:22,active:34,closing:7},delivery:{gather:3,active:28,closing:5},quiet:{gather:3,active:28,closing:5}};
 const live=j=>!['done','failed','cancelled'].includes(j.status);
@@ -98,8 +98,8 @@ export function advanceSceneEvent(s,nav,dt,emit){
    else if(['market','supper'].includes(e.kind))emit('摊前排起了小队，热食一份份递到客人手里。');
   }
  }else if(e.phase==='active'&&s.time>=e.until)closeEvent(s,e,emit);
- else if(e.phase==='closing'&&s.time>=e.until){if(e.next){startEvent(s,e.next,emit);return;}finishSky(s);s.weather='clear';s.lastWeather='clear';s.occasion='ordinary';s.lastOccasion='ordinary';s.afterRainUntil=0;e.phase='release';e.phaseAt=s.time;e.until=s.time+13;clearPulse(s);s.planRevision++;
-  for(const a of s.actors){if(e.protectedIds?.includes(a.id))continue;a.taskRevision=-1;a.reservation=null;a.responseReplan=true;a.wait=.15+stableUnit(a.id)*2.7;}
+ else if(e.phase==='closing'&&s.time>=e.until){if(e.next){startEvent(s,e.next,emit);return;}finishSky(s);s.weather='clear';s.lastWeather='clear';s.occasion='ordinary';s.lastOccasion='ordinary';s.afterRainUntil=0;e.phase='release';e.phaseAt=s.time;e.until=s.time+13;e.returnSlots={};clearPulse(s);s.planRevision++;
+  for(const a of s.actors){if(e.protectedIds?.includes(a.id))continue;a.taskRevision=-1;a.reservation=null;a.responseReplan=true;a.wait=.15+stableUnit(a.id)*2.7;if(s.residentActions[a.id])s.residentActions[a.id].nextAt=s.time+3.5;}
   stimulateTown(s,[],{id:e.id+'-return',opening:true});emit('这一场热闹结束，街坊分头散开，小镇回到日常。');
  }else if(e.phase==='release'&&s.time>=e.until){if(Object.values(s.eventGuests||{}).some(g=>g.active)&&s.time-e.phaseAt<30){e.until=s.time+1;return;}for(const g of Object.values(s.eventGuests||{}))if(g.active)g.returnRequested=true;s.sceneEvent=null;s.festivalNextAt=s.time+180;s.planRevision++;for(const a of s.actors)if(a.mobile){a.taskRevision=-1;a.reservation=null;a.wait=.2+stableUnit(a.id)*1.5;}stimulateTown(s,[],{id:e.id+'-daily',opening:true});}
 }
