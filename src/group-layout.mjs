@@ -1,0 +1,26 @@
+import {pathTo,navigationGraph} from './navigation.mjs?v=cp32-events-dea0a76ba5ff';
+import {moverBlocks,sampleClip} from './motion.mjs?v=cp32-events-dea0a76ba5ff';
+export const GROUP_KINDS=new Set(['festival','market','supper','reunion']);
+const D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
+const queues=[
+ [[-2.4,1.6],[-3.02,1.10],[-3.65,.61],[-4.30,.20],[-4.0,-.47],[-3.3,-.65]],
+ [[-.90,2.68],[-.34,2.26],[.22,1.84],[.78,1.42],[1.34,1.0],[1.83,.47],[2.04,-.23],[2.08,-.93],[2.08,-1.63]],
+ [[.59,3.80],[1.25,3.30],[1.91,2.80],[2.57,2.30],[3.23,1.80],[3.46,1.05],[3.46,.30],[3.40,-.45],[3.52,-1.6]]
+];
+export function groupPlaces(nav,kind,s){
+ const graph=navigationGraph(nav),main=graph.components[nav.actors[0].entry.at(-1)],used=[],result=[],market=['market','supper'].includes(kind);
+ const hints=market?queues.flatMap((q,lane)=>q.map((p,index)=>({p,lane,index}))):[...Array.from({length:22},(_,i)=>{const a=i*Math.PI*2/22;return{p:[-.27+Math.cos(a)*2.6,-.54+Math.sin(a)*2.6],index:i};}),...Array.from({length:26},(_,i)=>{const a=(i+.5)*Math.PI*2/26;return{p:[-.27+Math.cos(a)*3.40,-.54+Math.sin(a)*3.40],index:22+i};}),...Array.from({length:28},(_,i)=>{const a=(i+.25)*Math.PI*2/28;return{p:[-.27+Math.cos(a)*4.0,-.54+Math.sin(a)*4.0],index:48+i};})];
+ for(const hint of hints){const found=nav.nodes.map((p,i)=>({p,i,d:D(p,hint.p)})).filter(({p,i,d})=>graph.components[i]===main&&Object.entries(nav.activities.eventTrips||{}).filter(([id])=>['resident.water_companion','resident.water_visitor','resident.quiet_reader','resident.returning_resident'].includes(id)).every(([,c])=>c.entry.every(q=>Math.abs(q[2]-p[2])>1||D(q,p)>.64))&&d<(market?.9:1.15)&&used.every(q=>D(p,q)>.61)&&Object.entries(s.movers).every(([id,m])=>!['ride','creature_walk'].includes(nav.activities.clips[id].motion)||!moverBlocks(p,{...m,p:id==='animal.garden_fox'?[5.15,1.7,.624]:m.p,footDown:1},nav.activities.clips[id],.28)&&(nav.activities.clips[id].motion!=='ride'||!nav.activities.clips[id].samples.some((q,k)=>k%8===0&&D(p,q)<.74))&&(nav.activities.clips[id].motion!=='ride'||!moverBlocks(p,{...sampleClip(nav.activities.clips[id],nav.activities.clips[id].stops.at(-1).clock),footDown:1},nav.activities.clips[id],.28)))).sort((a,b)=>a.d-b.d)[0];if(!found)continue;used.push(found.p);result.push({...hint,node:found.i,p:found.p});if(!market&&result.length===25)break;}
+ return result;
+}
+export function assignGroup(s,nav,e,candidates){
+ let places=groupPlaces(nav,e.kind,s);if(['market','supper'].includes(e.kind))places.sort((a,b)=>a.index-b.index||a.lane-b.lane);places=places.slice(0,candidates.length);const pairs=[];e.queue={};
+ const graph=navigationGraph(nav),access=new Map();for(const a of candidates){const distances=new Float64Array(nav.nodes.length).fill(Infinity),queue=[a.node];distances[a.node]=0;for(let j=0;j<queue.length;j++){const n=queue[j];for(const k of graph.edges[n])if(!Number.isFinite(distances[k])){distances[k]=distances[n]+1;queue.push(k);}}access.set(a.id,distances);}
+ const costFor=(a,p)=>access.get(a.id)[p.node]*nav.step+(a.id==='resident.kite_child'&&!(p.p[0]>1.9&&p.p[0]<4.1&&p.p[1]>-2.4&&p.p[1]<1.0)?100:0);
+ if(['market','supper'].includes(e.kind)){const remaining=new Set(candidates.map(a=>a.id));for(const p of places){const ranked=candidates.filter(a=>remaining.has(a.id)).map(a=>({a,cost:costFor(a,p)+(s.eventGuests?.[a.id]?.phase==='home'?(nav.activities.eventTrips[a.id]?.outFrames.at(-1).time||0)*.8:0)})).sort((a,b)=>a.cost-b.cost);if(!ranked.length)break;const a=ranked[0].a;remaining.delete(a.id);e.slots[a.id]=p.node;e.queue[a.id]={lane:p.lane,index:p.index,vendor:['resident.vendor_bread','resident.vendor_flower','resident.vendor_lamp'][p.lane]};}return{actors:candidates.length-remaining.size,places:places.length};}
+ for(const a of candidates)for(const [i,p]of places.entries())pairs.push({a,i,p,cost:costFor(a,p)});
+ const priority=new Map(candidates.filter(a=>s.eventGuests?.[a.id]).sort((a,b)=>(nav.activities.eventTrips[b.id]?.outFrames.at(-1).time||0)-(nav.activities.eventTrips[a.id]?.outFrames.at(-1).time||0)).map((a,i)=>[a.id,i]));const actors=new Set(),used=new Set();pairs.sort((a,b)=>(priority.get(a.a.id)??1000)-(priority.get(b.a.id)??1000)||a.cost-b.cost);
+ for(const {a,i,p}of pairs){if(actors.has(a.id)||used.has(i))continue;actors.add(a.id);used.add(i);e.slots[a.id]=p.node;if(p.lane!==undefined)e.queue[a.id]={lane:p.lane,index:p.index,vendor:['resident.vendor_bread','resident.vendor_flower','resident.vendor_lamp'][p.lane]};if(actors.size===candidates.length)break;}
+ return{actors:actors.size,places:places.length};
+}
+export function eventPose(s,a,nav){const e=s.sceneEvent,n=e?.slots?.[a.id];if(n===undefined||!GROUP_KINDS.has(e.kind)||!['gather','active','closing'].includes(e.phase))return null;const target=e.kind==='festival'?[-4.6,2.8,6.8]:e.queue?.[a.id]?nav.activities.spaces.residents[e.queue[a.id].vendor].position:[-.27,-.54,1.3];return{node:n,target,standing:!a.path.length&&D(a.p,nav.nodes[n])<.20,task:e.kind==='festival'?'fireworks':e.kind==='reunion'?'chat':'browse'};}

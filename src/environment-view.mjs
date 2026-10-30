@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {celestialVisibility} from './celestial-phase.mjs?v=cp31-sound-dea918b266ec';
+import {celestialVisibility} from './celestial-phase.mjs?v=cp32-events-dea0a76ba5ff';
 export function createEnvironmentView({scene,art,entities,camera}){
  const themes={dawn:['#39313e','#756061','#49414c'],day:['#49434a','#938577','#625a5a'],dusk:art.preset.background,night:['#201f2a','#403a4c','#2c2937']};
  const textures=Object.fromEntries(Object.entries(themes).map(([key,colors])=>[key,key==='dusk'?scene.background:art.backgroundFactory(colors)]));

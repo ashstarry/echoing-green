@@ -1,4 +1,4 @@
-import {EN} from './i18n-en.mjs?v=cp31-sound-dea918b266ec';
+import {EN} from './i18n-en.mjs?v=cp32-events-dea0a76ba5ff';
 let locale='en';try{const saved=localStorage.getItem('afterwords.locale.v1');if(saved==='zh'||saved==='en')locale=saved;}catch{}
 const cache=new Map(),keys=Object.keys(EN).sort((a,b)=>b.length-a.length),listeners=new Set();
 export const getLocale=()=>locale;

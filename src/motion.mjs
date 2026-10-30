@@ -1,5 +1,5 @@
-import {makeRoom} from './event-travel.mjs?v=cp31-sound-dea918b266ec';
-import {CADENCE,varied} from './cadence.mjs?v=cp31-sound-dea918b266ec';
+import {makeRoom} from './event-travel.mjs?v=cp32-events-dea0a76ba5ff';
+import {CADENCE,varied} from './cadence.mjs?v=cp32-events-dea0a76ba5ff';
 export const TAU=Math.PI*2;
 export const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 export const ease=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
@@ -30,7 +30,7 @@ export function stepTrain(s,path,dt,emit){const tr=s.train;if(!tr||!path)return;
 export function sampleClip(clip,clock){const n=clip.samples.length-1,at=clamp(clock/clip.duration*n,0,n),i=Math.floor(at),j=Math.min(n,i+1),u=at-i,a=clip.samples[i],b=clip.samples[j],da=Math.atan2(Math.sin(b[3]-a[3]),Math.cos(b[3]-a[3]));return {p:a.slice(0,3).map((v,k)=>v+(b[k]-v)*u),yaw:a[3]+da*u,pitch:(a[4]||0)+((b[4]||0)-(a[4]||0))*u,bank:(a[5]||0)+((b[5]||0)-(a[5]||0))*u};}
 export function createMovers(activities){return Object.fromEntries(Object.entries(activities?.clips||{}).map(([id,c])=>[id,{clock:0,distance:0,footDown:0,stopWait:0,stopIndex:0,completedStops:0,tripState:'ride',blocked:false,wait:0,speed:1,strideWeight:1,clearTime:0,restUntil:0,nextPause:varied([3,7],id),pauses:0,intent:c.motion==='creature_walk'?'explore':c.motion,...sampleClip(c,0)}]));}
 export function advanceMovers(s,activities,dt,nav=null){for(const[id,m]of Object.entries(s.movers||{})){
- const clip=activities.clips[id],ground=['creature_walk','ride'].includes(clip.motion),policy=clip.motion==='fly'?s.birds:clip.motion==='ride'?s.cycling:clip.motion==='swim'?s.pond:s.animals;
+ const clip=activities.clips[id];if(id==='animal.garden_fox'&&advanceEventFox(s,m,clip,dt))continue;const ground=['creature_walk','ride'].includes(clip.motion),policy=clip.motion==='fly'?s.birds:clip.motion==='ride'?s.cycling:clip.motion==='swim'?s.pond:s.animals;
  if(clip.motion==='creature_walk'&&s.time>=m.nextPause&&s.time>=m.restUntil){m.pauses++;m.restUntil=s.time+varied([2.5,6],id,m.pauses);m.nextPause=m.restUntil+varied([3,7],id,m.pauses);}
  const eventRest=clip.motion==='creature_walk'&&['festival','market','supper','reunion'].includes(s.sceneEvent?.kind);
  const wantsRest=eventRest||policy==='rest'||s.time<m.restUntil||(clip.motion==='ride'&&(s.weather==='rain'||s.worldEvent?.kind==='festival'));
@@ -47,10 +47,10 @@ export function advanceMovers(s,activities,dt,nav=null){for(const[id,m]of Object
 export function createDiners(config){return Object.fromEntries(Object.keys(config||{}).map((id,i)=>[id,{phase:'dine',clock:0,wait:varied([25,55],id),policy:'auto',effectivePolicy:'auto',cycles:0}]));}
 export function advanceDiners(s,config,dt,emit){for(const[id,d]of Object.entries(s.diners||{})){const c=config[id];if(d.phase==='dine'&&s.residentActions?.[id]?.action){d.wait=Math.max(0,d.wait-dt);continue;}if(d.phase==='dine'||d.phase==='inside'){d.wait=Math.max(0,d.wait-dt);if(d.wait===0&&((d.phase==='dine'&&d.policy!=='dine')||(d.phase==='inside'&&d.policy!=='inside'))){d.phase=d.phase==='dine'?'exit':'turn';d.clock=0;emit(d.phase==='exit'?'二楼的客人推开椅子，走进门帘。':'二楼的客人准备回来用餐。');}}else{d.clock=Math.min(c.clips[d.phase].duration,d.clock+dt);if(d.clock>=c.clips[d.phase].duration){if(d.phase==='exit'){d.phase='inside';d.clock=0;d.wait=varied(d.policy==='dine'?CADENCE.reaction:CADENCE.inside,id,d.cycles);}else if(d.phase==='turn'){d.phase='enter';d.clock=0;}else{d.phase='dine';d.clock=0;d.wait=varied(d.policy==='inside'?CADENCE.reaction:CADENCE.meal,id,d.cycles);d.cycles++;emit('客人回到自己的座位，继续用餐。');}}}}}
 
-export function moverBlocks(p,m,clip,actorRadius=.43){if(clip.motion==='ride'){const dx=p[0]-m.p[0],dy=p[1]-m.p[1],c=Math.cos(m.yaw),n=Math.sin(m.yaw),u=dx*c+dy*n,v=-dx*n+dy*c;return Math.hypot(u-clamp(u,-.75,.75),v)<actorRadius+(m.footDown>.1?.52:.29)+.025;}return Math.hypot(p[0]-m.p[0],p[1]-m.p[1])<actorRadius+(clip.dynamic_clearance||clip.radius||.5)+.02;}
+export function moverBlocks(p,m,clip,actorRadius=.43){if(clip.motion==='ride'){const dx=p[0]-m.p[0],dy=p[1]-m.p[1],c=Math.cos(m.yaw),n=Math.sin(m.yaw),u=dx*c+dy*n,v=-dx*n+dy*c;return Math.hypot(u-clamp(u,-.75,.75),v)<actorRadius+(m.footDown>.1&&actorRadius>.35?.52:.29)+.025;}return Math.hypot(p[0]-m.p[0],p[1]-m.p[1])<actorRadius+(clip.dynamic_clearance||clip.radius||.5)+.02;}
 function advanceCycle(s,id,m,clip,dt,nav){
- const eventParking=false;
- const held=s.cycling==='rest'||s.weather==='rain'||s.worldEvent?.kind==='festival'||['festival','market','supper','reunion'].includes(s.sceneEvent?.kind);m.stopIndex??=0;m.stopWait??=0;m.footDown??=0;m.completedStops??=0;const stops=clip.stops||[];
+ const eventParking=['festival','market','supper','reunion'].includes(s.sceneEvent?.kind)||Object.values(s.eventGuests||{}).some(g=>g.active);
+ const held=s.cycling==='rest'||s.weather==='rain'||eventParking&&m.stopIndex===0;m.stopIndex??=0;m.stopWait??=0;m.footDown??=0;m.completedStops??=0;const stops=clip.stops||[];
  if(!stops.length)return false;
  if(m.stopWait>0||m.tripState==='parked'){
   if(eventParking&&m.stopIndex===1)m.stopWait=Math.min(m.stopWait,1.2);m.stopWait=Math.max(0,m.stopWait-dt);m.speed=0;m.intent=stops[(m.stopIndex+stops.length-1)%stops.length].label;m.tripState='parked';m.footDown+=Math.min(1,dt*3)*(1-m.footDown);
@@ -62,6 +62,13 @@ function advanceCycle(s,id,m,clip,dt,nav){
  const desired=ahead?0:Math.min(1,Math.sqrt(Math.max(0,left))*.85);m.speed=clamp(m.speed+clamp(desired-m.speed,-dt*1.3,dt*.55),0,1);
  const move=Math.min(left,dt*m.speed),clock=(m.clock+move)%clip.duration,candidate=sampleClip(clip,clock),blocked=Object.values(s.eventGuests||{}).some(g=>g.active&&moverBlocks(g.p,{...m,...candidate},clip))||s.actors.some(a=>(!a.eventOnly||a.mobile||s.eventGuests?.[a.id]?.active)&&moverBlocks(a.p,{...m,...candidate},clip));m.blocked=blocked||ahead;m.wait=m.blocked?(m.wait||0)+dt:0;if(m.wait>.7&&nav)makeRoom(s,nav,{id:'resident.cyclist',p:m.p},look.p);m.intent=m.blocked?'让行人先走':m.stopIndex===0?'去车站旁看看':'去池塘边歇脚';
  if(!blocked){m.distance+=Math.hypot(m.p[0]-candidate.p[0],m.p[1]-candidate.p[1]);m.clock=clock;Object.assign(m,candidate);}else m.speed=Math.max(0,m.speed-dt*1.3);
+ if(s.cycling==='rest'&&!eventParking&&m.blocked&&m.wait>2){m.tripState='parked';m.stopWait=0;m.speed=0;return true;}
  if(left<.004||move>=left-.00001){m.clock=target;Object.assign(m,sampleClip(clip,target));m.stopIndex=(m.stopIndex+1)%stops.length;m.stopWait=varied([11,19],id,m.completedStops++);m.tripState='parked';m.speed=0;}
  return true;
+}
+
+function advanceEventFox(s,m,clip,dt){
+ const active=['festival','market','supper','reunion'].includes(s.sceneEvent?.kind)&&['gather','active'].includes(s.sceneEvent.phase);
+ if(active&&!m.eventHome)m.eventHome={p:m.p.slice(),yaw:m.yaw};
+ if(!m.eventHome)return false;const target=active?[5.15,1.7,.624]:m.eventHome.p,dx=target[0]-m.p[0],dy=target[1]-m.p[1],d=Math.hypot(dx,dy),move=Math.min(d,.72*dt);m.strideWeight+=(Number(d>.05)-m.strideWeight)*Math.min(1,dt*8);m.intent=active?'head_for_garden':'return_to_garden';if(d>.005){m.p=m.p.map((x,k)=>x+(target[k]-x)*move/d);m.distance+=move;const yaw=Math.atan2(dy,dx);m.yaw+=clamp(Math.atan2(Math.sin(yaw-m.yaw),Math.cos(yaw-m.yaw)),-dt*3,dt*3);}else if(!active){m.p=m.eventHome.p;m.yaw=m.eventHome.yaw;delete m.eventHome;}return true;
 }

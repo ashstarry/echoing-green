@@ -863,3 +863,8 @@ Object.assign(EN,{"不改变这一项": "Keep this as it is", "晨曦初现": "F
 Object.assign(EN,{"把热食摆上柜台，让街坊来吃点东西。": "Set out warm food and invite the neighbors over.", "细雨落在屋檐边，街坊收好手里的东西。": "Soft rain reaches the eaves; neighbors put their things away.", "让纸片雪飘下来，给小镇换一个冬日。": "Paper snow brings a little winter to the town.", "晚市开张、展开招牌与纸旗、摊位备齐、居民逛摊排队": "Open the market, unfold its signs and pennants, and welcome the neighbors.", "活动结束，走回原来的位置": "Returning to a familiar place after the gathering", "收好手边的东西，走去参加小镇的活动": "Putting things away and walking over to join the gathering", "侧身让远处赶来的邻居先过去": "Making room for a neighbor arriving from farther away", "先走回适合完成这件事的位置": "Returning to a suitable place to do this"});
 
 Object.assign(EN,{'居民往返活动存档无效':'The saved gathering journey is invalid','在这里也看得清，给后来的人留一条路':'A clear nearby place, with room for later arrivals'});
+
+Object.assign(EN,{
+ '定点花火亮起，街坊走向广场并站定仰望。':'Fireworks rise as the neighbors gather in the square and look up.',
+ '燃放定点红金花火，街坊聚集后站定仰望':'Launch red and gold fireworks as the neighbors gather and look up.'
+});

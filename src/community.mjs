@@ -1,6 +1,6 @@
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp31-sound-dea918b266ec';
-import {advanceSceneEvent,requestSceneEvent,sceneTask} from './scene-events.mjs?v=cp31-sound-dea918b266ec';
-import {CADENCE,varied,stableUnit} from './cadence.mjs?v=cp31-sound-dea918b266ec';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp32-events-dea0a76ba5ff';
+import {advanceSceneEvent,requestSceneEvent,sceneTask} from './scene-events.mjs?v=cp32-events-dea0a76ba5ff';
+import {CADENCE,varied,stableUnit} from './cadence.mjs?v=cp32-events-dea0a76ba5ff';
 export const ACTIVITIES={
  hop:{label:'找一块空地跳两下',range:[3,6],zone:'playground'},follow:{label:'跟着孩子换个位置',range:[4,8],zone:'family'},
  play:{label:'给街坊弹一段琴',range:[18,35]},
@@ -20,8 +20,8 @@ export function updateDirector(s,dt,emit,nav){
  for(const[id,d]of Object.entries(s.diners)){const festival=s.sceneEvent?.kind==='festival'&&['gather','active'].includes(s.sceneEvent.phase);const policy=d.manualPolicy||(s.dining!=='auto'?s.dining:s.weather==='rain'?'inside':festival||s.occasion==='supper'?'dine':'auto');if(d.effectivePolicy!==policy){d.effectivePolicy=policy;d.policy=policy;d.wait=Math.min(d.wait,varied([1,4],id,s.planRevision));}}
 }
 export function wantedTask(s,a){
- if(a.manual)return a.intent==='quiet'?'rest':a.intent==='gather'?'listen':'stroll';
  const foreground=sceneTask(s,a);if(foreground)return foreground;
+ if(a.manual)return a.intent==='quiet'?'rest':a.intent==='gather'?'listen':'stroll';
  if(s.weather==='rain')return 'shelter';
  if(a.manualActivity&&s.time<a.activityUntil)return a.manualActivity;
  if(a.responseTask&&s.time<a.responseUntil)return a.responseTask;

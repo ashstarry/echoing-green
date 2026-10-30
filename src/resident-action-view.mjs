@@ -1,9 +1,9 @@
-import {createDinerActionView} from './diner-action-view.mjs?v=cp31-sound-dea918b266ec';
-import {makeArmSolver} from './arm-ik.mjs?v=cp31-sound-dea918b266ec';
+import {createDinerActionView} from './diner-action-view.mjs?v=cp32-events-dea0a76ba5ff';
+import {makeArmSolver} from './arm-ik.mjs?v=cp32-events-dea0a76ba5ff';
 import * as THREE from 'three';
-import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES} from './resident-actions.mjs?v=cp31-sound-dea918b266ec';
-import {PROFILES} from './community.mjs?v=cp31-sound-dea918b266ec';
-import {ease,legPose} from './motion.mjs?v=cp31-sound-dea918b266ec';
+import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES} from './resident-actions.mjs?v=cp32-events-dea0a76ba5ff';
+import {PROFILES} from './community.mjs?v=cp32-events-dea0a76ba5ff';
+import {ease,legPose} from './motion.mjs?v=cp32-events-dea0a76ba5ff';
 const X=new THREE.Vector3(1,0,0),Y=new THREE.Vector3(0,1,0),Z=new THREE.Vector3(0,0,-1);
 const mix=(a,b,t)=>a+(b-a)*t;
 export function createResidentActionView({scene,entities,parts,sockets,localRoutes,support,dinerGestures,diningProps}){
@@ -39,7 +39,7 @@ export function createResidentActionView({scene,entities,parts,sockets,localRout
  }
  function frame(s,dt){const active=[];for(const[id,r]of Object.entries(s.residentActions||{})){
   const root=entities.get(id),profile=PROFILES[id],a=s.actors.find(a=>a.id===id);if(!root)continue;resetElbows(id);
-  const valid=r.action&&!['walk','yield','fold_umbrella'].includes(a?.mode)&&!(s.residents[id]?.umbrellaOpen>.08)&&(profile.role!=='diner'||s.diners[id].phase==='dine')&&(profile.role!=='cycle'||s.movers['bicycle.street_bicycle'].tripState==='parked');
+  const valid=r.action&&!s.eventGuests?.[id]?.active&&!(s.sceneEvent?.slots?.[id]!==undefined&&['gather','active'].includes(s.sceneEvent.phase))&&!['walk','yield','fold_umbrella'].includes(a?.mode)&&!(s.residents[id]?.umbrellaOpen>.08)&&(profile.role!=='diner'||s.diners[id].phase==='dine')&&(profile.role!=='cycle'||s.movers['bicycle.street_bicycle'].tripState==='parked');
   const def=RESIDENT_ACTIONS[r.action],clock=r.clock||0,duration=def?.duration||1,w=valid?ease(clock/.75)*ease((duration-clock)/.9)*(r.cancelRemaining>0?r.cancelRemaining/.65:1):0,beat=Math.sin(clock*3.7),slow=.5-.5*Math.cos(clock*2.3),pose=valid?def.pose:null;
   if(w>.02){active.push(id+'/'+r.action);observed.set(id+'/'+r.action,(observed.get(id+'/'+r.action)||0)+dt);}
   let readerCupHeld=false,readerCupTilt=0;

@@ -1,4 +1,4 @@
-import {createCueTracker} from './sound-cues.mjs?v=cp31-sound-dea918b266ec';
+import {createCueTracker} from './sound-cues.mjs?v=cp32-events-dea0a76ba5ff';
 
 const noiseCache=new WeakMap();
 function paperNoise(ctx){

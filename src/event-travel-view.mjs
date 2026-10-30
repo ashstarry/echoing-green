@@ -1,7 +1,7 @@
 import * as THREE from 'three';
-import {legPose,ease} from './motion.mjs?v=cp31-sound-dea918b266ec';
-import {makeArmSolver} from './arm-ik.mjs?v=cp31-sound-dea918b266ec';
-import {FIREWORK_FOCUS,EVENT_GAZE_PITCH} from './event-design.mjs?v=cp31-sound-dea918b266ec';
+import {legPose,ease} from './motion.mjs?v=cp32-events-dea0a76ba5ff';
+import {makeArmSolver} from './arm-ik.mjs?v=cp32-events-dea0a76ba5ff';
+import {FIREWORK_FOCUS,EVENT_GAZE_PITCH} from './event-design.mjs?v=cp32-events-dea0a76ba5ff';
 const X=new THREE.Vector3(1,0,0),Y=new THREE.Vector3(0,1,0),Z=new THREE.Vector3(0,0,-1),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 export function createEventTravelView({entities,parts,sockets,seated={},support}){
  const bases=new Map([...parts].map(([id,o])=>[id,o.quaternion.clone()])),armBase=new Map([...parts].map(([id,o])=>[id,{q:o.quaternion.clone(),p:o.position.clone(),s:o.scale.clone()}])),origins=new Map([...entities].map(([id,o])=>[id,{p:o.position.clone(),q:o.quaternion.clone()}]));
@@ -25,12 +25,12 @@ export function createEventTravelView({entities,parts,sockets,seated={},support}
    if(rig||!ground){const rise=(rig?.standingRise||0)*scale*stand,drop=g.authorFeet?0:.026*scale*weight,world=new THREE.Vector3(p[0],p[2]+rise-drop,-p[1]);root.parent?.updateWorldMatrix(true,false);if(root.parent)root.parent.worldToLocal(world);root.position.copy(world);root.quaternion.copy(origins.get(id).q).premultiply(new THREE.Quaternion().setFromAxisAngle(Y,g.yaw-sock.yaw));root.updateWorldMatrix(true,true);
     for(const side of ['left','right']){
      if(!rig&&transition&&!g.authorFeet){for(const key of ['leg','knee','ankle'])rotate(id,'anim_'+key+'_'+side,0);continue;}
-     let target;if(g.authorFeet){const f=g.authorFeet[side];target=new THREE.Vector3(f[0],f[2]+(rig?.ankle?rig.ankle-.02:.09)*scale,-f[1]);}
+     let target;if(g.authorFeet){const f=g.authorFeet[side].slice();if(g.blocked>.2)f[2]+=(floorAt(f[0],f[1],p[2]+.02*scale)+.02*scale-f[2])*Math.min(1,(g.blocked-.2)*5);target=new THREE.Vector3(f[0],f[2]+(rig?.ankle?rig.ankle-.02:.09)*scale,-f[1]);}
      else{const gait=legPose(g.walked,scale,side,weight),sx=side==='left'?-.1:.1,localY=transition&&rig?-.235*(1-stand):-.01+gait.footY,cs=Math.cos(g.yaw),sn=Math.sin(g.yaw),wx=p[0]+(cs*sx-sn*localY)*scale,wy=p[1]+(sn*sx+cs*localY)*scale,expected=p[2]+.02*scale;let floor=expected;for(const dx of[-.065,.065])for(const dy of[-.14,.075])floor=Math.max(floor,floorAt(wx+(cs*dx-sn*dy)*scale,wy+(sn*dx+cs*dy)*scale,expected));target=new THREE.Vector3(wx,floor+(rig?.ankle?rig.ankle-.02:.09)*scale+.014+gait.lift*scale,-wy);}
      solveFoot(id,side,root,target,rig);
     }
    }
-   if(g.authorFeet&&id!=='resident.quiet_reader')for(const side of ['left','right'])if(!(id==='resident.water_companion'&&side==='right')){rotate(id,'anim_arm_'+side,-.08-Math.sin((g.entryClock||0)*4+(side==='left'?0:Math.PI))*.025);const arm=parts.get(id+'/anim_arm_'+side);arm?.quaternion.multiply(new THREE.Quaternion().setFromAxisAngle(Z,side==='left'?-.18:.18));rotate(id,'anim_elbow_'+side,-.35);}
+   if(g.authorFeet&&id!=='resident.quiet_reader')for(const side of ['left','right'])if(!(id==='resident.water_companion'&&side==='right')){rotate(id,'anim_arm_'+side,-.08-Math.sin((g.walked||0)/(.56*scale)*Math.PI*2+(side==='left'?0:Math.PI))*.18*(g.gaitWeight||0));const arm=parts.get(id+'/anim_arm_'+side);arm?.quaternion.multiply(new THREE.Quaternion().setFromAxisAngle(Z,side==='left'?-.18:.18));rotate(id,'anim_elbow_'+side,-.35);}
    // Compact the closed parasol around the real hand grip while it is carried.
    if(id==='resident.water_companion'&&umbrellaRest){rotate(id,'anim_arm_right',0);rotate(id,'anim_elbow_right',0);root.updateWorldMatrix(true,true);const grip=handWorld(id,'right'),factor=.55+.45*(s.residentActions[id].umbrella||0);umbrella.scale.y=umbrellaRest.s.y*factor;umbrella.updateWorldMatrix(true,true);const shifted=umbrella.localToWorld(umbrellaRest.grip.clone()),world=umbrella.getWorldPosition(new THREE.Vector3()).add(grip.sub(shifted));umbrella.parent.worldToLocal(world);umbrella.position.copy(world);}
    if(id==='resident.quiet_reader'&&book){const w=transition?stand:1;solveArm(id,'left',[-.08,.64,.30],w);root.updateWorldMatrix(true,true);const target=root.localToWorld(new THREE.Vector3(-.10,.69,.38));book.parent.updateWorldMatrix(true,false);book.position.lerp(book.parent.worldToLocal(target),w);const orientation=root.getWorldQuaternion(new THREE.Quaternion()).multiply(bookRel);book.quaternion.copy(book.parent.getWorldQuaternion(new THREE.Quaternion()).invert().multiply(orientation));}
