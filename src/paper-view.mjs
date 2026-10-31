@@ -1,7 +1,7 @@
 import * as THREE from 'three';
-import {makeArmSolver} from './arm-ik.mjs?v=cp39-neighborhood-18b2d8344ad8';
-import {handWorldPoint} from './prop-attachment.mjs?v=cp39-neighborhood-18b2d8344ad8';
-import {interactionStep,INTERACTION_PRIMITIVES} from './interaction-sequence.mjs?v=cp39-neighborhood-18b2d8344ad8';
+import {makeArmSolver} from './arm-ik.mjs?v=cp41-living-core-420fb12de96c';
+import {handWorldPoint} from './prop-attachment.mjs?v=cp41-living-core-420fb12de96c';
+import {interactionStep,INTERACTION_PRIMITIVES} from './interaction-sequence.mjs?v=cp41-living-core-420fb12de96c';
 const ease=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};
 const palette=['#e1ba78','#99b8ad','#d5a1a5','#8faec5','#d6c6a0','#ad9dbd'];
 export function createPaperView({scene,entities,parts,sockets}){

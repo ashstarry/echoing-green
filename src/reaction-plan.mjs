@@ -1,5 +1,5 @@
-import {ACTOR_DOMAINS} from './catalog.mjs?v=cp39-neighborhood-18b2d8344ad8';
-import {PROFILES} from './community.mjs?v=cp39-neighborhood-18b2d8344ad8';
+import {ACTOR_DOMAINS} from './catalog.mjs?v=cp41-living-core-420fb12de96c';
+import {PROFILES} from './community.mjs?v=cp41-living-core-420fb12de96c';
 const role=id=>PROFILES[id]?.label||'这位居民';
 const moving=a=>a&&['walk','yield','fold_umbrella'].includes(a.mode);
 const reached=a=>a&&a.reservation!==null&&!moving(a)&&a.path.length===0;

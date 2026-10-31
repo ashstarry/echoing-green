@@ -1,7 +1,7 @@
 export const ATMOSPHERE_QUESTIONS={
   "intent": {
     "type": "choice",
-    "instructions": "User speaks to an artistic miniature town. Present feelings, sensory impressions, loose associations and poetic fragments are soft invitations, even without imperative verbs or a request to change the town. Interpret generously when there is any meaningful emotional link. A current personal feeling is enough; do not demand a named action. Emotion transformed into imagery is a metaphor, not a demand to manufacture its imaginary objects. Pure praise of the interface or a completed event, hypothetical questions, and explicit keep-as-is are not invitations. A memory used to evoke a feeling now can be an invitation. Personal needs such as hunger or wanting company are mood invitations, not literal object manipulation. A wish to hear human voices evokes social company; it does not require new speech synthesis. Choose literal if a concrete supported activity/time/weather/person/object is the meaning of the wish; poetic adjectives alone do not make it mixed. Choose mixed for a concrete request PLUS a separately desired town-wide feeling. A separate clause expressing relief, breathing room, personal space, reduced pressure, or companionship is an independent mood even when another clause precisely controls a vehicle or person; do not let that concrete clause erase the emotional one. Choose mood for a feeling or evocative metaphor without a concrete supported command.",
+    "instructions": "User speaks to an artistic miniature town. Present feelings, sensory impressions, loose associations and poetic fragments are soft invitations, even without imperative verbs or a request to change the town. Interpret generously when there is any meaningful emotional link. A current personal feeling is enough; do not demand a named action. Emotion transformed into imagery is a metaphor, not a demand to manufacture its imaginary objects. Pure praise of the interface or a completed event, hypothetical questions, and explicit keep-as-is are not invitations. A memory used to evoke a feeling now can be an invitation. Personal needs such as hunger or wanting company are mood invitations, not literal object manipulation. A wish to hear human voices evokes social company; it does not require new speech synthesis. An explicit local request saying the other people should carry on, leave everyone else alone, or no one else needs to respond is literal-only, not an invitation for a separate quieter mood. Choose literal if a concrete supported activity/time/weather/person/object is the meaning of the wish; poetic adjectives alone do not make it mixed. Abstract imperatives about leaving haste outside, putting worries down, or giving the day some breathing room are mood invitations; the abstract feeling is not an object that needs a physical door or storage action. Choose mixed for a concrete request PLUS a separately desired town-wide feeling. A separate clause expressing relief, breathing room, personal space, reduced pressure, or companionship is an independent mood even when another clause precisely controls a vehicle or person; do not let that concrete clause erase the emotional one. Choose mood for a feeling or evocative metaphor without a concrete supported command.",
     "criteria": {
       "mood": "An implied or explicit invitation to evoke an atmosphere",
       "literal": "A specific action, communal activity, time, weather or object request, including poetic phrasing",
@@ -48,7 +48,8 @@ export function atmospherePlan(answers){const intent=answers.mood_intent,mood=an
 
 // Concrete choices cannot be erased by the less-specific mood interpretation.
 // Only an independently requested mood may add compatible, unmentioned fields.
-export function composeAtmosphere(literal, answers){
+export function composeAtmosphere(literal, answers, {utterance=""}={}){
+ if(literal.items.some(i=>i.kind==='resident'||i.kind==='object')&&keepsOtherActivity(utterance))return {...literal,resolution:{...literal.resolution,scopeGuard:'explicit-others-unchanged'}};
  const mood=atmospherePlan(answers);if(!mood)return literal;
  if(!literal.items.length){
   const unresolved=literal.skipped?.some(x=>!['已经是这个状态','没有明确要求改变这个对象'].includes(x.reason));
@@ -56,10 +57,16 @@ export function composeAtmosphere(literal, answers){
   return {...mood,literalPlan:literal};
  }
  if(answers.mood_intent.choice!=='mixed')return literal;
- const foreground=new Set(['weather','festival','occasion','paper','neighborhood']);
+ const foreground=new Set(['weather','festival','occasion','paper','neighborhood','journey']);
  const targets=new Set(literal.items.filter(i=>i.kind==='macro').map(i=>i.target));
- const hasScene=[...targets].some(t=>foreground.has(t));
+ const hasScene=literal.items.some(i=>i.kind==='macro'&&foreground.has(i.target)&&!({weather:['clear','keep'],festival:['quiet','auto','keep'],occasion:['ordinary','keep'],paper:['rest','keep'],neighborhood:['rest','keep'],journey:['rest','keep']}[i.target]||[]).includes(i.action));
  const additions=mood.items.filter(i=>!targets.has(i.target)&&!(hasScene&&foreground.has(i.target)));
  if(!additions.length)return literal;
  return {...literal,items:[...literal.items,...additions],resolution:{...mood.resolution,source:'jev-composed'},summary:literal.summary+'；'+mood.summary};
+}
+
+// An explicit local-only request takes precedence over a guessed town-wide mood.
+export function keepsOtherActivity(text){
+ const t=String(text||'').normalize('NFKC');
+ return /(?:其他|其余|其它|别的)(?:人|居民|街坊|东西|部分)?(?:都|也)?(?:照旧|保持(?:不变|原样|原状)|不用(?:理(?:我|它|他|她)|回应|改变|改|动|管(?:我|它|他|她))|别(?:回应|改|动)|不要(?:回应|改|动))|大家(?:都)?照旧/u.test(t)||/(?:everyone|everything)(?: else)?\s+(?:can |should )?(?:carry on|stay unchanged|keep (?:going|doing)|remain as)|(?:leave|keep)\s+(?:everyone|everything|the rest)(?: else)?\s+(?:alone|unchanged|as (?:it|they) (?:is|are))/i.test(t);
 }

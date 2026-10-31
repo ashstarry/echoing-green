@@ -927,3 +927,51 @@ Object.assign(EN,{
 });
 
 Object.assign(EN,{"走向约定的地方":"Walking to the meeting place","把手里的物件搬过去":"Carrying something to its new place","拿起准备好的物件":"Picking up what is needed","把物件稳稳放好":"Setting it down carefully","把东西递给邻居":"Passing it to a neighbor","接过邻居递来的东西":"Receiving something from a neighbor","打开门迎接归人":"Opening the door for a welcome","招呼归来的邻居":"Welcoming a returning neighbor","擦干椅子和台面":"Drying seats and surfaces","把折好的花和摆设展开":"Unfolding flowers and decorations","看看刚刚准备好的街角":"Enjoying the newly arranged corner","等邻居走近":"Waiting for a neighbor to arrive","留一盏灯，迎一个归人":"A light and a welcome at the door","街坊一起准备今晚的欢喜":"Neighbors prepare a little joy for tonight","雨后，生活重新开张":"Life begins again after rain","花开与晚风走进街角":"Blossoms and a breeze reach the lanes"});
+
+Object.assign(EN,{
+  "低身邀玩、轻快小跑，再停下摇尾": "Bow to play, trot a little, then wag the tail",
+  "走近花园旁可达的居民，摇尾打招呼": "Walk over to a nearby neighbor and wag hello",
+  "停下伸展前爪、舒展身体": "Stretch the front paws and loosen up",
+  "电车上的一段旅程": "A little tram journey",
+  "电车的送行与迎接": "Tram departures and homecomings",
+  "保持当前行程": "Keep the current journey",
+  "请现有旅客乘电车绕镇一程，邻居送行，回来后再下车": "Let the traveler take a lap, with a send-off and a return",
+  "让现有旅客乘电车绕镇一程，邻居送行，回来下车": "Let the traveler ride around town and return to a welcome",
+  "迎接这位旅客回来：在车上的人到站下车，尚在站台的人先完成一程再归来": "Welcome the traveler home after the current or next lap",
+  "迎接现有旅客回来；人在车上则下站下来，人在站台则先乘一程再归来": "Welcome the traveler back after their lap",
+  "先不安排新的乘车，已上车的人安全到站再下车": "No new trip; finish any boarding or return safely",
+  "先不安排新旅程，已上车的人安全到站再下车": "No new trip; return safely to the platform",
+  "送旅客乘一程": "See the traveler off",
+  "接旅客回来": "Welcome the traveler back",
+  "先不安排新行程": "Finish this journey",
+  "这趟行程先收住，已经上车的人会到站后再下来。": "No new journey; anyone aboard will return safely at the station.",
+  "车站留意归来的电车，准备迎接这位旅客。": "Neighbors look out for the returning tram and its traveler.",
+  "旅客准备乘电车绕镇一程，站边的邻居来送行。": "The traveler prepares for a lap as neighbors see them off.",
+  "邻居抬手送行，旅客等踏板放稳，再一步步上车。": "Neighbors wave goodbye as the traveler boards after the ramp settles.",
+  "旅客在车窗边挥挥手，电车载着他绕过小镇。": "A wave from the window as the tram carries its traveler around town.",
+  "电车回到站台，熟悉的邻居正等着招手。": "The tram returns, with familiar neighbors ready to wave.",
+  "这一程结束，旅客回到站台，和邻居打过招呼。": "The journey ends with the traveler back among the neighbors.",
+  "跟随新的小动物安排": "Following the new animal request"
+});
+
+Object.assign(EN,{
+  "小狐狸": "Little fox",
+  "电车旅程": "Tram journey",
+  "沿花园空地走走": "Exploring the garden paths",
+  "抬头看看周围": "Looking around with curiosity",
+  "停下来认真闻一闻": "Pausing for a good sniff",
+  "安静歇一会": "Taking a quiet rest",
+  "伸展前爪，舒展身体": "Stretching the front paws",
+  "朝附近居民摇尾打招呼": "Wagging hello to a nearby neighbor",
+  "轻轻跳两下，摇摇尾巴": "A little bounce and a wag",
+  "压低前身，邀请一起玩": "Bowing down to invite play",
+  "旅客先等电车进站": "Waiting for the tram to arrive",
+  "邻居送行，旅客正在上车": "Neighbors wave as the traveler boards",
+  "旅客在车窗边挥手，绕镇看看": "A wave from the window on a little ride",
+  "电车回站，旅客准备下来": "The tram returns; the traveler is getting off",
+  "回到站台，和邻居打招呼": "Back on the platform, greeting the neighbors",
+  "先完成当前这段安全上下车": "Finishing the current boarding or exit safely",
+  "这一程已经完成": "This little journey is complete",
+  "暂时没有新的旅程": "No new journey is planned",
+  "花园已检查的铺装区域；不能追遍全镇或进屋": "Within the checked garden paths; no unrestricted roaming or indoor access"
+});

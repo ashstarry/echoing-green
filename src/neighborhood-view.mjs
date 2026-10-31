@@ -1,8 +1,8 @@
 import * as THREE from 'three';
-import {makeArmSolver} from './arm-ik.mjs?v=cp39-neighborhood-18b2d8344ad8';
-import {handWorldPoint} from './prop-attachment.mjs?v=cp39-neighborhood-18b2d8344ad8';
-import {interactionStep,INTERACTION_PRIMITIVES} from './interaction-sequence.mjs?v=cp39-neighborhood-18b2d8344ad8';
-import {HOME} from './neighborhood-world.mjs?v=cp39-neighborhood-18b2d8344ad8';
+import {makeArmSolver} from './arm-ik.mjs?v=cp41-living-core-420fb12de96c';
+import {handWorldPoint} from './prop-attachment.mjs?v=cp41-living-core-420fb12de96c';
+import {interactionStep,INTERACTION_PRIMITIVES} from './interaction-sequence.mjs?v=cp41-living-core-420fb12de96c';
+import {HOME} from './neighborhood-world.mjs?v=cp41-living-core-420fb12de96c';
 const ease=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};
 export function createNeighborhoodView({scene,entities,parts,sockets}){
  const group=new THREE.Group();group.name='Neighborhood reusable props';group.userData.runtime_effect_id='effect.neighborhood_work';scene.add(group);

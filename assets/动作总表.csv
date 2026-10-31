@@ -34,7 +34,7 @@
 "小动物","animal.doorstep_cat","4","沿熟悉的地方走走；停下嗅闻；抬头留意周围；安静歇息","","animal.doorstep_cat"
 "鸭子","animal.duck_0","4","沿水面游动；低头啄食；抬头张望；安静浮着","","animal.duck_0"
 "鸭子","animal.duck_1","4","沿水面游动；低头啄食；抬头张望；安静浮着","","animal.duck_1"
-"小动物","animal.garden_fox","4","沿熟悉的地方走走；停下嗅闻；抬头留意周围；安静歇息","","animal.garden_fox"
+"小动物","花园的小狐狸","7","沿熟悉的地方走走；停下嗅闻；抬头留意周围；安静歇息；低身邀玩、轻快小跑，再停下摇尾；走近花园旁可达的居民，摇尾打招呼；停下伸展前爪、舒展身体","花园已检查的铺装区域；不能追遍全镇或进屋","animal.garden_fox"
 "停放的自行车","bicycle.cp07_parked_bicycle","2","轻拨车轮；让车轮停下","","bicycle.cp07_parked_bicycle"
 "自行车","bicycle.street_bicycle","2","骑去下一处；到下一处停脚","与使用者联动，不另算新的全局动作类型","bicycle.street_bicycle"
 "纸雕鸟","bird.paper_bird_0","4","循着空中路线飞；放慢并悬停；舒展翅膀滑翔；轻快拍翼","空中活动；尚未开放落地、筑巢或归巢","bird.paper_bird_0"

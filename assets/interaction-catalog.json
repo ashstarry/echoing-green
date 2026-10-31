@@ -385,5 +385,29 @@
     "reopen",
     "spring",
     "rest"
-  ]
+  ],
+  "core_extensions": {
+    "fox": {
+      "actions": [
+        "explore",
+        "sniff",
+        "look",
+        "rest",
+        "play",
+        "greet",
+        "stretch"
+      ],
+      "movement": "101 checked garden paving nodes; no unrestricted town roaming",
+      "interacting_residents": "one nearby reachable resident; obey preserveOthers"
+    },
+    "train": {
+      "goals": [
+        "depart",
+        "welcome",
+        "rest"
+      ],
+      "reuse": "existing traveler, boarding ramp, passenger door, car, station figures",
+      "new_entities": 0
+    }
+  }
 }
