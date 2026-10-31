@@ -1,6 +1,6 @@
-import {needsClearPromenade} from './event-design.mjs?v=cp37-paper-1dbadc3fdf78';
-import {makeRoom} from './event-travel.mjs?v=cp37-paper-1dbadc3fdf78';
-import {CADENCE,varied} from './cadence.mjs?v=cp37-paper-1dbadc3fdf78';
+import {needsClearPromenade} from './event-design.mjs?v=cp37-paper-0036492e3f36';
+import {makeRoom} from './event-travel.mjs?v=cp37-paper-0036492e3f36';
+import {CADENCE,varied} from './cadence.mjs?v=cp37-paper-0036492e3f36';
 export const TAU=Math.PI*2;
 export const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 export const ease=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};

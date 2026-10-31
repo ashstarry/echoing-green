@@ -1,11 +1,11 @@
-import {ensurePaperWorld} from './paper-world.mjs?v=cp37-paper-1dbadc3fdf78';
-import {assignGroup,GROUP_KINDS} from './group-layout.mjs?v=cp37-paper-1dbadc3fdf78';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp37-paper-1dbadc3fdf78';
-import {eventGuestCandidates,ensureEventTravel} from './event-travel.mjs?v=cp37-paper-1dbadc3fdf78';
-import {stableUnit} from './cadence.mjs?v=cp37-paper-1dbadc3fdf78';
-import {stimulateTown} from './town-response.mjs?v=cp37-paper-1dbadc3fdf78';
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp37-paper-1dbadc3fdf78';
-import {moverBlocks} from './motion.mjs?v=cp37-paper-1dbadc3fdf78';
+import {ensurePaperWorld} from './paper-world.mjs?v=cp37-paper-0036492e3f36';
+import {assignGroup,GROUP_KINDS} from './group-layout.mjs?v=cp37-paper-0036492e3f36';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp37-paper-0036492e3f36';
+import {eventGuestCandidates,ensureEventTravel} from './event-travel.mjs?v=cp37-paper-0036492e3f36';
+import {stableUnit} from './cadence.mjs?v=cp37-paper-0036492e3f36';
+import {stimulateTown} from './town-response.mjs?v=cp37-paper-0036492e3f36';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp37-paper-0036492e3f36';
+import {moverBlocks} from './motion.mjs?v=cp37-paper-0036492e3f36';
 
 export const EVENT_TIMING={paper_read:{gather:12,active:18,closing:5},paper_collect:{gather:12,active:22,closing:5},paper_hang:{gather:22,active:45,closing:7},paper_share:{gather:22,active:45,closing:7},snow:{gather:0,active:38,closing:7},rain:{gather:0,active:42,closing:7},lantern:{gather:22,active:32,closing:8},festival:{gather:24,active:38,closing:7},market:{gather:22,active:38,closing:8},supper:{gather:22,active:38,closing:8},reunion:{gather:22,active:34,closing:7},delivery:{gather:3,active:28,closing:5},music:{gather:22,active:34,closing:7},quiet:{gather:16,active:28,closing:6}};
 const live=j=>!['done','failed','cancelled'].includes(j.status);

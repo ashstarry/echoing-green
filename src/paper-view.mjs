@@ -1,7 +1,7 @@
 import * as THREE from 'three';
-import {makeArmSolver} from './arm-ik.mjs?v=cp37-paper-1dbadc3fdf78';
-import {handWorldPoint} from './prop-attachment.mjs?v=cp37-paper-1dbadc3fdf78';
-import {interactionStep,INTERACTION_PRIMITIVES} from './interaction-sequence.mjs?v=cp37-paper-1dbadc3fdf78';
+import {makeArmSolver} from './arm-ik.mjs?v=cp37-paper-0036492e3f36';
+import {handWorldPoint} from './prop-attachment.mjs?v=cp37-paper-0036492e3f36';
+import {interactionStep,INTERACTION_PRIMITIVES} from './interaction-sequence.mjs?v=cp37-paper-0036492e3f36';
 const ease=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};
 const palette=['#e1ba78','#99b8ad','#d5a1a5','#8faec5','#d6c6a0','#ad9dbd'];
 export function createPaperView({scene,entities,parts,sockets}){
@@ -10,6 +10,7 @@ export function createPaperView({scene,entities,parts,sockets}){
  const paperGeo=new THREE.BoxGeometry(.25,.66,.009),flapGeo=new THREE.BoxGeometry(.25,.105,.009),ink=new THREE.MeshStandardMaterial({color:0x695947,roughness:1}),ropeMat=new THREE.LineBasicMaterial({color:0xb4a182}),penMat=new THREE.MeshStandardMaterial({color:0x73533c,roughness:1});
  let paperMap=null;scene.traverse(o=>{if(o.isMesh&&o.material?.name==='WEB paper'&&!paperMap)paperMap=o.material.map;});
  const materials=palette.map(color=>new THREE.MeshStandardMaterial({color,roughness:1,map:paperMap,side:THREE.DoubleSide}));
+ const knotGeometry=new THREE.SphereGeometry(.014,6,4),inkGeometry=new THREE.PlaneGeometry(.18,.35);
  const glyphMaterials={};for(const[key,glyph]of [['wish','願'],['heart','心']]){const canvas=document.createElement('canvas');canvas.width=128;canvas.height=256;const ctx=canvas.getContext('2d');ctx.fillStyle='#5f5143';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='90px "Yu Mincho", "Songti SC", "Noto Serif CJK JP", serif';ctx.fillText(glyph,64,100);ctx.globalAlpha=.65;ctx.fillRect(61,180,2,27);ctx.fillRect(72,187,2,17);const texture=new THREE.CanvasTexture(canvas);texture.colorSpace=THREE.SRGBColorSpace;glyphMaterials[key]=new THREE.MeshBasicMaterial({map:texture,transparent:true,opacity:.76,depthWrite:false,side:THREE.DoubleSide});}
  const bamboo=[];const stemMaterial=new THREE.MeshStandardMaterial({color:0x72856f,roughness:1,map:paperMap}),leafMaterial=new THREE.MeshStandardMaterial({color:0x879981,roughness:1,side:THREE.DoubleSide});
  function support(station,anchor){if(bamboo[station])return bamboo[station];const groupStem=new THREE.Group();groupStem.name='paper-note-support-'+station;group.add(groupStem);const tree=new THREE.Vector3(-.2347,.78,.6956),tip=new THREE.Vector3(anchor[0],anchor[2]+.53,-anchor[1]),outward=new THREE.Vector3(tip.x-tree.x,0,tip.z-tree.z).normalize();const foot=tree.clone().addScaledVector(outward,1.05),bend=tree.clone().addScaledVector(outward,1.4);bend.y=2.32;tip.addScaledVector(outward,-.18);const curve=new THREE.CatmullRomCurve3([foot,bend,tip]);groupStem.add(new THREE.Mesh(new THREE.TubeGeometry(curve,6,.018,5,false),stemMaterial));
@@ -19,9 +20,9 @@ export function createPaperView({scene,entities,parts,sockets}){
   const root=new THREE.Group();root.userData.entity_id='paper.note.'+note.id;root.userData.paper_note_id=note.id;root.name=root.userData.entity_id;entities.set(root.userData.entity_id,root);group.add(root);
   const face=new THREE.Mesh(paperGeo,materials[note.color%palette.length]);face.position.y=-.3825;face.castShadow=true;root.add(face);
   const flap=new THREE.Group();flap.position.y=-.0525;const fold=new THREE.Mesh(flapGeo,materials[note.color%palette.length]);fold.position.y=.0525;fold.castShadow=true;flap.add(fold);root.add(flap);
-  const knot=new THREE.Mesh(new THREE.SphereGeometry(.014,6,4),ink);knot.position.set(0,.012,0);root.add(knot);
+  const knot=new THREE.Mesh(knotGeometry,ink);knot.position.set(0,.012,0);root.add(knot);
   const strokes=new THREE.Group();root.add(strokes);
-  const inkPlane=new THREE.Mesh(new THREE.PlaneGeometry(.18,.35),glyphMaterials[note.purpose==='paper_share'?'heart':'wish']);inkPlane.position.set(0,-.31,.006);strokes.add(inkPlane);
+  const inkPlane=new THREE.Mesh(inkGeometry,glyphMaterials[note.purpose==='paper_share'?'heart':'wish']);inkPlane.position.set(0,-.31,.006);strokes.add(inkPlane);
 
   const stringGeo=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(),new THREE.Vector3()]);const string=new THREE.Line(stringGeo,ropeMat);group.add(string);const record={root,face,flap,strokes,string};objects.set(note.id,record);return record;
  }

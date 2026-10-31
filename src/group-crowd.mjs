@@ -1,8 +1,8 @@
-import {makeRoom} from './event-travel.mjs?v=cp37-paper-1dbadc3fdf78';
-import {groupPlaces} from './group-layout.mjs?v=cp37-paper-1dbadc3fdf78';
-import {pathTo,navigationGraph} from './navigation.mjs?v=cp37-paper-1dbadc3fdf78';
-import {moverBlocks} from './motion.mjs?v=cp37-paper-1dbadc3fdf78';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp37-paper-1dbadc3fdf78';
+import {makeRoom} from './event-travel.mjs?v=cp37-paper-0036492e3f36';
+import {groupPlaces} from './group-layout.mjs?v=cp37-paper-0036492e3f36';
+import {pathTo,navigationGraph} from './navigation.mjs?v=cp37-paper-0036492e3f36';
+import {moverBlocks} from './motion.mjs?v=cp37-paper-0036492e3f36';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp37-paper-0036492e3f36';
 const D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 const angle=(a,b)=>Math.atan2(Math.sin(b-a),Math.cos(b-a));
