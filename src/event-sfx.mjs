@@ -1,5 +1,5 @@
-import {renderFirework} from './firework-timbre.mjs?v=cp38-response-b8cecd6027c5';
-import {createCueTracker} from './sound-cues.mjs?v=cp38-response-b8cecd6027c5';
+import {renderFirework} from './firework-timbre.mjs?v=cp39-neighborhood-18b2d8344ad8';
+import {createCueTracker} from './sound-cues.mjs?v=cp39-neighborhood-18b2d8344ad8';
 
 const fireworkCache=new WeakMap();
 function fireworkBuffer(ctx,cue){
@@ -25,6 +25,8 @@ export function scheduleCue(ctx,destination,cue,at=ctx.currentTime){
  function tone(frequency,volume,delay,duration,type='sine',end=frequency){const o=ctx.createOscillator();o.type=type;o.frequency.setValueAtTime(frequency,at+delay);o.frequency.exponentialRampToValueAtTime(end,at+delay+duration*.85);return envelope(o,volume,delay,duration);}
  if(cue.type==='market_open'){
   tone(523.25,.15,0,.68);tone(1046.5,.025,0,.38);tone(783.99,.115,.22,.82);tone(1567.98,.016,.22,.4);
+ }else if(cue.type==='neighborhood_chime'){
+  tone(cue.variant?1046.5:659.25,.065,0,1.18);tone(cue.variant?1568:987.77,.018,.13,1.38);
  }else if(cue.type==='market_close'){
   tone(392,.12,0,.58);tone(784,.018,0,.28);
  }

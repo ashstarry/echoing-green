@@ -1,8 +1,8 @@
-import {makeRoom} from './event-travel.mjs?v=cp38-response-b8cecd6027c5';
-import {groupPlaces} from './group-layout.mjs?v=cp38-response-b8cecd6027c5';
-import {pathTo,navigationGraph} from './navigation.mjs?v=cp38-response-b8cecd6027c5';
-import {moverBlocks} from './motion.mjs?v=cp38-response-b8cecd6027c5';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp38-response-b8cecd6027c5';
+import {makeRoom} from './event-travel.mjs?v=cp39-neighborhood-18b2d8344ad8';
+import {groupPlaces} from './group-layout.mjs?v=cp39-neighborhood-18b2d8344ad8';
+import {pathTo,navigationGraph} from './navigation.mjs?v=cp39-neighborhood-18b2d8344ad8';
+import {moverBlocks} from './motion.mjs?v=cp39-neighborhood-18b2d8344ad8';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp39-neighborhood-18b2d8344ad8';
 const D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 const angle=(a,b)=>Math.atan2(Math.sin(b-a),Math.cos(b-a));
@@ -34,7 +34,7 @@ export function advanceGroupCrowd(s,nav,dt){
    for(const place of available){const path=pathTo(nav,start,place.node,blocked);if(!path.length)continue;e.slots[a.id]=place.node;if(place.lane!==undefined)e.queue[a.id]={lane:place.lane,index:place.index,vendor:['resident.vendor_bread','resident.vendor_flower','resident.vendor_lamp'][place.lane]};c.relocations++;c.goalProgressAt=s.time;c.bestRemaining=D(a.p,nav.nodes[place.node]);c.yieldUntil=s.time+.25;c.direction=null;c.passUntil=0;c.route=[];a.reservation=place.node;a.responseDestination=place.node;settle();break;}
    if(e.slots[a.id]!==goal)continue;
   }
-  if(c.waitFor?.length){const same=c.waitGoal===goal&&c.waitFor.every(w=>{const b=s.actors.find(b=>b.id===w.id);return b&&D(b.p,w.p)<.10;});if(same){if((home||a.interactionLock)&&s.time>=(c.courtesyAt||0)){makeRoom(s,nav,a,target);c.courtesyAt=s.time+1;}settle();turn(a,a.lookTarget,dt);continue;}c.waitFor=[];c.route=[];c.direction=null;c.passUntil=0;c.watchAt=s.time;c.watchP=a.p.slice();c.watchDistance=a.walked;c.goalProgressAt=s.time;c.bestRemaining=D(a.p,target);}
+  if(c.waitFor?.length){const same=c.waitGoal===goal&&c.waitFor.every(w=>{const b=s.actors.find(b=>b.id===w.id);return b&&D(b.p,w.p)<.10;});if(same){if((home||a.interactionLock)&&s.time>=(c.courtesyAt||0)){const obstruction=c.waitFor.map(w=>s.actors.find(b=>b.id===w.id)).filter(Boolean).sort((x,y)=>D(x.p,a.p)-D(y.p,a.p))[0];makeRoom(s,nav,a,obstruction?.p||target);c.courtesyAt=s.time+1;}settle();turn(a,a.lookTarget,dt);continue;}c.waitFor=[];c.route=[];c.direction=null;c.passUntil=0;c.watchAt=s.time;c.watchP=a.p.slice();c.watchDistance=a.walked;c.goalProgressAt=s.time;c.bestRemaining=D(a.p,target);}
   if(s.time-(c.goalProgressAt||0)>2){const blockers=s.actors.filter(b=>b!==a&&Math.abs(b.p[2]-a.p[2])<1&&D(b.p,a.p)<.86&&(!b.mobile||!b.path.length||a.id>b.id));if(blockers.length){c.waitFor=blockers.map(b=>({id:b.id,p:b.p.slice()}));c.waitGoal=goal;settle();continue;}}
   if(s.time<c.yieldUntil){settle();continue;}
   if(s.time-c.watchAt>=.85){const progress=D(c.watchP,a.p),travel=a.walked-c.watchDistance;c.watchAt=s.time;c.watchP=a.p.slice();c.watchDistance=a.walked;if(progress<.08&&travel>.10){c.yieldUntil=s.time+patience(a.id);c.route=[];c.replan=c.yieldUntil;c.passUntil=0;c.direction=null;settle();continue;}}

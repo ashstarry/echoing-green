@@ -34,15 +34,15 @@ export const ATMOSPHERES={
  gratitude:{label:'写下一点谢意，亲手交给邻居。',changes:{paper:'share',light:'warm'}},
  tender:{label:'让街巷暖一点，让彼此靠近一点。',changes:{light:'warm',breeze:'gentle',occasion:'reunion'}},
  together:{label:'让邻居们慢慢找到彼此。',changes:{occasion:'reunion',light:'warm'}},
- celebration:{label:'把这份欢喜带到树下，让街坊和琴声一起热闹起来。',changes:{occasion:'reunion',music:'play',light:'warm',breeze:'lively'}},
+ celebration:{label:'把这份欢喜带到树下，让街坊和琴声一起热闹起来。',changes:{neighborhood:'prepare',music:'play',light:'warm',breeze:'lively'}},
  dream:{label:'让夜色、灯火和晚风一起放轻。',changes:{day_phase:'night',light:'soft',breeze:'calm',occasion:'quiet'}},
  quiet:{label:'让脚步和风都慢一点，留一会儿安静。',changes:{occasion:'quiet',light:'soft',breeze:'calm'}},
  hearth:{label:'把热食摆上柜台，让街坊来吃点东西。',changes:{occasion:'supper',light:'warm'}},
  drizzle:{label:'细雨落在屋檐边，街坊收好手里的东西。',changes:{weather:'rain'}},
  snowfall:{label:'让纸片雪飘下来，给小镇换一个冬日。',changes:{weather:'snow'}},
- hopeful:{label:'让街巷亮起来，把新的好心情传开。',changes:{occasion:'market',light:'bright',breeze:'gentle'}}
+ hopeful:{label:'把春天带进街角，让花和晚风先动起来。',changes:{neighborhood:'spring',light:'warm',breeze:'gentle'}}
 };
-export function atmospherePlan(answers){const intent=answers.mood_intent,mood=answers.atmosphere;if(!['mood','mixed'].includes(intent?.choice)||!ATMOSPHERES[mood?.choice]||((intent.probabilities?.mood||0)+(intent.probabilities?.mixed||0))<.45||(mood.probabilities?.[mood.choice]||0)<.28)return null;let preset=ATMOSPHERES[mood.choice];const paperOff=answers.paper?.choice==='rest'&&(answers.paper.probabilities?.rest||0)>.5;if(paperOff&&['longing','gratitude'].includes(mood.choice))preset=ATMOSPHERES.tender;const explicitOff=answers.festival?.choice==='quiet'&&(answers.festival.probabilities?.quiet||0)>=.5&&(answers['scope:festival']?.probabilities?.yes||0)>=.4;
+export function atmospherePlan(answers){const intent=answers.mood_intent,mood=answers.atmosphere;if(!['mood','mixed'].includes(intent?.choice)||!ATMOSPHERES[mood?.choice]||((intent.probabilities?.mood||0)+(intent.probabilities?.mixed||0))<.45||(mood.probabilities?.[mood.choice]||0)<.28)return null;let preset=ATMOSPHERES[mood.choice];const neighborhoodOff=answers.neighborhood?.choice==='rest'&&(answers.neighborhood.probabilities?.rest||0)>.5;if(neighborhoodOff&&['celebration','hopeful'].includes(mood.choice))preset=ATMOSPHERES.together;const paperOff=answers.paper?.choice==='rest'&&(answers.paper.probabilities?.rest||0)>.5;if(paperOff&&['longing','gratitude'].includes(mood.choice))preset=ATMOSPHERES.tender;const explicitOff=answers.festival?.choice==='quiet'&&(answers.festival.probabilities?.quiet||0)>=.5&&(answers['scope:festival']?.probabilities?.yes||0)>=.4;
  if(mood.choice==='celebration'&&explicitOff)preset={label:'让街坊聚起一些欢笑，保持安静的夜空。',changes:{occasion:'reunion',light:'warm',breeze:'lively'}};
  return{status:'change',items:Object.entries(preset.changes).map(([target,action])=>({kind:'macro',target,action,field:target,label:preset.label,target_label:'氛围'})),skipped:[],summary:preset.label,resolution:{source:'jev-atmosphere',choice:mood.choice,confidence:mood.probabilities[mood.choice],...(explicitOff?{constraint:'explicit-fireworks-off'}:{})}};}
 
@@ -56,7 +56,7 @@ export function composeAtmosphere(literal, answers){
   return {...mood,literalPlan:literal};
  }
  if(answers.mood_intent.choice!=='mixed')return literal;
- const foreground=new Set(['weather','festival','occasion','paper']);
+ const foreground=new Set(['weather','festival','occasion','paper','neighborhood']);
  const targets=new Set(literal.items.filter(i=>i.kind==='macro').map(i=>i.target));
  const hasScene=[...targets].some(t=>foreground.has(t));
  const additions=mood.items.filter(i=>!targets.has(i.target)&&!(hasScene&&foreground.has(i.target)));

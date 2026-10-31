@@ -892,3 +892,38 @@ Object.assign(EN,{'挂一张纸笺':'Hang a paper wish','递一张心意':'Give 
 Object.assign(EN,{'这份心意已记下，手里的纸笺写完后会接着写。':'This thought is noted; the neighbors will begin it after finishing the notes in their hands.'});
 
 Object.assign(EN,{'回到全图':'Back to whole town','响应光圈':'Response glows'});
+
+Object.assign(EN,{"街坊一起做的事":"Neighborly moments","留灯迎归人":"Welcome home","一起筹备":"Prepare together","雨后重开":"After the rain","春风花开":"Spring in the lanes","一起筹备庆祝":"Prepare a celebration","雨后重新开张":"Reopen after rain","让春天走进街角":"Bring spring to the lanes","收好手里的东西":"Put things away","街坊协作":"Neighborhood work"});
+
+Object.assign(EN,{
+  "街坊协作与小镇变化": "Neighborly activities",
+  "保持当前安排": "Keep the current arrangement",
+  "留灯等晚归、回家有人迎接、门打开暖窗变化": "Keep a light for a late arrival; open the door and welcome them home",
+  "为欢庆做准备：搬凳、点心、纸灯，之后相聚": "Bring stools, snacks and lanterns, then gather to celebrate",
+  "雨后重新生活：收伞擦拭摆回商品，街道恢复活动": "Fold umbrellas, dry the seats and reopen the street after rain",
+  "春风花开：搬盆与纸花展开、牵风筝、扶帽、风铃": "Bring flowerpots, unfold blossoms, fly kites and hold hats in the breeze",
+  "不要或停止新的街坊协作": "Stop new preparations and put things away",
+  "保持街坊当前安排": "Keep the neighbors’ current plans",
+  "留一盏灯等晚归的人：居民走向家门、开门迎接、暖窗亮起": "Keep a light on, walk to the door, and welcome someone home",
+  "一起筹备庆祝：搬小凳、摆点心、递纸灯，准备好后邻居相聚": "Bring stools, set out snacks and pass a lantern before gathering",
+  "雨后重新开始：收伞、擦椅、重新摆回商品，自行车与小动物恢复活动": "Put umbrellas away, dry a bench and set out goods as street life returns",
+  "把春天带到街角：搬花盆、折纸花展开、孩子牵风筝、居民扶帽，风铃轻响": "Bring flowerpots to the lanes, unfold flowers and follow the spring breeze",
+  "停止新的街坊协作，收好手里的东西，保留已经摆好的小物": "Finish putting things away and keep the objects already placed",
+  "留一盏灯，等晚归的人": "Keep a light on for someone coming home",
+  "一起准备一个值得开心的晚上": "Prepare a little evening worth celebrating",
+  "雨停了，日子重新开始": "The rain has passed; daily life begins again",
+  "让春天走进每个角落": "Let spring reach every little corner",
+  "门前留下一盏暖灯，有人准备迎接归来的街坊。": "A light waits by the door as a neighbor prepares a welcome.",
+  "街坊开始分工：搬小凳、摆点心、递来纸灯。": "Neighbors bring stools, set out snacks and pass a paper lantern.",
+  "雨慢慢停下，街坊收伞、擦拭，把生活重新摆回街边。": "Umbrellas fold, benches are wiped, and the lanes come back to life.",
+  "园丁搬来花盆，折纸花准备在街角展开，孩子迎着风牵起风筝。": "Flowerpots arrive, paper blossoms unfold, and a child follows the kite.",
+  "门前有人迎接，归来的街坊终于放下手里的东西。": "Someone is waiting at the door; the returning neighbor can put things down.",
+  "点心、小凳和纸灯都准备好了，大家可以一起过一个开心的晚上。": "Snacks, stools and lanterns are ready. Now the neighbors can celebrate together.",
+  "雨后的街巷重新开张，日常又热闹起来。": "The lanes reopen after the rain, and everyday life returns.",
+  "折纸花在街角展开，新的春风从这里传开。": "Paper flowers unfold in the lanes as a fresh breeze passes through.",
+  "椅子擦干，点心重新摆好，自行车和小动物又回到街上。": "The seats are dry and snacks are ready; bicycles and little animals return.",
+  "街坊收好手里的东西，门前与街角留下这一场小小变化。": "Neighbors put things away, leaving a little change at the door and in the lanes.",
+  "把春天带进街角，让花和晚风先动起来。": "Bring spring to the lanes, beginning with flowers and the breeze."
+});
+
+Object.assign(EN,{"走向约定的地方":"Walking to the meeting place","把手里的物件搬过去":"Carrying something to its new place","拿起准备好的物件":"Picking up what is needed","把物件稳稳放好":"Setting it down carefully","把东西递给邻居":"Passing it to a neighbor","接过邻居递来的东西":"Receiving something from a neighbor","打开门迎接归人":"Opening the door for a welcome","招呼归来的邻居":"Welcoming a returning neighbor","擦干椅子和台面":"Drying seats and surfaces","把折好的花和摆设展开":"Unfolding flowers and decorations","看看刚刚准备好的街角":"Enjoying the newly arranged corner","等邻居走近":"Waiting for a neighbor to arrive","留一盏灯，迎一个归人":"A light and a welcome at the door","街坊一起准备今晚的欢喜":"Neighbors prepare a little joy for tonight","雨后，生活重新开张":"Life begins again after rain","花开与晚风走进街角":"Blossoms and a breeze reach the lanes"});

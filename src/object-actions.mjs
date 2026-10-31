@@ -1,4 +1,4 @@
-import {requestResidentAction} from './resident-actions.mjs?v=cp38-response-b8cecd6027c5';
+import {requestResidentAction} from './resident-actions.mjs?v=cp39-neighborhood-18b2d8344ad8';
 const definitions={
  kite:{fly:['牵稳线放风筝',1],calm:['让风筝平稳下来',.12]},
  windmill:{slow:['慢慢转',.20],brisk:['轻快地转',.70],stop:['慢慢停住',0],follow_wind:['跟随晚风',null]},

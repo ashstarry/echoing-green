@@ -1,9 +1,9 @@
-import {eventKind} from './scene-events.mjs?v=cp38-response-b8cecd6027c5';
-import {stimulateTown} from './town-response.mjs?v=cp38-response-b8cecd6027c5';
-import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp38-response-b8cecd6027c5';
-import {requestPassengerAction} from './passengers.mjs?v=cp38-response-b8cecd6027c5';
-import {requestObjectAction} from './object-actions.mjs?v=cp38-response-b8cecd6027c5';
-import {validateDecision} from './catalog.mjs?v=cp38-response-b8cecd6027c5';
+import {eventKind} from './scene-events.mjs?v=cp39-neighborhood-18b2d8344ad8';
+import {stimulateTown} from './town-response.mjs?v=cp39-neighborhood-18b2d8344ad8';
+import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp39-neighborhood-18b2d8344ad8';
+import {requestPassengerAction} from './passengers.mjs?v=cp39-neighborhood-18b2d8344ad8';
+import {requestObjectAction} from './object-actions.mjs?v=cp39-neighborhood-18b2d8344ad8';
+import {validateDecision} from './catalog.mjs?v=cp39-neighborhood-18b2d8344ad8';
 
 // Compound goals reuse tested movements, with real completion/occupation checks between steps.
 export const LIFE_PLANS={

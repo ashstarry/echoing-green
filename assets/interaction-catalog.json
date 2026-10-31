@@ -39,9 +39,205 @@
     "receive": {
       "kind": "pose",
       "seconds": 3.2
+    },
+    "carry": {
+      "kind": "move"
+    },
+    "place": {
+      "kind": "pose",
+      "seconds": 2.4
+    },
+    "wipe": {
+      "kind": "pose",
+      "seconds": 4.4
+    },
+    "open": {
+      "kind": "pose",
+      "seconds": 1.7
+    },
+    "welcome": {
+      "kind": "pose",
+      "seconds": 4.2
+    },
+    "wait_for": {
+      "kind": "pose",
+      "seconds": 0.2
+    },
+    "unfold": {
+      "kind": "pose",
+      "seconds": 3.2
+    },
+    "admire": {
+      "kind": "pose",
+      "seconds": 3.6
+    },
+    "pack": {
+      "kind": "pose",
+      "seconds": 2.5
     }
   },
   "recipes": {
+    "receive_prop": [
+      {
+        "action": "approach",
+        "target": "destination"
+      },
+      {
+        "action": "receive",
+        "waitFor": "received"
+      },
+      {
+        "action": "place"
+      },
+      {
+        "action": "admire"
+      }
+    ],
+    "home_host": [
+      {
+        "action": "approach",
+        "target": "destination"
+      },
+      {
+        "action": "open"
+      },
+      {
+        "action": "wait_for",
+        "waitFor": "partner"
+      },
+      {
+        "action": "welcome"
+      },
+      {
+        "action": "offer"
+      },
+      {
+        "action": "admire"
+      }
+    ],
+    "home_arrive": [
+      {
+        "action": "approach",
+        "target": "supply"
+      },
+      {
+        "action": "wait_for",
+        "waitFor": "door"
+      },
+      {
+        "action": "approach",
+        "target": "destination"
+      },
+      {
+        "action": "welcome"
+      },
+      {
+        "action": "receive"
+      },
+      {
+        "action": "admire"
+      }
+    ],
+    "carry_place": [
+      {
+        "action": "approach",
+        "target": "supply"
+      },
+      {
+        "action": "take"
+      },
+      {
+        "action": "carry",
+        "target": "destination"
+      },
+      {
+        "action": "place"
+      },
+      {
+        "action": "admire"
+      }
+    ],
+    "carry_give": [
+      {
+        "action": "approach",
+        "target": "supply"
+      },
+      {
+        "action": "take"
+      },
+      {
+        "action": "carry",
+        "target": "destination"
+      },
+      {
+        "action": "offer",
+        "waitFor": "recipient"
+      },
+      {
+        "action": "admire"
+      }
+    ],
+    "wipe_surface": [
+      {
+        "action": "approach",
+        "target": "destination"
+      },
+      {
+        "action": "take"
+      },
+      {
+        "action": "wipe"
+      },
+      {
+        "action": "stow"
+      },
+      {
+        "action": "admire"
+      }
+    ],
+    "wipe_place": [
+      {
+        "action": "approach",
+        "target": "destination"
+      },
+      {
+        "action": "take"
+      },
+      {
+        "action": "wipe"
+      },
+      {
+        "action": "stow"
+      },
+      {
+        "action": "unfold"
+      },
+      {
+        "action": "admire"
+      }
+    ],
+    "plant_flower": [
+      {
+        "action": "approach",
+        "target": "supply"
+      },
+      {
+        "action": "take"
+      },
+      {
+        "action": "carry",
+        "target": "destination"
+      },
+      {
+        "action": "place"
+      },
+      {
+        "action": "unfold"
+      },
+      {
+        "action": "admire"
+      }
+    ],
     "hang_note": [
       {
         "action": "approach",
@@ -170,5 +366,24 @@
   ],
   "display_limit": 6,
   "history_limit": 12,
-  "notes": "Four user-facing recipes; receive_note is the recipient half of share_note. Other props can reuse the executor and hand binding, but their new grips/destinations still need authoring and validation."
+  "notes": "Five thematic systems share real movement, taking, carrying, giving, placing and storage. Component grips and reachable stations are authored; this is not arbitrary generated behavior. A homecoming is a doorstep welcome, not unrestricted interior navigation.",
+  "components": [
+    "paper_note",
+    "food_tray",
+    "stool",
+    "lantern",
+    "goods_crate",
+    "bench",
+    "cloth",
+    "flowerpot",
+    "parcel",
+    "home_sliding_door"
+  ],
+  "neighborhood_operations": [
+    "homecoming",
+    "prepare",
+    "reopen",
+    "spring",
+    "rest"
+  ]
 }

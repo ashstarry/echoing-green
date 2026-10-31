@@ -23,7 +23,7 @@ export function createResponseSignals(){
    const a=s.actors.find(a=>a.id===id),g=s.eventGuests?.[id];const started=g?.active&&g.phase!=='home'&&g.stand>.1||a&&!a.atHome&&(a.mode==='walk'||a.node===e.slots[id]&&!a.path.length);
    if(started)cue(id,'scene:'+e.id+':'+id,s.time);
   }
-  for(const j of s.paperWorld?.jobs||[])if(j.status==='running'){
+  for(const j of [...(s.paperWorld?.jobs||[]),...(s.neighborhoodWorld?.jobs||[])])if(j.status==='running'){
    const a=s.actors.find(a=>a.id===j.actor);if(a&&(a.mode==='walk'||a.mode==='idle'&&j.clock>.12))cue(j.actor,'paper:'+j.id+':'+j.step,s.time);
   }
   for(const[id,c]of Object.entries(s.objectControls||{}))cue(id,'object:'+id+':'+c.action+':'+c.started,c.started);
