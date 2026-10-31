@@ -890,3 +890,5 @@ Object.assign(EN,{"纸笺": "Paper notes", "纸笺与心意": "Paper notes and w
 Object.assign(EN,{'挂一张纸笺':'Hang a paper wish','递一张心意':'Give a little note','读一读纸笺':'Read a paper note','收起一张纸笺':'Collect a paper note','先收好纸笔':'Put away paper and pen','树边还没有纸笺，先留一张吧。':'There are no hanging notes yet. Leave one first.'});
 
 Object.assign(EN,{'这份心意已记下，手里的纸笺写完后会接着写。':'This thought is noted; the neighbors will begin it after finishing the notes in their hands.'});
+
+Object.assign(EN,{'回到全图':'Back to whole town','响应光圈':'Response glows'});
