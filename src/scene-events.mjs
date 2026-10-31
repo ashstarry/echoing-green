@@ -1,11 +1,11 @@
-import {ensurePaperWorld} from './paper-world.mjs?v=cp37-paper-c8fccf30daca';
-import {assignGroup,GROUP_KINDS} from './group-layout.mjs?v=cp37-paper-c8fccf30daca';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp37-paper-c8fccf30daca';
-import {eventGuestCandidates,ensureEventTravel} from './event-travel.mjs?v=cp37-paper-c8fccf30daca';
-import {stableUnit} from './cadence.mjs?v=cp37-paper-c8fccf30daca';
-import {stimulateTown} from './town-response.mjs?v=cp37-paper-c8fccf30daca';
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp37-paper-c8fccf30daca';
-import {moverBlocks} from './motion.mjs?v=cp37-paper-c8fccf30daca';
+import {ensurePaperWorld} from './paper-world.mjs?v=cp37-paper-1dbadc3fdf78';
+import {assignGroup,GROUP_KINDS} from './group-layout.mjs?v=cp37-paper-1dbadc3fdf78';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp37-paper-1dbadc3fdf78';
+import {eventGuestCandidates,ensureEventTravel} from './event-travel.mjs?v=cp37-paper-1dbadc3fdf78';
+import {stableUnit} from './cadence.mjs?v=cp37-paper-1dbadc3fdf78';
+import {stimulateTown} from './town-response.mjs?v=cp37-paper-1dbadc3fdf78';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp37-paper-1dbadc3fdf78';
+import {moverBlocks} from './motion.mjs?v=cp37-paper-1dbadc3fdf78';
 
 export const EVENT_TIMING={paper_read:{gather:12,active:18,closing:5},paper_collect:{gather:12,active:22,closing:5},paper_hang:{gather:22,active:45,closing:7},paper_share:{gather:22,active:45,closing:7},snow:{gather:0,active:38,closing:7},rain:{gather:0,active:42,closing:7},lantern:{gather:22,active:32,closing:8},festival:{gather:24,active:38,closing:7},market:{gather:22,active:38,closing:8},supper:{gather:22,active:38,closing:8},reunion:{gather:22,active:34,closing:7},delivery:{gather:3,active:28,closing:5},music:{gather:22,active:34,closing:7},quiet:{gather:16,active:28,closing:6}};
 const live=j=>!['done','failed','cancelled'].includes(j.status);
@@ -27,6 +27,7 @@ export function eventKind(d){if(d.festival==='fireworks')return 'festival';if(d.
 function clearPulse(s){s.townResponse=null;for(const a of s.actors){a.responseUntil=0;a.responseDestination=null;a.responseReplan=false;}}
 function finishSky(s){if(s.festivalUntil>s.time){s.festivalStop=s.time;s.festivalUntil=Math.min(s.festivalUntil,s.time+5.5);}s.worldEvent={kind:'ordinary',phase:'ongoing',started:s.time,until:0,revision:s.worldEvent.revision+1};}
 function closeEvent(s,e,emit,next=null){
+ if(!next&&e.paperRepeat)next=e.paperRepeat;
  if(e.phase==='closing'){e.next=next;return;}
  e.phase='closing';e.phaseAt=s.time;e.until=s.time+(next?7:EVENT_TIMING[e.kind].closing);e.next=next;e.returnSlots=Object.fromEntries(Object.entries(e.slots).filter(([id])=>!s.eventGuests?.[id]));e.slots={};e.slotsAssigned=true;clearPulse(s);
  if(['rain','snow'].includes(e.kind)){s.weather='clear';s.rainActive=false;s.afterRainUntil=0;emit(e.kind==='snow'?'雪势渐歇，屋顶的薄雪慢慢融化。':'雨势渐歇，居民收好雨具。');}
@@ -60,7 +61,7 @@ function startEvent(s,descriptor,emit){
 export function requestSceneEvent(s,input,emit,{automatic=false,sourceText=''}={}){
  ensureSceneEvents(s);const d={...input},kind=eventKind(d),e=s.sceneEvent;const paper=ensurePaperWorld(s);const paperKind=eventKind({paper:d.paper});if(paperKind&&paperKind!==kind)paper.pending={mode:d.paper,text:String(sourceText||'').slice(0,160)};else if(kind||d.paper==='rest')paper.pending=null;
  if(!kind){
-  if(e?.kind?.startsWith('paper_')&&d.paper==='rest')closeEvent(s,e,emit);
+  if(e?.kind?.startsWith('paper_')&&d.paper==='rest'){delete e.paperRepeat;closeEvent(s,e,emit);}
   const stops=e&&((e.kind==='lantern'&&d.day_phase&& !['keep','night'].includes(d.day_phase))||(['rain','snow'].includes(e.kind)&&d.weather==='clear')||(e.kind==='festival'&&d.festival==='quiet')||(!['rain','snow','festival'].includes(e.kind)&&d.occasion==='ordinary'));
   if(e?.kind==='music'&&d.music==='rest'){e.silentMusic=true;closeEvent(s,e,emit);}
   if(e?.kind==='music'&&d.street==='wander')closeEvent(s,e,emit);
@@ -72,6 +73,7 @@ export function requestSceneEvent(s,input,emit,{automatic=false,sourceText=''}={
  const protectedIds=s.intentRuntime.jobs.filter(j=>j.kind==='resident'&&live(j)&&j.requestId===s.intentRuntime.lastReceipt?.id).map(j=>j.target);
  const descriptor={id:'scene-'+(++s.eventSequence),kind,protectedIds,automatic,explicitDay:d.day_phase&&d.day_phase!=='keep',silentMusic:d.music==='rest',...(['paper_hang','paper_share','paper_read','paper_collect'].includes(kind)?{sourceText:String(sourceText||'').slice(0,160)}:{})};
  if(e&&e.kind===kind&&!['closing','release'].includes(e.phase)){
+  if(kind.startsWith('paper_')){e.paperRepeat=descriptor;emit('这份心意已记下，手里的纸笺写完后会接着写。');d.paper='keep';return d;}
   e.until=Math.min(e.started+EVENT_TIMING[kind].gather+EVENT_TIMING[kind].active+12,Math.max(e.until,s.time+12));
   if(e.kind==='lantern')e.illuminationAt=s.time;
   if(e.kind==='festival'){if(s.time-s.festivalStarted>4)s.festivalStarted=s.time;s.festivalStop=null;s.festivalUntil=e.until+(e.phase==='gather'?EVENT_TIMING.festival.active:0)+5.5;s.worldEvent.until=e.until;}
