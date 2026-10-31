@@ -1,0 +1,174 @@
+{
+  "component": "paper_note",
+  "primitives": {
+    "approach": {
+      "kind": "move"
+    },
+    "take": {
+      "kind": "pose",
+      "seconds": 1.2
+    },
+    "write": {
+      "kind": "pose",
+      "seconds": 4.8
+    },
+    "fold": {
+      "kind": "pose",
+      "seconds": 2.1
+    },
+    "hang": {
+      "kind": "pose",
+      "seconds": 2.7
+    },
+    "offer": {
+      "kind": "pose",
+      "seconds": 3
+    },
+    "read": {
+      "kind": "pose",
+      "seconds": 3.2
+    },
+    "collect": {
+      "kind": "pose",
+      "seconds": 1.6
+    },
+    "stow": {
+      "kind": "pose",
+      "seconds": 1.6
+    },
+    "receive": {
+      "kind": "pose",
+      "seconds": 3.2
+    }
+  },
+  "recipes": {
+    "hang_note": [
+      {
+        "action": "approach",
+        "target": "writing"
+      },
+      {
+        "action": "take"
+      },
+      {
+        "action": "write"
+      },
+      {
+        "action": "fold"
+      },
+      {
+        "action": "approach",
+        "target": "destination"
+      },
+      {
+        "action": "collect",
+        "when": "occupied"
+      },
+      {
+        "action": "stow",
+        "when": "occupied"
+      },
+      {
+        "action": "hang"
+      },
+      {
+        "action": "read"
+      }
+    ],
+    "share_note": [
+      {
+        "action": "approach",
+        "target": "writing"
+      },
+      {
+        "action": "take"
+      },
+      {
+        "action": "write"
+      },
+      {
+        "action": "fold"
+      },
+      {
+        "action": "approach",
+        "target": "destination"
+      },
+      {
+        "action": "offer",
+        "waitFor": "recipient"
+      },
+      {
+        "action": "read"
+      }
+    ],
+    "read_note": [
+      {
+        "action": "approach",
+        "target": "destination"
+      },
+      {
+        "action": "read"
+      }
+    ],
+    "collect_note": [
+      {
+        "action": "approach",
+        "target": "destination"
+      },
+      {
+        "action": "collect"
+      },
+      {
+        "action": "read"
+      },
+      {
+        "action": "fold"
+      },
+      {
+        "action": "stow"
+      }
+    ],
+    "receive_note": [
+      {
+        "action": "approach",
+        "target": "destination"
+      },
+      {
+        "action": "receive",
+        "waitFor": "received"
+      },
+      {
+        "action": "read"
+      },
+      {
+        "action": "fold"
+      },
+      {
+        "action": "stow"
+      }
+    ]
+  },
+  "operations": [
+    "hang",
+    "share",
+    "read",
+    "collect",
+    "rest"
+  ],
+  "eligible_writers": [
+    "resident.customer_one",
+    "resident.customer_two",
+    "resident.customer_three",
+    "resident.market_browser",
+    "resident.strolling_parent",
+    "resident.courier"
+  ],
+  "shared_binding_users": [
+    "paper notes",
+    "hand lanterns",
+    "cups and snacks"
+  ],
+  "display_limit": 6,
+  "history_limit": 12,
+  "notes": "Four user-facing recipes; receive_note is the recipient half of share_note. Other props can reuse the executor and hand binding, but their new grips/destinations still need authoring and validation."
+}

@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {ease} from './motion.mjs?v=cp36-freewords-007e6e30821d';
+import {ease} from './motion.mjs?v=cp37-paper-c8fccf30daca';
 const V=p=>new THREE.Vector3(p[0],p[2],-p[1]);const X=new THREE.Vector3(1,0,0),Y=new THREE.Vector3(0,1,0);
 function around(p,q){return new THREE.Matrix4().makeTranslation(p.x,p.y,p.z).multiply(new THREE.Matrix4().makeRotationFromQuaternion(q)).multiply(new THREE.Matrix4().makeTranslation(-p.x,-p.y,-p.z));}
 export function createDinerActionView({entities,parts,gestures,diningProps}){

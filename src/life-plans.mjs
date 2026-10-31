@@ -1,9 +1,9 @@
-import {eventKind} from './scene-events.mjs?v=cp36-freewords-007e6e30821d';
-import {stimulateTown} from './town-response.mjs?v=cp36-freewords-007e6e30821d';
-import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp36-freewords-007e6e30821d';
-import {requestPassengerAction} from './passengers.mjs?v=cp36-freewords-007e6e30821d';
-import {requestObjectAction} from './object-actions.mjs?v=cp36-freewords-007e6e30821d';
-import {validateDecision} from './catalog.mjs?v=cp36-freewords-007e6e30821d';
+import {eventKind} from './scene-events.mjs?v=cp37-paper-c8fccf30daca';
+import {stimulateTown} from './town-response.mjs?v=cp37-paper-c8fccf30daca';
+import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp37-paper-c8fccf30daca';
+import {requestPassengerAction} from './passengers.mjs?v=cp37-paper-c8fccf30daca';
+import {requestObjectAction} from './object-actions.mjs?v=cp37-paper-c8fccf30daca';
+import {validateDecision} from './catalog.mjs?v=cp37-paper-c8fccf30daca';
 
 // Compound goals reuse tested movements, with real completion/occupation checks between steps.
 export const LIFE_PLANS={
@@ -20,7 +20,7 @@ const EXTRA={inside:['resident.upper_diner_0','resident.upper_diner_1'],dine:['r
 export function supportsResident(id,action){return !!(RESIDENT_CAPABILITIES[id]?.includes(action)||EXTRA[action]?.includes(id)||LIFE_PLANS[action]?.actors.includes(id));}
 const blockedInRain=new Set(['read_pages','feed_pond','water_plants','walk_street','visit_market','listen_music','seek_neighbor','watch_pond','hop','kite_play','cycle_trip']);
 export function createIntentRuntime(){return {jobs:[],seen:[],sequence:0,lastDay:'dusk',daily:[],lastReceipt:null};}
-export function queueIntent(s,items,{id=`local-plan-${s.revision+1}-${s.intentRuntime.sequence+1}`,expectedRevision=s.revision,source='words'}={},catalog={}){
+export function queueIntent(s,items,{id=`local-plan-${s.revision+1}-${s.intentRuntime.sequence+1}`,expectedRevision=s.revision,source='words',sourceText=''}={},catalog={}){
  if(expectedRevision!==s.revision)return{accepted:false,reason:'stale'};
  if(s.intentRuntime.seen.includes(id))return{accepted:false,reason:'duplicate'};
  if(!Array.isArray(items)||items.length>60)throw Error('计划项数无效');
@@ -33,7 +33,7 @@ export function queueIntent(s,items,{id=`local-plan-${s.revision+1}-${s.intentRu
  if(source==='words'&&s.sceneEvent){for(const item of items)if(item.kind==='resident'){if(!s.sceneEvent.protectedIds.includes(item.target))s.sceneEvent.protectedIds.push(item.target);delete s.sceneEvent.slots[item.target];}}
  s.intentRuntime.seen.push(id);s.intentRuntime.seen=s.intentRuntime.seen.slice(-50);
  const receipt={id,source,started:s.time,targets:items.map(x=>x.target),count:items.length};
- for(const item of items){for(const j of s.intentRuntime.jobs)if(j.target===item.target&&!['done','cancelled','failed'].includes(j.status))j.status='cancelled';const definition=LIFE_PLANS[item.action];s.intentRuntime.jobs.push({...item,id:`${id}/${++s.intentRuntime.sequence}`,requestId:id,status:'pending',step:0,steps:definition?structuredClone(definition.steps):[item.action],started:s.time,updated:s.time,source,reason:'等当前动作安全结束'});}
+ for(const item of items){for(const j of s.intentRuntime.jobs)if(j.target===item.target&&!['done','cancelled','failed'].includes(j.status))j.status='cancelled';const definition=LIFE_PLANS[item.action];s.intentRuntime.jobs.push({...item,id:`${id}/${++s.intentRuntime.sequence}`,requestId:id,status:'pending',step:0,steps:definition?structuredClone(definition.steps):[item.action],started:s.time,updated:s.time,source,sourceText:String(sourceText||'').slice(0,160),reason:'等当前动作安全结束'});}
  s.intentRuntime.jobs=s.intentRuntime.jobs.filter(j=>!['done','cancelled','failed'].includes(j.status)||s.time-j.updated<90).slice(-80);
  if(source!=='day_rhythm'){s.intentRuntime.lastReceipt=receipt;s.revision++;if(!eventKind(Object.fromEntries(items.filter(i=>i.kind==='macro').map(i=>[i.target,i.action]))))stimulateTown(s,items,{id});}return{accepted:true,receipt};
 }
@@ -56,7 +56,7 @@ export function advanceIntentRuntime(s,nav,dt,apply,emit){
  // Apply the macros from one utterance atomically: the event policy sees the
  // complete request, rather than treating each field as another new event.
  const groups=new Map();for(const j of runtime.jobs)if(j.kind==='macro'&&j.status==='pending'&&j.step===0){if(!groups.has(j.requestId))groups.set(j.requestId,[]);groups.get(j.requestId).push(j);}
- for(const[id,jobs]of groups){const revision=s.revision;try{apply(s,Object.fromEntries(jobs.map(j=>[j.target,j.action])),{id:'macro-batch:'+id,expectedRevision:revision});for(const j of jobs){j.status='done';j.step=j.steps.length;j.updated=s.time;}}catch(e){for(const j of jobs){j.status='failed';j.reason=e.message;}}finally{s.revision=revision;}}
+ for(const[id,jobs]of groups){const revision=s.revision;try{apply(s,Object.fromEntries(jobs.map(j=>[j.target,j.action])),{id:'macro-batch:'+id,expectedRevision:revision,sourceText:jobs[0].sourceText||''});for(const j of jobs){j.status='done';j.step=j.steps.length;j.updated=s.time;}}catch(e){for(const j of jobs){j.status='failed';j.reason=e.message;}}finally{s.revision=revision;}}
  for(const j of runtime.jobs){if(['done','cancelled','failed'].includes(j.status))continue;
   if(j.status==='running'){if(!complete(s,j)){if(s.time-j.updated>220){j.status='failed';j.reason='当前路径或动作尚未完成，取消后续步骤';emit('有一项安排暂时没有完成，小镇会继续自己的生活。');}continue;}j.step++;j.monitor=null;j.status='pending';j.updated=s.time;}
   if(j.step>=j.steps.length){j.status='done';j.updated=s.time;j.reason='这一段生活已经完成';continue;}

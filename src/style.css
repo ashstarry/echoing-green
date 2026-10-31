@@ -16,3 +16,7 @@ footer{width:min(630px,calc(100vw - 28px));padding:10px 15px 8px}.inputRow{margi
 button[data-quality][aria-pressed=true]{border-color:#d9b47d;background:#5a4939}
 /* Language changes typography, never the world or its camera. */
 #language{min-width:44px;font-size:11px}html[lang=en] h1{letter-spacing:.015em;font-weight:500}html[lang=en] .eyebrow{font-size:9px;letter-spacing:.10em}html[lang=en] #panel{width:355px}html[lang=en] #focusSuggestion{max-width:80vw;white-space:normal}#nameNote a{color:#dfb879}@media(max-width:650px){html[lang=en] h1{font-size:21px}html[lang=en] header nav{max-width:238px}html[lang=en] header nav button{padding:5px 6px;font-size:10px}html[lang=en] #panel{width:auto;top:94px}html[lang=en] header>div{max-width:120px}html[lang=en] .eyebrow{font-size:8px;line-height:1.2}html[lang=en] footer label{font-size:11px}#language{min-width:34px}}
+
+.paper-memory{padding:16px;border-left:2px solid #bfaa7e;color:#eddfc2;font-family:serif;line-height:1.9;white-space:pre-wrap;overflow-wrap:anywhere}
+
+footer{width:min(720px,calc(100vw - 28px))}

@@ -17,5 +17,6 @@ export function interpolateWorld(previous,current,alpha){
  p.objectControls=Object.fromEntries(Object.entries(current.objectControls||{}).map(([id,b])=>{const a=previous.objectControls?.[id];return[id,a?{...b,value:mix(a.value,b.value,t),phase:mix(a.phase,b.phase,t)}:b]}));
  p.passengers=Object.fromEntries(Object.entries(current.passengers||{}).map(([id,b])=>{const a=previous.passengers?.[id];return[id,a?{...b,clock:a.phase===b.phase?mix(a.clock,b.clock,t):b.clock,door:mix(a.door,b.door,t),ramp:mix(a.ramp,b.ramp,t)}:b]}));
  if(current.eventGuests)p.eventGuests=Object.fromEntries(Object.entries(current.eventGuests).map(([id,b])=>{const a=previous.eventGuests?.[id];return[id,a?{...b,p:vec(a.p,b.p,t),yaw:angleMix(a.yaw,b.yaw,t),walked:mix(a.walked,b.walked,t),gaitWeight:mix(a.gaitWeight,b.gaitWeight,t),stand:mix(a.stand,b.stand,t),authorFeet:a.authorFeet&&b.authorFeet?Object.fromEntries(['left','right'].map(side=>[side,vec(a.authorFeet[side],b.authorFeet[side],t)])):b.authorFeet}:b]}));
+ if(current.paperWorld)p.paperWorld={...current.paperWorld,jobs:current.paperWorld.jobs.map(b=>{const a=previous.paperWorld?.jobs.find(x=>x.id===b.id);return a?{...b,clock:a.step===b.step?mix(a.clock,b.clock,t):b.clock,cancelClock:mix(a.cancelClock||0,b.cancelClock||0,t)}:b;})};
  p.music=current.effectiveMusic??current.music;return p;
 }

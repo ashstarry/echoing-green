@@ -1,5 +1,5 @@
-import {pathTo,navigationGraph} from './navigation.mjs?v=cp36-freewords-007e6e30821d';
-import {moverBlocks,sampleClip} from './motion.mjs?v=cp36-freewords-007e6e30821d';
+import {pathTo,navigationGraph} from './navigation.mjs?v=cp37-paper-c8fccf30daca';
+import {moverBlocks,sampleClip} from './motion.mjs?v=cp37-paper-c8fccf30daca';
 export const GROUP_KINDS=new Set(['festival','market','supper','reunion','lantern','music','quiet']);
 const D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 const queues=[

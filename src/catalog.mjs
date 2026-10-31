@@ -17,6 +17,7 @@ Object.assign(DOMAINS,{
  cycling:{label:'骑车的居民',choices:{keep:'保持骑车人的状态',ride:'骑车人沿街道慢行，遇到行人会停下来让路',rest:'骑车人走完当前路段，到下一处停留点落脚歇息；转弯中不急停'}}
 });
 DOMAINS.day_phase={label:'日夜',choices:{keep:'保留当前时段',dawn:'晨曦渐亮',day:'明亮白昼',dusk:'温暖黄昏',night:'灯火夜晚，街巷仍清楚'}};
+DOMAINS.paper={label:'纸笺',choices:{keep:'保持纸笺的安排',hang:'写下思念或祝愿，折好纸笺，挂到树边留下',share:'写一张感谢或心意，折好后亲手递给邻居',read:'走到树边，读一读最近留下的纸笺',collect:'走到树边，取下一张纸笺，读过后折好收起',rest:'停止新的纸笺活动，收好手里的纸，保留已经挂好的纸笺'}};
 export const KEEP={};
 export function validateDecision(input){if(!input||typeof input!=='object'||Array.isArray(input))throw Error('决策格式无效');for(const [k,v]of Object.entries(input))if(!Object.hasOwn(DOMAINS,k)||typeof v!=='string'||!Object.hasOwn(DOMAINS[k].choices,v))throw Error('决策包含未开放的动作');return {...KEEP,...input};}
 export const labels={'resident.customer_two':'二号餐厅客人','resident.customer_three':'三号餐厅客人','resident.postman':'邮局的邮差','resident.child_runner':'小跑的孩子','resident.market_browser':'逛集市的居民','resident.customer_one':'餐厅门前的客人','resident.courier':'巷口的送信人','resident.garden_child':'花园里的孩子','resident.strolling_parent':'散步的家长'};
@@ -27,3 +28,5 @@ export const CHOICE_LABELS={weather:{clear:'雨雪停一会儿',rain:'小镇细�
 
 Object.assign(CHOICE_LABELS,{occasion:{ordinary:'各自的日常',market:'逛逛晚市',supper:'晚餐时间',reunion:'邻里聊一会',delivery:'送信时光',quiet:'安静看看风景'},train:{auto:'继续环镇行驶',hold:'到站多停一会'},dining:{auto:'自在用餐休息',inside:'进门帘休息',dine:'出来用餐'},pond:{swim:'自在游动',rest:'停下来歇息'},animals:{wander:'走走闻闻',rest:'休息一会'},cycling:{ride:'沿街骑行',rest:'暂时停一停'}});
 Object.assign(KEEP,Object.fromEntries(Object.keys(DOMAINS).map(k=>[k,'keep'])));
+
+CHOICE_LABELS.paper={hang:'挂一张纸笺',share:'递一张心意',read:'读一读纸笺',collect:'收起一张纸笺',rest:'先收好纸笔'};

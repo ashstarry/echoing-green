@@ -1,6 +1,6 @@
-import {EVENT_GAZE_PITCH} from './event-design.mjs?v=cp36-freewords-007e6e30821d';
+import {EVENT_GAZE_PITCH} from './event-design.mjs?v=cp37-paper-c8fccf30daca';
 import * as THREE from 'three';
-import {PROFILES,ACTIVITIES} from './community.mjs?v=cp36-freewords-007e6e30821d';
+import {PROFILES,ACTIVITIES} from './community.mjs?v=cp37-paper-c8fccf30daca';
 const X=new THREE.Vector3(1,0,0),Y=new THREE.Vector3(0,1,0),SIDE=new THREE.Vector3(0,0,-1);
 export function createIntentView({entities,parts,registry,spaces,scene,localRoutes={}}){
  const blends=new Map();const can=entities.get('watering_can.garden_can'),canBase=can?.quaternion.clone();

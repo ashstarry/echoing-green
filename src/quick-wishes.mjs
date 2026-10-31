@@ -1,6 +1,7 @@
 // These are product controls with known intent, not model-evaluation samples.
 // Free text still uses Jev; curated controls must work offline and deterministically.
 export const QUICK_WISHES={
+ paper:{label:'把思念挂在树上，留一张随风的纸笺',decisions:{paper:'hang'}},
  snow:{label:'纸雪轻落，街坊换个地方看看',decisions:{weather:'snow'}},
  dawn:{label:'晨光渐亮，小镇开始新的一天',decisions:{day_phase:'dawn'}},
  night:{label:'纸灯沿街亮起，街坊提灯相聚',decisions:{day_phase:'night',light:'warm'}},

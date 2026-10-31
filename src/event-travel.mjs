@@ -1,6 +1,6 @@
-import {moverBlocks} from './motion.mjs?v=cp36-freewords-007e6e30821d';
-import {pathTo,navigationGraph} from './navigation.mjs?v=cp36-freewords-007e6e30821d';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp36-freewords-007e6e30821d';
+import {moverBlocks} from './motion.mjs?v=cp37-paper-c8fccf30daca';
+import {pathTo,navigationGraph} from './navigation.mjs?v=cp37-paper-c8fccf30daca';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp37-paper-c8fccf30daca';
 const dist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 const turn=(a,b,n)=>a+Math.max(-n,Math.min(n,Math.atan2(Math.sin(b-a),Math.cos(b-a))));
 const live=j=>!['done','cancelled','failed'].includes(j.status);
@@ -15,7 +15,7 @@ function obstacle(s,g,p){
  return s.actors.some(a=>a.id!==g.id&&Math.abs(a.p[2]-p[2])<1.4&&dist(a.p,p)<separation&&dist(a.p,p)<dist(a.p,g.p)-1e-7)||Object.values(s.eventGuests).some(o=>o!==g&&o.active&&Math.abs(o.p[2]-p[2])<1.4&&dist(o.p,p)<separation&&dist(o.p,p)<dist(o.p,g.p)-1e-7)||Object.entries(s.localWalkers||{}).some(([id,w])=>id!==g.id&&!s.eventGuests?.[id]?.active&&Math.abs(w.root[2]-p[2])<1.4&&dist(w.root,p)<.48&&dist(w.root,p)<dist(w.root,g.p)-1e-7);
 }
 export function makeRoom(s,nav,g,target){
- const blocks=s.actors.filter(a=>a.id!==g.id&&a.mobile&&!a.manual&&!s.residentActions[a.id]?.requested&&s.eventGuests?.[a.id]?.phase!=='hold'&&!(s.sceneEvent?.slots?.[a.id]===a.node&&!a.path.length)).map(a=>({id:a.id,p:a.p,actor:a}));
+ const blocks=s.actors.filter(a=>a.id!==g.id&&a.mobile&&!a.interactionLock&&!a.manual&&!s.residentActions[a.id]?.requested&&s.eventGuests?.[a.id]?.phase!=='hold'&&!(s.sceneEvent?.slots?.[a.id]===a.node&&!a.path.length)).map(a=>({id:a.id,p:a.p,actor:a}));
  const b=blocks.find(b=>Math.abs(b.p[2]-target[2])<1.4&&dist(b.p,target)<(g.id==='resident.cyclist'?1.9:.97));if(!b||s.time<(b.actor?.eventYieldUntil||b.guest?.yieldUntil||0)||s.sceneEvent?.protectedIds?.includes(b.id)||s.intentRuntime.jobs.some(j=>j.target===b.id&&live(j)))return;
  const start=nearest(nav,b.p),people=[...s.actors.filter(a=>a.id!==b.id).map(a=>a.p),...Object.values(s.eventGuests).filter(o=>o.id!==b.id&&o.active).map(o=>o.p)],blocked=new Set(nav.nodes.flatMap((p,i)=>people.some(q=>Math.abs(q[2]-p[2])<1.4&&dist(p,q)<.97)?[i]:[]));blocked.delete(start);
  const candidates=nav.nodes.map((p,i)=>({p,i})).filter(({p,i})=>!blocked.has(i)&&Object.entries(nav.activities.eventTrips||{}).filter(([id])=>s.eventGuests?.[id]?.active).every(([,c])=>c.entry.every(q=>Math.abs(p[2]-q[2])>1.4||dist(p,q)>1.0))&&(g.id!=='resident.cyclist'||!nav.noStopping.has(i))&&Object.entries(s.movers).every(([id,m])=>!['creature_walk','ride'].includes(nav.activities.clips[id].motion)||!moverBlocks(p,m,nav.activities.clips[id],nav.radius))&&dist(p,b.p)>.55&&dist(p,b.p)<2.3&&dist(p,g.p)>1.15&&navigationGraph(nav).components[i]===navigationGraph(nav).components[start]&&(!b.actor||b.id!=='resident.kite_child'||p[0]>2.3&&p[0]<3.8&&p[1]>-1.7&&p[1]<.65)).sort((a,c)=>dist(a.p,b.p)-dist(c.p,b.p));

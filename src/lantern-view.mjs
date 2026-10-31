@@ -1,6 +1,7 @@
+import {handWorldPoint} from './prop-attachment.mjs?v=cp37-paper-c8fccf30daca';
 import * as THREE from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
-import {lanternDisplay,LANTERN_CARRIERS} from './lantern-scene.mjs?v=cp36-freewords-007e6e30821d';
+import {lanternDisplay,LANTERN_CARRIERS} from './lantern-scene.mjs?v=cp37-paper-c8fccf30daca';
 
 function paperLampGeometry(){
  const pieces=[];
@@ -33,7 +34,7 @@ export function createLanternView({scene,entities,parts,sockets}){
    const chosen=e?.kind==='lantern'&&(e.slots?.[id]!==undefined||e.phase==='closing')&&!e.protectedIds?.includes(id);
    const ready=chosen&&(!guest||!guest.active||!['prepare','sit'].includes(guest.phase));
    const a=ready&&binding?lanternDisplay(s,i+3):0;
-   if(a>.001){const node=parts.get(id+'/'+binding.part),p=binding.local;node.updateWorldMatrix(true,false);point.set(p[0],p[2],-p[1]);node.localToWorld(point);dummy.position.copy(point);dummy.rotation.set(Math.sin(s.time*2.1+i)*.06,actor?.yaw||0,Math.sin(s.time*1.6+i)*.05);const scale=(actor?.scale||1)*.76*a;dummy.scale.setScalar(scale);visibleCount++;}
+   if(a>.001){handWorldPoint({entities,parts,sockets},id,'right',point);dummy.position.copy(point);dummy.rotation.set(Math.sin(s.time*2.1+i)*.06,actor?.yaw||0,Math.sin(s.time*1.6+i)*.05);const scale=(actor?.scale||1)*.76*a;dummy.scale.setScalar(scale);visibleCount++;}
    else dummy.scale.setScalar(0);
    dummy.updateMatrix();lamps.setMatrixAt(positions.length+i,dummy.matrix);
   }

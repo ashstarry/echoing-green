@@ -1,12 +1,13 @@
-import {assignGroup,GROUP_KINDS} from './group-layout.mjs?v=cp36-freewords-007e6e30821d';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp36-freewords-007e6e30821d';
-import {eventGuestCandidates,ensureEventTravel} from './event-travel.mjs?v=cp36-freewords-007e6e30821d';
-import {stableUnit} from './cadence.mjs?v=cp36-freewords-007e6e30821d';
-import {stimulateTown} from './town-response.mjs?v=cp36-freewords-007e6e30821d';
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp36-freewords-007e6e30821d';
-import {moverBlocks} from './motion.mjs?v=cp36-freewords-007e6e30821d';
+import {ensurePaperWorld} from './paper-world.mjs?v=cp37-paper-c8fccf30daca';
+import {assignGroup,GROUP_KINDS} from './group-layout.mjs?v=cp37-paper-c8fccf30daca';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp37-paper-c8fccf30daca';
+import {eventGuestCandidates,ensureEventTravel} from './event-travel.mjs?v=cp37-paper-c8fccf30daca';
+import {stableUnit} from './cadence.mjs?v=cp37-paper-c8fccf30daca';
+import {stimulateTown} from './town-response.mjs?v=cp37-paper-c8fccf30daca';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp37-paper-c8fccf30daca';
+import {moverBlocks} from './motion.mjs?v=cp37-paper-c8fccf30daca';
 
-export const EVENT_TIMING={snow:{gather:0,active:38,closing:7},rain:{gather:0,active:42,closing:7},lantern:{gather:22,active:32,closing:8},festival:{gather:24,active:38,closing:7},market:{gather:22,active:38,closing:8},supper:{gather:22,active:38,closing:8},reunion:{gather:22,active:34,closing:7},delivery:{gather:3,active:28,closing:5},music:{gather:22,active:34,closing:7},quiet:{gather:16,active:28,closing:6}};
+export const EVENT_TIMING={paper_read:{gather:12,active:18,closing:5},paper_collect:{gather:12,active:22,closing:5},paper_hang:{gather:22,active:45,closing:7},paper_share:{gather:22,active:45,closing:7},snow:{gather:0,active:38,closing:7},rain:{gather:0,active:42,closing:7},lantern:{gather:22,active:32,closing:8},festival:{gather:24,active:38,closing:7},market:{gather:22,active:38,closing:8},supper:{gather:22,active:38,closing:8},reunion:{gather:22,active:34,closing:7},delivery:{gather:3,active:28,closing:5},music:{gather:22,active:34,closing:7},quiet:{gather:16,active:28,closing:6}};
 const live=j=>!['done','failed','cancelled'].includes(j.status);
 const distance=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 export function ensureSceneEvents(s){
@@ -22,7 +23,7 @@ export function ensureSceneEvents(s){
  }
  s.eventSequence??=0;s.eventWeather??={rain:s.weather==='rain'?1:0,snow:s.weather==='snow'?1:0,cover:0};
 }
-export function eventKind(d){if(d.festival==='fireworks')return 'festival';if(d.weather==='snow'||d.weather==='rain')return d.weather;if(EVENT_TIMING[d.occasion])return d.occasion;if(d.street==='gather')return 'music';if(d.street==='quiet')return 'quiet';if(d.day_phase==='night'&&(!d.occasion||d.occasion==='keep')&&(!d.festival||d.festival==='keep')&&(!d.weather||['keep','clear'].includes(d.weather)))return 'lantern';return null;}
+export function eventKind(d){if(d.festival==='fireworks')return 'festival';if(d.weather==='snow'||d.weather==='rain')return d.weather;if(d.paper==='hang')return 'paper_hang';if(d.paper==='share')return 'paper_share';if(d.paper==='read')return 'paper_read';if(d.paper==='collect')return 'paper_collect';if(EVENT_TIMING[d.occasion])return d.occasion;if(d.street==='gather')return 'music';if(d.street==='quiet')return 'quiet';if(d.day_phase==='night'&&(!d.occasion||d.occasion==='keep')&&(!d.festival||d.festival==='keep')&&(!d.weather||['keep','clear'].includes(d.weather)))return 'lantern';return null;}
 function clearPulse(s){s.townResponse=null;for(const a of s.actors){a.responseUntil=0;a.responseDestination=null;a.responseReplan=false;}}
 function finishSky(s){if(s.festivalUntil>s.time){s.festivalStop=s.time;s.festivalUntil=Math.min(s.festivalUntil,s.time+5.5);}s.worldEvent={kind:'ordinary',phase:'ongoing',started:s.time,until:0,revision:s.worldEvent.revision+1};}
 function closeEvent(s,e,emit,next=null){
@@ -32,6 +33,7 @@ function closeEvent(s,e,emit,next=null){
  if(e.kind==='festival'){s.festivalStop=s.time;s.festivalUntil=Math.min(s.festivalUntil,s.time+5.5);s.worldEvent={kind:'festival',phase:'linger',started:s.time,until:e.until,revision:s.worldEvent.revision+1};emit('最后一束花火散去，大家鼓掌道别。');}
  if(['market','supper'].includes(e.kind))emit('摊主收好餐具，最后的客人互相道别，晚市准备收摊。');
  if(e.kind==='lantern')emit('纸灯轻轻收起，街坊道别，暖窗继续陪着夜色。');
+ if(['paper_hang','paper_share','paper_read','paper_collect'].includes(e.kind))emit('街坊收好手里的纸笔，留下的短笺继续随风轻摆。');
  if(e.kind==='music')emit('这一小段琴声落定，听众挥手道别，再各自散开。');
  if(e.kind==='quiet')emit('歇息过后，街坊慢慢回到各自的日常。');
  if(e.kind==='reunion')emit('邻居们挥手道别，准备回到各自的日常。');
@@ -43,21 +45,22 @@ function startEvent(s,descriptor,emit){
  s.weather=['snow','rain'].includes(kind)?kind:'clear';s.rainActive=s.weather==='rain';s.lastWeather=s.weather;s.weatherChangedAt=s.time;
  s.occasion=['market','supper','reunion','delivery','quiet'].includes(kind)?kind:'ordinary';s.lastOccasion=s.occasion;s.occasionUntil=s.time+timing.gather+timing.active;
  if(['festival','market','lantern'].includes(kind)&&!descriptor.explicitDay)s.day_phase='night';
- if(['music','quiet'].includes(kind))s.street='wander';
+ if(['music','quiet','paper_hang','paper_share'].includes(kind))s.street='wander';
  const e=s.sceneEvent={...descriptor,phase:timing.gather?'gather':'active',phaseAt:s.time,started:s.time,until:s.time+(timing.gather||timing.active),slots:{},ready:0,next:null,...(kind==='lantern'?{illuminationAt:s.time}:{})};
  if(kind==='festival'){s.worldEvent={kind:'festival',phase:'prepare',started:s.time,until:e.until,revision:s.worldEvent.revision+1};s.festivalStarted=s.time;s.festivalUntil=s.time+timing.gather+timing.active+5.5;s.festivalStop=null;}
  const items=[{kind:'macro',target:kind==='festival'?'festival':['rain','snow'].includes(kind)?'weather':'occasion',action:kind==='festival'?'fireworks':kind},...(e.protectedIds||[]).map(target=>({kind:'resident',target,action:'keep'}))];
- stimulateTown(s,items,{id:e.id});if(s.townResponse)s.townResponse.until=e.until+timing.active+12;
- for(const a of s.actors){if(e.protectedIds?.includes(a.id))continue;a.reservation=null;a.manual=false;a.manualActivity=null;a.activityUntil=0;a.taskRevision=-1;a.localActionUntil=0;a.path=[];a.wait=.08+stableUnit(a.id)*.6;const r=s.residentActions[a.id];if(r&&!r.requested){r.action=null;r.queued=null;r.cancelRemaining=0;r.nextAt=s.time+.5;}}
+ if(!['paper_hang','paper_share','paper_read','paper_collect'].includes(kind))stimulateTown(s,items,{id:e.id});if(s.townResponse)s.townResponse.until=e.until+timing.active+12;
+ for(const a of s.actors){if(['paper_hang','paper_share','paper_read','paper_collect'].includes(kind)||e.protectedIds?.includes(a.id))continue;a.reservation=null;a.manual=false;a.manualActivity=null;a.activityUntil=0;a.taskRevision=-1;a.localActionUntil=0;a.path=[];a.wait=.08+stableUnit(a.id)*.6;const r=s.residentActions[a.id];if(r&&!r.requested){r.action=null;r.queued=null;r.cancelRemaining=0;r.nextAt=s.time+.5;}}
  s.planRevision++;
- const text={music:'琴声把街坊牵到树下，大家找好位置，听一段小小的演奏。',quiet:'街坊走到树荫和水边，放下忙碌，停一会儿看看风景。',lantern:'纸灯沿街依次亮起，街坊提灯走向树下。',snow:'大一些的纸雪落下，屋檐和路边渐渐留下一层白。',rain:'雨来了，街坊收住手里的事，分头找地方等雨停。',festival:'花火即将开始，街坊往广场空位聚拢。',market:'晚市开张，大家走向酒楼摊前，排队等一份热食。',supper:'热饭端上柜台，街坊往餐厅聚拢。',reunion:'邻居们相约走近，找一处地方聊聊。',delivery:'邮差开始送信，街坊留意门前的动静。'};
+ const text={paper_read:'有人走到树边，读一读风里留下的纸笺。',paper_collect:'有人取下最近的纸笺，读过后折好，仔细收起。',paper_hang:'有人取出短笺，把想念和祝愿写下来，再带到树边。',paper_share:'有人写下心意，折好一张纸，准备亲手交给邻居。',music:'琴声把街坊牵到树下，大家找好位置，听一段小小的演奏。',quiet:'街坊走到树荫和水边，放下忙碌，停一会儿看看风景。',lantern:'纸灯沿街依次亮起，街坊提灯走向树下。',snow:'大一些的纸雪落下，屋檐和路边渐渐留下一层白。',rain:'雨来了，街坊收住手里的事，分头找地方等雨停。',festival:'花火即将开始，街坊往广场空位聚拢。',market:'晚市开张，大家走向酒楼摊前，排队等一份热食。',supper:'热饭端上柜台，街坊往餐厅聚拢。',reunion:'邻居们相约走近，找一处地方聊聊。',delivery:'邮差开始送信，街坊留意门前的动静。'};
  emit(text[kind]);return e;
 }
 // One foreground event owns weather/crowd choreography. A newer event replaces
 // the pending one, but only starts after the current event's visible closing.
-export function requestSceneEvent(s,input,emit,{automatic=false}={}){
- ensureSceneEvents(s);const d={...input},kind=eventKind(d),e=s.sceneEvent;
+export function requestSceneEvent(s,input,emit,{automatic=false,sourceText=''}={}){
+ ensureSceneEvents(s);const d={...input},kind=eventKind(d),e=s.sceneEvent;const paper=ensurePaperWorld(s);const paperKind=eventKind({paper:d.paper});if(paperKind&&paperKind!==kind)paper.pending={mode:d.paper,text:String(sourceText||'').slice(0,160)};else if(kind||d.paper==='rest')paper.pending=null;
  if(!kind){
+  if(e?.kind?.startsWith('paper_')&&d.paper==='rest')closeEvent(s,e,emit);
   const stops=e&&((e.kind==='lantern'&&d.day_phase&& !['keep','night'].includes(d.day_phase))||(['rain','snow'].includes(e.kind)&&d.weather==='clear')||(e.kind==='festival'&&d.festival==='quiet')||(!['rain','snow','festival'].includes(e.kind)&&d.occasion==='ordinary'));
   if(e?.kind==='music'&&d.music==='rest'){e.silentMusic=true;closeEvent(s,e,emit);}
   if(e?.kind==='music'&&d.street==='wander')closeEvent(s,e,emit);
@@ -67,7 +70,7 @@ export function requestSceneEvent(s,input,emit,{automatic=false}={}){
   return d;
  }
  const protectedIds=s.intentRuntime.jobs.filter(j=>j.kind==='resident'&&live(j)&&j.requestId===s.intentRuntime.lastReceipt?.id).map(j=>j.target);
- const descriptor={id:'scene-'+(++s.eventSequence),kind,protectedIds,automatic,explicitDay:d.day_phase&&d.day_phase!=='keep',silentMusic:d.music==='rest'};
+ const descriptor={id:'scene-'+(++s.eventSequence),kind,protectedIds,automatic,explicitDay:d.day_phase&&d.day_phase!=='keep',silentMusic:d.music==='rest',...(['paper_hang','paper_share','paper_read','paper_collect'].includes(kind)?{sourceText:String(sourceText||'').slice(0,160)}:{})};
  if(e&&e.kind===kind&&!['closing','release'].includes(e.phase)){
   e.until=Math.min(e.started+EVENT_TIMING[kind].gather+EVENT_TIMING[kind].active+12,Math.max(e.until,s.time+12));
   if(e.kind==='lantern')e.illuminationAt=s.time;
@@ -79,6 +82,7 @@ export function requestSceneEvent(s,input,emit,{automatic=false}={}){
  }else startEvent(s,descriptor,emit);
  // Managed fields are activated by the episode, not independently by each job.
  if(['music','quiet'].includes(kind)&&['gather','quiet'].includes(d.street))d.street='keep';
+ if(d.paper&&d.paper!=='keep')d.paper='keep';
  if(d.weather!=='keep')d.weather='keep';if(d.occasion!=='keep')d.occasion='keep';if(d.festival!=='keep')d.festival='keep';
  return d;
 }

@@ -1,9 +1,10 @@
-import {createDinerActionView} from './diner-action-view.mjs?v=cp36-freewords-007e6e30821d';
-import {makeArmSolver} from './arm-ik.mjs?v=cp36-freewords-007e6e30821d';
+import {handWorldPoint} from './prop-attachment.mjs?v=cp37-paper-c8fccf30daca';
+import {createDinerActionView} from './diner-action-view.mjs?v=cp37-paper-c8fccf30daca';
+import {makeArmSolver} from './arm-ik.mjs?v=cp37-paper-c8fccf30daca';
 import * as THREE from 'three';
-import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES} from './resident-actions.mjs?v=cp36-freewords-007e6e30821d';
-import {PROFILES} from './community.mjs?v=cp36-freewords-007e6e30821d';
-import {ease,legPose} from './motion.mjs?v=cp36-freewords-007e6e30821d';
+import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES} from './resident-actions.mjs?v=cp37-paper-c8fccf30daca';
+import {PROFILES} from './community.mjs?v=cp37-paper-c8fccf30daca';
+import {ease,legPose} from './motion.mjs?v=cp37-paper-c8fccf30daca';
 const X=new THREE.Vector3(1,0,0),Y=new THREE.Vector3(0,1,0),Z=new THREE.Vector3(0,0,-1);
 const mix=(a,b,t)=>a+(b-a)*t;
 export function createResidentActionView({scene,entities,parts,sockets,localRoutes,support,dinerGestures,diningProps}){
@@ -23,7 +24,7 @@ export function createResidentActionView({scene,entities,parts,sockets,localRout
  const crumb=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(.021,0),ivory,8);crumb.name='CP22_paper_pond_food';crumb.userData.runtime_effect_id='effect.pond_food';crumb.userData.owner_entity='resident.water_visitor';crumb.frustumCulled=false;scene.add(crumb);const dummy=new THREE.Object3D(),point=new THREE.Vector3();
  function rot(id,key,axis,a){const p=parts.get(id+'/'+key),b=base.get(id+'/'+key);if(p&&b&&!p.matrixAutoUpdate)return;if(p&&b)p.quaternion.copy(b.q).multiply(new THREE.Quaternion().setFromAxisAngle(axis,a));}
  function arm(id,side,pitch=0,roll=0,elbow=0){rot(id,'anim_arm_'+side,X,pitch);const p=parts.get(id+'/anim_arm_'+side);if(p)p.quaternion.multiply(new THREE.Quaternion().setFromAxisAngle(Z,roll));rot(id,'anim_elbow_'+side,X,elbow);}
- function handWorld(id,side){const entry=sockets[id]?.hands?.[side];if(!entry)return entities.get(id).getWorldPosition(new THREE.Vector3()).add(new THREE.Vector3(0,.7,0));const node=parts.get(id+'/'+(entry.part||'anim_arm_'+side));const p=entry.part_local;node.updateWorldMatrix(true,false);return node.localToWorld(new THREE.Vector3(p[0],p[2],-p[1]));}
+ function handWorld(id,side){return handWorldPoint({entities,parts,sockets},id,side);}
  function toRoot(id,world){return entities.get(id).worldToLocal(world.clone());}
  function resetElbows(id){for(const side of ['left','right'])rot(id,'anim_elbow_'+side,X,0);}
  function fitBridgeFeet(id,root,weight){

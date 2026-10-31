@@ -1,6 +1,6 @@
-import {requestLocalDestination} from './local-walkers.mjs?v=cp36-freewords-007e6e30821d';
-import {PROFILES} from './community.mjs?v=cp36-freewords-007e6e30821d';
-import {stableUnit,varied} from './cadence.mjs?v=cp36-freewords-007e6e30821d';
+import {requestLocalDestination} from './local-walkers.mjs?v=cp37-paper-c8fccf30daca';
+import {PROFILES} from './community.mjs?v=cp37-paper-c8fccf30daca';
+import {stableUnit,varied} from './cadence.mjs?v=cp37-paper-c8fccf30daca';
 // Counts refer to distinct, executable intentions, not interpolation frames or body parts.
 export const RESIDENT_ACTIONS={
  walk_street:{label:'沿街走到另一处',duration:60,navTask:'stroll'},
@@ -113,7 +113,7 @@ function choose(s,id,r){const p=PROFILES[id],cap=RESIDENT_CAPABILITIES[id];let c
 export function advanceResidentActions(s,dt,routes={}){for(const[id,r]of Object.entries(s.residentActions)){
  r.bookOpen+=(r.bookTarget-r.bookOpen)*Math.min(1,dt*2.6);
  r.umbrella+=(r.umbrellaTarget-r.umbrella)*Math.min(1,dt*2.6);
- if(s.eventGuests?.[id]?.active||s.sceneEvent?.slots?.[id]!==undefined&&['gather','active','closing'].includes(s.sceneEvent.phase)&&!r.requested&&!r.queuedByUser){r.action=null;r.clock=0;r.nextAt=s.time+.5;continue;}
+ if(s.actors.find(a=>a.id===id)?.interactionLock||s.eventGuests?.[id]?.active||s.sceneEvent?.slots?.[id]!==undefined&&['gather','active','closing'].includes(s.sceneEvent.phase)&&!r.requested&&!r.queuedByUser){r.action=null;r.clock=0;r.nextAt=s.time+.5;continue;}
  if(r.action){const def=RESIDENT_ACTIONS[r.action];if(r.contextWeather!==s.weather){r.contextWeather=s.weather;if(def.navTask&&s.weather==='rain'&&def.navTask!=='shelter'){r.queued=r.action;r.queuedByUser=r.requested;r.action=null;r.nextAt=s.time+.25;continue;}if(id==='resident.quiet_reader'&&s.weather==='rain')r.bookTarget=0;if(!def.route&&!def.navTask&&PROFILES[id].role!=='diner'&&!['sip_tea','taste_food','feed_pond','look_pond'].includes(r.action))r.cancelRemaining=.65;}
   // Finish the small gesture before switching. Walking always owns the limbs.
   const cancelling=r.cancelRemaining>0;if(cancelling)r.cancelRemaining=Math.max(0,r.cancelRemaining-dt);else r.clock=Math.min(def.duration,r.clock+dt);const walker=s.localWalkers?.[id];const actor=s.actors.find(a=>a.id===id);const finished=cancelling&&r.cancelRemaining===0?true:def.route?walker&&!walker.clip&&walker.anchor===walker.goal:def.navTask?actor?.task===def.navTask&&actor.reservation!==null&&!actor.path.length&&actor.mode==='idle'&&(def.navTask!=='chat'||!!actor.chatPartner)&&(def.navTask!=='listen'||s.effectiveMusic==='play'):r.clock>=def.duration;if(finished){const holder=s.actors.find(a=>a.id===id);if(holder){holder.localActionUntil=Math.min(holder.localActionUntil||0,s.time);if(cancelling)holder.wait=Math.min(holder.wait,varied([.25,1.4],id,r.cycle));}if(def.route&&r.requested)walker.holdUntil=s.time+varied([18,30],id,r.cycle);r.lastAction=r.action;r.completed++;r.action=null;r.clock=0;r.nextAt=s.time+(cancelling?.25:varied([2,5],id,r.cycle));if(r.requested)r.requested=false;}continue;
