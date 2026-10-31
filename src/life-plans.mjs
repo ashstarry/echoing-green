@@ -1,9 +1,9 @@
-import {eventKind} from './scene-events.mjs?v=cp35-lantern-f3a6f95a814b';
-import {stimulateTown} from './town-response.mjs?v=cp35-lantern-f3a6f95a814b';
-import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp35-lantern-f3a6f95a814b';
-import {requestPassengerAction} from './passengers.mjs?v=cp35-lantern-f3a6f95a814b';
-import {requestObjectAction} from './object-actions.mjs?v=cp35-lantern-f3a6f95a814b';
-import {validateDecision} from './catalog.mjs?v=cp35-lantern-f3a6f95a814b';
+import {eventKind} from './scene-events.mjs?v=cp36-freewords-007e6e30821d';
+import {stimulateTown} from './town-response.mjs?v=cp36-freewords-007e6e30821d';
+import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp36-freewords-007e6e30821d';
+import {requestPassengerAction} from './passengers.mjs?v=cp36-freewords-007e6e30821d';
+import {requestObjectAction} from './object-actions.mjs?v=cp36-freewords-007e6e30821d';
+import {validateDecision} from './catalog.mjs?v=cp36-freewords-007e6e30821d';
 
 // Compound goals reuse tested movements, with real completion/occupation checks between steps.
 export const LIFE_PLANS={

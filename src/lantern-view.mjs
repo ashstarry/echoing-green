@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
-import {lanternDisplay,LANTERN_CARRIERS} from './lantern-scene.mjs?v=cp35-lantern-f3a6f95a814b';
+import {lanternDisplay,LANTERN_CARRIERS} from './lantern-scene.mjs?v=cp36-freewords-007e6e30821d';
 
 function paperLampGeometry(){
  const pieces=[];

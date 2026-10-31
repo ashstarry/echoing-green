@@ -1,6 +1,6 @@
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp35-lantern-f3a6f95a814b';
-import {advanceSceneEvent,requestSceneEvent,sceneTask} from './scene-events.mjs?v=cp35-lantern-f3a6f95a814b';
-import {CADENCE,varied,stableUnit} from './cadence.mjs?v=cp35-lantern-f3a6f95a814b';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp36-freewords-007e6e30821d';
+import {advanceSceneEvent,requestSceneEvent,sceneTask} from './scene-events.mjs?v=cp36-freewords-007e6e30821d';
+import {CADENCE,varied,stableUnit} from './cadence.mjs?v=cp36-freewords-007e6e30821d';
 export const ACTIVITIES={
  hop:{label:'找一块空地跳两下',range:[3,6],zone:'playground'},follow:{label:'跟着孩子换个位置',range:[4,8],zone:'family'},
  play:{label:'给街坊弹一段琴',range:[18,35]},
@@ -16,7 +16,7 @@ export function requestFestival(s){if(s.worldEvent?.phase==='show'){s.worldEvent
 export function updateDirector(s,dt,emit,nav){
  advanceSceneEvent(s,nav,dt,emit);
  if(s.festivalAuto&&!s.sceneEvent&&['dusk','night'].includes(s.day_phase)&&s.time>=s.festivalNextAt)requestSceneEvent(s,{festival:'fireworks'},emit,{automatic:true});
- s.effectiveMusic=s.weather==='rain'&&!s.musicManual||s.sceneEvent?.kind==='festival'&&s.sceneEvent.phase==='active'?'rest':s.music;
+ s.effectiveMusic=s.sceneEvent?.kind==='music'&&!s.sceneEvent.silentMusic&&['gather','active'].includes(s.sceneEvent.phase)?'play':s.weather==='rain'&&!s.musicManual||s.sceneEvent?.kind==='festival'&&s.sceneEvent.phase==='active'?'rest':s.music;
  for(const[id,d]of Object.entries(s.diners)){const festival=s.sceneEvent?.kind==='festival'&&['gather','active'].includes(s.sceneEvent.phase);const policy=d.manualPolicy||(s.dining!=='auto'?s.dining:s.weather==='rain'?'inside':festival||s.occasion==='supper'?'dine':'auto');if(d.effectivePolicy!==policy){d.effectivePolicy=policy;d.policy=policy;d.wait=Math.min(d.wait,varied([1,4],id,s.planRevision));}}
 }
 export function wantedTask(s,a){

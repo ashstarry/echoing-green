@@ -1,16 +1,16 @@
-import {createLanternView} from './lantern-view.mjs?v=cp35-lantern-f3a6f95a814b';
-import {lanternLightFactor} from './lantern-scene.mjs?v=cp35-lantern-f3a6f95a814b';
-import {createGroupView} from './group-view.mjs?v=cp35-lantern-f3a6f95a814b';
-import {createEventProps} from './event-props.mjs?v=cp35-lantern-f3a6f95a814b';
-import {createEventTravelView} from './event-travel-view.mjs?v=cp35-lantern-f3a6f95a814b';
-import {createPavingSupport} from './foot-support.mjs?v=cp35-lantern-f3a6f95a814b';
-import {createPassengerView} from './passenger-view.mjs?v=cp35-lantern-f3a6f95a814b';
-import {createObjectActionView} from './object-action-view.mjs?v=cp35-lantern-f3a6f95a814b';
-import {createResidentActionView} from './resident-action-view.mjs?v=cp35-lantern-f3a6f95a814b';
+import {createLanternView} from './lantern-view.mjs?v=cp36-freewords-007e6e30821d';
+import {lanternLightFactor} from './lantern-scene.mjs?v=cp36-freewords-007e6e30821d';
+import {createGroupView} from './group-view.mjs?v=cp36-freewords-007e6e30821d';
+import {createEventProps} from './event-props.mjs?v=cp36-freewords-007e6e30821d';
+import {createEventTravelView} from './event-travel-view.mjs?v=cp36-freewords-007e6e30821d';
+import {createPavingSupport} from './foot-support.mjs?v=cp36-freewords-007e6e30821d';
+import {createPassengerView} from './passenger-view.mjs?v=cp36-freewords-007e6e30821d';
+import {createObjectActionView} from './object-action-view.mjs?v=cp36-freewords-007e6e30821d';
+import {createResidentActionView} from './resident-action-view.mjs?v=cp36-freewords-007e6e30821d';
 import * as THREE from 'three';
-import {legPose,railPose,sampleRail,ease,sampleClip} from './motion.mjs?v=cp35-lantern-f3a6f95a814b';
-import {createIntentView} from './intent-view.mjs?v=cp35-lantern-f3a6f95a814b';
-import {createFireworks} from './fireworks.mjs?v=cp35-lantern-f3a6f95a814b';
+import {legPose,railPose,sampleRail,ease,sampleClip} from './motion.mjs?v=cp36-freewords-007e6e30821d';
+import {createIntentView} from './intent-view.mjs?v=cp36-freewords-007e6e30821d';
+import {createFireworks} from './fireworks.mjs?v=cp36-freewords-007e6e30821d';
 const X=new THREE.Vector3(1,0,0),Y=new THREE.Vector3(0,1,0),BZ=new THREE.Vector3(0,0,-1),q=new THREE.Quaternion(),v=new THREE.Vector3();
 export function createLifeView({scene,entities,parts,registry,lights,weatherSupport,renderer,camera,activities,nav}){
  const originals=new Map(),partBase=new Map(),emissive=[],stars=[],byId=new Map(registry.entities.map(e=>[e.id,e])),headAngles=new Map(),curtainAmounts=new Map();

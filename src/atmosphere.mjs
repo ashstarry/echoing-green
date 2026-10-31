@@ -1,7 +1,7 @@
 export const ATMOSPHERE_QUESTIONS={
   "intent": {
     "type": "choice",
-    "instructions": "User speaks to an artistic miniature town. Present feelings, sensory impressions, loose associations and poetic fragments are soft invitations, even without imperative verbs or a request to change the town. Interpret generously when there is any meaningful emotional link. A current personal feeling is enough; do not demand a named action. Emotion transformed into imagery is a metaphor, not a demand to manufacture its imaginary objects. Pure praise of the interface or a completed event, hypothetical questions, and explicit keep-as-is are not invitations. A memory used to evoke a feeling now can be an invitation. Personal needs such as hunger or wanting company are mood invitations, not literal object manipulation. A wish to hear human voices evokes social company; it does not require new speech synthesis. Choose literal if a concrete supported activity/time/weather/person/object is the meaning of the wish; poetic adjectives alone do not make it mixed. Choose mixed for a concrete request PLUS a separately desired town-wide feeling. Choose mood for a feeling or evocative metaphor without a concrete supported command.",
+    "instructions": "User speaks to an artistic miniature town. Present feelings, sensory impressions, loose associations and poetic fragments are soft invitations, even without imperative verbs or a request to change the town. Interpret generously when there is any meaningful emotional link. A current personal feeling is enough; do not demand a named action. Emotion transformed into imagery is a metaphor, not a demand to manufacture its imaginary objects. Pure praise of the interface or a completed event, hypothetical questions, and explicit keep-as-is are not invitations. A memory used to evoke a feeling now can be an invitation. Personal needs such as hunger or wanting company are mood invitations, not literal object manipulation. A wish to hear human voices evokes social company; it does not require new speech synthesis. Choose literal if a concrete supported activity/time/weather/person/object is the meaning of the wish; poetic adjectives alone do not make it mixed. Choose mixed for a concrete request PLUS a separately desired town-wide feeling. A separate clause expressing relief, breathing room, personal space, reduced pressure, or companionship is an independent mood even when another clause precisely controls a vehicle or person; do not let that concrete clause erase the emotional one. Choose mood for a feeling or evocative metaphor without a concrete supported command.",
     "criteria": {
       "mood": "An implied or explicit invitation to evoke an atmosphere",
       "literal": "A specific action, communal activity, time, weather or object request, including poetic phrasing",
@@ -30,7 +30,7 @@ export const ATMOSPHERE_QUESTIONS={
 export const ATMOSPHERES={
  tender:{label:'让街巷暖一点，让彼此靠近一点。',changes:{light:'warm',breeze:'gentle',occasion:'reunion'}},
  together:{label:'让邻居们慢慢找到彼此。',changes:{occasion:'reunion',light:'warm'}},
- celebration:{label:'把这份小小的欢喜，化成一场夜空里的花。',changes:{day_phase:'night',festival:'fireworks'}},
+ celebration:{label:'把这份欢喜带到树下，让街坊和琴声一起热闹起来。',changes:{occasion:'reunion',music:'play',light:'warm',breeze:'lively'}},
  dream:{label:'让夜色、灯火和晚风一起放轻。',changes:{day_phase:'night',light:'soft',breeze:'calm',occasion:'quiet'}},
  quiet:{label:'让脚步和风都慢一点，留一会儿安静。',changes:{occasion:'quiet',light:'soft',breeze:'calm'}},
  hearth:{label:'把热食摆上柜台，让街坊来吃点东西。',changes:{occasion:'supper',light:'warm'}},
@@ -38,14 +38,17 @@ export const ATMOSPHERES={
  snowfall:{label:'让纸片雪飘下来，给小镇换一个冬日。',changes:{weather:'snow'}},
  hopeful:{label:'让街巷亮起来，把新的好心情传开。',changes:{occasion:'market',light:'bright',breeze:'gentle'}}
 };
-export function atmospherePlan(answers){const intent=answers.mood_intent,mood=answers.atmosphere;if(!['mood','mixed'].includes(intent?.choice)||!ATMOSPHERES[mood?.choice]||((intent.probabilities?.mood||0)+(intent.probabilities?.mixed||0))<.45||(mood.probabilities?.[mood.choice]||0)<.28)return null;const preset=ATMOSPHERES[mood.choice];return{status:'change',items:Object.entries(preset.changes).map(([target,action])=>({kind:'macro',target,action,field:target,label:preset.label,target_label:'氛围'})),skipped:[],summary:preset.label,resolution:{source:'jev-atmosphere',choice:mood.choice,confidence:mood.probabilities[mood.choice]}};}
+export function atmospherePlan(answers){const intent=answers.mood_intent,mood=answers.atmosphere;if(!['mood','mixed'].includes(intent?.choice)||!ATMOSPHERES[mood?.choice]||((intent.probabilities?.mood||0)+(intent.probabilities?.mixed||0))<.45||(mood.probabilities?.[mood.choice]||0)<.28)return null;let preset=ATMOSPHERES[mood.choice];const explicitOff=answers.festival?.choice==='quiet'&&(answers.festival.probabilities?.quiet||0)>=.5&&(answers['scope:festival']?.probabilities?.yes||0)>=.4;
+ if(mood.choice==='celebration'&&explicitOff)preset={label:'让街坊聚起一些欢笑，保持安静的夜空。',changes:{occasion:'reunion',light:'warm',breeze:'lively'}};
+ return{status:'change',items:Object.entries(preset.changes).map(([target,action])=>({kind:'macro',target,action,field:target,label:preset.label,target_label:'氛围'})),skipped:[],summary:preset.label,resolution:{source:'jev-atmosphere',choice:mood.choice,confidence:mood.probabilities[mood.choice],...(explicitOff?{constraint:'explicit-fireworks-off'}:{})}};}
 
 // Concrete choices cannot be erased by the less-specific mood interpretation.
 // Only an independently requested mood may add compatible, unmentioned fields.
 export function composeAtmosphere(literal, answers){
  const mood=atmospherePlan(answers);if(!mood)return literal;
  if(!literal.items.length){
-  if(answers.mood_intent.choice==='mixed'||['clarify','partial'].includes(literal.status))return literal;
+  const unresolved=literal.skipped?.some(x=>!['已经是这个状态','没有明确要求改变这个对象'].includes(x.reason));
+  if(['clarify','partial'].includes(literal.status)||answers.mood_intent.choice==='mixed'&&(literal.status!=='change'||unresolved))return literal;
   return {...mood,literalPlan:literal};
  }
  if(answers.mood_intent.choice!=='mixed')return literal;

@@ -874,3 +874,13 @@ Object.assign(EN,{
  '定点花火亮起，街坊走向广场并站定仰望。':'Fireworks rise as the neighbors gather in the square and look up.',
  '燃放定点红金花火，街坊聚集后站定仰望':'Launch red and gold fireworks as the neighbors gather and look up.'
 });
+
+Object.assign(EN,{"琴声把街坊牵到树下，大家找好位置，听一段小小的演奏。": "Music draws the neighbors to the tree for a little performance.", "这一小段琴声落定，听众挥手道别，再各自散开。": "As the little performance ends, listeners wave goodbye and wander home.", "街坊走到树荫和水边，放下忙碌，停一会儿看看风景。": "Neighbors find a quiet place by the tree or pond and take a little rest.", "歇息过后，街坊慢慢回到各自的日常。": "After a little rest, the neighbors return to their day.", "听众在树下站定，跟着琴声轻轻点头。": "The listeners settle beneath the tree and nod along to the music.", "街坊已经停好脚步，在树荫和水边安静歇息。": "The neighbors pause in the shade and by the water."});
+
+Object.assign(EN,{'让街坊聚起一些欢笑，保持安静的夜空。':'Let the neighbors share a little joy, with the sky kept quiet.'});
+
+Object.assign(EN,{'街坊在树下听一段琴':'A little music beneath the tree','放慢脚步，看看树影和水光':'Slower footsteps, tree shadows and water'});
+
+Object.assign(EN,{'把这份欢喜带到树下，让街坊和琴声一起热闹起来。':'Bring this joy beneath the tree, with music and neighbors together.'});
+
+Object.assign(EN,{"树下的琴声": "Music beneath the tree", "不改变琴声": "Keep the music as it is", "让乐手演奏、琴声响起，适合相伴听琴": "Let the musician play for the neighbors", "让乐手停下来歇一会儿": "Let the musician take a little rest", "街坊的整体活动方向": "The neighbors’ shared activity", "不改变居民整体目标": "Keep the neighbors’ current plans", "大家沿街走动散步、各自活动": "Let the neighbors stroll and go about their day", "大家去树下听琴，聚拢成为听众": "Gather beneath the tree to listen to the musician", "大家走到合适位置后停步休息、看景": "Find a restful place, then pause and enjoy the view"});

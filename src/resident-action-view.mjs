@@ -1,9 +1,9 @@
-import {createDinerActionView} from './diner-action-view.mjs?v=cp35-lantern-f3a6f95a814b';
-import {makeArmSolver} from './arm-ik.mjs?v=cp35-lantern-f3a6f95a814b';
+import {createDinerActionView} from './diner-action-view.mjs?v=cp36-freewords-007e6e30821d';
+import {makeArmSolver} from './arm-ik.mjs?v=cp36-freewords-007e6e30821d';
 import * as THREE from 'three';
-import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES} from './resident-actions.mjs?v=cp35-lantern-f3a6f95a814b';
-import {PROFILES} from './community.mjs?v=cp35-lantern-f3a6f95a814b';
-import {ease,legPose} from './motion.mjs?v=cp35-lantern-f3a6f95a814b';
+import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES} from './resident-actions.mjs?v=cp36-freewords-007e6e30821d';
+import {PROFILES} from './community.mjs?v=cp36-freewords-007e6e30821d';
+import {ease,legPose} from './motion.mjs?v=cp36-freewords-007e6e30821d';
 const X=new THREE.Vector3(1,0,0),Y=new THREE.Vector3(0,1,0),Z=new THREE.Vector3(0,0,-1);
 const mix=(a,b,t)=>a+(b-a)*t;
 export function createResidentActionView({scene,entities,parts,sockets,localRoutes,support,dinerGestures,diningProps}){

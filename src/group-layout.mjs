@@ -1,6 +1,6 @@
-import {pathTo,navigationGraph} from './navigation.mjs?v=cp35-lantern-f3a6f95a814b';
-import {moverBlocks,sampleClip} from './motion.mjs?v=cp35-lantern-f3a6f95a814b';
-export const GROUP_KINDS=new Set(['festival','market','supper','reunion','lantern']);
+import {pathTo,navigationGraph} from './navigation.mjs?v=cp36-freewords-007e6e30821d';
+import {moverBlocks,sampleClip} from './motion.mjs?v=cp36-freewords-007e6e30821d';
+export const GROUP_KINDS=new Set(['festival','market','supper','reunion','lantern','music','quiet']);
 const D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 const queues=[
  [[-2.4,1.6],[-3.02,1.10],[-3.65,.61],[-4.30,.20],[-4.0,-.47],[-3.3,-.65]],
@@ -9,7 +9,8 @@ const queues=[
 ];
 export function groupPlaces(nav,kind,s){
  const graph=navigationGraph(nav),main=graph.components[nav.actors[0].entry.at(-1)],used=[],result=[],market=['market','supper'].includes(kind);
- const hints=market?queues.flatMap((q,lane)=>q.map((p,index)=>({p,lane,index}))):[...Array.from({length:22},(_,i)=>{const a=i*Math.PI*2/22;return{p:[-.27+Math.cos(a)*2.6,-.54+Math.sin(a)*2.6],index:i};}),...Array.from({length:26},(_,i)=>{const a=(i+.5)*Math.PI*2/26;return{p:[-.27+Math.cos(a)*3.40,-.54+Math.sin(a)*3.40],index:22+i};}),...Array.from({length:28},(_,i)=>{const a=(i+.25)*Math.PI*2/28;return{p:[-.27+Math.cos(a)*4.0,-.54+Math.sin(a)*4.0],index:48+i};})];
+ const quietHints=[[-4.8,-1],[-4.3,-.4],[-3.9,.3],[2.1,-1.7],[2.4,-.9],[2.5,.1],[3.1,-1.2],[-1.6,-3],[-.8,-3],[.1,-3],[.9,-2.9],[1.4,1.7],[.5,2]].map((p,index)=>({p,index}));
+ const hints=kind==='quiet'?quietHints:market?queues.flatMap((q,lane)=>q.map((p,index)=>({p,lane,index}))):[...Array.from({length:22},(_,i)=>{const a=i*Math.PI*2/22;return{p:[-.27+Math.cos(a)*2.6,-.54+Math.sin(a)*2.6],index:i};}),...Array.from({length:26},(_,i)=>{const a=(i+.5)*Math.PI*2/26;return{p:[-.27+Math.cos(a)*3.40,-.54+Math.sin(a)*3.40],index:22+i};}),...Array.from({length:28},(_,i)=>{const a=(i+.25)*Math.PI*2/28;return{p:[-.27+Math.cos(a)*4.0,-.54+Math.sin(a)*4.0],index:48+i};})];
  for(const hint of hints){const found=nav.nodes.map((p,i)=>({p,i,d:D(p,hint.p)})).filter(({p,i,d})=>graph.components[i]===main&&Object.entries(nav.activities.eventTrips||{}).filter(([id])=>['resident.water_companion','resident.water_visitor','resident.quiet_reader','resident.returning_resident'].includes(id)).every(([,c])=>c.entry.every(q=>Math.abs(q[2]-p[2])>1||D(q,p)>.64))&&d<(market?.9:1.15)&&used.every(q=>D(p,q)>.61)&&Object.entries(s.movers).every(([id,m])=>!['ride','creature_walk'].includes(nav.activities.clips[id].motion)||!moverBlocks(p,{...m,p:id==='animal.garden_fox'&&s.objectControls?.[id]?.target!==0?[5.15,1.7,.624]:m.p,footDown:1},nav.activities.clips[id],.28)&&(nav.activities.clips[id].motion!=='ride'||!nav.activities.clips[id].samples.some((q,k)=>k%8===0&&D(p,q)<.74))&&(nav.activities.clips[id].motion!=='ride'||!moverBlocks(p,{...sampleClip(nav.activities.clips[id],nav.activities.clips[id].stops.at(-1).clock),footDown:1},nav.activities.clips[id],.28)))).sort((a,b)=>a.d-b.d)[0];if(!found)continue;used.push(found.p);result.push({...hint,node:found.i,p:found.p});if(!market&&result.length===25)break;}
  return result;
 }
@@ -23,4 +24,4 @@ export function assignGroup(s,nav,e,candidates){
  for(const {a,i,p}of pairs){if(actors.has(a.id)||used.has(i))continue;actors.add(a.id);used.add(i);e.slots[a.id]=p.node;if(p.lane!==undefined)e.queue[a.id]={lane:p.lane,index:p.index,vendor:['resident.vendor_bread','resident.vendor_flower','resident.vendor_lamp'][p.lane]};if(actors.size===candidates.length)break;}
  return{actors:actors.size,places:places.length};
 }
-export function eventPose(s,a,nav){const e=s.sceneEvent,n=e?.slots?.[a.id];if(n===undefined||!GROUP_KINDS.has(e.kind)||!['gather','active','closing'].includes(e.phase))return null;const target=e.kind==='festival'?[-4.6,2.8,6.8]:e.queue?.[a.id]?nav.activities.spaces.residents[e.queue[a.id].vendor].position:[-.27,-.54,1.3];return{node:n,target,standing:!a.path.length&&D(a.p,nav.nodes[n])<.20,task:e.kind==='festival'?'fireworks':['reunion','lantern'].includes(e.kind)?'chat':'browse'};}
+export function eventPose(s,a,nav){const e=s.sceneEvent,n=e?.slots?.[a.id];if(n===undefined||!GROUP_KINDS.has(e.kind)||!['gather','active','closing'].includes(e.phase))return null;const target=e.kind==='music'?[-2.47,-1.45,1.25]:e.kind==='quiet'?(a.p[0]>1.8?[7.7,-1.2,.7]:[-.3,-.5,1.4]):e.kind==='festival'?[-4.6,2.8,6.8]:e.queue?.[a.id]?nav.activities.spaces.residents[e.queue[a.id].vendor].position:[-.27,-.54,1.3];return{node:n,target,standing:!a.path.length&&D(a.p,nav.nodes[n])<.20,task:e.kind==='music'?'listen':e.kind==='quiet'?'rest':e.kind==='festival'?'fireworks':['reunion','lantern'].includes(e.kind)?'chat':'browse'};}
