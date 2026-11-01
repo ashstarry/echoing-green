@@ -1,5 +1,5 @@
-import {createInteraction,advanceInteraction,interactionStep} from './interaction-sequence.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
+import {createInteraction,advanceInteraction,interactionStep} from './interaction-sequence.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
 export const NEIGHBORHOOD_KINDS=new Set(['homecoming','prepare','reopen','spring']);
 export const HOME={door:[-5.947,-1.723,.77],yaw:25*Math.PI/180,host:[-5.76,-2.48,.628],guest:[-4.96,-2.48,.628]};
 const ADULTS=['resident.customer_one','resident.customer_two','resident.customer_three','resident.market_browser','resident.strolling_parent','resident.courier'];

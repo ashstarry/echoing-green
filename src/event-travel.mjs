@@ -1,6 +1,6 @@
-import {moverBlocks} from './motion.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
-import {pathTo,navigationGraph} from './navigation.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
+import {moverBlocks} from './motion.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
+import {pathTo,navigationGraph} from './navigation.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
 const dist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 const turn=(a,b,n)=>a+Math.max(-n,Math.min(n,Math.atan2(Math.sin(b-a),Math.cos(b-a))));
 const live=j=>!['done','cancelled','failed'].includes(j.status);

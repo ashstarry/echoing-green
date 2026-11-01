@@ -3,7 +3,7 @@
 const macro=(target,action)=>({kind:'macro',target,action});
 const object=(target,action)=>({kind:'object',target,action});
 const resident=(target,action)=>({kind:'resident',target,action});
-export const WISH_PERIOD_MS=18000;
+export const WISH_PERIOD_MS=8000;
 export const WISH_SUGGESTIONS=[
  ['tea','让一双手被一杯热茶暖一暖。','Warm a neighbor’s hands with a cup of tea.',[macro('craft','tea')],'component.restaurant_steamer'],
  ['paper','把思念挂在树上，留一张随风的纸笺。','Leave a little wish in the lantern tree.',[macro('paper','hang')],'tree.lantern_tree'],
@@ -24,6 +24,10 @@ export const WISH_SUGGESTIONS=[
  ['pond','给池塘里的小鱼儿一点心意。','Let a neighbor feed the little pond fish.',[resident('resident.water_visitor','feed_pond')],'resident.water_visitor'],
  ['night','纸灯沿街亮起，留一晚温柔的光。','Let paper lanterns brighten a gentle night.',[macro('day_phase','night'),macro('light','warm')],'tree.lantern_tree']
 ].map(([id,zh,en,items,focus])=>({id,zh,en,items,focus}));
-export function createWishRotation(now=0){let index=0,nextAt=now+WISH_PERIOD_MS;
- return{current:()=>WISH_SUGGESTIONS[index],interact(time){nextAt=time+WISH_PERIOD_MS;},tick(time,{typed=false,focused=false,pending=false,hidden=false}={}){if(typed||focused||pending||hidden){nextAt=time+WISH_PERIOD_MS;return false;}if(time<nextAt)return false;index=(index+1)%WISH_SUGGESTIONS.length;nextAt=time+WISH_PERIOD_MS;return true;},capture(value,locale){const text=String(value||'').trim();if(text)return{source:'words',text};const hint=WISH_SUGGESTIONS[index];return{source:'suggestion',id:hint.id,text:hint[locale==='zh'?'zh':'en'],items:hint.items.map(x=>({...x})),focus:hint.focus};}};
+export function createWishRotation(now=0,{random=Math.random}={}){let index=0,nextAt=now+WISH_PERIOD_MS,recent=[0];
+ const select=(next,time)=>{index=next;recent=[...recent,index].slice(-3);nextAt=time+WISH_PERIOD_MS;return WISH_SUGGESTIONS[index];};
+ return{current:()=>WISH_SUGGESTIONS[index],interact(time){nextAt=time+WISH_PERIOD_MS;},
+ reroll(time){const choices=WISH_SUGGESTIONS.map((_,i)=>i).filter(i=>!recent.includes(i));const pick=Math.min(choices.length-1,Math.max(0,Math.floor(random()*choices.length)));return select(choices[pick],time);},
+ tick(time,{typed=false,focused=false,pending=false,hidden=false}={}){if(typed||focused||pending||hidden){nextAt=time+WISH_PERIOD_MS;return false;}if(time<nextAt)return false;let next=(index+1)%WISH_SUGGESTIONS.length;while(recent.includes(next))next=(next+1)%WISH_SUGGESTIONS.length;select(next,time);return true;},
+ capture(value,locale){const text=String(value||'').trim();if(text)return{source:'words',text};const hint=WISH_SUGGESTIONS[index];return{source:'suggestion',id:hint.id,text:hint[locale==='zh'?'zh':'en'],items:hint.items.map(x=>({...x})),focus:hint.focus};}};
 }

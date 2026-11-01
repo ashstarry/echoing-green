@@ -1,4 +1,4 @@
-import {CRAFT_EN} from './craft-english.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
+import {CRAFT_EN} from './craft-english.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
 // Source strings remain stable in the simulation and saves. Only presentation is translated.
 export const EN=Object.fromEntries(`
 言外=Echoing Green
@@ -984,3 +984,5 @@ EN['停下摇尾，等邻居回应']='Pausing to wag hello';
 Object.assign(EN,{'试试这句':'Try this wish','晚市':'Market','花火':'Fireworks'});
 
 Object.assign(EN,{'借一缕晨光':'First light','看纸雪飘落':'Paper snow','逛逛晚市':'Market glow','等一场花火':'Sky in bloom'});
+
+EN['换一句灵感']='Another idea';

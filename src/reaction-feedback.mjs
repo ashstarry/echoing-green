@@ -1,6 +1,6 @@
-import {writeText,t,initializeI18n} from './i18n.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
+import {writeText,t,initializeI18n} from './i18n.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
 import * as THREE from 'three';
-import {makeReaction,reactionStatus} from './reaction-plan.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
+import {makeReaction,reactionStatus} from './reaction-plan.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
 const phaseLabels={pending:'在听',waiting:'已经记下',active:'正在回应',done:'变化已发生',already:'已经在这样做',unavailable:'暂时没有变化',error:'这次没有生效'};
 export function createReactionFeedback({entities,camera,mode}){
  const root=document.createElement('div');root.id='reactionFeedback';root.setAttribute('role','status');root.setAttribute('aria-live','polite');root.innerHTML='<span class="reaction-phase"></span><strong></strong><p></p>';document.body.append(root);const phase=root.querySelector('span'),title=root.querySelector('strong'),body=root.querySelector('p');

@@ -1,9 +1,9 @@
-import {eventKind} from './scene-events.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
-import {stimulateTown} from './town-response.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
-import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
-import {requestPassengerAction} from './passengers.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
-import {requestObjectAction} from './object-actions.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
-import {validateDecision} from './catalog.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
+import {eventKind} from './scene-events.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
+import {stimulateTown} from './town-response.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
+import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
+import {requestPassengerAction} from './passengers.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
+import {requestObjectAction} from './object-actions.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
+import {validateDecision} from './catalog.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
 
 // Compound goals reuse tested movements, with real completion/occupation checks between steps.
 export const LIFE_PLANS={

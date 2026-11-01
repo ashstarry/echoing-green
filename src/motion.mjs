@@ -1,8 +1,8 @@
-import {avoidBoat} from './boat-world.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
-import {advanceFox} from './fox-behavior.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
-import {needsClearPromenade} from './event-design.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
-import {makeRoom} from './event-travel.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
-import {CADENCE,varied} from './cadence.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
+import {avoidBoat} from './boat-world.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
+import {advanceFox} from './fox-behavior.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
+import {needsClearPromenade} from './event-design.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
+import {makeRoom} from './event-travel.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
+import {CADENCE,varied} from './cadence.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
 export const TAU=Math.PI*2;
 export const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 export const ease=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};

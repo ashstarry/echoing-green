@@ -1,6 +1,6 @@
-import {rainingAt} from './local-cloud.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
-import {varied} from './cadence.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
-import {foxCurve,foxBackstep,foxPathPose,foxFloor} from './fox-path.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
+import {rainingAt} from './local-cloud.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
+import {varied} from './cadence.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
+import {foxCurve,foxBackstep,foxPathPose,foxFloor} from './fox-path.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
 const ID='animal.garden_fox',D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const modes=new Set(['explore','sniff','look','rest','play','greet','stretch']);
 const delta=(a,b)=>Math.atan2(Math.sin(b-a),Math.cos(b-a));
