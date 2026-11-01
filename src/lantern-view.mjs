@@ -1,7 +1,7 @@
-import {handWorldPoint} from './prop-attachment.mjs?v=cp42-town-life-23ec88cd8aa5';
+import {handWorldPoint} from './prop-attachment.mjs?v=cp42-town-life-bcedc4b465f4';
 import * as THREE from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
-import {lanternDisplay,LANTERN_CARRIERS} from './lantern-scene.mjs?v=cp42-town-life-23ec88cd8aa5';
+import {lanternDisplay,LANTERN_CARRIERS} from './lantern-scene.mjs?v=cp42-town-life-bcedc4b465f4';
 
 function paperLampGeometry(){
  const pieces=[];

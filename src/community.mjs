@@ -1,7 +1,7 @@
-import {rainingAt} from './local-cloud.mjs?v=cp42-town-life-23ec88cd8aa5';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp42-town-life-23ec88cd8aa5';
-import {advanceSceneEvent,requestSceneEvent,sceneTask} from './scene-events.mjs?v=cp42-town-life-23ec88cd8aa5';
-import {CADENCE,varied,stableUnit} from './cadence.mjs?v=cp42-town-life-23ec88cd8aa5';
+import {rainingAt} from './local-cloud.mjs?v=cp42-town-life-bcedc4b465f4';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp42-town-life-bcedc4b465f4';
+import {advanceSceneEvent,requestSceneEvent,sceneTask} from './scene-events.mjs?v=cp42-town-life-bcedc4b465f4';
+import {CADENCE,varied,stableUnit} from './cadence.mjs?v=cp42-town-life-bcedc4b465f4';
 export const ACTIVITIES={
  hop:{label:'找一块空地跳两下',range:[3,6],zone:'playground'},follow:{label:'跟着孩子换个位置',range:[4,8],zone:'family'},
  play:{label:'给街坊弹一段琴',range:[18,35]},

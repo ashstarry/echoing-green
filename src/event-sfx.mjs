@@ -1,5 +1,5 @@
-import {renderFirework} from './firework-timbre.mjs?v=cp42-town-life-23ec88cd8aa5';
-import {createCueTracker} from './sound-cues.mjs?v=cp42-town-life-23ec88cd8aa5';
+import {renderFirework} from './firework-timbre.mjs?v=cp42-town-life-bcedc4b465f4';
+import {createCueTracker} from './sound-cues.mjs?v=cp42-town-life-bcedc4b465f4';
 
 const fireworkCache=new WeakMap();
 function fireworkBuffer(ctx,cue){

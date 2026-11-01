@@ -1,5 +1,5 @@
-import {rainingAt} from './local-cloud.mjs?v=cp42-town-life-23ec88cd8aa5';
-import {varied} from './cadence.mjs?v=cp42-town-life-23ec88cd8aa5';
+import {rainingAt} from './local-cloud.mjs?v=cp42-town-life-bcedc4b465f4';
+import {varied} from './cadence.mjs?v=cp42-town-life-bcedc4b465f4';
 const ID='animal.garden_fox';const D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const modes=new Set(['explore','sniff','look','rest','play','greet','stretch']);
 export function ensureFoxBehavior(s){return s.foxBehavior??={phase:'look',clock:0,duration:2.5,cycle:0,path:[],at:0,velocity:0,blocked:0,neighbor:null,command:null,seenControl:null,completedControl:null,completed:0,suspended:false,reacted:false};}
@@ -25,7 +25,7 @@ export function advanceFox(s,data,dt,requestGesture=()=>{}){
  }
  const held=['sniff','look','rest'].includes(c?.action)?c.action:!c&&s.animals==='rest'?'rest':null;
  if(held){f.phase=held;f.path=[];f.velocity=0;f.clock+=dt;m.speed=0;m.strideWeight+=(0-m.strideWeight)*Math.min(1,dt*8);m.intent=held;return true;}
- if(!held&&(!c||f.completedControl===key)){const wet=!s.localCloud?.preserveOthers&&rainingAt(s,m.p);if(wet&&!f.rainReacted){f.rainReacted=true;beginWalk(s,data,m,f,'shelter');}if(!wet)f.rainReacted=false;const leaf=s.craftWorld?.leaves.find(p=>!p.collected&&D(p.center,m.p)<3.5&&f.lastLeaf!==p.id);if(!wet&&leaf&&f.phase!=='walk'){f.lastLeaf=leaf.id;beginWalk(s,data,m,f,'leaf');}}
+ if(!held&&(!c||f.completedControl===key)){const wet=rainingAt(s,m.p);if(wet&&!f.rainReacted){f.rainReacted=true;beginWalk(s,data,m,f,'shelter');}if(!wet)f.rainReacted=false;const leaf=s.craftWorld?.leaves.find(p=>!p.collected&&D(p.center,m.p)<3.5&&f.lastLeaf!==p.id);if(!wet&&leaf&&f.phase!=='walk'){f.lastLeaf=leaf.id;beginWalk(s,data,m,f,'leaf');}}
  f.clock+=dt;
  if(f.phase==='walk'){
   const n=f.path[f.at],p=data.nodes[n];if(!p){f.phase=f.goalMode==='greet'?'greet':f.goalMode==='play'?'play':'sniff';f.duration=f.phase==='greet'?6.5:f.phase==='play'?3.2:varied([3,5],ID,f.cycle);f.clock=0;f.velocity=0;f.path=[];return true;}

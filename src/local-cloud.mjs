@@ -1,10 +1,10 @@
-import {interactionStep} from './interaction-sequence.mjs?v=cp42-town-life-23ec88cd8aa5';
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp42-town-life-23ec88cd8aa5';
+import {interactionStep} from './interaction-sequence.mjs?v=cp42-town-life-bcedc4b465f4';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp42-town-life-bcedc4b465f4';
 const D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 export const CLOUD_HOME=[11.220066,1.239714,5.5];
 export function ensureCloud(s){const c=s.localCloud??={mode:'rest',phase:'home',center:CLOUD_HOME.slice(),rain:0,clock:0,sequence:0,waypoint:0,route:[],exposures:{},automatic:false,scale:1};c.scale??=1;return c;}
 export function requestCloud(s,mode,{preserveOthers=false}={}){const w=ensureCloud(s);w.sequence++;w.mode=mode;w.preserveOthers=!!preserveOthers;w.clock=0;w.automatic=false;if(mode==='rest'){w.phase='return';w.route=[CLOUD_HOME.slice()];w.waypoint=0;return;}const places=mode==='garden'?[[4.2,1.0,5.5]]:mode==='market'?[[-1.2,1.8,5.5]]:[[3.2,-.8,5.5],[-2.5,-.4,5.5],[.8,2.6,5.5]];w.route=places;w.waypoint=0;w.phase='travel';}
-export function rainingAt(s,p){const c=s.localCloud;return s.weather==='rain'||!!(c&&c.rain>.15&&D(c.center,p)<1.35);}
+export function rainingAt(s,p){const c=s.localCloud;return s.weather==='rain'||!!(c&&!c.preserveOthers&&c.rain>.15&&D(c.center,p)<1.35);}
 function dryNode(s,nav,a,c){const graph=navigationGraph(nav);return nav.nodes.map((p,i)=>({p,i,d:D(p,a.p)})).filter(x=>graph.components[x.i]===graph.components[a.node]&&!nav.noStopping.has(x.i)&&D(x.p,c.center)>1.8&&x.d>.6&&x.d<3.4&&s.actors.every(b=>b===a||D(x.p,b.p)>.70)).sort((a,b)=>a.d-b.d).find(x=>pathTo(nav,a.node,x.i).length)?.i;}
 export function advanceCloud(s,nav,dt){const w=ensureCloud(s),pair=s.craftWorld?.pair,umbrella=s.sceneEvent?.kind==='umbrella_walk'&&['gather','active'].includes(s.sceneEvent.phase);w.clock+=dt;
  if(umbrella&&pair&&!pair.done&&(w.phase==='home'||w.automatic)){const loan=s.craftWorld.props.find(p=>p.type==='umbrella'&&p.location==='hand');if(loan){w.automatic=true;w.mode='pair';w.phase='follow';}}
