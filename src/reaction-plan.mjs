@@ -1,5 +1,5 @@
-import {ACTOR_DOMAINS} from './catalog.mjs?v=cp42-town-life-bcedc4b465f4';
-import {PROFILES} from './community.mjs?v=cp42-town-life-bcedc4b465f4';
+import {ACTOR_DOMAINS} from './catalog.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
+import {PROFILES} from './community.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
 const role=id=>PROFILES[id]?.label||'这位居民';
 const moving=a=>a&&['walk','yield','fold_umbrella'].includes(a.mode);
 const reached=a=>a&&a.reservation!==null&&!moving(a)&&a.path.length===0;

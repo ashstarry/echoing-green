@@ -1,9 +1,9 @@
-import {eventKind} from './scene-events.mjs?v=cp42-town-life-bcedc4b465f4';
-import {stimulateTown} from './town-response.mjs?v=cp42-town-life-bcedc4b465f4';
-import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp42-town-life-bcedc4b465f4';
-import {requestPassengerAction} from './passengers.mjs?v=cp42-town-life-bcedc4b465f4';
-import {requestObjectAction} from './object-actions.mjs?v=cp42-town-life-bcedc4b465f4';
-import {validateDecision} from './catalog.mjs?v=cp42-town-life-bcedc4b465f4';
+import {eventKind} from './scene-events.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
+import {stimulateTown} from './town-response.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
+import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
+import {requestPassengerAction} from './passengers.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
+import {requestObjectAction} from './object-actions.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
+import {validateDecision} from './catalog.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
 
 // Compound goals reuse tested movements, with real completion/occupation checks between steps.
 export const LIFE_PLANS={

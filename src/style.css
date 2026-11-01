@@ -20,3 +20,6 @@ button[data-quality][aria-pressed=true]{border-color:#d9b47d;background:#5a4939}
 .paper-memory{padding:16px;border-left:2px solid #bfaa7e;color:#eddfc2;font-family:serif;line-height:1.9;white-space:pre-wrap;overflow-wrap:anywhere}
 
 footer{width:min(720px,calc(100vw - 28px))}
+
+/* A single line of small invitations; text determines width. */
+.examples{display:flex;flex-wrap:nowrap;align-items:center;justify-content:flex-start;gap:12px;overflow-x:auto;scrollbar-width:none}.examples::-webkit-scrollbar{display:none}.examples button{flex:0 0 auto;width:auto;min-width:0;white-space:nowrap;padding:4px 3px;font-size:11px;letter-spacing:.025em;color:#c7b8a8;background:transparent;border-radius:5px;backdrop-filter:none}.examples button:hover{color:#f0d9b9;background:#d7b7850b}.examples button:focus-visible{outline-offset:0}#poem::placeholder{color:#b2a9a2;opacity:.68}#send{white-space:nowrap;min-width:88px}#focusSuggestion{bottom:156px}@media(max-width:650px){.examples{gap:6px;padding-right:0}.examples button{font-size:10px;padding:4px 2px;letter-spacing:0}#focusSuggestion{bottom:168px}#send{min-width:72px;padding:8px}footer .inputRow{gap:6px}footer .inputRow input{font-size:12px}}

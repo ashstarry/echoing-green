@@ -1,10 +1,10 @@
-import {handWorldPoint} from './prop-attachment.mjs?v=cp42-town-life-bcedc4b465f4';
-import {createDinerActionView} from './diner-action-view.mjs?v=cp42-town-life-bcedc4b465f4';
-import {makeArmSolver} from './arm-ik.mjs?v=cp42-town-life-bcedc4b465f4';
+import {handWorldPoint} from './prop-attachment.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
+import {createDinerActionView} from './diner-action-view.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
+import {makeArmSolver} from './arm-ik.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
 import * as THREE from 'three';
-import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES} from './resident-actions.mjs?v=cp42-town-life-bcedc4b465f4';
-import {PROFILES} from './community.mjs?v=cp42-town-life-bcedc4b465f4';
-import {ease,legPose} from './motion.mjs?v=cp42-town-life-bcedc4b465f4';
+import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES} from './resident-actions.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
+import {PROFILES} from './community.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
+import {ease,legPose} from './motion.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
 const X=new THREE.Vector3(1,0,0),Y=new THREE.Vector3(0,1,0),Z=new THREE.Vector3(0,0,-1);
 const mix=(a,b,t)=>a+(b-a)*t;
 export function createResidentActionView({scene,entities,parts,sockets,localRoutes,support,dinerGestures,diningProps}){

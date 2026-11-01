@@ -1,5 +1,5 @@
-import {interactionStep} from './interaction-sequence.mjs?v=cp42-town-life-bcedc4b465f4';
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp42-town-life-bcedc4b465f4';
+import {interactionStep} from './interaction-sequence.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
 const D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 export const CLOUD_HOME=[11.220066,1.239714,5.5];
 export function ensureCloud(s){const c=s.localCloud??={mode:'rest',phase:'home',center:CLOUD_HOME.slice(),rain:0,clock:0,sequence:0,waypoint:0,route:[],exposures:{},automatic:false,scale:1};c.scale??=1;return c;}

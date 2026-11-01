@@ -1,5 +1,5 @@
-import {ensureCraft,addCraftProp,craftProp} from './craft-world.mjs?v=cp42-town-life-bcedc4b465f4';
-import {requestPassengerAction} from './passengers.mjs?v=cp42-town-life-bcedc4b465f4';
+import {ensureCraft,addCraftProp,craftProp} from './craft-world.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
+import {requestPassengerAction} from './passengers.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
 const traveler='resident.station_traveler';
 export function ensureJourney(s){return s.trainJourney??={mode:'rest',phase:'idle',started:0,phaseAt:0,baselineTrips:0,sequence:0,flags:{}};}
 export function requestJourney(s,mode,emit=()=>{}){const j=ensureJourney(s),p=s.passengers[traveler];if(!p)return;

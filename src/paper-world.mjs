@@ -1,5 +1,5 @@
-import {createInteraction,advanceInteraction,interactionStep,INTERACTION_RECIPES} from './interaction-sequence.mjs?v=cp42-town-life-bcedc4b465f4';
-import {navigationGraph} from './navigation.mjs?v=cp42-town-life-bcedc4b465f4';
+import {createInteraction,advanceInteraction,interactionStep,INTERACTION_RECIPES} from './interaction-sequence.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
+import {navigationGraph} from './navigation.mjs?v=cp43-gentle-fox-7e6aedb16c1c';
 export const PAPER_MODES=new Set(['paper_hang','paper_share','paper_read','paper_collect']);
 export const PAPER_LIMIT=6;
 const STATIONS=[{write:[-2.88,-.56],hang:[-2.72,.24],receive:[-2.4,.88]},{write:[1.92,2],hang:[2.24,.24],receive:[2.88,.72]},{write:[3.04,-.08],hang:[1.44,-1.68],receive:[2.08,-1.68]}];
