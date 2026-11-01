@@ -1,7 +1,7 @@
 import * as THREE from 'three';
-import {legPose,ease} from './motion.mjs?v=cp41-living-core-420fb12de96c';
-import {makeArmSolver} from './arm-ik.mjs?v=cp41-living-core-420fb12de96c';
-import {FIREWORK_FOCUS,EVENT_GAZE_PITCH} from './event-design.mjs?v=cp41-living-core-420fb12de96c';
+import {legPose,ease} from './motion.mjs?v=cp42-town-life-23ec88cd8aa5';
+import {makeArmSolver} from './arm-ik.mjs?v=cp42-town-life-23ec88cd8aa5';
+import {FIREWORK_FOCUS,EVENT_GAZE_PITCH} from './event-design.mjs?v=cp42-town-life-23ec88cd8aa5';
 const X=new THREE.Vector3(1,0,0),Y=new THREE.Vector3(0,1,0),Z=new THREE.Vector3(0,0,-1),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 export function createEventTravelView({entities,parts,sockets,seated={},support}){
  const bases=new Map([...parts].map(([id,o])=>[id,o.quaternion.clone()])),armBase=new Map([...parts].map(([id,o])=>[id,{q:o.quaternion.clone(),p:o.position.clone(),s:o.scale.clone()}])),origins=new Map([...entities].map(([id,o])=>[id,{p:o.position.clone(),q:o.quaternion.clone()}]));

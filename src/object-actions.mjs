@@ -1,4 +1,4 @@
-import {requestResidentAction} from './resident-actions.mjs?v=cp41-living-core-420fb12de96c';
+import {requestResidentAction} from './resident-actions.mjs?v=cp42-town-life-23ec88cd8aa5';
 const definitions={
  kite:{fly:['牵稳线放风筝',1],calm:['让风筝平稳下来',.12]},
  windmill:{slow:['慢慢转',.20],brisk:['轻快地转',.70],stop:['慢慢停住',0],follow_wind:['跟随晚风',null]},
@@ -9,7 +9,7 @@ const definitions={
  fish:{swim:['继续游动',1],nibble:['放慢觅食',.12],rest:['缓缓停留',0]},
  animal:{play:['低身邀玩、轻快小跑，再停下摇尾',1],greet:['走近花园旁可达的居民，摇尾打招呼',1],stretch:['停下伸展前爪、舒展身体',0],explore:['沿熟悉的地方走走',1],sniff:['停下嗅闻',0],look:['抬头留意周围',0],rest:['安静歇息',0]},
  duck:{swim:['沿水面游动',1],nibble:['低头啄食',.12],look:['抬头张望',.15],rest:['安静浮着',0]},
- boat:{bob:['系泊轻摇',1],row:['摆动船桨',1],rest:['船与桨放轻动作',0]},
+ boat:{cruise:['收拢船桨，随水流离岸走一程，再回泊',1],dock:['沿水路慢慢回到泊位',0],bob:['系泊轻摇',1],row:['摆动船桨',1],rest:['船与桨放轻动作',0]},
  water_lantern:{float:['在水上轻浮',1],still:['缓缓停稳',0],shine:['灯心更明亮',1]},
  light:{warm:['橘暖灯火',1],soft:['柔和灯火',.55],dark:['熄下这盏灯',0]},
  star:{glow:['稳定发亮',1],twinkle:['轻轻闪烁',1],dim:['光芒淡下来',.35]},
@@ -24,7 +24,7 @@ const coupled={
  letter:[['check_letter','让邮差核对信件','resident.postman']],
  instrument:[['play','弹奏琴弦',null],['rest','放下拨弦动作',null]],
  watering_can:[['pour','抬壶浇水',null],['rest','把水壶放稳',null]],
- weather:[['rain','让雨落下来',null],['snow','让纸片雪落下',null],['clear','让雨雪收住',null]],
+ weather:[['wander','小雨云沿街走走',null],['garden','小云给花园一点雨',null],['market','小云去集市看看',null],['local_clear','让小云回去休息',null],['rain','让雨落下来',null],['snow','让纸片雪落下',null],['clear','让雨雪收住',null]],
  tram:[['run','到站后继续环镇',null],['hold','到站停候',null]],
  bicycle:[['ride','骑去下一处',null],['rest','到下一处停脚',null]]
 };
@@ -41,7 +41,7 @@ export function requestObjectAction(s,id,action,catalog,apply,{preserveOthers=fa
  if(def.executor==='seat'){const diner=id.endsWith('0')?'resident.upper_diner_0':'resident.upper_diner_1';const d=s.diners[diner];d.manualPolicy=action==='pull_out'?'inside':'dine';d.policy=d.manualPolicy;d.effectivePolicy=d.policy;d.wait=0;s.revision++;return;}
  if(def.executor==='workstation'){const people=['resident.vendor_bread','resident.vendor_flower','resident.vendor_lamp'],n=Number(id.at(-1))||0;return requestResidentAction(s,people[n%3],action==='serve'?'offer_food':'wipe_counter');}
  if(def.executor==='coupled'){
-  if(item.kind==='weather')apply(s,{weather:action});
+  if(item.kind==='weather'){if(['wander','garden','market','local_clear'].includes(action))apply(s,{cloud:action==='local_clear'?'rest':action});else apply(s,{weather:action,...(action==='clear'?{cloud:'rest'}:{})});}
   if(item.kind==='instrument')apply(s,{music:action==='play'?'play':'rest'});
   if(item.kind==='tram')apply(s,{train:action==='run'?'auto':'hold'});
   if(item.kind==='bicycle')apply(s,{cycling:action==='ride'?'ride':'rest'});
@@ -49,7 +49,7 @@ export function requestObjectAction(s,id,action,catalog,apply,{preserveOthers=fa
   if(item.kind==='kite')apply(s,{breeze:action==='fly'?'gentle':'calm'});
   return;
  }
- const old=s.objectControls[id];s.objectControls[id]={kind:item.kind,action,target:def.value,value:old?.value??(item.kind==='windmill'?s.windSpeed:item.kind==='parked_bicycle'||item.kind==='curtain'?0:item.kind==='door'?(s.train.doorOpen||0):1),preserveOthers:!!preserveOthers,phase:old?.phase??(item.kind==='windmill'?s.windPhase:0),started:s.time};s.revision++;if(id==='animal.garden_fox'&&['play','greet','stretch'].includes(action))return{monitor:{type:'fox',value:action+':'+s.time}};
+ const old=s.objectControls[id];s.objectControls[id]={kind:item.kind,action,target:def.value,value:old?.value??(item.kind==='windmill'?s.windSpeed:item.kind==='parked_bicycle'||item.kind==='curtain'?0:item.kind==='door'?(s.train.doorOpen||0):1),preserveOthers:!!preserveOthers,phase:old?.phase??(item.kind==='windmill'?s.windPhase:0),started:s.time};s.revision++;if(id==='boat.pond_boat'&&['cruise','dock'].includes(action))return{monitor:{type:'boat',value:action+':'+s.time}};if(id==='animal.garden_fox'&&['play','greet','stretch'].includes(action))return{monitor:{type:'fox',value:action+':'+s.time}};
 }
 export function advanceObjectControls(s,dt){for(const c of Object.values(s.objectControls)){const target=c.target??s.windSpeed;c.value+=(target-c.value)*Math.min(1,dt*3);c.phase+=c.value*dt*3.1;}}
 export function validateObjectControls(s){if(!s.objectControls||typeof s.objectControls!=='object')throw Error('物件动作存档不完整');for(const c of Object.values(s.objectControls))if(!definitions[c.kind]?.[c.action]||!Number.isFinite(c.value)||!Number.isFinite(c.phase)||!Number.isFinite(c.started))throw Error('物件动作存档无效');}

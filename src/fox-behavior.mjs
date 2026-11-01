@@ -1,4 +1,5 @@
-import {varied} from './cadence.mjs?v=cp41-living-core-420fb12de96c';
+import {rainingAt} from './local-cloud.mjs?v=cp42-town-life-23ec88cd8aa5';
+import {varied} from './cadence.mjs?v=cp42-town-life-23ec88cd8aa5';
 const ID='animal.garden_fox';const D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const modes=new Set(['explore','sniff','look','rest','play','greet','stretch']);
 export function ensureFoxBehavior(s){return s.foxBehavior??={phase:'look',clock:0,duration:2.5,cycle:0,path:[],at:0,velocity:0,blocked:0,neighbor:null,command:null,seenControl:null,completedControl:null,completed:0,suspended:false,reacted:false};}
@@ -10,7 +11,8 @@ function beginWalk(s,data,m,f,goalMode){
  const ps=people(s),start=nearest(data.nodes,m.p),blocked=new Set(data.nodes.flatMap((p,i)=>ps.some(a=>D(p,a.p)<.87)?[i]:[]));blocked.delete(start);
  let neighbor=null;if(goalMode==='greet')neighbor=ps.filter(a=>D(m.p,a.p)<5&&!a.actor.interactionLock&&s.sceneEvent?.slots?.[a.id]===undefined&&!s.residentActions?.[a.id]?.requested&&!a.id.includes('vendor')).sort((a,b)=>(a.id.includes('child')?-.7:0)+D(m.p,a.p)-((b.id.includes('child')?-.7:0)+D(m.p,b.p)))[0];
  if(goalMode==='greet'&&!neighbor){f.phase='look';f.goalMode=goalMode;f.clock=0;f.duration=2.5;f.neighbor=null;f.path=[];return false;}
- const options=data.nodes.map((p,i)=>({p,i,d:D(p,m.p)})).filter(x=>!blocked.has(x.i)&&x.d>.75&&x.d<3.4&&(!neighbor||D(x.p,neighbor.p)>1.0&&D(x.p,neighbor.p)<1.9)).sort((a,b)=>neighbor?D(a.p,neighbor.p)-D(b.p,neighbor.p):Math.abs(a.d-1.4)-Math.abs(b.d-1.4)||((a.i+f.cycle*17)%23)-((b.i+f.cycle*17)%23));
+ const leaf=goalMode==='leaf'?s.craftWorld?.leaves.find(p=>!p.collected&&D(p.center,m.p)<3.5):null;
+ const options=data.nodes.map((p,i)=>({p,i,d:D(p,m.p)})).filter(x=>!blocked.has(x.i)&&x.d>.75&&x.d<3.4&&(goalMode!=='shelter'||!rainingAt(s,x.p))&&(!neighbor||D(x.p,neighbor.p)>1.0&&D(x.p,neighbor.p)<1.9)).sort((a,b)=>neighbor?D(a.p,neighbor.p)-D(b.p,neighbor.p):leaf?Math.abs(D(a.p,leaf.center)-.85)-Math.abs(D(b.p,leaf.center)-.85):Math.abs(a.d-1.4)-Math.abs(b.d-1.4)||((a.i+f.cycle*17)%23)-((b.i+f.cycle*17)%23));
  for(const x of options){let path=route(data,start,x.i,blocked);if(!path.length)continue;f.path=path.filter((n,i)=>i===0||i===path.length-1||Math.abs(Math.atan2(data.nodes[n][1]-data.nodes[path[i-1]][1],data.nodes[n][0]-data.nodes[path[i-1]][0])-Math.atan2(data.nodes[path[i+1]][1]-data.nodes[n][1],data.nodes[path[i+1]][0]-data.nodes[n][0]))>.01);f.at=0;f.goalMode=goalMode;f.neighbor=neighbor?.id||null;f.phase='walk';f.clock=0;f.blocked=0;f.reacted=false;return true;}
  f.phase=goalMode==='greet'&&neighbor?'greet':'look';f.neighbor=neighbor?.id||null;f.clock=0;f.duration=goalMode==='greet'?6:3;return false;
 }
@@ -23,6 +25,7 @@ export function advanceFox(s,data,dt,requestGesture=()=>{}){
  }
  const held=['sniff','look','rest'].includes(c?.action)?c.action:!c&&s.animals==='rest'?'rest':null;
  if(held){f.phase=held;f.path=[];f.velocity=0;f.clock+=dt;m.speed=0;m.strideWeight+=(0-m.strideWeight)*Math.min(1,dt*8);m.intent=held;return true;}
+ if(!held&&(!c||f.completedControl===key)){const wet=!s.localCloud?.preserveOthers&&rainingAt(s,m.p);if(wet&&!f.rainReacted){f.rainReacted=true;beginWalk(s,data,m,f,'shelter');}if(!wet)f.rainReacted=false;const leaf=s.craftWorld?.leaves.find(p=>!p.collected&&D(p.center,m.p)<3.5&&f.lastLeaf!==p.id);if(!wet&&leaf&&f.phase!=='walk'){f.lastLeaf=leaf.id;beginWalk(s,data,m,f,'leaf');}}
  f.clock+=dt;
  if(f.phase==='walk'){
   const n=f.path[f.at],p=data.nodes[n];if(!p){f.phase=f.goalMode==='greet'?'greet':f.goalMode==='play'?'play':'sniff';f.duration=f.phase==='greet'?6.5:f.phase==='play'?3.2:varied([3,5],ID,f.cycle);f.clock=0;f.velocity=0;f.path=[];return true;}

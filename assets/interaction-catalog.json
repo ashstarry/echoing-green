@@ -1,5 +1,5 @@
 {
-  "component": "paper_note",
+  "checkpoint": 42,
   "primitives": {
     "approach": {
       "kind": "move"
@@ -74,9 +74,428 @@
     "pack": {
       "kind": "pose",
       "seconds": 2.5
+    },
+    "pour": {
+      "kind": "pose",
+      "seconds": 3.4
+    },
+    "sip": {
+      "kind": "pose",
+      "seconds": 4.5
+    },
+    "taste": {
+      "kind": "pose",
+      "seconds": 4.5
+    },
+    "sweep": {
+      "kind": "pose",
+      "seconds": 6
+    },
+    "dry": {
+      "kind": "pose",
+      "seconds": 8
+    },
+    "pair_walk": {
+      "kind": "move"
+    },
+    "close": {
+      "kind": "pose",
+      "seconds": 2.1
     }
   },
   "recipes": {
+    "snack_host": [
+      {
+        "action": "open"
+      },
+      {
+        "action": "take"
+      },
+      {
+        "action": "offer",
+        "waitFor": "recipient"
+      },
+      {
+        "action": "wipe"
+      },
+      {
+        "action": "close"
+      }
+    ],
+    "snack_guest": [
+      {
+        "action": "approach",
+        "target": "destination"
+      },
+      {
+        "action": "receive",
+        "waitFor": "received"
+      },
+      {
+        "action": "taste"
+      },
+      {
+        "action": "place"
+      },
+      {
+        "action": "welcome"
+      }
+    ],
+    "tea_host": [
+      {
+        "action": "open"
+      },
+      {
+        "action": "pour"
+      },
+      {
+        "action": "take"
+      },
+      {
+        "action": "offer",
+        "waitFor": "recipient"
+      },
+      {
+        "action": "wipe"
+      },
+      {
+        "action": "close"
+      }
+    ],
+    "tea_guest": [
+      {
+        "action": "approach",
+        "target": "destination"
+      },
+      {
+        "action": "receive",
+        "waitFor": "received"
+      },
+      {
+        "action": "sip"
+      },
+      {
+        "action": "place"
+      },
+      {
+        "action": "welcome"
+      }
+    ],
+    "umbrella_lender": [
+      {
+        "action": "approach",
+        "target": "supply"
+      },
+      {
+        "action": "take"
+      },
+      {
+        "action": "offer",
+        "waitFor": "recipient"
+      },
+      {
+        "action": "pair_walk",
+        "target": "destination"
+      },
+      {
+        "action": "receive",
+        "waitFor": "returned"
+      },
+      {
+        "action": "fold"
+      },
+      {
+        "action": "stow"
+      }
+    ],
+    "umbrella_borrower": [
+      {
+        "action": "approach",
+        "target": "supply"
+      },
+      {
+        "action": "receive",
+        "waitFor": "received"
+      },
+      {
+        "action": "unfold"
+      },
+      {
+        "action": "pair_walk",
+        "target": "destination"
+      },
+      {
+        "action": "close"
+      },
+      {
+        "action": "offer",
+        "waitFor": "lender"
+      },
+      {
+        "action": "welcome"
+      }
+    ],
+    "sweep_leaves": [
+      {
+        "action": "approach",
+        "target": "destination"
+      },
+      {
+        "action": "take"
+      },
+      {
+        "action": "sweep",
+        "when": "leaves_spread"
+      },
+      {
+        "action": "collect"
+      },
+      {
+        "action": "stow"
+      },
+      {
+        "action": "admire"
+      }
+    ],
+    "keep_memory": [
+      {
+        "action": "approach",
+        "target": "supply"
+      },
+      {
+        "action": "take"
+      },
+      {
+        "action": "read"
+      },
+      {
+        "action": "carry",
+        "target": "destination"
+      },
+      {
+        "action": "collect",
+        "when": "occupied"
+      },
+      {
+        "action": "stow",
+        "when": "occupied"
+      },
+      {
+        "action": "place"
+      },
+      {
+        "action": "read"
+      }
+    ],
+    "read_memory": [
+      {
+        "action": "approach",
+        "target": "destination"
+      },
+      {
+        "action": "take"
+      },
+      {
+        "action": "read"
+      },
+      {
+        "action": "place"
+      }
+    ],
+    "putaway_memory": [
+      {
+        "action": "approach",
+        "target": "destination"
+      },
+      {
+        "action": "take"
+      },
+      {
+        "action": "read"
+      },
+      {
+        "action": "fold"
+      },
+      {
+        "action": "stow"
+      }
+    ],
+    "laundry_batch": [
+      {
+        "action": "approach",
+        "target": "supply",
+        "propIndex": 0
+      },
+      {
+        "action": "take",
+        "propIndex": 0
+      },
+      {
+        "action": "unfold",
+        "propIndex": 0
+      },
+      {
+        "action": "carry",
+        "target": "destination",
+        "propIndex": 0
+      },
+      {
+        "action": "hang",
+        "propIndex": 0
+      },
+      {
+        "action": "approach",
+        "target": "supply",
+        "propIndex": 1
+      },
+      {
+        "action": "take",
+        "propIndex": 1
+      },
+      {
+        "action": "unfold",
+        "propIndex": 1
+      },
+      {
+        "action": "carry",
+        "target": "destination",
+        "propIndex": 1
+      },
+      {
+        "action": "hang",
+        "propIndex": 1
+      },
+      {
+        "action": "dry",
+        "propIndex": 1
+      },
+      {
+        "action": "collect",
+        "propIndex": 1
+      },
+      {
+        "action": "fold",
+        "propIndex": 1
+      },
+      {
+        "action": "carry",
+        "target": "supply",
+        "propIndex": 1
+      },
+      {
+        "action": "stow",
+        "propIndex": 1
+      },
+      {
+        "action": "approach",
+        "target": "destination",
+        "propIndex": 0
+      },
+      {
+        "action": "collect",
+        "propIndex": 0
+      },
+      {
+        "action": "fold",
+        "propIndex": 0
+      },
+      {
+        "action": "carry",
+        "target": "supply",
+        "propIndex": 0
+      },
+      {
+        "action": "stow",
+        "propIndex": 0
+      }
+    ],
+    "collect_laundry_batch": [
+      {
+        "action": "approach",
+        "target": "destination",
+        "propIndex": 0
+      },
+      {
+        "action": "collect",
+        "propIndex": 0
+      },
+      {
+        "action": "fold",
+        "propIndex": 0
+      },
+      {
+        "action": "carry",
+        "target": "supply",
+        "propIndex": 0
+      },
+      {
+        "action": "stow",
+        "propIndex": 0
+      },
+      {
+        "action": "approach",
+        "target": "destination",
+        "propIndex": 1,
+        "when": "has_second"
+      },
+      {
+        "action": "collect",
+        "propIndex": 1,
+        "when": "has_second"
+      },
+      {
+        "action": "fold",
+        "propIndex": 1,
+        "when": "has_second"
+      },
+      {
+        "action": "carry",
+        "target": "supply",
+        "propIndex": 1,
+        "when": "has_second"
+      },
+      {
+        "action": "stow",
+        "propIndex": 1,
+        "when": "has_second"
+      }
+    ],
+    "give_parcel": [
+      {
+        "action": "approach",
+        "target": "destination"
+      },
+      {
+        "action": "offer",
+        "waitFor": "recipient"
+      },
+      {
+        "action": "welcome"
+      }
+    ],
+    "receive_parcel": [
+      {
+        "action": "approach",
+        "target": "destination"
+      },
+      {
+        "action": "receive",
+        "waitFor": "received"
+      },
+      {
+        "action": "read"
+      },
+      {
+        "action": "carry",
+        "target": "supply"
+      },
+      {
+        "action": "place"
+      },
+      {
+        "action": "welcome"
+      }
+    ],
     "receive_prop": [
       {
         "action": "approach",
@@ -344,70 +763,42 @@
       }
     ]
   },
-  "operations": [
-    "hang",
-    "share",
-    "read",
-    "collect",
-    "rest"
-  ],
-  "eligible_writers": [
-    "resident.customer_one",
-    "resident.customer_two",
-    "resident.customer_three",
-    "resident.market_browser",
-    "resident.strolling_parent",
-    "resident.courier"
-  ],
-  "shared_binding_users": [
-    "paper notes",
-    "hand lanterns",
-    "cups and snacks"
-  ],
-  "display_limit": 6,
-  "history_limit": 12,
-  "notes": "Five thematic systems share real movement, taking, carrying, giving, placing and storage. Component grips and reachable stations are authored; this is not arbitrary generated behavior. A homecoming is a doorstep welcome, not unrestricted interior navigation.",
-  "components": [
-    "paper_note",
-    "food_tray",
-    "stool",
-    "lantern",
-    "goods_crate",
-    "bench",
-    "cloth",
-    "flowerpot",
-    "parcel",
-    "home_sliding_door"
-  ],
-  "neighborhood_operations": [
-    "homecoming",
-    "prepare",
-    "reopen",
-    "spring",
-    "rest"
-  ],
-  "core_extensions": {
-    "fox": {
-      "actions": [
-        "explore",
-        "sniff",
-        "look",
-        "rest",
-        "play",
-        "greet",
-        "stretch"
-      ],
-      "movement": "101 checked garden paving nodes; no unrestricted town roaming",
-      "interacting_residents": "one nearby reachable resident; obey preserveOthers"
-    },
-    "train": {
-      "goals": [
-        "depart",
-        "welcome",
-        "rest"
-      ],
-      "reuse": "existing traveler, boarding ramp, passenger door, car, station figures",
-      "new_entities": 0
-    }
+  "limits": {
+    "memory": 6,
+    "cloth": 2,
+    "coreResidents": 32
+  },
+  "flows": {
+    "fox_actions": 7,
+    "journey_goals": [
+      "depart",
+      "welcome",
+      "deliver",
+      "rest"
+    ],
+    "cloud_goals": [
+      "wander",
+      "garden",
+      "market",
+      "rest"
+    ],
+    "craft_goals": [
+      "tea",
+      "snack",
+      "umbrella",
+      "leaves",
+      "remember",
+      "recall",
+      "putaway",
+      "laundry",
+      "bring_in",
+      "rest"
+    ],
+    "primitives": 26,
+    "recipes": 27,
+    "keepsake_limit": 6,
+    "cloth_limit": 2,
+    "boat_one_way_distance": 2.52,
+    "note": "Shared recipes reuse existing residents and small props. Counts are behavior goals, not unique animation clips."
   }
 }

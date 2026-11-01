@@ -1,10 +1,12 @@
+import {smallProps} from './small-props.mjs?v=cp42-town-life-23ec88cd8aa5';
 import * as THREE from 'three';
-import {makeArmSolver} from './arm-ik.mjs?v=cp41-living-core-420fb12de96c';
-import {handWorldPoint} from './prop-attachment.mjs?v=cp41-living-core-420fb12de96c';
-import {interactionStep,INTERACTION_PRIMITIVES} from './interaction-sequence.mjs?v=cp41-living-core-420fb12de96c';
-import {HOME} from './neighborhood-world.mjs?v=cp41-living-core-420fb12de96c';
+import {makeArmSolver} from './arm-ik.mjs?v=cp42-town-life-23ec88cd8aa5';
+import {handWorldPoint} from './prop-attachment.mjs?v=cp42-town-life-23ec88cd8aa5';
+import {interactionStep,INTERACTION_PRIMITIVES} from './interaction-sequence.mjs?v=cp42-town-life-23ec88cd8aa5';
+import {HOME} from './neighborhood-world.mjs?v=cp42-town-life-23ec88cd8aa5';
 const ease=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};
 export function createNeighborhoodView({scene,entities,parts,sockets}){
+ const shared=smallProps(scene);
  const group=new THREE.Group();group.name='Neighborhood reusable props';group.userData.runtime_effect_id='effect.neighborhood_work';scene.add(group);
  const base=new Map([...parts].map(([id,o])=>[id,{p:o.position.clone(),q:o.quaternion.clone(),s:o.scale.clone()}])),solve=makeArmSolver({entities,parts,sockets,base}),objects=new Map(),cloths=new Map();
  let texture=null;scene.traverse(o=>{if(o.isMesh&&o.material?.name==='WEB paper'&&!texture)texture=o.material.map;});
@@ -26,7 +28,7 @@ export function createNeighborhoodView({scene,entities,parts,sockets}){
    round(root,0,.25,0,.18,.38,mats.amber);for(const y of[.055,.445])round(root,0,y,0,.16,.025,mats.wood);for(let j=0;j<8;j++){const a=j*Math.PI/4;box(root,Math.sin(a)*.175,.25,Math.cos(a)*.175,.008,.37,.008,mats.cream);}const h=new THREE.Mesh(handleGeo,mats.wood);h.position.y=.445;root.add(h);
   }else if(p.type==='flowerpot'){
    round(root,0,.13,0,.19,.24,mats.red);round(root,0,.26,0,.205,.045,mats.wood);for(let j=0;j<3;j++)petals.push(...flower(root,(j-1)*.13,.22,(j%2)*.1,j));
-  }else if(p.type==='parcel'){box(root,0,.15,0,.32,.28,.25,mats.blue);box(root,0,.294,0,.035,.012,.26,mats.cream);box(root,0,.15,.128,.035,.28,.01,mats.cream);}else box(root,0,.01,0,.27,.012,.24,mats.blue);
+  }else if(p.type==='parcel'){root.add(shared.make('parcel'));}else box(root,0,.01,0,.27,.012,.24,mats.blue);
   const o={root,petals};objects.set(p.id,o);return o;
  }
  // A small double sliding door fits the existing postal-home facade gap.

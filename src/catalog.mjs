@@ -19,7 +19,9 @@ Object.assign(DOMAINS,{
 DOMAINS.day_phase={label:'日夜',choices:{keep:'保留当前时段',dawn:'晨曦渐亮',day:'明亮白昼',dusk:'温暖黄昏',night:'灯火夜晚，街巷仍清楚'}};
 DOMAINS.paper={label:'纸笺',choices:{keep:'保持纸笺的安排',hang:'写下思念或祝愿，折好纸笺，挂到树边留下',share:'写一张感谢或心意，折好后亲手递给邻居',read:'走到树边，读一读最近留下的纸笺',collect:'走到树边，取下一张纸笺，读过后折好收起',rest:'停止新的纸笺活动，收好手里的纸，保留已经挂好的纸笺'}};
 DOMAINS.neighborhood={label:'街坊一起做的事',choices:{keep:'保持街坊当前安排',homecoming:'留一盏灯等晚归的人：居民走向家门、开门迎接、暖窗亮起',prepare:'一起筹备庆祝：搬小凳、摆点心、递纸灯，准备好后邻居相聚',reopen:'雨后重新开始：收伞、擦椅、重新摆回商品，自行车与小动物恢复活动',spring:'把春天带到街角：搬花盆、折纸花展开、孩子牵风筝、居民扶帽，风铃轻响',rest:'停止新的街坊协作，收好手里的东西，保留已经摆好的小物'}};
-DOMAINS.journey={label:'电车上的一段旅程',choices:{keep:'保持当前行程',depart:'请现有旅客乘电车绕镇一程，邻居送行，回来后再下车',welcome:'迎接这位旅客回来：在车上的人到站下车，尚在站台的人先完成一程再归来',rest:'先不安排新的乘车，已上车的人安全到站再下车'}};
+DOMAINS.journey={label:'电车上的一段旅程',choices:{keep:'保持当前行程',deliver:'用现有电车捎一件包裹，旅客回来后与街坊交接',depart:'请现有旅客乘电车绕镇一程，邻居送行，回来后再下车',welcome:'迎接这位旅客回来：在车上的人到站下车，尚在站台的人先完成一程再归来',rest:'先不安排新的乘车，已上车的人安全到站再下车'}};
+DOMAINS.craft={label:'街边的小日子',choices:{keep:'保持现在的安排',tea:'开蒸笼、倒一杯热茶，递给一位走近的客人',snack:'揭开热蒸笼，把点心递给一位客人',umbrella:'借一把伞，两位居民一起走一段，再收伞归还',leaves:'纸叶落在小路上，居民扫拢、装篮整理',remember:'把这份心情留成一件小纪念，放在已有柜台的纪念角',recall:'走到纪念角，拿起最近的一件看看，再放回',putaway:'拿起最近的一件纪念，读过后收好',laundry:'取布展开、挂在屋檐边随风，再收下折好',bring_in:'把正在晾晒的布收下来折好',rest:'收好手里的东西，停止新的小活动'}};
+DOMAINS.cloud={label:'小雨云',choices:{keep:'保持小雨云状态',wander:'现有小雨云缓缓经过几条街，只在云下面落一小片雨',garden:'小雨云走到花园上方，下一小阵局部雨',market:'小雨云走到集市附近，下一小阵局部雨',rest:'收住局部雨，小云慢慢回到原来的位置'}};
 export const KEEP={};
 export function validateDecision(input){if(!input||typeof input!=='object'||Array.isArray(input))throw Error('决策格式无效');for(const [k,v]of Object.entries(input))if(!Object.hasOwn(DOMAINS,k)||typeof v!=='string'||!Object.hasOwn(DOMAINS[k].choices,v))throw Error('决策包含未开放的动作');return {...KEEP,...input};}
 export const labels={'resident.customer_two':'二号餐厅客人','resident.customer_three':'三号餐厅客人','resident.postman':'邮局的邮差','resident.child_runner':'小跑的孩子','resident.market_browser':'逛集市的居民','resident.customer_one':'餐厅门前的客人','resident.courier':'巷口的送信人','resident.garden_child':'花园里的孩子','resident.strolling_parent':'散步的家长'};
@@ -35,6 +37,10 @@ CHOICE_LABELS.paper={hang:'挂一张纸笺',share:'递一张心意',read:'读一
 
 CHOICE_LABELS.neighborhood={homecoming:'留灯迎归人',prepare:'一起筹备庆祝',reopen:'雨后重新开张',spring:'让春天走进街角',rest:'收好手里的东西'};
 
-CHOICE_LABELS.journey={depart:'送旅客乘一程',welcome:'接旅客回来',rest:'先不安排新行程'};
+CHOICE_LABELS.journey={deliver:'电车捎来包裹',depart:'送旅客乘一程',welcome:'接旅客回来',rest:'先不安排新行程'};
 
 labels['animal.garden_fox']='花园的小狐狸';
+
+CHOICE_LABELS.craft={tea:'来杯热茶',snack:'揭开蒸笼',umbrella:'借伞陪一段路',leaves:'整理落叶',remember:'留一件纪念',recall:'看看纪念',putaway:'收起纪念',laundry:'晾一晾小布巾',bring_in:'把布巾收回来',rest:'先收好东西'};
+
+CHOICE_LABELS.cloud={wander:'小云去街上走走',garden:'小云给花园一点雨',market:'小云去集市看看',rest:'让小云回去休息'};

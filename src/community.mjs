@@ -1,6 +1,7 @@
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp41-living-core-420fb12de96c';
-import {advanceSceneEvent,requestSceneEvent,sceneTask} from './scene-events.mjs?v=cp41-living-core-420fb12de96c';
-import {CADENCE,varied,stableUnit} from './cadence.mjs?v=cp41-living-core-420fb12de96c';
+import {rainingAt} from './local-cloud.mjs?v=cp42-town-life-23ec88cd8aa5';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp42-town-life-23ec88cd8aa5';
+import {advanceSceneEvent,requestSceneEvent,sceneTask} from './scene-events.mjs?v=cp42-town-life-23ec88cd8aa5';
+import {CADENCE,varied,stableUnit} from './cadence.mjs?v=cp42-town-life-23ec88cd8aa5';
 export const ACTIVITIES={
  hop:{label:'找一块空地跳两下',range:[3,6],zone:'playground'},follow:{label:'跟着孩子换个位置',range:[4,8],zone:'family'},
  play:{label:'给街坊弹一段琴',range:[18,35]},
@@ -16,7 +17,7 @@ export function requestFestival(s){if(s.worldEvent?.phase==='show'){s.worldEvent
 export function updateDirector(s,dt,emit,nav){
  advanceSceneEvent(s,nav,dt,emit);
  if(s.festivalAuto&&!s.sceneEvent&&['dusk','night'].includes(s.day_phase)&&s.time>=s.festivalNextAt)requestSceneEvent(s,{festival:'fireworks'},emit,{automatic:true});
- s.effectiveMusic=s.sceneEvent?.kind==='music'&&!s.sceneEvent.silentMusic&&['gather','active'].includes(s.sceneEvent.phase)?'play':s.weather==='rain'&&!s.musicManual||s.sceneEvent?.kind==='festival'&&s.sceneEvent.phase==='active'?'rest':s.music;
+ s.effectiveMusic=s.sceneEvent?.kind==='music'&&!s.sceneEvent.silentMusic&&['gather','active'].includes(s.sceneEvent.phase)?'play':rainingAt(s,nav.activities.spaces.residents['resident.musician'].position)&&!s.musicManual||s.sceneEvent?.kind==='festival'&&s.sceneEvent.phase==='active'?'rest':s.music;
  for(const[id,d]of Object.entries(s.diners)){const festival=s.sceneEvent?.kind==='festival'&&['gather','active'].includes(s.sceneEvent.phase);const policy=d.manualPolicy||(s.dining!=='auto'?s.dining:s.weather==='rain'?'inside':festival||s.occasion==='supper'?'dine':'auto');if(d.effectivePolicy!==policy){d.effectivePolicy=policy;d.policy=policy;d.wait=Math.min(d.wait,varied([1,4],id,s.planRevision));}}
 }
 export function wantedTask(s,a){
@@ -44,7 +45,7 @@ export function updateResidents(s,nav,dt){
   if(!a?.mobile&&p.role!=='diner'){
    let next=null,reason='按自己的习惯过晚间生活';
    if(s.roleOverrides?.[id]?.until>s.time){next=s.roleOverrides[id].activity;reason='正在试一试这个活动';}
-   else if(s.weather==='rain'){next=p.role==='vendor'?'tidy':p.role==='musician'?'rest':'shelter';reason=p.role==='vendor'?'下雨了，先照看摊上的东西':'等雨小一些，留意身边的人';}
+   else if(rainingAt(s,a?.p||nav.activities.spaces.residents[id]?.position||[99,99,0])){next=p.role==='vendor'?'tidy':p.role==='musician'?'rest':'shelter';reason=p.role==='vendor'?'下雨了，先照看摊上的东西':'等雨小一些，留意身边的人';}
    else if(s.worldEvent.kind==='festival'&&['prepare','show','linger'].includes(s.worldEvent.phase)){next=s.worldEvent.phase==='linger'?'applaud':'fireworks';reason='听见花火的动静，在自己的位置看夜空';}
    else if(s.train.mode==='dwell'&&s.time-s.train.arrivedAt<4&&p.role==='station'){next='signal';reason='电车进站，和车上的人打个招呼';}
    else if(p.role==='vendor'&&s.sceneEvent?.phase==='closing'&&['market','supper'].includes(s.sceneEvent.kind)){next='tidy';reason='收好餐具，和最后的客人道别';}
@@ -74,6 +75,6 @@ export function updateResidents(s,nav,dt){
   if(r.activity==='kite')r.gesture=(.5-.5*Math.cos(phase*3.5))*Math.min(1,phase);
   if(r.activity==='chat'){const buddy=a?.chatPartner||p.buddy;if(!buddy)r.gesture=0;else{const turn=(s.time%7)<3.5;if((id<buddy)!==turn)r.gesture*=.12;}}
   const safe=a?.mobile&&!a.atHome?nav.activities.spaces.nodes[a.node]?.umbrellaClear:nav.activities.spaces.residents[id]?.umbrellaClear;const covered=a?.mobile&&!a.atHome?nav.activities.spaces.nodes[a.node]?.covered:nav.activities.spaces.residents[id]?.covered;
-  const eligible=p.role==='walker'||['garden','watch'].includes(p.role);const want=eligible&&!s.localWalkers?.[id]&&s.weather==='rain'&&safe&&!covered&&!a?.path?.length&&!['resident.water_visitor','resident.water_companion','resident.kite_child'].includes(id);r.umbrellaOpen+=(Number(want)-r.umbrellaOpen)*Math.min(1,dt*3.5);
+  const eligible=p.role==='walker'||['garden','watch'].includes(p.role);const want=eligible&&!s.localWalkers?.[id]&&rainingAt(s,origin)&&!a?.interactionLock&&safe&&!covered&&!a?.path?.length&&!['resident.water_visitor','resident.water_companion','resident.kite_child'].includes(id);r.umbrellaOpen+=(Number(want)-r.umbrellaOpen)*Math.min(1,dt*3.5);
  }
 }

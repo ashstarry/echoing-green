@@ -1,3 +1,4 @@
+import {CRAFT_EN} from './craft-english.mjs?v=cp42-town-life-23ec88cd8aa5';
 // Source strings remain stable in the simulation and saves. Only presentation is translated.
 export const EN=Object.fromEntries(`
 言外=Echoing Green
@@ -975,3 +976,5 @@ Object.assign(EN,{
   "暂时没有新的旅程": "No new journey is planned",
   "花园已检查的铺装区域；不能追遍全镇或进屋": "Within the checked garden paths; no unrestricted roaming or indoor access"
 });
+
+Object.assign(EN,CRAFT_EN);

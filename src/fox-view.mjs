@@ -1,4 +1,4 @@
-import * as THREE from 'three';import{foxPose}from'./fox-behavior.mjs?v=cp41-living-core-420fb12de96c';
+import * as THREE from 'three';import{foxPose}from'./fox-behavior.mjs?v=cp42-town-life-23ec88cd8aa5';
 const PITCH=new THREE.Vector3(0,0,-1),UP=new THREE.Vector3(0,1,0);
 export function createFoxView({entities,parts}){const id='animal.garden_fox',root=entities.get(id),base=new Map([...parts].filter(([k])=>k.startsWith(id+'/')).map(([k,p])=>[k,p.quaternion.clone()]));function rotate(name,axis,angle){const p=parts.get(id+'/'+name),b=base.get(id+'/'+name);if(p&&b)p.quaternion.copy(b).multiply(new THREE.Quaternion().setFromAxisAngle(axis,angle));}
  return{frame(s){if(!root)return;const p=foxPose(s);if(s.foxBehavior?.suspended)return;rotate('head',PITCH,-p.headPitch);parts.get(id+'/head')?.quaternion.multiply(new THREE.Quaternion().setFromAxisAngle(UP,p.headTurn));rotate('tail',UP,p.tail);if(p.front){for(let i=0;i<4;i++)rotate('leg_'+i,PITCH,[0,2].includes(i)?p.front:p.back);}if(p.lift){const v=root.getWorldPosition(new THREE.Vector3());v.y+=p.lift;if(root.parent)root.parent.worldToLocal(v);root.position.copy(v);}}};}

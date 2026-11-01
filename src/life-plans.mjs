@@ -1,9 +1,9 @@
-import {eventKind} from './scene-events.mjs?v=cp41-living-core-420fb12de96c';
-import {stimulateTown} from './town-response.mjs?v=cp41-living-core-420fb12de96c';
-import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp41-living-core-420fb12de96c';
-import {requestPassengerAction} from './passengers.mjs?v=cp41-living-core-420fb12de96c';
-import {requestObjectAction} from './object-actions.mjs?v=cp41-living-core-420fb12de96c';
-import {validateDecision} from './catalog.mjs?v=cp41-living-core-420fb12de96c';
+import {eventKind} from './scene-events.mjs?v=cp42-town-life-23ec88cd8aa5';
+import {stimulateTown} from './town-response.mjs?v=cp42-town-life-23ec88cd8aa5';
+import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp42-town-life-23ec88cd8aa5';
+import {requestPassengerAction} from './passengers.mjs?v=cp42-town-life-23ec88cd8aa5';
+import {requestObjectAction} from './object-actions.mjs?v=cp42-town-life-23ec88cd8aa5';
+import {validateDecision} from './catalog.mjs?v=cp42-town-life-23ec88cd8aa5';
 
 // Compound goals reuse tested movements, with real completion/occupation checks between steps.
 export const LIFE_PLANS={
@@ -20,7 +20,7 @@ const EXTRA={inside:['resident.upper_diner_0','resident.upper_diner_1'],dine:['r
 export function supportsResident(id,action){return !!(RESIDENT_CAPABILITIES[id]?.includes(action)||EXTRA[action]?.includes(id)||LIFE_PLANS[action]?.actors.includes(id));}
 const blockedInRain=new Set(['read_pages','feed_pond','water_plants','walk_street','visit_market','listen_music','seek_neighbor','watch_pond','hop','kite_play','cycle_trip']);
 export function createIntentRuntime(){return {jobs:[],seen:[],sequence:0,lastDay:'dusk',daily:[],lastReceipt:null};}
-export function queueIntent(s,items,{id=`local-plan-${s.revision+1}-${s.intentRuntime.sequence+1}`,expectedRevision=s.revision,source='words',sourceText='',preserveOthers=false}={},catalog={}){
+export function queueIntent(s,items,{id=`local-plan-${s.revision+1}-${s.intentRuntime.sequence+1}`,expectedRevision=s.revision,source='words',sourceText='',preserveOthers=false,selectedMemory=null}={},catalog={}){
  if(expectedRevision!==s.revision)return{accepted:false,reason:'stale'};
  if(s.intentRuntime.seen.includes(id))return{accepted:false,reason:'duplicate'};
  if(!Array.isArray(items)||items.length>60)throw Error('计划项数无效');
@@ -32,8 +32,9 @@ export function queueIntent(s,items,{id=`local-plan-${s.revision+1}-${s.intentRu
   if(owner){if(!supportsResident(owner,goal))throw Error('这个物件尚未连接到使用者动作');return{...item,origin_object:item.target,kind:'resident',target:owner,action:goal};}return item;});
  if(source==='words'&&s.sceneEvent){for(const item of items)if(item.kind==='resident'){if(!s.sceneEvent.protectedIds.includes(item.target))s.sceneEvent.protectedIds.push(item.target);delete s.sceneEvent.slots[item.target];}}
  s.intentRuntime.seen.push(id);s.intentRuntime.seen=s.intentRuntime.seen.slice(-50);
+ if(source==='words'&&sourceText&&!items.every(i=>i.kind==='macro'&&i.target==='craft'&&['remember','recall','putaway','rest'].includes(i.action)))s.lastWish={text:String(sourceText).slice(0,160),at:s.time,kind:items.some(i=>i.target==='journey')?'journey':items.find(i=>i.target==='craft')?.action||items.find(i=>i.target==='neighborhood')?.action||'note'};
  const receipt={id,source,started:s.time,targets:items.map(x=>x.target),count:items.length};
- for(const item of items){for(const j of s.intentRuntime.jobs)if(j.target===item.target&&!['done','cancelled','failed'].includes(j.status))j.status='cancelled';const definition=LIFE_PLANS[item.action];s.intentRuntime.jobs.push({...item,id:`${id}/${++s.intentRuntime.sequence}`,requestId:id,status:'pending',step:0,steps:definition?structuredClone(definition.steps):[item.action],started:s.time,updated:s.time,source,preserveOthers:!!preserveOthers,sourceText:String(sourceText||'').slice(0,160),reason:'等当前动作安全结束'});}
+ for(const item of items){for(const j of s.intentRuntime.jobs)if(j.target===item.target&&!['done','cancelled','failed'].includes(j.status))j.status='cancelled';const definition=LIFE_PLANS[item.action];s.intentRuntime.jobs.push({...item,id:`${id}/${++s.intentRuntime.sequence}`,requestId:id,status:'pending',step:0,steps:definition?structuredClone(definition.steps):[item.action],started:s.time,updated:s.time,source,selectedMemory,preserveOthers:!!preserveOthers,sourceText:String(sourceText||'').slice(0,160),reason:'等当前动作安全结束'});}
  s.intentRuntime.jobs=s.intentRuntime.jobs.filter(j=>!['done','cancelled','failed'].includes(j.status)||s.time-j.updated<90).slice(-80);
  if(source!=='day_rhythm'){s.intentRuntime.lastReceipt=receipt;s.revision++;if(!eventKind(Object.fromEntries(items.filter(i=>i.kind==='macro').map(i=>[i.target,i.action]))))stimulateTown(s,items,{id});}return{accepted:true,receipt};
 }
@@ -46,7 +47,7 @@ function startResident(s,j,action,apply){const id=j.target;
  const def=RESIDENT_ACTIONS[action];if(def.destination&&s.localWalkers[id]?.anchor===def.destination&&!s.localWalkers[id].clip)return{type:'immediate'};
  const r=s.residentActions[id],before=r.completed;requestResidentAction(s,id,action);return{type:'resident',action,before};
 }
-function complete(s,j){const m=j.monitor;if(!m)return false;if(m.type==='fox')return s.foxBehavior?.completedControl===m.value;if(m.type==='immediate')return true;if(m.type==='wait'||m.type==='activity')return s.time>=m.until;if(m.type==='diner')return s.diners[j.target].phase===m.value;if(m.type==='resident'){const r=s.residentActions[j.target];return r.completed>m.before&&r.lastAction===m.action;}
+function complete(s,j){const m=j.monitor;if(!m)return false;if(m.type==='boat')return s.boatJourney?.completedControl===m.value;if(m.type==='fox')return s.foxBehavior?.completedControl===m.value;if(m.type==='immediate')return true;if(m.type==='wait'||m.type==='activity')return s.time>=m.until;if(m.type==='diner')return s.diners[j.target].phase===m.value;if(m.type==='resident'){const r=s.residentActions[j.target];return r.completed>m.before&&r.lastAction===m.action;}
  if(m.type==='passenger'){const p=s.passengers[j.target];return m.value==='ride_once'?p.completedTrips>m.before:p.phase==='waiting';}return false;
 }
 export function advanceIntentRuntime(s,nav,dt,apply,emit){
@@ -56,9 +57,9 @@ export function advanceIntentRuntime(s,nav,dt,apply,emit){
  // Apply the macros from one utterance atomically: the event policy sees the
  // complete request, rather than treating each field as another new event.
  const groups=new Map();for(const j of runtime.jobs)if(j.kind==='macro'&&j.status==='pending'&&j.step===0){if(!groups.has(j.requestId))groups.set(j.requestId,[]);groups.get(j.requestId).push(j);}
- for(const[id,jobs]of groups){const revision=s.revision;try{apply(s,Object.fromEntries(jobs.map(j=>[j.target,j.action])),{id:'macro-batch:'+id,expectedRevision:revision,sourceText:jobs[0].sourceText||''});for(const j of jobs){j.status='done';j.step=j.steps.length;j.updated=s.time;}}catch(e){for(const j of jobs){j.status='failed';j.reason=e.message;}}finally{s.revision=revision;}}
+ for(const[id,jobs]of groups){const revision=s.revision;try{apply(s,Object.fromEntries(jobs.map(j=>[j.target,j.action])),{id:'macro-batch:'+id,expectedRevision:revision,sourceText:jobs[0].sourceText||'',selectedMemory:jobs[0].selectedMemory||null,preserveOthers:jobs[0].preserveOthers});for(const j of jobs){j.status='done';j.step=j.steps.length;j.updated=s.time;}}catch(e){for(const j of jobs){j.status='failed';j.reason=e.message;}}finally{s.revision=revision;}}
  for(const j of runtime.jobs){if(['done','cancelled','failed'].includes(j.status))continue;
-  if(j.status==='running'){if(j.monitor?.type==='fox'){const c=s.objectControls[j.target];if(!c||c.action+':'+c.started!==j.monitor.value){j.status='cancelled';j.reason='跟随新的小动物安排';continue;}}if(!complete(s,j)){if(s.time-j.updated>220){j.status='failed';j.reason='当前路径或动作尚未完成，取消后续步骤';emit('有一项安排暂时没有完成，小镇会继续自己的生活。');}continue;}j.step++;j.monitor=null;j.status='pending';j.updated=s.time;}
+  if(j.status==='running'){if(['fox','boat'].includes(j.monitor?.type)){const c=s.objectControls[j.target];if(!c||c.action+':'+c.started!==j.monitor.value){j.status='cancelled';j.reason='跟随新的小动物安排';continue;}}if(!complete(s,j)){if(s.time-j.updated>220){j.status='failed';j.reason='当前路径或动作尚未完成，取消后续步骤';emit('有一项安排暂时没有完成，小镇会继续自己的生活。');}continue;}j.step++;j.monitor=null;j.status='pending';j.updated=s.time;}
   if(j.step>=j.steps.length){j.status='done';j.updated=s.time;j.reason='这一段生活已经完成';continue;}
   if(j.kind==='resident'&&s.eventGuests?.[j.target]?.active){s.eventGuests[j.target].returnRequested=true;j.status='waiting';j.reason='先走回适合完成这件事的位置';continue;}
   const action=j.steps[j.step];
@@ -69,7 +70,7 @@ export function advanceIntentRuntime(s,nav,dt,apply,emit){
    if(r.action===action){j.monitor={type:'resident',action,before:r.completed};j.status='running';j.updated=s.time;j.reason='已经在做这件事，顺着完成';continue;}
    if(current&&!current.route&&!current.navTask&&!j.target.startsWith('resident.upper_diner')&&!['sip_tea','taste_food','feed_pond','look_pond'].includes(r.action)){r.cancelRemaining=r.cancelRemaining||.65;j.reason='轻轻收住当前动作，再响应你';}
    else j.reason='先完成手里的动作';j.status='waiting';continue;}
-  const revision=s.revision,applyJob=(state,input)=>apply(state,input,{id:`intent:${j.id}:${j.step}`,expectedRevision:state.revision});try{
+  const revision=s.revision,applyJob=(state,input)=>apply(state,input,{id:`intent:${j.id}:${j.step}`,expectedRevision:state.revision,preserveOthers:j.preserveOthers});try{
    if(j.kind==='macro'){applyJob(s,{[j.target]:action});j.monitor={type:'immediate'};}
    else if(j.kind==='object'){const started=requestObjectAction(s,j.target,action,catalog,applyJob,{preserveOthers:j.preserveOthers});j.monitor=started?.monitor||{type:'immediate'};}
    else j.monitor=startResident(s,j,action,applyJob);

@@ -49,7 +49,7 @@ export function atmospherePlan(answers){const intent=answers.mood_intent,mood=an
 // Concrete choices cannot be erased by the less-specific mood interpretation.
 // Only an independently requested mood may add compatible, unmentioned fields.
 export function composeAtmosphere(literal, answers, {utterance=""}={}){
- if(literal.items.some(i=>i.kind==='resident'||i.kind==='object')&&keepsOtherActivity(utterance))return {...literal,resolution:{...literal.resolution,scopeGuard:'explicit-others-unchanged'}};
+ if(literal.items.some(i=>i.kind==='resident'||i.kind==='object'||i.kind==='macro'&&['craft','cloud'].includes(i.target))&&keepsOtherActivity(utterance))return {...literal,resolution:{...literal.resolution,scopeGuard:'explicit-others-unchanged'}};
  const mood=atmospherePlan(answers);if(!mood)return literal;
  if(!literal.items.length){
   const unresolved=literal.skipped?.some(x=>!['已经是这个状态','没有明确要求改变这个对象'].includes(x.reason));
@@ -57,9 +57,9 @@ export function composeAtmosphere(literal, answers, {utterance=""}={}){
   return {...mood,literalPlan:literal};
  }
  if(answers.mood_intent.choice!=='mixed')return literal;
- const foreground=new Set(['weather','festival','occasion','paper','neighborhood','journey']);
+ const foreground=new Set(['weather','festival','occasion','paper','neighborhood','journey','craft','cloud']);
  const targets=new Set(literal.items.filter(i=>i.kind==='macro').map(i=>i.target));
- const hasScene=literal.items.some(i=>i.kind==='macro'&&foreground.has(i.target)&&!({weather:['clear','keep'],festival:['quiet','auto','keep'],occasion:['ordinary','keep'],paper:['rest','keep'],neighborhood:['rest','keep'],journey:['rest','keep']}[i.target]||[]).includes(i.action));
+ const hasScene=literal.items.some(i=>i.kind==='macro'&&foreground.has(i.target)&&!({weather:['clear','keep'],festival:['quiet','auto','keep'],occasion:['ordinary','keep'],paper:['rest','keep'],neighborhood:['rest','keep'],journey:['rest','keep'],craft:['rest','keep'],cloud:['rest','keep']}[i.target]||[]).includes(i.action));
  const additions=mood.items.filter(i=>!targets.has(i.target)&&!(hasScene&&foreground.has(i.target)));
  if(!additions.length)return literal;
  return {...literal,items:[...literal.items,...additions],resolution:{...mood.resolution,source:'jev-composed'},summary:literal.summary+'；'+mood.summary};

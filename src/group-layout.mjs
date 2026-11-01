@@ -1,5 +1,5 @@
-import {pathTo,navigationGraph} from './navigation.mjs?v=cp41-living-core-420fb12de96c';
-import {moverBlocks,sampleClip} from './motion.mjs?v=cp41-living-core-420fb12de96c';
+import {pathTo,navigationGraph} from './navigation.mjs?v=cp42-town-life-23ec88cd8aa5';
+import {moverBlocks,sampleClip} from './motion.mjs?v=cp42-town-life-23ec88cd8aa5';
 export const GROUP_KINDS=new Set(['festival','market','supper','reunion','lantern','music','quiet']);
 const D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 const queues=[
@@ -24,4 +24,4 @@ export function assignGroup(s,nav,e,candidates){
  for(const {a,i,p}of pairs){if(actors.has(a.id)||used.has(i))continue;actors.add(a.id);used.add(i);e.slots[a.id]=p.node;if(p.lane!==undefined)e.queue[a.id]={lane:p.lane,index:p.index,vendor:['resident.vendor_bread','resident.vendor_flower','resident.vendor_lamp'][p.lane]};if(actors.size===candidates.length)break;}
  return{actors:actors.size,places:places.length};
 }
-export function eventPose(s,a,nav){const e=s.sceneEvent,n=e?.slots?.[a.id];if(n===undefined||!GROUP_KINDS.has(e.kind)||!['gather','active','closing'].includes(e.phase))return null;const target=e.kind==='music'?[-2.47,-1.45,1.25]:e.kind==='quiet'?(a.p[0]>1.8?[7.7,-1.2,.7]:[-.3,-.5,1.4]):e.kind==='festival'?[-4.6,2.8,6.8]:e.queue?.[a.id]?nav.activities.spaces.residents[e.queue[a.id].vendor].position:[-.27,-.54,1.3];return{node:n,target,standing:!a.path.length&&D(a.p,nav.nodes[n])<.20,task:e.kind==='music'?'listen':e.kind==='quiet'?'rest':e.kind==='festival'?'fireworks':['reunion','lantern'].includes(e.kind)?'chat':'browse'};}
+export function eventPose(s,a,nav){if(a.interactionLock)return null;const e=s.sceneEvent,n=e?.slots?.[a.id];if(n===undefined||!GROUP_KINDS.has(e.kind)||!['gather','active','closing'].includes(e.phase))return null;const target=e.kind==='music'?[-2.47,-1.45,1.25]:e.kind==='quiet'?(a.p[0]>1.8?[7.7,-1.2,.7]:[-.3,-.5,1.4]):e.kind==='festival'?[-4.6,2.8,6.8]:e.queue?.[a.id]?nav.activities.spaces.residents[e.queue[a.id].vendor].position:[-.27,-.54,1.3];return{node:n,target,standing:!a.path.length&&D(a.p,nav.nodes[n])<.20,task:e.kind==='music'?'listen':e.kind==='quiet'?'rest':e.kind==='festival'?'fireworks':['reunion','lantern'].includes(e.kind)?'chat':'browse'};}

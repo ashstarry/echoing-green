@@ -1,7 +1,8 @@
-import {advanceFox,suspendFox} from './fox-behavior.mjs?v=cp41-living-core-420fb12de96c';
-import {needsClearPromenade} from './event-design.mjs?v=cp41-living-core-420fb12de96c';
-import {makeRoom} from './event-travel.mjs?v=cp41-living-core-420fb12de96c';
-import {CADENCE,varied} from './cadence.mjs?v=cp41-living-core-420fb12de96c';
+import {avoidBoat} from './boat-world.mjs?v=cp42-town-life-23ec88cd8aa5';
+import {advanceFox,suspendFox} from './fox-behavior.mjs?v=cp42-town-life-23ec88cd8aa5';
+import {needsClearPromenade} from './event-design.mjs?v=cp42-town-life-23ec88cd8aa5';
+import {makeRoom} from './event-travel.mjs?v=cp42-town-life-23ec88cd8aa5';
+import {CADENCE,varied} from './cadence.mjs?v=cp42-town-life-23ec88cd8aa5';
 export const TAU=Math.PI*2;
 export const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 export const ease=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
@@ -32,7 +33,7 @@ export function stepTrain(s,path,dt,emit){const tr=s.train;if(!tr||!path)return;
 export function sampleClip(clip,clock){const n=clip.samples.length-1,at=clamp(clock/clip.duration*n,0,n),i=Math.floor(at),j=Math.min(n,i+1),u=at-i,a=clip.samples[i],b=clip.samples[j],da=Math.atan2(Math.sin(b[3]-a[3]),Math.cos(b[3]-a[3]));return {p:a.slice(0,3).map((v,k)=>v+(b[k]-v)*u),yaw:a[3]+da*u,pitch:(a[4]||0)+((b[4]||0)-(a[4]||0))*u,bank:(a[5]||0)+((b[5]||0)-(a[5]||0))*u};}
 export function createMovers(activities){return Object.fromEntries(Object.entries(activities?.clips||{}).map(([id,c])=>[id,{clock:0,distance:0,footDown:0,stopWait:0,stopIndex:0,completedStops:0,tripState:'ride',blocked:false,wait:0,speed:1,strideWeight:1,clearTime:0,restUntil:0,nextPause:varied([3,7],id),pauses:0,intent:c.motion==='creature_walk'?'explore':c.motion,...sampleClip(c,0)}]));}
 export function advanceMovers(s,activities,dt,nav=null,requestGesture=()=>{}){for(const[id,m]of Object.entries(s.movers||{})){
- const clip=activities.clips[id];if(id==='animal.garden_fox'){const clearing=needsClearPromenade(s.sceneEvent?.kind)&&['gather','active','closing'].includes(s.sceneEvent.phase);if(clearing||m.eventHome){suspendFox(s);if(advanceEventFox(s,m,clip,dt))continue;}if(advanceFox(s,activities.foxRoaming,dt,requestGesture))continue;}const ground=['creature_walk','ride'].includes(clip.motion),policy=clip.motion==='fly'?s.birds:clip.motion==='ride'?s.cycling:clip.motion==='swim'?s.pond:s.animals;
+ const clip=activities.clips[id];if(avoidBoat(s,id,m,clip,dt,activities.boatRoute))continue;if(id==='animal.garden_fox'){const clearing=needsClearPromenade(s.sceneEvent?.kind)&&['gather','active','closing'].includes(s.sceneEvent.phase);if(clearing||m.eventHome){suspendFox(s);if(advanceEventFox(s,m,clip,dt))continue;}if(advanceFox(s,activities.foxRoaming,dt,requestGesture))continue;}const ground=['creature_walk','ride'].includes(clip.motion),policy=clip.motion==='fly'?s.birds:clip.motion==='ride'?s.cycling:clip.motion==='swim'?s.pond:s.animals;
  if(clip.motion==='creature_walk'&&s.time>=m.nextPause&&s.time>=m.restUntil){m.pauses++;m.restUntil=s.time+varied([2.5,6],id,m.pauses);m.nextPause=m.restUntil+varied([3,7],id,m.pauses);}
  const eventRest=clip.motion==='creature_walk'&&needsClearPromenade(s.sceneEvent?.kind);
  const wantsRest=eventRest||policy==='rest'||s.time<m.restUntil||(clip.motion==='ride'&&(s.weather==='rain'||s.worldEvent?.kind==='festival'));
