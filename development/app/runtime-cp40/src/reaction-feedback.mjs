@@ -1,0 +1,22 @@
+import {writeText,t,initializeI18n} from './i18n.mjs';
+import * as THREE from 'three';
+import {makeReaction,reactionStatus} from './reaction-plan.mjs';
+const phaseLabels={pending:'在听',waiting:'已经记下',active:'正在回应',done:'变化已发生',already:'已经在这样做',unavailable:'暂时没有变化',error:'这次没有生效'};
+export function createReactionFeedback({entities,camera,mode}){
+ const root=document.createElement('div');root.id='reactionFeedback';root.setAttribute('role','status');root.setAttribute('aria-live','polite');root.innerHTML='<span class="reaction-phase"></span><strong></strong><p></p>';document.body.append(root);const phase=root.querySelector('span'),title=root.querySelector('strong'),body=root.querySelector('p');
+ const cues=Array.from({length:3},()=>{const e=document.createElement('div');e.className='reaction-cue';e.setAttribute('aria-hidden','true');document.body.append(e);return e;});
+ let current=null,cueStart=-100,lastPoll=0,lastText='',view={phase:'idle',visible:false},lastSummary='';const point=new THREE.Vector3();
+ function show(status){const text=[status.phase,status.title,status.text,status.secondary].join('|');if(text!==lastText){writeText(phase,phaseLabels[status.phase]||'正在回应');writeText(title,status.title);writeText(body,[status.text,status.secondary&&status.secondary!==status.text?status.secondary:''].filter(Boolean).join(' '));root.dataset.phase=status.phase;lastText=text;}root.classList.add('visible');view={...status,visible:true};}
+ function simple(phaseName,heading,text,duration=6){current={simple:true,until:performance.now()+duration*1000,status:{phase:phaseName,title:heading,text},ids:[]};cueStart=-100;show(current.status);if(phaseName!=='pending'){lastSummary=heading;writeText(mode,heading);}}
+ function accept(before,after,decision,meta={}){const plan=makeReaction(before,after,decision,meta);current={plan,ids:plan.ids,wall:performance.now(),doneAt:null,lastComplete:false};cueStart=performance.now();lastPoll=0;const status=reactionStatus(plan,after,{});show(status);lastSummary=plan.summary||status.title;writeText(mode,status.title);return plan;}
+ function frame(state,visual){const now=performance.now();if(current?.simple){if(now>current.until){root.classList.remove('visible');view.visible=false;current=null;}}else if(current){if(now-lastPoll>120){lastPoll=now;const status=reactionStatus(current.plan,state,{...visual,fireworksActive:state.festivalUntil>state.time});if(status.complete&&!current.lastComplete){current.doneAt=now;current.lastComplete=true;if(now-current.wall>5000)cueStart=now;}
+  const visible=current.doneAt?now-current.doneAt<4800:now-current.wall<14000;
+  if(visible)show(status);else{root.classList.remove('visible');view={...status,visible:false};}
+  writeText(mode,status.complete?status.text:status.phase==='unavailable'?status.title:status.phase==='waiting'?'已记下 · '+status.text:status.title+' · 正在发生');
+  if(current.doneAt&&now-current.doneAt>8500||status.phase==='unavailable'&&now-current.wall>14000){lastSummary=status.text;current=null;}
+ }}
+ for(let i=0;i<cues.length;i++){const id=current?.ids?.[i],e=cues[i],age=(now-cueStart)/1000;if(!id||age>3.8||age<0){e.style.opacity='0';continue;}let o=entities.get(id);if(!o){e.style.opacity='0';continue;}o.getWorldPosition(point);if(id.startsWith('tram.')&&point.z<-3){o=entities.get('door.station_entry_door');o?.getWorldPosition(point);}else if(id.startsWith('resident.'))point.y+=.7;else if(id.startsWith('tram.'))point.y+=.9;else if(id.startsWith('bicycle.'))point.y+=.55;point.project(camera);if(point.z>1||point.z< -1){e.style.opacity='0';continue;}const x=(point.x*.5+.5)*innerWidth,y=(-point.y*.5+.5)*innerHeight;const beat=(age%1.9)/1.9,scale=.65+beat*.55;e.style.transform=`translate(${x}px,${y}px) translate(-50%,-50%) scale(${scale})`;e.style.opacity=String((1-beat)*.58);}
+ }
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden&&current?.plan&&!current.doneAt){current.wall=performance.now();cueStart=performance.now();}});
+ return{accept,frame,kept:message=>simple('already','小镇继续自己的生活',message,5),announce:(title,text)=>simple('active',title,text,7),dismiss:()=>{current=null;root.classList.remove('visible');for(const cue of cues)cue.style.opacity='0';view.visible=false;},pending:()=>simple('pending','小镇在听这句话','稍等一下，心愿正在送达。',25),failed:message=>simple('error','这次没有改变小镇',message,7),denied:message=>simple('unavailable','这次暂未安排',message,7),undone:()=>simple('active','回到上一组安排','目标已恢复，人物会自然衔接，不会倒着走。',6),state:()=>({...view,targets:current?.ids||[],summary:lastSummary})};
+}

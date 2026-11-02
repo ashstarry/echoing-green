@@ -1,0 +1,5 @@
+
+const hero=document.getElementById('hero'), caption=document.getElementById('heroCaption');
+document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-view]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));hero.src=b.dataset.view;hero.alt=b.textContent;caption.textContent=b.dataset.caption;}));
+const viewer=document.getElementById('viewer'),large=document.getElementById('large');function zoom(i){large.src=i.src;large.alt=i.alt;viewer.showModal();}
+document.querySelectorAll('.zoom').forEach(i=>{i.addEventListener('click',()=>zoom(i));i.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();zoom(i);}});});document.getElementById('close').addEventListener('click',()=>viewer.close());viewer.addEventListener('click',e=>{if(e.target===viewer)viewer.close();});

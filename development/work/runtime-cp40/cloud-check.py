@@ -1,0 +1,7 @@
+from pathlib import Path
+import json,subprocess,time
+rows=[]
+for name,text,expected,count in [('abstract','把所有急匆匆都放在门外。','quiet',2),('quiet_dry','安静一点，别放烟花，也别下雨。','quiet',2),('local','只有风车慢下来，其他人不用理我。','local',2),('mint','薄荷汽水，刚刚打开的那一下。','spring',2),('old_photo','老照片里那个舍不得结束的下午。','hang',2),('keep','刚才很好，不需要改变了。',None,2)]:
+ body={'poem':text,'state':{'weather':'clear','day_phase':'dusk','paper_count':count}}
+ cmd=['curl','-sS','--max-time','35','-w','\n%{http_code}','https://echoing-green-api.dongyuanshun.chatgpt.site/api/decision','-H','Origin: https://ashstarry.github.io','-H','Content-Type: application/json','--data-binary','@-']
+ started=time.monotonic();raw=subprocess.run(cmd,input=json.dumps(body).encode(),capture_output=True,check=True).stdout.decode();payload,status=raw.rsplit('\n',1);r=json.loads(payload);items=r.get('plan',{}).get('items',[]);passed=status=='200'and (all(i['kind']=='object' for i in items)and bool(items)if expected=='local'else any(i['target']==('occasion'if expected=='quiet'else 'paper'if expected=='hang'else 'neighborhood')and i['action']==expected for i in items)if expected else not items);rows.append({'case':name,'request':body,'status':status,'result':r,'pass':passed,'roundtrip_ms':round((time.monotonic()-started)*1000)});Path('outputs/runtime-checkpoint-40/cloud-verification.json').write_text(json.dumps(rows,ensure_ascii=False,indent=2));print(json.dumps({'case':name,'status':status,'pass':passed,'items':[(i['target'],i['action'])for i in items]},ensure_ascii=False))

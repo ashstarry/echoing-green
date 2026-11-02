@@ -21,3 +21,7 @@ Serve this directory with any static HTTP server. No build step is required for 
 ## Security
 
 Never add API keys, private configuration, raw API logs or research archives. `src/deployment-config.mjs` may contain only a public proxy URL. The provider key belongs in the proxy host’s secret storage, never in frontend environment variables or repository files.
+
+## Editable source and project history
+
+The complete current development project, API source mirror, earlier runtime source checkpoints and authoring scripts are in [development/](development/README.md). The root remains the live GitHub Pages site.

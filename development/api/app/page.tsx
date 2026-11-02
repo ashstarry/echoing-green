@@ -1,0 +1,1 @@
+export default function Home(){return <main style={{maxWidth:640,margin:"80px auto",padding:24,fontFamily:"serif"}}><h1>Echoing Green</h1><p>The secure decision service for a little paper town.</p><a href="https://ashstarry.github.io/echoing-green/">Visit the town →</a></main>}

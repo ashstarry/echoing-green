@@ -1,0 +1,3 @@
+
+const shots={cp12:{src:'01-overview.png',caption:'CP12：整体提亮，保留局部暖光；两个真实纸水灯模型加入池塘。固定 43° 正交视角，完整屋顶。'},cp11:{src:'reference/cp11-overview.png',caption:'CP11：上一版局部灯光更有质感，但整体及雨桥偏暗。'},cp10:{src:'reference/cp10-overview.png',caption:'CP10：用户接受的空间布局与较明亮的原照明。'},ref:{src:'reference/approved-v3.png',caption:'认可的 v3 纸雕艺术参考：仍是视觉目标，不是当前实时画面。'}};
+for(const button of document.querySelectorAll('[data-shot]'))button.addEventListener('click',()=>{const shot=shots[button.dataset.shot];document.getElementById('overview').src=shot.src;document.getElementById('overview').alt=shot.caption;document.getElementById('overview-caption').textContent=shot.caption;document.querySelectorAll('[data-shot]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));});

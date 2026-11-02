@@ -1,0 +1,3 @@
+
+const shots={cp14:{src:'01-overview.png',caption:'CP14：夜色背景和阴影略提亮，几个活动区的暖光更连贯；暖橘色灯纸保留。'},cp13:{src:'reference/cp13-overview.png',caption:'CP13：原先的整体照明与二楼圆灯排列。'},cp10:{src:'reference/cp10-overview.png',caption:'CP10：原暖色照明与已接受的总体空间布局。'},ref:{src:'reference/approved-v3.png',caption:'认可的 v3 艺术参考；仍然是目标，不是已实现的网页画面。'}};
+for(const b of document.querySelectorAll('[data-shot]'))b.addEventListener('click',()=>{const x=shots[b.dataset.shot];document.getElementById('overview').src=x.src;document.getElementById('overview').alt=x.caption;document.getElementById('caption').textContent=x.caption;document.querySelectorAll('[data-shot]').forEach(v=>v.setAttribute('aria-pressed',String(v===b)));});

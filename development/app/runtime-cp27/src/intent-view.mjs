@@ -1,0 +1,42 @@
+import * as THREE from 'three';
+import {PROFILES,ACTIVITIES} from './community.mjs';
+const X=new THREE.Vector3(1,0,0),Y=new THREE.Vector3(0,1,0),SIDE=new THREE.Vector3(0,0,-1);
+export function createIntentView({entities,parts,registry,spaces,scene,localRoutes={}}){
+ const blends=new Map();const can=entities.get('watering_can.garden_can'),canBase=can?.quaternion.clone();
+ let pourAlpha=0;const pour=new THREE.InstancedMesh(new THREE.OctahedronGeometry(.024,0),new THREE.MeshBasicMaterial({color:0xb2d6dd,transparent:true,opacity:0}),4);pour.userData.runtime_effect_id='effect.garden_watering';pour.userData.owner_entity='watering_can.garden_can';pour.frustumCulled=false;scene.add(pour);const drop=new THREE.Object3D();let canBlend=canBase?.clone();
+ const base=new Map([...parts].map(([id,p])=>[id,p.quaternion.clone()]));const umbrellas=new Map();
+ const canopyGeo=new THREE.ConeGeometry(.36,.13,10,1,true).toNonIndexed(),shaftGeo=new THREE.CylinderGeometry(.009,.009,1,5),cream=new THREE.MeshStandardMaterial({color:0xd6bc91,roughness:.93,side:THREE.DoubleSide}),blue=new THREE.MeshStandardMaterial({color:0x486c86,roughness:.93,side:THREE.DoubleSide}),wood=new THREE.MeshStandardMaterial({color:0x6c4d30,roughness:1});
+ const colors=[];for(let i=0;i<canopyGeo.attributes.position.count;i++){const c=new THREE.Color(Math.floor(i/3)%2?0x779092:0x486c86);colors.push(c.r,c.g,c.b);}canopyGeo.setAttribute('color',new THREE.Float32BufferAttribute(colors,3));blue.vertexColors=true;blue.color.set(0xffffff);cream.vertexColors=true;cream.color.set(0xffe0b2);
+ const ribVertices=[];for(let i=0;i<10;i++){const t=i*Math.PI*2/10;ribVertices.push(0,.068,0,Math.cos(t)*.36,-.060,Math.sin(t)*.36);}const ribGeo=new THREE.BufferGeometry();ribGeo.setAttribute('position',new THREE.Float32BufferAttribute(ribVertices,3));const ribMat=new THREE.LineBasicMaterial({color:0xc5b18b,transparent:true,opacity:.65});
+ const letter=registry.entities.find(e=>e.id==='letter.postman_letter'),carryingSide=letter?.socket_part?.endsWith('left')?'left':'right';
+ for(const[id,o]of entities){if(localRoutes[id]||!PROFILES[id]||!(PROFILES[id].role==='walker'||(['garden','watch'].includes(PROFILES[id].role)&&spaces.residents[id]?.umbrellaClear&&!spaces.residents[id]?.covered))||['resident.water_visitor','resident.water_companion','resident.quiet_reader','resident.cyclist','resident.kite_child'].includes(id))continue;const side=id==='resident.gardener'?'left':id==='resident.postman'?(carryingSide==='right'?'left':'right'):'right';const hand=parts.get(`${id}/anim_arm_${side}`);if(!hand)continue;
+  hand.updateWorldMatrix(true,false);o.updateWorldMatrix(true,false);const group=new THREE.Group();group.name='rain_umbrella_'+id;group.userData.runtime_effect_id='umbrella.rain_'+id.slice(9);group.userData.owner_entity=id;group.matrixAutoUpdate=false;group.matrix.copy(hand.matrixWorld.clone().invert().multiply(o.matrixWorld));hand.add(group);
+  const canopy=new THREE.Mesh(canopyGeo,id.includes('child')?cream:blue),shaft=new THREE.Mesh(shaftGeo,wood);canopy.name='runtime_'+id+'_rain_canopy';shaft.name='runtime_'+id+'_rain_shaft';canopy.castShadow=true;shaft.castShadow=true;canopy.receiveShadow=true;canopy.add(new THREE.LineSegments(ribGeo,ribMat));group.add(canopy,shaft);const sign=side==='right'?1:-1,grip=new THREE.Mesh(new THREE.CylinderGeometry(.012,.012,Math.hypot(.09,.04),5),wood);grip.name='runtime_'+id+'_umbrella_grip';grip.position.set(sign*.315,.71,.01);grip.quaternion.setFromUnitVectors(Y,new THREE.Vector3(sign*.09,.04,0).normalize());group.add(grip);umbrellas.set(id,{group,canopy,shaft,side,sign:side==='right'?1:-1});
+ }
+ function set(id,side,pitch,roll){const key=`${id}/anim_arm_${side}`,p=parts.get(key),b=base.get(key);if(p&&b)p.quaternion.copy(b).multiply(new THREE.Quaternion().setFromAxisAngle(X,pitch)).multiply(new THREE.Quaternion().setFromAxisAngle(SIDE,roll));}
+ return {umbrellas,signals:()=>({watering:pourAlpha>.12,watching:['resident.water_visitor','resident.water_companion'].some(id=>{const p=parts.get(id+'/anim_torso'),q=base.get(id+'/anim_torso');return p&&q&&p.quaternion.angleTo(q)>.035;})}),frame(s,dt){for(const[id,stored]of Object.entries(s.residents||{})){const current=s.residentActions?.[id],action=current?.action,effective=action==='water_plants'?'garden':action==='inspect_leaf'?'inspect':action==='read_pages'?'read':action?'rest':stored.activity;const r=action?{...stored,activity:effective,gesture:action==='water_plants'?Math.sin(Math.max(0,Math.min(1,(current.clock-.6)/7.8))*Math.PI)*(current.cancelRemaining>0?current.cancelRemaining/.65:1):stored.gesture}:stored;const a=s.actors.find(x=>x.id===id),walking=a?.mode==='walk',profile=PROFILES[id];if(!profile)continue;const head=parts.get(`${id}/anim_head`),hq=base.get(`${id}/anim_head`);if(head&&hq){const pitch=['lotus','read','garden','inspect'].includes(r.activity)?.15+.08*(r.gesture||0):r.activity==='fireworks'?-.035:0;head.quaternion.copy(hq).multiply(new THREE.Quaternion().setFromAxisAngle(Y,r.lookYaw||0)).multiply(new THREE.Quaternion().setFromAxisAngle(X,pitch));}
+  const torso=parts.get(`${id}/anim_torso`),tq=base.get(`${id}/anim_torso`);if(torso&&tq){const amount=['garden','inspect'].includes(r.activity)?.12*(r.gesture||0):r.activity==='lotus'?.10*(r.gesture||0):r.activity==='read'?.07:0;torso.quaternion.copy(tq).multiply(new THREE.Quaternion().setFromAxisAngle(X,amount));}
+  if(!walking&&profile.role!=='diner'&&id!=='resident.cyclist'){
+   set(id,'left',0,0);set(id,'right',0,0);const pulse=r.gesture||0;
+   if(r.activity==='follow'){set(id,'right',-.24*pulse,-.18*pulse);}
+   if(r.activity==='chat'){set(id,'right',-.14*pulse,-.22*pulse);}
+   if(['garden','inspect'].includes(r.activity)){set(id,'right',-.12*pulse,-.12*pulse);}
+   if(r.activity==='browse'){set(id,'right',-.16*pulse,-.12*pulse);}
+   if(r.activity==='serve'){set(id,'right',-.12*pulse,-.48*pulse);}
+   if(r.activity==='tidy'){set(id,'right',-.20*pulse,-.18*pulse);}
+   if(r.activity==='signal'&&s.time-s.train.arrivedAt<4){set(id,'right',-.12,-.45-.12*Math.sin((s.time-s.train.arrivedAt)*4));}
+   if(r.activity==='applaud'){const beat=.48+.10*Math.sin(r.gesturePhase*6);if(id!=='resident.postman'){set(id,'left',-.48,-beat);set(id,'right',-.48,beat);}else set(id,carryingSide==='right'?'left':'right',-.14,-.20);}
+   if(r.activity==='snow'){set(id,'right',-.24*pulse,-.18*pulse);}
+   if(id==='resident.musician'){set(id,'left',0,(s.effectiveMusic??s.music)==='play'?Math.sin(s.time*7)*.16:0);}
+  }
+  if(id==='resident.kite_child'){set(id,'left',r.activity==='kite'&& !walking?-.15*(r.gesture||0):0,0);}
+  // Constrained places keep hands inside their real counter/bridge clearance.
+  if(profile.role==='vendor'&&r.activity==='applaud'){set(id,'left',0,0);set(id,'right',-.06*(r.gesture||0),-.10*(r.gesture||0));}
+  if(['resident.water_visitor','resident.water_companion'].includes(id)){set(id,'left',0,0);set(id,'right',0,0);}
+  if(id==='resident.gardener'&&can&&canBase){const target=canBase.clone().multiply(new THREE.Quaternion().setFromAxisAngle(X,r.activity==='garden'?(r.gesture||0)*.55:0));canBlend.slerp(target,1-Math.exp(-dt*8));can.quaternion.copy(canBlend);pourAlpha+=((r.activity==='garden'?Math.max(0,((r.gesture||0)-.35)/.65):0)-pourAlpha)*(1-Math.exp(-dt*8));}
+  const u=umbrellas.get(id);if(u){const open=r.umbrellaOpen||0;const lift=Math.min(1,open/.45),fan=Math.max(0,(open-.45)/.55);u.canopy.position.set(u.sign*.36*(1-fan),.96+lift*.66,.01);u.canopy.scale.set(.10+.90*fan,1,.10+.90*fan);u.shaft.position.set(u.sign*.36,.73+(.21+.65*lift)/2,.01);u.shaft.scale.y=.21+.65*lift;if(open>.02)set(id,u.side,0,0);}
+  for(const key of [`${id}/anim_head`,`${id}/anim_arm_left`,`${id}/anim_arm_right`,`${id}/anim_torso`]){const part=parts.get(key);if(!part)continue;let q=blends.get(key);if(!q){q=part.quaternion.clone();blends.set(key,q);}q.slerp(part.quaternion,1-Math.exp(-dt*8));part.quaternion.copy(q);}
+ }
+ if(can){can.updateWorldMatrix(true,false);const tip=can.localToWorld(new THREE.Vector3(0,-.061,.311));pour.visible=pourAlpha>.01;pour.material.opacity=pourAlpha*.8;for(let i=0;i<4;i++){const t=(s.time*1.6+i*.25)%1;drop.position.copy(tip);drop.position.y-=t*.36;drop.scale.setScalar(Math.sin(t*Math.PI));drop.updateMatrix();pour.setMatrixAt(i,drop.matrix);}pour.instanceMatrix.needsUpdate=true;}
+ } };
+}

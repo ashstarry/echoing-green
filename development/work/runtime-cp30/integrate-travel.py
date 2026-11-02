@@ -1,0 +1,23 @@
+from pathlib import Path
+p=Path('app/runtime-cp30/src/scene-events.mjs');s=p.read_text();s="import {eventGuestCandidates,ensureEventTravel} from './event-travel.mjs';\n"+s
+s=s.replace('festival:{gather:36,active:24','festival:{gather:56,active:28').replace('market:{gather:26,active:30','market:{gather:48,active:34').replace('supper:{gather:26,active:30','supper:{gather:48,active:34')
+s=s.replace("const actors=s.actors.filter(a=>a.mobile&&!e.protectedIds?.includes(a.id)),kite=actors.find", "const actors=[...s.actors.filter(a=>a.mobile&&!e.protectedIds?.includes(a.id)),...eventGuestCandidates(s,nav,e)],kite=actors.find")
+s=s.replace('distance(p,q)>1.28','distance(p,q)>1.08')
+s=s.replace("const points=e.kind==='festival'||e.kind==='reunion'?festivalSpots:marketSpots;", "const points=[...(e.kind==='festival'||e.kind==='reunion'?festivalSpots:marketSpots),...Array.from({length:30},(_,i)=>[-4.0+(i%6)*1.25,-2.8+Math.floor(i/6)*1.2])];")
+s=s.replace("const a=s.actors.find(a=>a.id===id);return !a.path.length&&a.reservation===e.slots[id]&&distance(a.p,nav.nodes[e.slots[id]])<.18;", "const a=s.actors.find(a=>a.id===id),g=s.eventGuests?.[id];return a?!a.path.length&&a.reservation===e.slots[id]&&distance(a.p,nav.nodes[e.slots[id]])<.18:g?.phase==='hold'&&distance(g.p,nav.nodes[e.slots[id]])<.18;")
+s=s.replace("!s.actors.some(a=>a.id===id)||!Number.isInteger(n)","!s.actors.some(a=>a.id===id)&&!s.eventGuests?.[id]||!Number.isInteger(n)")
+p.write_text(s)
+p=Path('app/runtime-cp30/src/simulation.mjs');s=p.read_text();s="import {ensureEventTravel,advanceEventTravel,eventGuestPositions} from './event-travel.mjs';\n"+s
+s=s.replace("event(s,'晚风里，小镇开始了自己的日常。');return s;", "ensureEventTravel(s,nav);event(s,'晚风里，小镇开始了自己的日常。');return s;")
+s=s.replace('advanceLocalWalkers(s,nav.activities?.localRoutes||{},dt);let planned=0;', 'advanceLocalWalkers(s,nav.activities?.localRoutes||{},dt);advanceEventTravel(s,nav,dt);let planned=0;')
+s=s.replace('...Object.values(s.localWalkers||{}).map(w=>w.root)', '...Object.values(s.localWalkers||{}).map(w=>w.root),...eventGuestPositions(s)')
+s=s.replace("if(Object.values(s.localWalkers||{}).some", "if(eventGuestPositions(s).some(p=>Math.abs(p[2]-candidate[2])<1.4&&distance(p,candidate)<.94&&distance(p,candidate)<distance(p,a.p)-1e-8)||Object.values(s.localWalkers||{}).some")
+s=s.replace('validateSceneEvents(s,nav);validateTownResponse','ensureEventTravel(s,nav);validateSceneEvents(s,nav);validateTownResponse')
+p.write_text(s)
+p=Path('app/runtime-cp30/src/resident-actions.mjs');s=p.read_text().replace("for(const[id,r]of Object.entries(s.residentActions)){\n r.bookOpen", "for(const[id,r]of Object.entries(s.residentActions)){\n r.bookOpen")
+s=s.replace("if(r.action){const def=RESIDENT_ACTIONS[r.action]", "if(s.eventGuests?.[id]?.active){r.nextAt=s.time+.5;continue;}\n if(r.action){const def=RESIDENT_ACTIONS[r.action]")
+p.write_text(s)
+p=Path('app/runtime-cp30/src/life-plans.mjs');s=p.read_text().replace("const action=j.steps[j.step];", "if(j.kind==='resident'&&s.eventGuests?.[j.target]?.active){s.eventGuests[j.target].returnRequested=true;j.status='waiting';j.reason='先走回适合完成这件事的位置';continue;}\n  const action=j.steps[j.step];")
+p.write_text(s)
+p=Path('app/runtime-cp30/src/presentation.mjs');s=p.read_text().replace('p.music=current.effectiveMusic', "if(current.eventGuests)p.eventGuests=Object.fromEntries(Object.entries(current.eventGuests).map(([id,b])=>{const a=previous.eventGuests?.[id];return[id,a?{...b,p:vec(a.p,b.p,t),yaw:angleMix(a.yaw,b.yaw,t),walked:mix(a.walked,b.walked,t),gaitWeight:mix(a.gaitWeight,b.gaitWeight,t),stand:mix(a.stand,b.stand,t)}:b]}));\n p.music=current.effectiveMusic")
+p.write_text(s)

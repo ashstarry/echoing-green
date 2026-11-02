@@ -1,0 +1,7 @@
+import bpy,json
+from pathlib import Path
+from mathutils import Vector,Matrix
+ROOT=Path(__file__).resolve().parents[2];OUT=ROOT/'outputs/lighting-checkpoint-12';s=bpy.context.scene;owners={o['decision_entity_id']:o for o in s.objects if o.get('decision_entity_id')};proof=[];delta=Vector((.125,0,0))
+for light in [o for o in s.objects if o.type=='LIGHT'and o.data.energy>0 and o.get('decision_owner')]:
+ owner=owners[light['decision_owner']];saved=owner.location.copy();before=light.matrix_world.translation.copy();factor=owner.parent.matrix_world@owner.matrix_parent_inverse if owner.parent else Matrix.Identity(4);owner.location+=factor.to_3x3().inverted()@delta;bpy.context.view_layer.update();after=light.matrix_world.translation.copy();owner.location=saved;bpy.context.view_layer.update();restored=light.matrix_world.translation.copy();err=(after-before-delta).length;restore=(restored-before).length;proof.append({'light':light.name,'owner':light['decision_owner'],'motion_error':err,'restore_error':restore,'passed':err<1e-5 and restore<1e-5})
+record={'passed':all(x['passed']for x in proof),'checked_sources':len(proof),'checks':proof,'scope':'Actual translate-and-restore of existing owner transforms; proves parent binding only, not an animation/state executor or Decision integration.'};(OUT/'light-binding-check.json').write_text(json.dumps(record,indent=2));print('LIGHT_BINDINGS',record['passed'],len(proof));assert record['passed']

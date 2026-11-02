@@ -1,0 +1,12 @@
+app/runtime-cp44/public/assets/
+**/node_modules/
+**/dist/
+**/.local/
+**/.wrangler/
+**/.next/
+**/.env
+**/.env.*
+**/*.log
+work/**/*.json
+work/**/*.png
+work/**/*.wav

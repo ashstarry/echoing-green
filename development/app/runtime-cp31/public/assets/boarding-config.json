@@ -1,0 +1,19 @@
+{
+  "actor": "resident.station_traveler",
+  "vehicle": "tram.tram_car_front",
+  "scale": 1.0800000429153442,
+  "home": [
+    -1.98863685131073,
+    -6.0353474617004395,
+    0.7714000940322876
+  ],
+  "homeYaw": 0.20943959057331085,
+  "carScale": [
+    1.1,
+    1.05,
+    1.0
+  ],
+  "platformFloor": 0.79,
+  "boardDuration": 17.8,
+  "exitDuration": 19.5
+}

@@ -1,0 +1,2 @@
+import {decide} from '../../app/runtime-cp32/decision-api.mjs';import {writeFileSync}from'node:fs';
+const rows=[];for(const poem of ['放烟花，让大家聚在广场上看','晚市开张，大家去买点热乎的东西','下雨了，大家赶快找地方避雨','今晚想热闹一点，有人陪伴就好了']){const r=await decide(poem,{});rows.push({poem,...r});console.log(JSON.stringify({poem,ms:r.ms,items:r.plan.items}));writeFileSync('outputs/runtime-checkpoint-32/semantic-smoke.json',JSON.stringify(rows,null,2));}

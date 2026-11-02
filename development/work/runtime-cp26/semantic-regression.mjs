@@ -1,0 +1,5 @@
+import{decide}from'../../app/runtime-cp26/decision-api.mjs';import{writeFile}from'node:fs/promises';
+const state={weather:'snow',day_phase:'night',festival:'quiet',train:'auto',selected_entity:null,passenger_phase:'waiting',reader_book:'closed',festival_auto:true,light:'warm',breeze:'gentle',occasion:'ordinary'};
+const cases=[['下雨了','rain'],['下雨了。','rain'],['小镇下雨了','rain'],['开始下雨吧','rain'],['雨停了','clear'],['下雪了','snow'],['别下雨了','clear'],['昨晚下雨了',null],['如果下雨了就先不放烟花',null],['等雨停之后再看花火吧',null],['让大家找好位置，一起等一场花火。','festival']];
+const results=[];for(const[text,expected]of cases){const r=await decide(text,state);const weather=r.plan.items.find(i=>i.target==='weather')?.action;const pass=expected==='festival'?r.plan.items.some(i=>i.target==='festival'&&i.action==='fireworks'):expected?weather===expected:!weather;results.push({text,expected,...r,pass});console.log(JSON.stringify({text,pass,items:r.plan.items,resolution:r.plan.resolution}));}
+await writeFile('outputs/runtime-checkpoint-26/semantic-regression.json',JSON.stringify(results,null,2));

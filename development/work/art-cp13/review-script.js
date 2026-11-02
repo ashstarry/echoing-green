@@ -1,0 +1,3 @@
+
+const shots={cp13:{src:'01-overview.png',caption:'CP13：降低灯纸过强的自发光，增加柔和的局部暖色补光。画面可读性与灯笼饱和度分别处理。'},cp12:{src:'reference/cp12-overview.png',caption:'CP12：此前整体提亮，但灯纸与窗纸较淡，纸水灯和天空几何仍偏简略。'},cp10:{src:'reference/cp10-overview.png',caption:'CP10：用户偏好的暖橘色参考；当前保持其空间布局。'},ref:{src:'reference/approved-v3.png',caption:'认可的 v3 艺术参考，仍是我们的视觉目标，不是当前运行画面。'}};
+for(const button of document.querySelectorAll('[data-shot]'))button.addEventListener('click',()=>{const shot=shots[button.dataset.shot];document.getElementById('overview').src=shot.src;document.getElementById('overview').alt=shot.caption;document.getElementById('caption').textContent=shot.caption;document.querySelectorAll('[data-shot]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));});

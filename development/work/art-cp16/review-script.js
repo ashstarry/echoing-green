@@ -1,0 +1,3 @@
+
+const shots={cp16:{src:'01-overview.png',caption:'CP16：屋顶与天窗回落 CP14 那次抬高幅度的一半；镜头、蓝白条棚、人物与桌椅位置保持。'},cp15:{src:'reference/cp15-overview.png',caption:'CP15：上一版二楼比例与中间留白。'},ref:{src:'reference/approved-v3.png',caption:'认可的 v3 艺术参考，仍然是视觉目标。'}};
+for(const b of document.querySelectorAll('[data-shot]'))b.addEventListener('click',()=>{const x=shots[b.dataset.shot];document.getElementById('overview').src=x.src;document.getElementById('overview').alt=x.caption;document.getElementById('caption').textContent=x.caption;document.querySelectorAll('[data-shot]').forEach(v=>v.setAttribute('aria-pressed',String(v===b)));});

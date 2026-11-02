@@ -1,0 +1,3 @@
+
+const shots={cp15:{src:'01-overview.png',caption:'CP15：只调整条棚的显露与二楼布饰。灯光、层高、镜头、人物和桌椅位置保持 CP14。'},cp14:{src:'reference/cp14-overview.png',caption:'CP14：上一版的二楼与整体氛围。'},ref:{src:'reference/approved-v3.png',caption:'认可的 v3 艺术参考，仍然是视觉目标。'}};
+for(const b of document.querySelectorAll('[data-shot]'))b.addEventListener('click',()=>{const x=shots[b.dataset.shot];document.getElementById('overview').src=x.src;document.getElementById('overview').alt=x.caption;document.getElementById('caption').textContent=x.caption;document.querySelectorAll('[data-shot]').forEach(v=>v.setAttribute('aria-pressed',String(v===b)));});
