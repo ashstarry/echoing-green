@@ -1,5 +1,5 @@
 {
-  "checkpoint": 42,
+  "checkpoint": 46,
   "primitives": {
     "approach": {
       "kind": "move"
@@ -69,7 +69,7 @@
     },
     "admire": {
       "kind": "pose",
-      "seconds": 3.6
+      "seconds": 1.2
     },
     "pack": {
       "kind": "pose",
@@ -93,7 +93,7 @@
     },
     "dry": {
       "kind": "pose",
-      "seconds": 8
+      "seconds": 1.4
     },
     "pair_walk": {
       "kind": "move"
@@ -104,6 +104,59 @@
     }
   },
   "recipes": {
+    "home_return": [
+      {
+        "action": "approach",
+        "target": "destination"
+      },
+      {
+        "action": "open"
+      },
+      {
+        "action": "welcome"
+      },
+      {
+        "action": "admire"
+      }
+    ],
+    "carry_lantern": [
+      {
+        "action": "approach",
+        "target": "supply"
+      },
+      {
+        "action": "take"
+      },
+      {
+        "action": "open"
+      },
+      {
+        "action": "carry",
+        "target": "destination"
+      },
+      {
+        "action": "welcome",
+        "seconds": 2
+      },
+      {
+        "action": "carry",
+        "target": "supply"
+      },
+      {
+        "action": "place",
+        "target": "supply"
+      }
+    ],
+    "return_lantern": [
+      {
+        "action": "carry",
+        "target": "supply"
+      },
+      {
+        "action": "place",
+        "target": "supply"
+      }
+    ],
     "snack_host": [
       {
         "action": "open"
@@ -366,47 +419,25 @@
         "propIndex": 1
       },
       {
-        "action": "dry",
-        "propIndex": 1
-      },
-      {
-        "action": "collect",
-        "propIndex": 1
-      },
-      {
-        "action": "fold",
-        "propIndex": 1
-      },
-      {
-        "action": "carry",
-        "target": "supply",
-        "propIndex": 1
-      },
-      {
-        "action": "stow",
-        "propIndex": 1
-      },
+        "action": "admire"
+      }
+    ],
+    "straighten_laundry": [
       {
         "action": "approach",
-        "target": "destination",
-        "propIndex": 0
+        "target": "destination"
       },
       {
-        "action": "collect",
-        "propIndex": 0
+        "action": "collect"
       },
       {
-        "action": "fold",
-        "propIndex": 0
+        "action": "unfold"
       },
       {
-        "action": "carry",
-        "target": "supply",
-        "propIndex": 0
+        "action": "hang"
       },
       {
-        "action": "stow",
-        "propIndex": 0
+        "action": "admire"
       }
     ],
     "collect_laundry_batch": [
@@ -795,10 +826,10 @@
       "rest"
     ],
     "primitives": 26,
-    "recipes": 27,
+    "recipes": 31,
     "keepsake_limit": 6,
     "cloth_limit": 2,
-    "boat_one_way_distance": 2.52,
+    "boat_one_way_distance": 0,
     "note": "Shared recipes reuse existing residents and small props. Counts are behavior goals, not unique animation clips."
   }
 }

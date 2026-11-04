@@ -1,9 +1,9 @@
-import {eventKind} from './scene-events.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {stimulateTown} from './town-response.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {requestPassengerAction} from './passengers.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {requestObjectAction} from './object-actions.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {validateDecision} from './catalog.mjs?v=cp45-responsive-episodes-e28490733a86';
+import {eventKind} from './scene-events.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {stimulateTown} from './town-response.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {requestPassengerAction} from './passengers.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {requestObjectAction} from './object-actions.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {validateDecision} from './catalog.mjs?v=cp46-causal-feedback-2887e8b494a1';
 
 // Compound goals reuse tested movements, with real completion/occupation checks between steps.
 export const LIFE_PLANS={
@@ -23,7 +23,7 @@ export function createIntentRuntime(){return {jobs:[],seen:[],sequence:0,lastDay
 export function queueIntent(s,items,{id=`local-plan-${s.revision+1}-${s.intentRuntime.sequence+1}`,expectedRevision=s.revision,source='words',sourceText='',preserveOthers=false,selectedMemory=null}={},catalog={}){
  if(expectedRevision!==s.revision)return{accepted:false,reason:'stale'};
  if(s.intentRuntime.seen.includes(id))return{accepted:false,reason:'duplicate'};
- if(!Array.isArray(items)||items.length>60)throw Error('计划项数无效');
+ if(!Array.isArray(items)||items.length>256)throw Error('计划项数无效');
  for(const x of items){if(!x||typeof x.target!=='string'||typeof x.action!=='string')throw Error('动作格式无效');if(x.kind==='resident'&&!supportsResident(x.target,x.action))throw Error('角色没有这个已实现动作');if(x.kind==='object'&&!catalog[x.target]?.actions.some(a=>a.id===x.action))throw Error('物件没有这个已实现动作');if(x.kind==='macro')validateDecision({[x.target]:x.action});if(!['resident','object','macro'].includes(x.kind))throw Error('不允许的动作类型');}
  items=items.map(item=>{if(item.kind!=='object')return item;const object=catalog[item.target],action=object.actions.find(a=>a.id===item.action);let owner=action.owner,goal=item.action;
   if(object.kind==='watering_can'){owner='resident.gardener';goal=item.action==='pour'?'water_plants':'inspect_leaf';}
@@ -35,7 +35,7 @@ export function queueIntent(s,items,{id=`local-plan-${s.revision+1}-${s.intentRu
  if(source==='words'&&sourceText&&!items.every(i=>i.kind==='macro'&&i.target==='craft'&&['remember','recall','putaway','rest'].includes(i.action)))s.lastWish={text:String(sourceText).slice(0,160),at:s.time,kind:items.some(i=>i.target==='journey')?'journey':items.find(i=>i.target==='craft')?.action||items.find(i=>i.target==='neighborhood')?.action||'note'};
  const receipt={id,source,started:s.time,targets:items.map(x=>x.target),count:items.length};
  for(const item of items){for(const j of s.intentRuntime.jobs)if(j.target===item.target&&!['done','cancelled','failed'].includes(j.status))j.status='cancelled';const definition=LIFE_PLANS[item.action];s.intentRuntime.jobs.push({...item,id:`${id}/${++s.intentRuntime.sequence}`,requestId:id,status:'pending',step:0,steps:definition?structuredClone(definition.steps):[item.action],started:s.time,updated:s.time,source,selectedMemory,preserveOthers:!!preserveOthers,sourceText:String(sourceText||'').slice(0,160),reason:'等当前动作安全结束'});}
- s.intentRuntime.jobs=s.intentRuntime.jobs.filter(j=>!['done','cancelled','failed'].includes(j.status)||s.time-j.updated<90).slice(-80);
+ s.intentRuntime.jobs=[...s.intentRuntime.jobs.filter(j=>['done','cancelled','failed'].includes(j.status)&&s.time-j.updated<90).slice(-80),...s.intentRuntime.jobs.filter(j=>!['done','cancelled','failed'].includes(j.status))];
  if(source!=='day_rhythm'){s.intentRuntime.lastReceipt=receipt;s.revision++;if(!eventKind(Object.fromEntries(items.filter(i=>i.kind==='macro').map(i=>[i.target,i.action]))))stimulateTown(s,items,{id});}return{accepted:true,receipt};
 }
 function startResident(s,j,action,apply){const id=j.target;
@@ -79,4 +79,4 @@ export function advanceIntentRuntime(s,nav,dt,apply,emit){
  }
 }
 export function cancelIntentJobs(s,targets){for(const j of s.intentRuntime.jobs)if(!targets||targets.includes(j.target)||targets.includes(j.origin_object)){if(!['done','failed'].includes(j.status)){j.status='cancelled';j.updated=s.time;}}}
-export function validateIntentRuntime(s){const r=s.intentRuntime;if(!r||!Array.isArray(r.jobs)||r.jobs.length>80||!Array.isArray(r.seen)||!Array.isArray(r.daily))throw Error('生活计划存档无效');for(const j of r.jobs)if(!['pending','waiting','running','done','failed','cancelled'].includes(j.status)||!Number.isInteger(j.step)||!Array.isArray(j.steps)||!Number.isFinite(j.started)||!Number.isFinite(j.updated))throw Error('计划状态无效');}
+export function validateIntentRuntime(s){const r=s.intentRuntime;if(!r||!Array.isArray(r.jobs)||r.jobs.length>400||!Array.isArray(r.seen)||!Array.isArray(r.daily))throw Error('生活计划存档无效');for(const j of r.jobs)if(!['pending','waiting','running','done','failed','cancelled'].includes(j.status)||!Number.isInteger(j.step)||!Array.isArray(j.steps)||!Number.isFinite(j.started)||!Number.isFinite(j.updated))throw Error('计划状态无效');}

@@ -1,28 +1,28 @@
-import {advanceInput,recoverInput} from './input-session.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {ensureBoat,advanceBoat,validateBoat} from './boat-world.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {ensureCloud,requestCloud,advanceCloud,validateCloud} from './local-cloud.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {ensureCraft,advanceCraft,validateCraft} from './craft-world.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {ensureJourney,requestJourney,advanceJourney,validateJourney} from './train-journey.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {ensureFoxBehavior,validateFox} from './fox-behavior.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {ensureNeighborhood,advanceNeighborhood,validateNeighborhood} from './neighborhood-world.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {ensurePaperWorld,advancePaperWorld,validatePaperWorld} from './paper-world.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {advanceGroupCrowd} from './group-crowd.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {eventPose} from './group-layout.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {ensureEventTravel,advanceEventTravel,eventGuestPositions,syncGuestActors,makeRoom,validateEventTravel} from './event-travel.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {requestSceneEvent,sceneTask,holdsEventPlace,validateSceneEvents,EVENT_TIMING} from './scene-events.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {eventCenter,eventScore} from './event-space.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {stimulateTown,advanceTownResponse,validateTownResponse} from './town-response.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {createIntentRuntime,advanceIntentRuntime,validateIntentRuntime} from './life-plans.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {createPassengers,advancePassengers,validatePassengers,requestPassengerAction} from './passengers.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {advanceObjectControls,validateObjectControls} from './object-actions.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {createLocalWalkers,advanceLocalWalkers,validateLocalWalkers} from './local-walkers.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {createResidentActions,advanceResidentActions,validateResidentActions,requestResidentAction,RESIDENT_CAPABILITIES} from './resident-actions.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {createCommunity,updateDirector,updateResidents,wantedTask,routineTask,setResidentTask,ACTIVITIES,PROFILES,requestFestival} from './community.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {CADENCE,varied,stableUnit} from './cadence.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {createTrain,stepTrain,clamp,createMovers,advanceMovers,createDiners,advanceDiners,moverBlocks} from './motion.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {validateDecision,labels,ACTOR_DOMAINS} from './catalog.mjs?v=cp45-responsive-episodes-e28490733a86';
+import {advanceInput,recoverInput} from './input-session.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {ensureBoat,advanceBoat,validateBoat} from './boat-world.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {ensureCloud,requestCloud,advanceCloud,validateCloud} from './local-cloud.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {ensureCraft,advanceCraft,validateCraft} from './craft-world.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {ensureJourney,requestJourney,advanceJourney,validateJourney} from './train-journey.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {ensureFoxBehavior,validateFox} from './fox-behavior.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {ensureNeighborhood,advanceNeighborhood,validateNeighborhood} from './neighborhood-world.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {ensurePaperWorld,advancePaperWorld,validatePaperWorld} from './paper-world.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {advanceGroupCrowd} from './group-crowd.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {eventPose} from './group-layout.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {ensureEventTravel,advanceEventTravel,eventGuestPositions,syncGuestActors,makeRoom,validateEventTravel} from './event-travel.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {requestSceneEvent,sceneTask,holdsEventPlace,validateSceneEvents,EVENT_TIMING} from './scene-events.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {eventCenter,eventScore} from './event-space.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {stimulateTown,advanceTownResponse,validateTownResponse} from './town-response.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {createIntentRuntime,advanceIntentRuntime,validateIntentRuntime} from './life-plans.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {createPassengers,advancePassengers,validatePassengers,requestPassengerAction} from './passengers.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {advanceObjectControls,validateObjectControls} from './object-actions.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {createLocalWalkers,advanceLocalWalkers,validateLocalWalkers} from './local-walkers.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {createResidentActions,advanceResidentActions,validateResidentActions,requestResidentAction,RESIDENT_CAPABILITIES} from './resident-actions.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {createCommunity,updateDirector,updateResidents,wantedTask,routineTask,setResidentTask,ACTIVITIES,PROFILES,requestFestival} from './community.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {CADENCE,varied,stableUnit} from './cadence.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {createTrain,stepTrain,clamp,createMovers,advanceMovers,createDiners,advanceDiners,moverBlocks} from './motion.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {validateDecision,labels,ACTOR_DOMAINS} from './catalog.mjs?v=cp46-causal-feedback-2887e8b494a1';
 export const VERSION=13, DT=.05;
 const distance=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 export function createWorld(nav,seed=62417){
@@ -101,7 +101,7 @@ export function step(s,nav,dt=DT){if(s.paused)return;if(dt!==DT)throw Error('模
  syncGuestActors(s);advanceInput(s,nav);
 }
 export function serialize(s){return JSON.stringify(s);}
-export function restore(raw,nav){const s=typeof raw==='string'?JSON.parse(raw):structuredClone(raw);
+export function restore(raw,nav){const s=typeof raw==='string'?JSON.parse(raw):structuredClone(raw);if(['cruise','dock','row'].includes(s.objectControls?.['boat.pond_boat']?.action)){delete s.objectControls['boat.pond_boat'];if(s.boatJourney&&nav.activities?.boatRoute)Object.assign(s.boatJourney,{retiredCruise:true,phase:'moored',p:nav.activities.boatRoute.home.slice(),distance:0,speed:0,fold:0,tether:1,blocked:0});}
  if(s.version===12&&[1245,1312].includes(s.navSignature)&&[11,19].includes(s.actors?.length)){
   const fresh=createWorld(nav,s.seed),oldGuests=s.eventGuests||{},graph=navigationGraph(nav),main=graph.components[nav.actors[0].entry.at(-1)];
   const nearest=p=>nav.nodes.map((q,i)=>({i,d:distance(p,q)+Math.abs(p[2]-q[2])*4})).filter(x=>graph.components[x.i]===main).sort((a,b)=>a.d-b.d)[0].i;

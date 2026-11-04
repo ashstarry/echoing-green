@@ -1,7 +1,7 @@
-import {rainingAt} from './local-cloud.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {advanceSceneEvent,requestSceneEvent,sceneTask} from './scene-events.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {CADENCE,varied,stableUnit} from './cadence.mjs?v=cp45-responsive-episodes-e28490733a86';
+import {rainingAt} from './local-cloud.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {advanceSceneEvent,requestSceneEvent,sceneTask} from './scene-events.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {CADENCE,varied,stableUnit} from './cadence.mjs?v=cp46-causal-feedback-2887e8b494a1';
 export const ACTIVITIES={
  hop:{label:'找一块空地跳两下',range:[3,6],zone:'playground'},follow:{label:'跟着孩子换个位置',range:[4,8],zone:'family'},
  play:{label:'给街坊弹一段琴',range:[18,35]},
@@ -33,7 +33,7 @@ export function wantedTask(s,a){
  if(s.occasion==='reunion')return a.id==='resident.postman'?'mail':'chat';
  if(s.occasion==='delivery'&&['resident.postman','resident.courier'].includes(a.id))return 'mail';
  if(s.occasion==='quiet')return ['resident.market_browser','resident.strolling_parent','resident.child_runner'].includes(a.id)?'lotus':a.id.includes('customer')?'listen':'rest';
- if(s.time<s.musicGatherUntil&&stableUnit(a.id)<.55)return 'listen';
+ if(s.time<s.musicGatherUntil&&s.sceneEvent?.slots?.[a.id]!==undefined)return 'listen';
  if(s.street==='gather')return 'listen';if(s.street==='quiet')return 'rest';
  return null;
 }

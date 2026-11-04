@@ -33,7 +33,7 @@ export function wantedTask(s,a){
  if(s.occasion==='reunion')return a.id==='resident.postman'?'mail':'chat';
  if(s.occasion==='delivery'&&['resident.postman','resident.courier'].includes(a.id))return 'mail';
  if(s.occasion==='quiet')return ['resident.market_browser','resident.strolling_parent','resident.child_runner'].includes(a.id)?'lotus':a.id.includes('customer')?'listen':'rest';
- if(s.time<s.musicGatherUntil&&stableUnit(a.id)<.55)return 'listen';
+ if(s.time<s.musicGatherUntil&&s.sceneEvent?.slots?.[a.id]!==undefined)return 'listen';
  if(s.street==='gather')return 'listen';if(s.street==='quiet')return 'rest';
  return null;
 }

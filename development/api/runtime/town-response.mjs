@@ -20,7 +20,7 @@ export function responseTheme(s,items){
 // replace explicit personal goals or continuously interrupt somebody's current work.
 export function stimulateTown(s,items,{id='opening',opening=false}={}){
  const theme=opening?(s.weather==='rain'?'rain':s.worldEvent.kind==='festival'?'festival':s.occasion==='quiet'||s.street==='quiet'?'quiet':s.weather==='snow'?'snow':'opening'):responseTheme(s,items);
- if(!theme)return null;
+ if(!theme||theme==='music')return null;
  const protectedIds=new Set(items.filter(i=>i.kind==='resident').map(i=>i.target));
  const pending=[];let n=0;
  for(const a of s.actors){if(!a.mobile||protectedIds.has(a.id)||theme==='quiet'&&s.street==='quiet')continue;

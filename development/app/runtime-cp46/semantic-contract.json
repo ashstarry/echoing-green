@@ -1,0 +1,1047 @@
+{
+  "version": 1,
+  "model": "typesafe/jev-1.14",
+  "endpoint": "https://openrouter.ai/api/alpha/decisions",
+  "source": "outputs/runtime-checkpoint-22/action-inventory.json",
+  "source_sha256": "428cff5520d578863517a76f62207bc290fe8b1bda3eca1cc57c9c9ca44a5bf8",
+  "fields": {
+    "weather": {
+      "label": "天气",
+      "kind": "macro",
+      "choices": {
+        "keep": "不改变这一项",
+        "clear": "停雨停雪",
+        "rain": "落纸雨",
+        "snow": "飘纸雪"
+      },
+      "available": true
+    },
+    "day_phase": {
+      "label": "日夜",
+      "kind": "macro",
+      "choices": {
+        "keep": "不改变这一项",
+        "dawn": "晨曦初现",
+        "day": "白天",
+        "dusk": "温暖黄昏",
+        "night": "夜幕星空"
+      },
+      "available": true
+    },
+    "light": {
+      "label": "灯火",
+      "kind": "macro",
+      "choices": {
+        "keep": "不改变这一项",
+        "warm": "更橘暖",
+        "bright": "提高亮度但保留橘色",
+        "soft": "柔和收敛但道路可见"
+      },
+      "available": true
+    },
+    "breeze": {
+      "label": "风",
+      "kind": "macro",
+      "choices": {
+        "keep": "不改变这一项",
+        "calm": "风更轻",
+        "gentle": "柔和晚风",
+        "lively": "风更活泼"
+      },
+      "available": true
+    },
+    "festival": {
+      "label": "花火大会",
+      "kind": "macro",
+      "choices": {
+        "keep": "不改变这一项",
+        "fireworks": "燃放定点红金花火，街坊聚集后站定仰望",
+        "quiet": "停止新增花火"
+      },
+      "available": true
+    },
+    "occasion": {
+      "label": "集体生活",
+      "kind": "macro",
+      "choices": {
+        "keep": "不改变这一项",
+        "ordinary": "恢复各自日常",
+        "market": "晚市开张、展开招牌与纸旗、摊位备齐、居民逛摊排队",
+        "supper": "集体用餐",
+        "reunion": "邻里聚集聊天",
+        "quiet": "安静休息看景",
+        "delivery": "送信时刻，邮差与送信人沿街核对门牌、分送信件，街坊留意来信"
+      },
+      "available": true
+    },
+    "train": {
+      "label": "电车",
+      "kind": "macro",
+      "choices": {
+        "keep": "不改变这一项",
+        "auto": "自动绕镇停站",
+        "hold": "安全到站后等待"
+      },
+      "available": true
+    },
+    "resident.assistant_gardener": {
+      "label": "花房的帮手",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "greet": "抬手招呼",
+        "converse": "用手势交谈",
+        "warm_hands": "搓手取暖",
+        "watch_sky": "抬手望向天空",
+        "brush_coat": "掸掉衣上的雨雪",
+        "inspect_leaf": "扶起花叶查看",
+        "stretch": "舒展肩臂"
+      },
+      "available": true
+    },
+    "resident.gardener": {
+      "label": "照料花草的居民",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "water_plants": "抬壶浇花",
+        "inspect_leaf": "扶起花叶查看",
+        "greet": "抬手招呼",
+        "converse": "用手势交谈",
+        "watch_sky": "抬手望向天空",
+        "brush_coat": "掸掉衣上的雨雪"
+      },
+      "available": true
+    },
+    "resident.garden_child": {
+      "label": "花园边玩耍的小孩",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "walk_street": "沿街走到另一处",
+        "visit_market": "走到摊前逛一逛",
+        "listen_music": "走去树下听琴",
+        "seek_neighbor": "走去找邻居聊天",
+        "watch_pond": "换到能看见池塘的位置",
+        "seek_shelter": "走去可避雨的位置",
+        "greet": "抬手招呼",
+        "converse": "用手势交谈",
+        "warm_hands": "搓手取暖",
+        "watch_sky": "抬手望向天空",
+        "brush_coat": "掸掉衣上的雨雪",
+        "stretch": "舒展肩臂",
+        "applaud": "拍手回应",
+        "shade_eyes": "遮眉眺望",
+        "hop": "到空地跳两下"
+      },
+      "available": true
+    },
+    "resident.child_listener": {
+      "label": "听琴的小孩",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "greet": "抬手招呼",
+        "converse": "用手势交谈",
+        "warm_hands": "搓手取暖",
+        "watch_sky": "抬手望向天空",
+        "brush_coat": "掸掉衣上的雨雪",
+        "applaud": "拍手回应",
+        "tap_music": "用脚打拍子",
+        "sip_tea": "端杯喝茶"
+      },
+      "available": true
+    },
+    "resident.listener": {
+      "label": "树下的听众",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "greet": "抬手招呼",
+        "converse": "用手势交谈",
+        "warm_hands": "搓手取暖",
+        "watch_sky": "抬手望向天空",
+        "brush_coat": "掸掉衣上的雨雪",
+        "applaud": "拍手回应",
+        "tap_music": "用脚打拍子",
+        "sip_tea": "端杯喝茶"
+      },
+      "available": true
+    },
+    "resident.child_parent": {
+      "label": "陪孩子的家长",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "walk_street": "沿街走到另一处",
+        "visit_market": "走到摊前逛一逛",
+        "listen_music": "走去树下听琴",
+        "seek_neighbor": "走去找邻居聊天",
+        "watch_pond": "换到能看见池塘的位置",
+        "seek_shelter": "走去可避雨的位置",
+        "greet": "抬手招呼",
+        "converse": "用手势交谈",
+        "warm_hands": "搓手取暖",
+        "watch_sky": "抬手望向天空",
+        "brush_coat": "掸掉衣上的雨雪",
+        "stretch": "舒展肩臂",
+        "applaud": "拍手回应",
+        "shade_eyes": "遮眉眺望",
+        "watch_child": "换到孩子旁陪看"
+      },
+      "available": true
+    },
+    "resident.kite_child": {
+      "label": "放风筝的孩子",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "walk_street": "沿街走到另一处",
+        "greet": "抬手招呼",
+        "converse": "用手势交谈",
+        "watch_sky": "抬手望向天空",
+        "brush_coat": "掸掉衣上的雨雪",
+        "shade_eyes": "遮眉眺望",
+        "kite_play": "牵线放风筝"
+      },
+      "available": true
+    },
+    "resident.child_runner": {
+      "label": "广场上玩耍的小孩",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "walk_street": "沿街走到另一处",
+        "visit_market": "走到摊前逛一逛",
+        "listen_music": "走去树下听琴",
+        "seek_neighbor": "走去找邻居聊天",
+        "watch_pond": "换到能看见池塘的位置",
+        "seek_shelter": "走去可避雨的位置",
+        "greet": "抬手招呼",
+        "converse": "用手势交谈",
+        "warm_hands": "搓手取暖",
+        "watch_sky": "抬手望向天空",
+        "brush_coat": "掸掉衣上的雨雪",
+        "stretch": "舒展肩臂",
+        "applaud": "拍手回应",
+        "shade_eyes": "遮眉眺望",
+        "hop": "到空地跳两下"
+      },
+      "available": true
+    },
+    "resident.courier": {
+      "label": "巷口的送信人",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "walk_street": "沿街走到另一处",
+        "visit_market": "走到摊前逛一逛",
+        "listen_music": "走去树下听琴",
+        "seek_neighbor": "走去找邻居聊天",
+        "watch_pond": "换到能看见池塘的位置",
+        "seek_shelter": "走去可避雨的位置",
+        "greet": "抬手招呼",
+        "converse": "用手势交谈",
+        "warm_hands": "搓手取暖",
+        "watch_sky": "抬手望向天空",
+        "brush_coat": "掸掉衣上的雨雪",
+        "stretch": "舒展肩臂",
+        "applaud": "拍手回应",
+        "shade_eyes": "遮眉眺望"
+      },
+      "available": true
+    },
+    "resident.postman": {
+      "label": "邮局的邮差",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "walk_street": "沿街走到另一处",
+        "visit_market": "走到摊前逛一逛",
+        "listen_music": "走去树下听琴",
+        "seek_neighbor": "走去找邻居聊天",
+        "watch_pond": "换到能看见池塘的位置",
+        "seek_shelter": "走去可避雨的位置",
+        "greet": "抬手招呼",
+        "converse": "用手势交谈",
+        "watch_sky": "抬手望向天空",
+        "brush_coat": "掸掉衣上的雨雪",
+        "stretch": "舒展肩臂",
+        "shade_eyes": "遮眉眺望",
+        "check_letter": "举起信件核对"
+      },
+      "available": true
+    },
+    "resident.customer_one": {
+      "label": "餐厅门前的客人",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "walk_street": "沿街走到另一处",
+        "visit_market": "走到摊前逛一逛",
+        "listen_music": "走去树下听琴",
+        "seek_neighbor": "走去找邻居聊天",
+        "watch_pond": "换到能看见池塘的位置",
+        "seek_shelter": "走去可避雨的位置",
+        "greet": "抬手招呼",
+        "converse": "用手势交谈",
+        "warm_hands": "搓手取暖",
+        "watch_sky": "抬手望向天空",
+        "brush_coat": "掸掉衣上的雨雪",
+        "stretch": "舒展肩臂",
+        "applaud": "拍手回应",
+        "shade_eyes": "遮眉眺望"
+      },
+      "available": true
+    },
+    "resident.customer_two": {
+      "label": "穿灰衣的客人",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "walk_street": "沿街走到另一处",
+        "visit_market": "走到摊前逛一逛",
+        "listen_music": "走去树下听琴",
+        "seek_neighbor": "走去找邻居聊天",
+        "watch_pond": "换到能看见池塘的位置",
+        "seek_shelter": "走去可避雨的位置",
+        "greet": "抬手招呼",
+        "converse": "用手势交谈",
+        "warm_hands": "搓手取暖",
+        "watch_sky": "抬手望向天空",
+        "brush_coat": "掸掉衣上的雨雪",
+        "stretch": "舒展肩臂",
+        "applaud": "拍手回应",
+        "shade_eyes": "遮眉眺望"
+      },
+      "available": true
+    },
+    "resident.customer_three": {
+      "label": "穿黄衣的客人",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "walk_street": "沿街走到另一处",
+        "visit_market": "走到摊前逛一逛",
+        "listen_music": "走去树下听琴",
+        "seek_neighbor": "走去找邻居聊天",
+        "watch_pond": "换到能看见池塘的位置",
+        "seek_shelter": "走去可避雨的位置",
+        "greet": "抬手招呼",
+        "converse": "用手势交谈",
+        "warm_hands": "搓手取暖",
+        "watch_sky": "抬手望向天空",
+        "brush_coat": "掸掉衣上的雨雪",
+        "stretch": "舒展肩臂",
+        "applaud": "拍手回应",
+        "shade_eyes": "遮眉眺望"
+      },
+      "available": true
+    },
+    "resident.market_browser": {
+      "label": "逛集市的居民",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "walk_street": "沿街走到另一处",
+        "visit_market": "走到摊前逛一逛",
+        "listen_music": "走去树下听琴",
+        "seek_neighbor": "走去找邻居聊天",
+        "watch_pond": "换到能看见池塘的位置",
+        "seek_shelter": "走去可避雨的位置",
+        "greet": "抬手招呼",
+        "converse": "用手势交谈",
+        "warm_hands": "搓手取暖",
+        "watch_sky": "抬手望向天空",
+        "brush_coat": "掸掉衣上的雨雪",
+        "stretch": "舒展肩臂",
+        "applaud": "拍手回应",
+        "shade_eyes": "遮眉眺望"
+      },
+      "available": true
+    },
+    "resident.strolling_parent": {
+      "label": "散步的家长",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "walk_street": "沿街走到另一处",
+        "visit_market": "走到摊前逛一逛",
+        "listen_music": "走去树下听琴",
+        "seek_neighbor": "走去找邻居聊天",
+        "watch_pond": "换到能看见池塘的位置",
+        "seek_shelter": "走去可避雨的位置",
+        "greet": "抬手招呼",
+        "converse": "用手势交谈",
+        "warm_hands": "搓手取暖",
+        "watch_sky": "抬手望向天空",
+        "brush_coat": "掸掉衣上的雨雪",
+        "stretch": "舒展肩臂",
+        "applaud": "拍手回应",
+        "shade_eyes": "遮眉眺望"
+      },
+      "available": true
+    },
+    "resident.cyclist": {
+      "label": "骑车的居民",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "greet": "抬手招呼",
+        "watch_sky": "抬手望向天空",
+        "check_time": "看看时间再候车",
+        "cycle_trip": "骑去下一站",
+        "cycle_rest": "到下一站停脚"
+      },
+      "available": true
+    },
+    "resident.elder": {
+      "label": "门边的长者",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "greet": "抬手招呼",
+        "converse": "用手势交谈",
+        "warm_hands": "搓手取暖",
+        "watch_sky": "抬手望向天空",
+        "brush_coat": "掸掉衣上的雨雪",
+        "stretch": "舒展肩臂",
+        "sip_tea": "端杯喝茶",
+        "tap_music": "用脚打拍子"
+      },
+      "available": true
+    },
+    "resident.porch_resident": {
+      "label": "阳台上的邻居",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "greet": "抬手招呼",
+        "converse": "用手势交谈",
+        "warm_hands": "搓手取暖",
+        "watch_sky": "抬手望向天空",
+        "brush_coat": "掸掉衣上的雨雪",
+        "shade_eyes": "遮眉眺望",
+        "go_window": "沿阳台走到窗边",
+        "return_porch": "回到阳台原位"
+      },
+      "available": true
+    },
+    "resident.quiet_reader": {
+      "label": "露台上的读者",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "read_pages": "捧书翻页",
+        "close_book": "合书放低休息",
+        "sip_tea": "端杯喝茶",
+        "greet": "抬手招呼",
+        "watch_sky": "抬手望向天空",
+        "tap_music": "用脚打拍子",
+        "warm_hands": "搓手取暖"
+      },
+      "available": true
+    },
+    "resident.returning_resident": {
+      "label": "楼梯上的红衣居民",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "greet": "抬手招呼",
+        "converse": "用手势交谈",
+        "warm_hands": "搓手取暖",
+        "watch_sky": "抬手望向天空",
+        "brush_coat": "掸掉衣上的雨雪",
+        "shade_eyes": "遮眉眺望",
+        "go_terrace": "走上观景露台",
+        "go_street": "走下楼梯到街边",
+        "return_landing": "回到楼梯平台"
+      },
+      "available": true
+    },
+    "resident.station_attendant": {
+      "label": "车站值守的人",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "greet": "抬手招呼",
+        "converse": "用手势交谈",
+        "warm_hands": "搓手取暖",
+        "watch_sky": "抬手望向天空",
+        "brush_coat": "掸掉衣上的雨雪",
+        "check_time": "看看时间再候车",
+        "signal_train": "抬臂示意电车",
+        "tap_music": "用脚打拍子"
+      },
+      "available": true
+    },
+    "resident.station_traveler": {
+      "label": "准备出行的旅客",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "greet": "抬手招呼",
+        "converse": "用手势交谈",
+        "warm_hands": "搓手取暖",
+        "watch_sky": "抬手望向天空",
+        "brush_coat": "掸掉衣上的雨雪",
+        "check_time": "看看时间再候车",
+        "signal_train": "抬臂示意电车",
+        "tap_music": "用脚打拍子",
+        "ride_once": "候车、乘一圈再下车",
+        "stay": "留在站台",
+        "alight": "到站下车"
+      },
+      "available": true
+    },
+    "resident.waiting_passenger": {
+      "label": "坐着候车的人",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "greet": "抬手招呼",
+        "converse": "用手势交谈",
+        "warm_hands": "搓手取暖",
+        "watch_sky": "抬手望向天空",
+        "brush_coat": "掸掉衣上的雨雪",
+        "check_time": "看看时间再候车",
+        "signal_train": "抬臂示意电车",
+        "tap_music": "用脚打拍子"
+      },
+      "available": true
+    },
+    "resident.waiting_passenger_2": {
+      "label": "候车的邻居",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "greet": "抬手招呼",
+        "converse": "用手势交谈",
+        "warm_hands": "搓手取暖",
+        "watch_sky": "抬手望向天空",
+        "brush_coat": "掸掉衣上的雨雪",
+        "check_time": "看看时间再候车",
+        "signal_train": "抬臂示意电车",
+        "tap_music": "用脚打拍子"
+      },
+      "available": true
+    },
+    "resident.water_companion": {
+      "label": "桥边持伞的同伴",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "greet": "抬手招呼",
+        "converse": "用手势交谈",
+        "watch_sky": "抬手望向天空",
+        "shade_eyes": "遮眉眺望",
+        "umbrella_open": "撑开纸伞",
+        "umbrella_close": "收拢纸伞"
+      },
+      "available": true
+    },
+    "resident.water_visitor": {
+      "label": "桥边红衣居民",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "greet": "抬手招呼",
+        "converse": "用手势交谈",
+        "warm_hands": "搓手取暖",
+        "watch_sky": "抬手望向天空",
+        "brush_coat": "掸掉衣上的雨雪",
+        "shade_eyes": "遮眉眺望",
+        "feed_pond": "向池塘投喂",
+        "look_pond": "转身指给同伴看游鱼"
+      },
+      "available": true
+    },
+    "resident.vendor_bread": {
+      "label": "酒楼的面点师",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "greet": "抬手招呼",
+        "converse": "用手势交谈",
+        "offer_food": "托起点心招呼",
+        "wipe_counter": "擦拭柜台",
+        "cover_food": "拿起整理餐布",
+        "warm_hands": "搓手取暖"
+      },
+      "available": true
+    },
+    "resident.vendor_flower": {
+      "label": "酒楼的招待",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "greet": "抬手招呼",
+        "converse": "用手势交谈",
+        "offer_food": "托起点心招呼",
+        "wipe_counter": "擦拭柜台",
+        "cover_food": "拿起整理餐布",
+        "warm_hands": "搓手取暖"
+      },
+      "available": true
+    },
+    "resident.vendor_lamp": {
+      "label": "柜台边的店员",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "greet": "抬手招呼",
+        "converse": "用手势交谈",
+        "offer_food": "托起点心招呼",
+        "wipe_counter": "擦拭柜台",
+        "cover_food": "拿起整理餐布",
+        "warm_hands": "搓手取暖"
+      },
+      "available": true
+    },
+    "resident.musician": {
+      "label": "树下的乐手",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "greet": "抬手招呼",
+        "converse": "用手势交谈",
+        "tap_music": "用脚打拍子",
+        "play_music": "拨弦演奏",
+        "rest_music": "停下来歇息"
+      },
+      "available": true
+    },
+    "resident.upper_diner_0": {
+      "label": "二楼左边的客人",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "sip_tea": "端杯喝茶",
+        "taste_food": "拿点心吃一口",
+        "converse": "用手势交谈",
+        "watch_sky": "抬手望向天空",
+        "inside": "起身走进门帘",
+        "dine": "走出门帘坐下"
+      },
+      "available": true
+    },
+    "resident.upper_diner_1": {
+      "label": "二楼右边的客人",
+      "kind": "resident",
+      "choices": {
+        "keep": "不改变这一项",
+        "sip_tea": "端杯喝茶",
+        "taste_food": "拿点心吃一口",
+        "converse": "用手势交谈",
+        "watch_sky": "抬手望向天空",
+        "inside": "起身走进门帘",
+        "dine": "走出门帘坐下"
+      },
+      "available": true
+    },
+    "object.birds": {
+      "label": "所有纸雕鸟",
+      "kind": "object",
+      "members": [
+        "bird.paper_bird_0",
+        "bird.paper_bird_1",
+        "bird.paper_bird_2"
+      ],
+      "choices": {
+        "keep": "不改变这一项",
+        "fly": "循着空中路线飞",
+        "hover": "放慢并悬停",
+        "glide": "舒展翅膀滑翔",
+        "flap": "轻快拍翼"
+      },
+      "available": true
+    },
+    "object.fish": {
+      "label": "池塘里的鱼",
+      "kind": "object",
+      "members": [
+        "fish.pond_fish_0",
+        "fish.pond_fish_1"
+      ],
+      "choices": {
+        "keep": "不改变这一项",
+        "swim": "继续游动",
+        "nibble": "放慢觅食",
+        "rest": "缓缓停留"
+      },
+      "available": true
+    },
+    "object.ducks": {
+      "label": "池塘里的鸭子",
+      "kind": "object",
+      "members": [
+        "animal.duck_0",
+        "animal.duck_1"
+      ],
+      "choices": {
+        "keep": "不改变这一项",
+        "swim": "沿水面游动",
+        "nibble": "低头啄食",
+        "look": "抬头张望",
+        "rest": "安静浮着"
+      },
+      "available": true
+    },
+    "object.cat": {
+      "label": "门边的小猫",
+      "kind": "object",
+      "members": [
+        "animal.doorstep_cat"
+      ],
+      "choices": {
+        "keep": "不改变这一项",
+        "explore": "沿熟悉的地方走走",
+        "sniff": "停下嗅闻",
+        "look": "抬头留意周围",
+        "rest": "安静歇息"
+      },
+      "available": true
+    },
+    "object.fox": {
+      "label": "花园的小狐狸",
+      "kind": "object",
+      "members": [
+        "animal.garden_fox"
+      ],
+      "choices": {
+        "keep": "不改变这一项",
+        "explore": "沿熟悉的地方走走",
+        "sniff": "停下嗅闻",
+        "look": "抬头留意周围",
+        "rest": "安静歇息",
+        "play": "低身邀玩、轻快小跑，再停下摇尾",
+        "greet": "走近花园旁可达的居民，摇尾打招呼",
+        "stretch": "停下伸展前爪、舒展身体"
+      },
+      "available": true
+    },
+    "object.boat": {
+      "label": "系泊小船",
+      "kind": "object",
+      "members": [
+        "boat.pond_boat"
+      ],
+      "choices": {
+        "keep": "保持系泊的小舟",
+        "bob": "随水轻摇，仍系在岸边",
+        "rest": "让泊着的小舟安静一点"
+      },
+      "available": true
+    },
+    "object.windmill": {
+      "label": "山坡风车",
+      "kind": "object",
+      "members": [
+        "windmill.hill_windwheel"
+      ],
+      "choices": {
+        "keep": "不改变这一项",
+        "slow": "慢慢转",
+        "brisk": "轻快地转",
+        "stop": "慢慢停住",
+        "follow_wind": "跟随晚风"
+      },
+      "available": true
+    },
+    "object.stars": {
+      "label": "天空星星",
+      "kind": "object",
+      "members": [
+        "star.sky_star_00",
+        "star.sky_star_01",
+        "star.sky_star_02",
+        "star.sky_star_03",
+        "star.sky_star_04"
+      ],
+      "choices": {
+        "keep": "不改变这一项",
+        "glow": "稳定发亮",
+        "twinkle": "轻轻闪烁",
+        "dim": "光芒淡下来"
+      },
+      "available": true
+    },
+    "object.moon": {
+      "label": "纸月亮",
+      "kind": "object",
+      "members": [
+        "moon.paper_crescent"
+      ],
+      "choices": {
+        "keep": "不改变这一项",
+        "glow": "月光明亮",
+        "dim": "月光柔和"
+      },
+      "available": true
+    },
+    "object.water_lanterns": {
+      "label": "池塘莲花灯",
+      "kind": "object",
+      "members": [
+        "water_lantern.pond_paper_lantern_0",
+        "water_lantern.pond_paper_lantern_1"
+      ],
+      "choices": {
+        "keep": "不改变这一项",
+        "float": "在水上轻浮",
+        "still": "缓缓停稳",
+        "shine": "灯心更明亮"
+      },
+      "available": true
+    },
+    "object.plants": {
+      "label": "全镇花草",
+      "kind": "object",
+      "members": [
+        "plant.cp07_garden_cluster_002",
+        "plant.cp07_garden_cluster_005",
+        "plant.cp07_garden_cluster_010",
+        "plant.cp07_garden_cluster_014",
+        "plant.cp07_garden_cluster_017",
+        "plant.cp07_garden_cluster_020",
+        "plant.cp07_garden_cluster_031",
+        "plant.cp07_garden_cluster_034",
+        "plant.cp07_garden_cluster_039",
+        "plant.cp07_garden_cluster_044",
+        "plant.cp07_garden_cluster_052",
+        "plant.cp07_garden_cluster_053",
+        "plant.cp07_garden_cluster_054",
+        "plant.cp07_garden_cluster_055",
+        "plant.cp07_garden_cluster_056",
+        "plant.cp07_garden_cluster_057",
+        "plant.cp07_garden_cluster_058",
+        "plant.cp07_garden_cluster_059",
+        "plant.cp07_garden_cluster_060",
+        "plant.cp07_garden_cluster_063",
+        "plant.cp07_garden_cluster_064",
+        "plant.cp07_garden_cluster_065",
+        "plant.cp07_garden_cluster_066",
+        "plant.cp07_garden_cluster_069",
+        "plant.cp07_garden_cluster_083",
+        "plant.cp07_garden_cluster_1000",
+        "plant.cp07_garden_cluster_1001",
+        "plant.cp07_garden_cluster_1002",
+        "plant.cp07_garden_cluster_1003",
+        "plant.cp07_garden_cluster_1004",
+        "plant.cp07_garden_cluster_1005",
+        "plant.cp07_garden_cluster_1006",
+        "plant.cp07_garden_cluster_1009",
+        "plant.cp07_garden_cluster_1010",
+        "plant.cp07_garden_cluster_1011",
+        "plant.cp07_garden_cluster_1012",
+        "plant.garden_planter_00",
+        "plant.garden_planter_01",
+        "plant.garden_planter_02",
+        "plant.garden_planter_03",
+        "plant.garden_planter_04",
+        "plant.garden_planter_05",
+        "plant.garden_planter_06",
+        "plant.garden_planter_07",
+        "plant.garden_planter_08",
+        "plant.garden_planter_09",
+        "plant.garden_planter_10",
+        "plant.garden_planter_11",
+        "plant.garden_planter_13",
+        "plant.garden_planter_14",
+        "plant.garden_planter_15",
+        "plant.garden_planter_16",
+        "plant.garden_planter_17",
+        "plant.water_lily_0",
+        "plant.water_lily_1",
+        "plant.water_lily_2",
+        "plant.water_lily_3",
+        "plant.water_lily_4",
+        "plant.water_lily_5",
+        "plant.water_lily_6",
+        "plant.water_lily_7"
+      ],
+      "choices": {
+        "keep": "不改变这一项",
+        "sway": "随晚风摆动",
+        "rustle": "轻轻抖动叶片",
+        "still": "叶片安静下来"
+      },
+      "available": true
+    },
+    "object.trees": {
+      "label": "全镇树木",
+      "kind": "object",
+      "members": [
+        "tree.district_tree_0",
+        "tree.district_tree_1",
+        "tree.district_tree_2",
+        "tree.district_tree_3",
+        "tree.district_tree_4",
+        "tree.district_tree_5",
+        "tree.district_tree_6",
+        "tree.lantern_tree",
+        "tree.pond_willow",
+        "tree.terrace_sakura_0",
+        "tree.terrace_sakura_1",
+        "tree.terrace_sakura_2"
+      ],
+      "choices": {
+        "keep": "不改变这一项",
+        "sway": "随晚风摆动",
+        "rustle": "轻轻抖动枝叶",
+        "still": "枝叶安静下来"
+      },
+      "available": true
+    },
+    "object.ornaments": {
+      "label": "酒楼风铃与纸鹤吊饰",
+      "kind": "object",
+      "members": [
+        "ornament.restaurant_wind_chime",
+        "ornament.restaurant_paper_cranes"
+      ],
+      "choices": {
+        "keep": "不改变这一项",
+        "sway": "轻摆吊饰",
+        "rustle": "轻快摆动",
+        "still": "安静垂下"
+      },
+      "available": true
+    },
+    "object.station_door": {
+      "label": "车站滑门",
+      "kind": "object",
+      "members": [
+        "door.station_entry_door"
+      ],
+      "choices": {
+        "keep": "不改变这一项",
+        "open": "滑开站门",
+        "close": "关上站门"
+      },
+      "available": true
+    },
+    "object.parked_bicycle": {
+      "label": "停在邮局旁的自行车轮",
+      "kind": "object",
+      "members": [
+        "bicycle.cp07_parked_bicycle"
+      ],
+      "choices": {
+        "keep": "不改变这一项",
+        "freewheel": "轻拨车轮",
+        "settle": "让车轮停下"
+      },
+      "available": true
+    },
+    "intent_status": {
+      "label": "理解状态",
+      "kind": "meta",
+      "choices": {
+        "change": "存在可规划的新安排",
+        "no_change": "仅评价/询问/明确保持，没有新安排",
+        "clarify": "指代不清，必须确认对象或意愿",
+        "unsupported": "全部超出清单能力",
+        "partial": "部分可规划，部分超出能力"
+      },
+      "available": true
+    },
+    "music": {
+      "label": "树下的琴声",
+      "kind": "macro",
+      "choices": {
+        "keep": "不改变琴声",
+        "play": "让乐手演奏、琴声响起，适合相伴听琴",
+        "rest": "让乐手停下来歇一会儿"
+      },
+      "available": true
+    },
+    "street": {
+      "label": "街坊的整体活动方向",
+      "kind": "macro",
+      "choices": {
+        "keep": "不改变居民整体目标",
+        "wander": "大家沿街走动散步、各自活动",
+        "gather": "大家去树下听琴，聚拢成为听众",
+        "quiet": "大家走到合适位置后停步休息、看景"
+      },
+      "available": true
+    },
+    "paper": {
+      "label": "纸笺与心意",
+      "kind": "macro",
+      "available": true,
+      "choices": {
+        "keep": "保持纸笺安排",
+        "hang": "写下思念、祝愿或留言，折好后挂到树边留下",
+        "share": "写下感谢或心意，亲手递给邻居",
+        "read": "走到树边读一读最近的纸笺",
+        "collect": "取下最近一张纸笺，读过并折好收起",
+        "rest": "停止新增纸笺，收好正在拿着的纸，保留树上已经挂好的"
+      }
+    },
+    "neighborhood": {
+      "label": "街坊协作与小镇变化",
+      "kind": "macro",
+      "available": true,
+      "choices": {
+        "keep": "保持当前安排",
+        "homecoming": "留灯等晚归、回家有人迎接、门打开暖窗变化",
+        "prepare": "为欢庆做准备：搬凳、点心、纸灯，之后相聚",
+        "reopen": "雨后重新生活：收伞擦拭摆回商品，街道恢复活动",
+        "spring": "春风花开：搬盆与纸花展开、牵风筝、扶帽、风铃",
+        "rest": "不要或停止新的街坊协作"
+      }
+    },
+    "journey": {
+      "label": "电车上的一段旅程",
+      "choices": {
+        "keep": "保持当前行程",
+        "deliver": "靠站时接过电车捎来的包裹，走向街坊并交接",
+        "depart": "旅客上车、邻居送行、电车出发；后续乘车归日常生活",
+        "welcome": "迎接已到站的旅客，下车或在站边招呼，不额外安排整圈",
+        "rest": "先不安排新的乘车，已上车的人安全到站再下车"
+      },
+      "kind": "macro",
+      "available": true
+    },
+    "craft": {
+      "label": "街边的小日子",
+      "choices": {
+        "keep": "保持现在的安排",
+        "tea": "开蒸笼、倒一杯热茶，递给一位走近的客人",
+        "snack": "揭开热蒸笼，把点心递给一位客人",
+        "umbrella": "借一把伞，两位居民一起走一段，再收伞归还",
+        "leaves": "纸叶落在小路上，居民扫拢、装篮整理",
+        "remember": "把这份心情留成一件小纪念，放在已有柜台的纪念角",
+        "recall": "走到纪念角，拿起最近的一件看看，再放回",
+        "putaway": "拿起最近的一件纪念，读过后收好",
+        "laundry": "取布展开、挂在屋檐边随风，再收下折好",
+        "bring_in": "把正在晾晒的布收下来折好",
+        "rest": "收好手里的东西，停止新的小活动"
+      },
+      "kind": "macro",
+      "available": true
+    },
+    "cloud": {
+      "label": "小雨云",
+      "choices": {
+        "keep": "保持小雨云状态",
+        "wander": "现有小雨云缓缓经过几条街，只在云下面落一小片雨",
+        "garden": "小雨云走到花园上方，下一小阵局部雨",
+        "market": "小雨云走到集市附近，下一小阵局部雨",
+        "rest": "收住局部雨，小云慢慢回到原来的位置"
+      },
+      "kind": "macro",
+      "available": true
+    }
+  },
+  "notes": [
+    "基础人物与物件候选来自CP22已实现目录；复合目标由CP24的life-plans模块补充。",
+    "Jev选择经过范围和状态校验后，已由浏览器执行器接入实际3D小镇。",
+    "晨曦、白昼、黄昏与夜晚均已实现；点选具体已注册物件时，请求会增加该物件的有限候选。",
+    "目标数和绑定数不等于独立动画数；能力边界见动作总表和runtime-capabilities.json。"
+  ],
+  "checkpoint": 24,
+  "extension_source": "src/life-plans.mjs"
+}

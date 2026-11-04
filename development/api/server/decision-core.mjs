@@ -1,3 +1,4 @@
+import {REPLY_QUESTION,withGentleReply} from '../runtime/gentle-reply.mjs';
 import {explicitScene} from '../runtime/explicit-scenes.mjs';
 import {ATMOSPHERE_QUESTIONS,composeAtmosphere} from '../runtime/atmosphere.mjs';
 import {explicitWeather} from '../runtime/explicit-intents.mjs';
@@ -732,12 +733,9 @@ export const contract={
         "boat.pond_boat"
       ],
       "choices": {
-        "keep": "不改变此物件",
-        "cruise": "收拢船桨，随水流离岸走一程，再回泊",
-        "dock": "沿水路慢慢回到泊位",
-        "bob": "系泊轻摇",
-        "row": "摆动船桨",
-        "rest": "船与桨放轻动作"
+        "keep": "保持系泊的小舟",
+        "bob": "随水轻摇，仍系在岸边",
+        "rest": "让泊着的小舟安静一点"
       },
       "available": true
     },
@@ -20417,17 +20415,19 @@ export function makeRequest(text,state={}){
  questions['scope:weather'].instructions+=' Only a small cloud moving or raining on one named corner/garden is local cloud, choose no for global weather.';
  questions.journey.instructions+=' 列车带一件小物回来交给街坊选deliver：靠站时拿起已经捎来的包裹，走向街坊并交接，不额外等整圈。depart展示真实上车、送行、开走，余下旅程归日常生活。只有current.train_at_station不是false且current.traveler_available不是false时，迎送和包裹交接才可立即开始；否则不要安排等待。没有跨世界目的地或新增人。';
  questions['scope:journey'].instructions+=' 电车捎来包裹/托列车带小礼物也选yes。';
- questions['object.boat'].instructions='现有小木船可cruise：收桨、松绳，在池塘内走一小程再回泊；dock：提前回泊；rest：先平稳停下；row只在原处摆桨；bob系泊轻摇。想让船看看池塘另一边/水路带它出去一小程可以cruise，不能出海、离开池塘或乘人。';
- questions.intent_status.instructions+=' 热茶点心、借伞同行、落叶整理、有限纪念角、晾晒收布、现有雨云移动与局部降雨、现有船在池塘内离岸回泊、电车带包裹交接都已经实现；这些相关诗意愿望属于change，不是新造物件。';
+ questions['object.boat'].instructions='小木舟始终系泊岸边，没有船夫，不能自行航行或摆桨。只支持bob随水轻摇、rest静泊。要航行时保持keep，并给出不能执行的反馈；不得声称它会出航。';
+ questions.intent_status.instructions+=' 热茶点心、借伞同行、落叶整理、有限纪念角、晾晒收布、现有雨云移动与局部降雨、系泊小船随水轻摇、电车带包裹交接都已经实现；这些相关诗意愿望属于change，不是新造物件。';
+ questions.street.instructions+=' gather是孩子在吉他手身边听琴、小狐狸来作伴；不让全部成年人聚到中央。';
  questions['object.fox'].instructions='橘色尖耳小动物是小狐狸，用户称小狗/橘色小家伙也可能指它；猫不是它。现有动作：explore在花园铺装内较大范围走走，sniff停下闻闻，look抬头看，rest歇息，play低身邀玩后小跑摇尾，greet走近附近可达居民摇尾招呼，stretch伸前爪舒展。想让它活泼调皮/开心玩选play；想它和附近孩子交朋友/打招呼选greet；懒洋洋舒展选stretch。动作幅度和目的地由安全执行器管理，不支持追遍全镇/进入室内/取不存在的玩具。只改变它，不联想改变全体动物或全镇氛围。';
- questions.intent_status.instructions='许愿输入：有明确或诗意的可行愿望change。只评价/明确保持/假设而非愿望no_change。指代不清clarify；肯定请求全部无法实现unsupported，部分无法实现partial。否定的事不计为不支持。这里支持雨雪风日夜灯火花火晚市、逐人喝茶合书喂鱼上下楼乘车等现有动作。当前有选中对象则代词已明确；未选中而只说红衣/那个人不够明确。读者可参加全镇活动，但不能任意指定移动地点、船不能远航、鸟不能归巢。';
+ questions.gentle_reply=REPLY_QUESTION;
+ questions.intent_status.instructions='许愿输入：有明确或诗意的可行愿望change。只评价/明确保持/假设而非愿望no_change。指代不清clarify；肯定请求全部无法实现unsupported，部分无法实现partial。否定的事不计为不支持。这里支持雨雪风日夜灯火花火晚市、逐人喝茶合书喂鱼上下楼乘车等现有动作。当前有选中对象则代词已明确；未选中而只说红衣/那个人不够明确。读者可参加全镇活动，但不能任意指定移动地点、船没有船夫，不能自行航行、鸟不能归巢。';
  questions['scope:weather'].instructions='Does this wish describe desired rain, drizzle, snow or cessation? Direct statements and poetic scene descriptions count as yes, even with other clauses about residents reacting. No imperative verb is needed. Only mentioning weather as a future condition, past memory, hypothetical question, or explicitly keeping it unchanged means no. Interpret figurative weather as yes when it is the requested scene, but not a mere comparison of emotions.';
  questions['scope:day_phase'].instructions='原话出现晨曦/清晨/白昼/黄昏/夜幕降临等肯定时段陈述，就是切换时间的愿望，选yes。仅回忆/假设/明确不要改变才no。没有时段信息只描述灯色或花火才no。';
  questions['scope:light'].instructions='未指名单灯时，灯火/灯的颜色或亮度默认全镇。仅指莲花水灯则no；暖黄昏不是灯火变化。';
  questions['scope:breeze'].instructions='是否希望空气中的风改变？只要求风车转速则no。';
  questions.intent_status=baseRequest(text,state,'v5').questions.intent_status;
  questions.intent_status.instructions+='这里可以同时安排多个不同对象或集体主题，各项独立；多个肯定请求只要各自已有能力就都是change，不因为句子有多个分句而partial。完整居民名单在resident_index：职业加位置可唯一识别，例如桥边/楼梯均为不同身份。肯定陈述某动作也属于许愿，不是新闻描述。';
- questions.intent_status.instructions+=' 这些小流程自动选合适的一两位居民，故没有姓名不是clarify：这把伞分给身旁的人明确是借伞同行，不需要已选中人；那件纪念默认最近一件，读或收都明确。支持街边热茶点心、借伞同行、落叶整理、保留回看纪念物、晾晒收布、小云移动并局部下雨、小船在池塘内离岸回泊、电车托包裹。';
+ questions.intent_status.instructions+=' 这些小流程自动选合适的一两位居民，故没有姓名不是clarify：这把伞分给身旁的人明确是借伞同行，不需要已选中人；那件纪念默认最近一件，读或收都明确。支持街边热茶点心、借伞同行、落叶整理、保留回看纪念物、晾晒收布、小云移动并局部下雨、系泊小船随水轻摇、电车托包裹。';
  questions.lighting_coverage={type:'choice',instructions:'原话要改变哪些灯？所有窗边、每扇窗、家家户户、整条街的灯属于全镇global；若又单独提水面灯则both。只提水面莲花灯或某一盏灯才specific，没有提灯选none。',criteria:{none:'没要求灯光变化',global:'泛指或明确全镇灯火',specific:'只改变特定位置/物件的灯',both:'明确分别要求全镇和特定灯具'}};
  const roleGroups={children:['resident.garden_child','resident.child_runner','resident.kite_child','resident.child_listener'],garden:['resident.gardener','resident.assistant_gardener']};
  for(const id of roleGroups.children){questions[id].instructions+=' 原话泛指小孩/孩子玩起来、活泼一些，就是安排这一组，不要求指名。garden_child和child_runner的hop是已实现的玩耍方式（不是仅限明确说跳跃）；kite_child选kite_play；无相应玩耍选项者keep。';questions['scope:'+id].instructions+=' 泛指孩子们/小孩是整组，属于本人的范围yes；只有试图指定不明的某一个孩子才unclear。';}
@@ -20470,7 +20470,8 @@ export function parsePlan(raw,request){
   if(TERMINAL.has(status))reason=status==='clarify'?'请先选中你指的居民或物件':status==='no_change'?'你没有要求新的改变':'部分要求还不能可靠完成，先保留原来的生活';
   else if(!['yes','group','selected'].includes(scope.choice)&&!macroAgreement)reason=scope.choice==='unclear'?'对象不够明确':'没有明确要求改变这个对象';
   else if(!neighborhoodChoice&&!moodAgreement&&(macroAgreement?scope.probabilities.yes:(scope.probabilities[scope.choice]||0))<(d.kind==='resident'?.62:d.kind==='macro'?.40:.55))reason='对影响范围还不够确定';
-  else{const probabilities=Object.values(answer.probabilities).sort((a,b)=>b-a);if((answer.probabilities[action]||0)<(d.kind==='macro'?.40:.55)||probabilities[0]-probabilities[1]<(d.kind==='macro'?.025:.15))reason='动作理解仍有歧义';}
+  else{const probabilities=Object.values(answer.probabilities).sort((a,b)=>b-a),localFox=key==='object.fox'&&action==='greet'&&/(?:狐狸|小狐|fox)/i.test(input.user_utterance)&&raw.answers.gentle_reply?.choice==='fox'&&(raw.answers.gentle_reply.probabilities.fox||0)>=.4;if((answer.probabilities[action]||0)<(d.kind==='macro'?.40:localFox?.45:.55)||probabilities[0]-probabilities[1]<(d.kind==='macro'?.025:.15))reason='动作理解仍有歧义';}
+  if(key==='journey'&&action!=='rest'&&!/(?:电车|列车|火车|车站|乘车|旅客|乘客|车窗|tram|train|station|passenger|travell?er|rail|carriage)/i.test(input.user_utterance))reason='这句话没有要求列车旅程';
   if(key==='craft'&&['recall','putaway'].includes(action)&&state.memory_count===0)reason='纪念角暂时还是空的，先留下一件小物吧。';
   if(key==='paper'&&['read','collect'].includes(action)&&state.paper_count===0)reason='树边还没有纸笺，先留一张吧。';
   if(key==='resident.station_traveler'&&((action==='ride_once'&&state.passenger_phase==='riding')||(action==='alight'&&state.passenger_phase==='waiting')))reason='已经是这个状态';
@@ -20494,8 +20495,9 @@ export function parsePlan(raw,request){
  const localCloud=items.find(i=>i.kind==='macro'&&i.target==='cloud'&&i.action!=='rest');
  const small=items.find(i=>i.kind==='macro'&&i.target==='craft'&&i.action!=='rest');
  for(let i=items.length-1;i>=0;i--){const x=items[i];if(!allTown&&(localCloud&&x.target==='weather'&&x.action==='rain'||small&&['occasion','street'].includes(x.target)&&['supper','market','reunion','quiet','gather'].includes(x.action)||small?.action==='umbrella'&&x.target==='weather'&&x.action==='rain'||trip?.action==='deliver'&&x.target==='occasion'&&x.action==='delivery')){skipped.push({...x,reason:'让这段局部生活保持自己的参与范围'});items.splice(i,1);}}
+ for(const item of items)if(item.target==='craft'&&item.action==='putaway'&&/(?:放回|put.{0,24}back|return.{0,24}(?:place|counter|shelf))/i.test(utterance)&&!/(?:收起|收好|收纳|箱子|盒子|不要放回|别放回|store away|put away|remove|don't.{0,6}put|do not.{0,6}put)/i.test(utterance)){item.action='recall';item.label=contract.fields.craft.choices.recall;item.resolution='return-to-display';}
  const executionKey=item=>{if(item.kind==='macro'&&item.target==='music')return 'resident.musician:'+(item.action==='play'?'play_music':'rest_music');if(item.kind!=='object')return item.target+':'+item.action;const o=selectedCatalog[item.target],a=o?.actions.find(a=>a.id===item.action);if(a?.owner)return a.owner+':'+item.action;if(o?.kind==='watering_can')return 'resident.gardener:'+(item.action==='pour'?'water_plants':'inspect_leaf');if(o?.kind==='instrument')return 'resident.musician:'+(item.action==='play'?'play_music':'rest_music');return item.target+':'+item.action;};
  const seen=new Set();for(let i=items.length-1;i>=0;i--){const k=executionKey(items[i]);if(seen.has(k))items.splice(i,1);else seen.add(k);}
- const literal={status,items,skipped,resolution:explicit?{source:explicit.rule,raw_weather:raw.answers.weather.choice,raw_scope:raw.answers['scope:weather'].choice}:null,summary:!items.length&&skipped.some(x=>x.reason==='树边还没有纸笺，先留一张吧。')?'树边还没有纸笺，先留一张吧。':items.length?items.slice(0,3).map(i=>`${i.target_label}：${i.label}`).join('；'):status==='no_change'?'小镇会保持现在的安排，继续自己的生活。':status==='clarify'?'先点选你指的居民，再说一次。':status==='unsupported'||status==='partial'?'这句话包含还不能做到的事，我先不替你安排近似动作。':skipped.length&&skipped.every(x=>x.reason==='已经是这个状态')?'已经在按这个安排进行，可以继续观察小镇。':'这句话我还没有理解成可执行的变化，可以换个说法或点选一个对象。'};
- return explicit?literal:composeAtmosphere(literal,raw.answers,{utterance:input.user_utterance});
+ const literal={status,items,skipped,resolution:explicit?{source:explicit.rule,raw_weather:raw.answers.weather.choice,raw_scope:raw.answers['scope:weather'].choice}:null,summary:!items.length&&skipped.some(x=>x.reason==='树边还没有纸笺，先留一张吧。')?'树边还没有纸笺，先留一张吧。':items.length?[...new Map(items.map(i=>[i.field||i.target,`${i.target_label}：${i.label}`])).values()].slice(0,3).join('；'):status==='no_change'?'小镇会保持现在的安排，继续自己的生活。':status==='clarify'?'先点选你指的居民，再说一次。':status==='unsupported'||status==='partial'?'这句话包含还不能做到的事，我先不替你安排近似动作。':skipped.length&&skipped.every(x=>x.reason==='已经是这个状态')?'已经在按这个安排进行，可以继续观察小镇。':'这句话我还没有理解成可执行的变化，可以换个说法或点选一个对象。'};
+ return explicit?literal:withGentleReply(composeAtmosphere(literal,raw.answers,{utterance:input.user_utterance}),raw.answers,input.user_utterance);
 }

@@ -1,4 +1,4 @@
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp45-responsive-episodes-e28490733a86';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp46-causal-feedback-2887e8b494a1';
 const D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 export const CLOUD_HOME=[11.220066,1.239714,5.5];
 export function ensureCloud(s){const c=s.localCloud??={mode:'rest',phase:'home',center:CLOUD_HOME.slice(),rain:0,clock:0,sequence:0,waypoint:0,route:[],exposures:{},automatic:false,scale:1};c.scale??=1;return c;}

@@ -1,4 +1,4 @@
-import {CRAFT_EN} from './craft-english.mjs?v=cp45-responsive-episodes-e28490733a86';
+import {CRAFT_EN} from './craft-english.mjs?v=cp46-causal-feedback-2887e8b494a1';
 // Source strings remain stable in the simulation and saves. Only presentation is translated.
 export const EN=Object.fromEntries(`
 言外=Echoing Green
@@ -1008,3 +1008,55 @@ Object.assign(EN,{
  '电车停在站边，旅客拿起捎来的小包裹，准备交给街坊。':'The tram waits as its traveler takes a little parcel to a neighbor.',
  '邻居挥手道别，电车带着旅客出发了。':'Neighbors wave goodbye as the tram sets off.'
 });
+
+Object.assign(EN,{
+  "街坊听见了，向你挥挥手。": "A neighbor hears you and waves hello.",
+  "把这份心情化成孩子们围坐听琴的小片刻。": "Let that feeling become a little tune for the children.",
+  "把这份心情化成一杯递到手里的热茶。": "Let that feeling become a warm cup of tea, passed from hand to hand.",
+  "把这份心意写成纸笺，留在树边。": "Put that feeling on a paper wish beside the tree.",
+  "让几盆花和一阵春风回应这句话。": "A few flowers and a spring breeze answer your words.",
+  "给这份心情留一处安静的角落。": "Make a quiet corner for this feeling.",
+  "让街坊走近彼此，陪这一刻待一会。": "Neighbors come closer and share this little moment.",
+  "让街坊拿起纸灯，把暖光带到街边。": "Neighbors take paper lamps from their stands and carry warmth into the street.",
+  "用一阵雨和街坊的雨伞回应这句话。": "A passing shower and opening umbrellas answer your words.",
+  "让纸片雪和街坊的抬头回应这句话。": "Paper snow falls as neighbors look up.",
+  "让摊前的热食和等候的街坊回应这句话。": "Warm food and a little stall queue answer your words.",
+  "街坊搬来点心和小凳，准备一个开心的晚上。": "Neighbors carry treats and stools to prepare a happy evening.",
+  "小狐狸摇摇尾巴，和附近的街坊打招呼。": "The little fox wags hello to a nearby neighbor.",
+  "让一位街坊走近水边，喂喂池塘的鱼。": "A neighbor shares a little food with the pond fish.",
+  "保持系泊的小舟": "Keep the little boat moored",
+  "随水轻摇，仍系在岸边": "Rock gently with the water, staying moored",
+  "让泊着的小舟安静一点": "Let the moored boat rest gently",
+  "随水轻摇的系泊小舟": "A moored boat rocking gently with the water",
+  "孩子走到吉他手身边听琴，小狐狸循着琴声靠近，其他街坊照常生活。": "Children join the guitarist, the fox follows the tune, and other neighbors carry on.",
+  "街坊走到灯架旁拿起纸灯，提着暖光走过街边。": "Neighbors pick up paper lamps at the stands and carry their light along the street.",
+  "街坊把纸灯送到街边，照过一段路，再轻轻放回灯架。": "After lighting a little path, the paper lamps are returned gently to their stands.",
+  "这件事小镇暂时做不到。街坊听见了，向你挥挥手。": "The town cannot do that yet. A neighbor hears you and waves hello.",
+  "这件事小镇暂时做不到。把这份心情化成孩子们围坐听琴的小片刻。": "The town cannot do that yet. Let that feeling become a little tune for the children.",
+  "这件事小镇暂时做不到。把这份心情化成一杯递到手里的热茶。": "The town cannot do that yet. Let that feeling become a warm cup of tea, passed from hand to hand.",
+  "这件事小镇暂时做不到。把这份心意写成纸笺，留在树边。": "The town cannot do that yet. Put that feeling on a paper wish beside the tree.",
+  "这件事小镇暂时做不到。让几盆花和一阵春风回应这句话。": "The town cannot do that yet. A few flowers and a spring breeze answer your words.",
+  "这件事小镇暂时做不到。给这份心情留一处安静的角落。": "The town cannot do that yet. Make a quiet corner for this feeling.",
+  "这件事小镇暂时做不到。让街坊走近彼此，陪这一刻待一会。": "The town cannot do that yet. Neighbors come closer and share this little moment.",
+  "这件事小镇暂时做不到。让街坊拿起纸灯，把暖光带到街边。": "The town cannot do that yet. Neighbors take paper lamps from their stands and carry warmth into the street.",
+  "这件事小镇暂时做不到。用一阵雨和街坊的雨伞回应这句话。": "The town cannot do that yet. A passing shower and opening umbrellas answer your words.",
+  "这件事小镇暂时做不到。让纸片雪和街坊的抬头回应这句话。": "The town cannot do that yet. Paper snow falls as neighbors look up.",
+  "这件事小镇暂时做不到。让摊前的热食和等候的街坊回应这句话。": "The town cannot do that yet. Warm food and a little stall queue answer your words.",
+  "这件事小镇暂时做不到。街坊搬来点心和小凳，准备一个开心的晚上。": "The town cannot do that yet. Neighbors carry treats and stools to prepare a happy evening.",
+  "这件事小镇暂时做不到。小狐狸摇摇尾巴，和附近的街坊打招呼。": "The town cannot do that yet. The little fox wags hello to a nearby neighbor.",
+  "这件事小镇暂时做不到。让一位街坊走近水边，喂喂池塘的鱼。": "The town cannot do that yet. A neighbor shares a little food with the pond fish.",
+  "这件事小镇暂时做不到。孩子走到吉他手身边听琴，小狐狸循着琴声靠近，其他街坊照常生活。": "The town cannot do that yet. Children join the guitarist, the fox follows the tune, and other neighbors carry on.",
+  "这件事小镇暂时做不到。街坊走到灯架旁拿起纸灯，提着暖光走过街边。": "The town cannot do that yet. Neighbors pick up paper lamps at the stands and carry their light along the street.",
+  "这件事小镇暂时做不到。街坊把纸灯送到街边，照过一段路，再轻轻放回灯架。": "The town cannot do that yet. After lighting a little path, the paper lamps are returned gently to their stands.",
+  "小舟系在岸边，没有船夫，不会自行航行。街坊听见了，向你挥挥手。": "The boat is moored, with nobody rowing it; it will not sail by itself. A neighbor waves hello."
+});
+
+Object.assign(EN,{'先落一阵雨，让街坊撑伞或避雨；这次不同时开另一场活动。':'A shower comes first, with umbrellas and shelter; a second event will not run at the same time.','先让纸雪落下、街坊安顿好；这次不同时开另一场活动。':'Paper snow comes first; a second event will not run at the same time.','先回应天气，让居民安顿好；这次不同时展开另一场活动。':'The weather response takes priority for this moment.'});
+
+EN['不打扰小狐狸，街坊继续各自的生活。']='The little fox is left undisturbed, and neighbors carry on.';
+
+EN['晚归的街坊打开家门，暖窗亮着，邻居从窗边打招呼。']='A returning neighbor opens the door, with warm windows and a wave from next door.';
+
+EN['树边还没有纸笺，先留一张吧。街坊听见了，向你挥挥手。']='There is no paper wish to read yet. A neighbor waves hello.';EN['纪念角暂时还是空的，先留下一件小物吧。街坊听见了，向你挥挥手。']='The keepsake corner is empty for now. A neighbor waves hello.';
+
+EN['回应']='A small response';

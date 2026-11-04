@@ -1,7 +1,8 @@
-import {handWorldPoint} from './prop-attachment.mjs?v=cp45-responsive-episodes-e28490733a86';
+import {interactionStep} from './interaction-sequence.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {handWorldPoint} from './prop-attachment.mjs?v=cp46-causal-feedback-2887e8b494a1';
 import * as THREE from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
-import {lanternDisplay,LANTERN_CARRIERS} from './lantern-scene.mjs?v=cp45-responsive-episodes-e28490733a86';
+import {lanternDisplay,LANTERN_STATIONS} from './lantern-scene.mjs?v=cp46-causal-feedback-2887e8b494a1';
 
 function paperLampGeometry(){
  const pieces=[];
@@ -15,29 +16,33 @@ function paperLampGeometry(){
 }
 export function createLanternView({scene,entities,parts,sockets}){
  const geometry=paperLampGeometry(),material=new THREE.MeshStandardMaterial({vertexColors:true,roughness:1,emissive:0xff9b3d,emissiveIntensity:.50});
- const hanging=[],strands=[],positions=[];
- // Keep the paper garlands over the promenade, never on the walking surface.
- for(const[a,b]of [[[ -5.8,-2.65,2.85],[-2.6,-3.3,2.75]],[[2.15,2.0,3.20],[5.05,.15,2.9]]]){
+ const strands=[],positions=[];
+ // These ropes, supports and unlit lamps belong to the town before the wish.
+ const wood=new THREE.MeshStandardMaterial({color:0x87613f,roughness:1});
+ for(const[a,b]of [[[-5.8,-2.65,2.85],[-2.6,-3.3,2.75]],[[2.15,2.0,3.20],[5.05,.15,2.9]]]){
   const pts=[];for(let j=0;j<=24;j++){const t=j/24,p=a.map((v,k)=>v+(b[k]-v)*t);p[2]-=Math.sin(t*Math.PI)*.23;pts.push(new THREE.Vector3(p[0],p[2],-p[1]));}
-  const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:0xaa8a5b,transparent:true,opacity:0}));line.userData.runtime_effect_id='effect.lantern_evening_garland_'+strands.length;scene.add(line);strands.push(line);
+  const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:0x957344,transparent:true,opacity:.6}));line.userData.runtime_effect_id='effect.lantern_evening_garland_'+strands.length;scene.add(line);strands.push(line);
+  for(const p of [a,b]){const pole=new THREE.Mesh(new THREE.CylinderGeometry(.022,.03,p[2]-.64,6),wood);pole.position.set(p[0],(p[2]+.64)/2,-p[1]);scene.add(pole);}
   for(let j=0;j<6;j++){const t=(j+.5)/6,p=a.map((v,k)=>v+(b[k]-v)*t);p[2]-=Math.sin(t*Math.PI)*.23;positions.push(new THREE.Vector3(p[0],p[2],-p[1]));}
  }
- const lamps=new THREE.InstancedMesh(geometry,material,positions.length+LANTERN_CARRIERS.length);lamps.frustumCulled=false;lamps.userData.runtime_effect_id='effect.lantern_evening_lamps';scene.add(lamps);
+ const lamps=new THREE.InstancedMesh(geometry,material,positions.length+LANTERN_STATIONS.length);lamps.frustumCulled=false;lamps.userData.runtime_effect_id='effect.lantern_evening_lamps';scene.add(lamps);
+ for(const c of LANTERN_STATIONS){const stand=new THREE.Group();stand.position.set(c.anchor[0],.64,-c.anchor[1]);scene.add(stand);for(const [x,z]of [[-.20,-.12],[.20,-.12],[-.20,.12],[.20,.12]]){const leg=new THREE.Mesh(new THREE.BoxGeometry(.035,.39,.035),wood);leg.position.set(x,.195,z);stand.add(leg);}const top=new THREE.Mesh(new THREE.BoxGeometry(.51,.035,.36),wood);top.position.y=.39;stand.add(top);}
  const dummy=new THREE.Object3D(),point=new THREE.Vector3();let visibleCount=0;
- const bindings=LANTERN_CARRIERS.map(id=>({id,part:sockets[id]?.hands?.right?.part||'anim_arm_right',local:sockets[id]?.hands?.right?.part_local})).filter(x=>x.local&&parts.has(x.id+'/'+x.part));
+ const ease=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};
  return{ids:[lamps.userData.runtime_effect_id,...strands.map(x=>x.userData.runtime_effect_id)],frame(s){
-  const amount=lanternDisplay(s);lamps.visible=amount>.001;visibleCount=0;
-  for(const line of strands){line.visible=amount>.001;line.material.opacity=amount*.75;}
-  for(let i=0;i<positions.length;i++){const a=lanternDisplay(s,i);dummy.position.copy(positions[i]);dummy.rotation.set(Math.sin(s.time*.8+i)*.035,0,Math.sin(s.time*.6+i)*.05);dummy.scale.set(a,a,a);dummy.updateMatrix();lamps.setMatrixAt(i,dummy.matrix);if(a>.05)visibleCount++;}
-  for(let i=0;i<LANTERN_CARRIERS.length;i++){
-   const id=LANTERN_CARRIERS[i],binding=bindings.find(x=>x.id===id),actor=s.actors.find(x=>x.id===id),guest=s.eventGuests?.[id],e=s.sceneEvent;
-   const chosen=e?.kind==='lantern'&&(e.slots?.[id]!==undefined||e.phase==='closing')&&!e.protectedIds?.includes(id);
-   const ready=chosen&&(!guest||!guest.active||!['prepare','sit'].includes(guest.phase));
-   const a=ready&&binding?lanternDisplay(s,i+3):0;
-   if(a>.001){handWorldPoint({entities,parts,sockets},id,'right',point);dummy.position.copy(point);dummy.rotation.set(Math.sin(s.time*2.1+i)*.06,actor?.yaw||0,Math.sin(s.time*1.6+i)*.05);const scale=(actor?.scale||1)*.76*a;dummy.scale.setScalar(scale);visibleCount++;}
-   else dummy.scale.setScalar(0);
+  const amount=lanternDisplay(s);lamps.visible=true;visibleCount=positions.length+LANTERN_STATIONS.length;material.emissiveIntensity=.04+.20*(s.dayWeights?.night||0)+amount*.32;
+  for(let i=0;i<positions.length;i++){dummy.position.copy(positions[i]);dummy.rotation.set(Math.sin(s.time*.8+i)*.035,0,Math.sin(s.time*.6+i)*.05);dummy.scale.setScalar(1);dummy.updateMatrix();lamps.setMatrixAt(i,dummy.matrix);}
+  for(const [i,c] of LANTERN_STATIONS.entries()){
+   const p=s.neighborhoodWorld?.props.find(p=>p.mode==='lantern'&&p.stockSlot===i),j=p&&s.neighborhoodWorld.jobs.find(j=>j.prop===p.id),step=interactionStep(j),anchor=p?.sourceAnchor||c.anchor;
+   dummy.position.set(anchor[0],anchor[2],-anchor[1]);dummy.rotation.set(0,.18,0);dummy.scale.setScalar(1);
+   if(p&&j&&(p.location==='hand'||p.location==='supply'&&step?.action==='take')){
+    handWorldPoint({entities,parts,sockets},p.owner,'right',point);point.y+=.02;
+    const owner=entities.get(p.owner);if(owner)dummy.quaternion.copy(owner.getWorldQuaternion(new THREE.Quaternion()));
+    if(step?.action==='take')dummy.position.lerp(point,ease(j.clock/1.2));
+    else{dummy.position.copy(point);if(step?.action==='place')dummy.position.lerp(new THREE.Vector3(anchor[0],anchor[2],-anchor[1]),ease(j.clock/2.4));}
+   }
    dummy.updateMatrix();lamps.setMatrixAt(positions.length+i,dummy.matrix);
   }
   lamps.instanceMatrix.needsUpdate=true;
- },snapshot:()=>({visibleLanterns:visibleCount,capacity:lamps.count})};
+ },snapshot:()=>({visibleLanterns:visibleCount,capacity:lamps.count,physicalStock:LANTERN_STATIONS.length})};
 }

@@ -1,9 +1,9 @@
-import {smallProps} from './small-props.mjs?v=cp45-responsive-episodes-e28490733a86';
+import {smallProps} from './small-props.mjs?v=cp46-causal-feedback-2887e8b494a1';
 import * as THREE from 'three';
-import {makeArmSolver} from './arm-ik.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {handWorldPoint} from './prop-attachment.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {interactionStep,INTERACTION_PRIMITIVES} from './interaction-sequence.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {HOME} from './neighborhood-world.mjs?v=cp45-responsive-episodes-e28490733a86';
+import {makeArmSolver} from './arm-ik.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {handWorldPoint} from './prop-attachment.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {interactionStep,INTERACTION_PRIMITIVES} from './interaction-sequence.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {HOME} from './neighborhood-world.mjs?v=cp46-causal-feedback-2887e8b494a1';
 const ease=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};
 export function createNeighborhoodView({scene,entities,parts,sockets}){
  const shared=smallProps(scene);
@@ -52,9 +52,10 @@ export function createNeighborhoodView({scene,entities,parts,sockets}){
   let cloth=cloths.get(id);if(!cloth){cloth=new THREE.Mesh(cube,mats.blue);cloth.scale.set(.22,.01,.18);group.add(cloth);cloths.set(id,cloth);}cloth.visible=action==='wipe';if(cloth.visible){handWorldPoint({entities,parts,sockets},id,'right',cloth.position);cloth.quaternion.copy(entities.get(id).getWorldQuaternion(q));}
  }
  return{group,ids:['effect.neighborhood_work','component.home_welcome_door'],frame(s){const w=s.neighborhoodWorld;if(!w)return;for(const c of cloths.values())c.visible=false;for(const j of w.jobs.filter(j=>j.status==='running'))pose(j,s);
-  for(const p of w.props){const o=objects.get(p.id)||createProp(p),job=w.jobs.find(j=>j.prop===p.id&&j.actor===p.owner&&j.status==='running'),action=job?.cancelledPose||interactionStep(job)?.action,clock=job?.cancelledPose?job.cancelClock:job?.clock||0;const root=o.root;root.userData.owner_entity=p.owner;root.visible=p.location!=='stored'&&(p.location!=='supply'||action==='take');if(!root.visible)continue;const fade=p.retireAt?1-ease((s.time-p.retireAt)/4):1;root.visible=fade>.005;root.scale.setScalar(fade);root.quaternion.identity();
-   if(p.location==='placed'){root.position.set(p.anchor[0],p.anchor[2],-p.anchor[1]);root.rotation.y=.18;}
-   else{const owner=entities.get(p.owner);if(!owner)continue;handWorldPoint({entities,parts,sockets},p.owner,p.type==='lantern'?'right':'left',temp);const other=handWorldPoint({entities,parts,sockets},p.owner,'right',new THREE.Vector3());if(p.type!=='lantern')temp.add(other).multiplyScalar(.5);temp.y-=p.type==='lantern'?.50:p.type==='stool'?.28:.08;root.position.copy(temp);root.quaternion.copy(owner.getWorldQuaternion(q));if(action==='take')root.scale.multiplyScalar(.4+.6*ease(clock/1.2));if(action==='place'){const dest=new THREE.Vector3(...[job.context.anchor[0],job.context.anchor[2],-job.context.anchor[1]]);root.position.lerp(dest,ease(clock/2.4));}if(action==='offer'&&job.context.partner){const target=handWorldPoint({entities,parts,sockets},job.context.partner,'right',new THREE.Vector3());target.y-=.5;root.position.lerp(target,ease((clock-.8)/2.2));}if(['pack','stow'].includes(action))root.scale.multiplyScalar(1-ease(clock/(INTERACTION_PRIMITIVES[action]?.seconds||2.5)));}
+  for(const p of w.props){if(p.mode==='lantern')continue;const o=objects.get(p.id)||createProp(p),job=w.jobs.find(j=>j.prop===p.id&&j.actor===p.owner&&j.status==='running'),action=job?.cancelledPose||interactionStep(job)?.action,clock=job?.cancelledPose?job.cancelClock:job?.clock||0;const root=o.root;root.userData.owner_entity=p.owner;root.visible=p.location!=='stored';if(!root.visible)continue;const fade=p.retireAt?1-ease((s.time-p.retireAt)/4):1;root.visible=fade>.005;root.scale.setScalar(fade);root.quaternion.identity();
+   if(p.location==='supply'&&action!=='take'){const q=p.supply;root.position.set(q[0],q[2]+(p.type==='tray'||p.type==='crate'?.42:0),-q[1]-.38);}
+   else if(p.location==='placed'){root.position.set(p.anchor[0],p.anchor[2],-p.anchor[1]);root.rotation.y=.18;}
+   else{const owner=entities.get(p.owner);if(!owner)continue;handWorldPoint({entities,parts,sockets},p.owner,p.type==='lantern'?'right':'left',temp);const other=handWorldPoint({entities,parts,sockets},p.owner,'right',new THREE.Vector3());if(p.type!=='lantern')temp.add(other).multiplyScalar(.5);temp.y-=p.type==='lantern'?.50:p.type==='stool'?.28:.08;root.position.copy(temp);root.quaternion.copy(owner.getWorldQuaternion(q));if(action==='take'){const q=p.supply;root.position.lerp(new THREE.Vector3(q[0],q[2]+(p.type==='tray'||p.type==='crate'?.42:0),-q[1]-.38),1-ease(clock/1.2));}if(action==='place'){const dest=new THREE.Vector3(...[job.context.anchor[0],job.context.anchor[2],-job.context.anchor[1]]);root.position.lerp(dest,ease(clock/2.4));}if(action==='offer'&&job.context.partner){const target=handWorldPoint({entities,parts,sockets},job.context.partner,'right',new THREE.Vector3());target.y-=.5;root.position.lerp(target,ease((clock-.8)/2.2));}if(['pack','stow'].includes(action))root.scale.multiplyScalar(1-ease(clock/(INTERACTION_PRIMITIVES[action]?.seconds||2.5)));}
    const open=action==='unfold'?ease(clock/3.2):p.unfold?1:.05;for(const petal of o.petals)petal.rotation.x=-1.22*(1-open)+Math.sin(s.time*1.2+petal.rotation.y)*.04*open;
   }
   for(const [id,o]of objects)if(!w.props.some(p=>p.id===id)){group.remove(o.root);entities.delete(o.root.userData.entity_id);objects.delete(id);}

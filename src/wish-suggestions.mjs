@@ -1,4 +1,4 @@
-import {actionAvailability} from './action-availability.mjs?v=cp45-responsive-episodes-e28490733a86';
+import {actionAvailability} from './action-availability.mjs?v=cp46-causal-feedback-2887e8b494a1';
 // Curated examples use the same finite executor as the activity buttons.
 // Rotation changes only the grey hint; it never performs an activity on its own.
 const macro=(target,action)=>({kind:'macro',target,action});
@@ -10,7 +10,6 @@ export const WISH_SUGGESTIONS=[
  ['paper','把思念挂在树上，留一张随风的纸笺。','Leave a little wish in the lantern tree.',[macro('paper','hang')],'tree.lantern_tree'],
  ['umbrella','这把伞，分一半给身旁的人吧。','Share an umbrella and a little walk.',[macro('craft','umbrella')]],
  ['homecoming','留一盏灯，等晚归的人。','Leave a light for someone coming home.',[macro('neighborhood','homecoming'),macro('light','warm')],'component.home_welcome_door'],
- ['boat','让小船看看池塘另一边，再慢慢回来。','Let the boat drift across the pond and back.',[object('boat.pond_boat','cruise')],'boat.pond_boat'],
  ['spring','让春天走进街角，花也伸个懒腰。','Let spring unfold in the corners of town.',[macro('neighborhood','spring'),macro('breeze','gentle')],'tree.lantern_tree'],
  ['fox','小狐狸，去和附近的街坊打个招呼吧。','Let the little fox say hello to a neighbor.',[object('animal.garden_fox','greet')],'animal.garden_fox'],
  ['laundry','让小布巾也闻一闻晚风。','Hang little cloths in the evening breeze.',[macro('craft','laundry')]],
@@ -20,7 +19,7 @@ export const WISH_SUGGESTIONS=[
  ['leaves','秋天落在脚边，替晚风收拾一下吧。','Gather the little leaves the breeze left behind.',[macro('craft','leaves')]],
  ['memory','把这个温柔的片刻，留作一件小纪念。','Keep a little memento of this gentle moment.',[macro('craft','remember')],'component.restaurant_steamer'],
  ['reopen','雨停了，把生活重新摆回街边。','After the rain, bring street life back outside.',[macro('weather','clear'),macro('neighborhood','reopen')]],
- ['music','让琴声把街坊牵到树下。','Let a little guitar music draw neighbors together.',[macro('music','play'),macro('street','gather')],'resident.musician'],
+ ['music','让孩子们围着吉他手听一曲，小狐狸也来作伴。','Let children and the little fox gather by the guitarist.',[macro('music','play'),macro('street','gather')],'resident.musician'],
  ['parcel','接过电车刚捎来的小礼物。','Receive a little gift from the waiting tram.',[macro('journey','deliver')],'tram.tram_car_front'],
  ['pond','给池塘里的小鱼儿一点心意。','Let a neighbor feed the little pond fish.',[resident('resident.water_visitor','feed_pond')],'resident.water_visitor'],
  ['night','纸灯沿街亮起，留一晚温柔的光。','Let paper lanterns brighten a gentle night.',[macro('day_phase','night'),macro('light','warm')],'tree.lantern_tree']

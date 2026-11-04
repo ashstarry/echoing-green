@@ -1,0 +1,3 @@
+import test from'node:test';import assert from'node:assert/strict';import{explicitWeather}from'../src/explicit-intents.mjs';
+test('Literal weather plus a supported collective reaction remains one executable weather event',()=>{for(const[text,action]of[['下雨了，大家赶快找地方避雨','rain'],['雨停了，出来走走吧','clear'],['下雪了，大家一起出来看雪','snow'],["The rain has stopped, let's go outside",'clear']])assert.equal(explicitWeather(text)?.action,action);});
+test('A reaction clause cannot smuggle in a condition, quote, question or unsupported request',()=>{for(const text of['如果下雨了，大家找地方避雨','下雨了，大家会躲雨吗','“下雨了”，大家去避雨','下雨了，让小明躲雨','下雨了，大家不要避雨','下雨了，造一架飞机','雨停了，大家飞上天'])assert.equal(explicitWeather(text),null,text);});

@@ -1,6 +1,6 @@
-import {PROFILES} from './community.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp45-responsive-episodes-e28490733a86';
-import {stableUnit} from './cadence.mjs?v=cp45-responsive-episodes-e28490733a86';
+import {PROFILES} from './community.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {stableUnit} from './cadence.mjs?v=cp46-causal-feedback-2887e8b494a1';
 
 const live=j=>!['done','failed','cancelled'].includes(j.status);
 const safeToBlend=action=>action&&!RESIDENT_ACTIONS[action]?.route&&!RESIDENT_ACTIONS[action]?.navTask&&!['sip_tea','taste_food','feed_pond','look_pond'].includes(action);
@@ -20,7 +20,7 @@ export function responseTheme(s,items){
 // replace explicit personal goals or continuously interrupt somebody's current work.
 export function stimulateTown(s,items,{id='opening',opening=false}={}){
  const theme=opening?(s.weather==='rain'?'rain':s.worldEvent.kind==='festival'?'festival':s.occasion==='quiet'||s.street==='quiet'?'quiet':s.weather==='snow'?'snow':'opening'):responseTheme(s,items);
- if(!theme)return null;
+ if(!theme||theme==='music')return null;
  const protectedIds=new Set(items.filter(i=>i.kind==='resident').map(i=>i.target));
  const pending=[];let n=0;
  for(const a of s.actors){if(!a.mobile||protectedIds.has(a.id)||theme==='quiet'&&s.street==='quiet')continue;

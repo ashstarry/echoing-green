@@ -1,0 +1,6 @@
+import{readFileSync,writeFileSync,existsSync}from'node:fs';
+import{decide}from'../../app/runtime-cp46/decision-api.mjs';
+import{setup,context,station,execute}from'./audit-utils.mjs';
+const cases=[...JSON.parse(readFileSync('outputs/runtime-checkpoint-46/frozen-language-cases.json')),...JSON.parse(readFileSync('outputs/runtime-checkpoint-46/supplemental-language-cases.json'))];
+const name=process.argv[2]||'language-first';const selected=process.argv[3]?.split(',');const rows=[];
+for(const c of cases.filter(c=>!selected||selected.includes(c.id))){const{s,nav}=setup(62417,10);if(c.name==='parcel')station(s,nav);const state=context(s);let row={...c,state};try{const result=await decide(c.text,state);row={...row,requestId:result.id,ms:result.ms,cost:result.cost,plan:result.plan,execution:result.plan.items.length?execute(s,nav,result.plan.items,c.text):null};}catch(error){row.error=error.message;}rows.push(row);writeFileSync('outputs/runtime-checkpoint-46/'+name+'.json',JSON.stringify(rows,null,2));console.log(JSON.stringify({id:c.id,status:row.plan?.status,items:row.plan?.items.map(i=>[i.target,i.action]),error:row.error,execution:row.execution&&{seconds:row.execution.seconds,outcome:row.execution.outcome,progress:row.execution.progress,music:row.execution.music}}));}
