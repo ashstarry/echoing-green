@@ -1,8 +1,8 @@
-import {interactionStep} from './interaction-sequence.mjs?v=cp46-causal-feedback-2887e8b494a1';
-import {handWorldPoint} from './prop-attachment.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {interactionStep} from './interaction-sequence.mjs?v=cp46-causal-feedback-ce25f0f81678';
+import {handWorldPoint} from './prop-attachment.mjs?v=cp46-causal-feedback-ce25f0f81678';
 import * as THREE from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
-import {lanternDisplay,LANTERN_STATIONS} from './lantern-scene.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {lanternDisplay,LANTERN_STATIONS} from './lantern-scene.mjs?v=cp46-causal-feedback-ce25f0f81678';
 
 function paperLampGeometry(){
  const pieces=[];

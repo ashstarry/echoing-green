@@ -1,4 +1,4 @@
-import {CRAFT_EN} from './craft-english.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {CRAFT_EN} from './craft-english.mjs?v=cp46-causal-feedback-ce25f0f81678';
 // Source strings remain stable in the simulation and saves. Only presentation is translated.
 export const EN=Object.fromEntries(`
 言外=Echoing Green

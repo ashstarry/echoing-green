@@ -1,9 +1,9 @@
-import {smallProps} from './small-props.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {smallProps} from './small-props.mjs?v=cp46-causal-feedback-ce25f0f81678';
 import * as THREE from 'three';
-import {makeArmSolver} from './arm-ik.mjs?v=cp46-causal-feedback-2887e8b494a1';
-import {handWorldPoint} from './prop-attachment.mjs?v=cp46-causal-feedback-2887e8b494a1';
-import {interactionStep,INTERACTION_PRIMITIVES} from './interaction-sequence.mjs?v=cp46-causal-feedback-2887e8b494a1';
-import {HOME} from './neighborhood-world.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {makeArmSolver} from './arm-ik.mjs?v=cp46-causal-feedback-ce25f0f81678';
+import {handWorldPoint} from './prop-attachment.mjs?v=cp46-causal-feedback-ce25f0f81678';
+import {interactionStep,INTERACTION_PRIMITIVES} from './interaction-sequence.mjs?v=cp46-causal-feedback-ce25f0f81678';
+import {HOME} from './neighborhood-world.mjs?v=cp46-causal-feedback-ce25f0f81678';
 const ease=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};
 export function createNeighborhoodView({scene,entities,parts,sockets}){
  const shared=smallProps(scene);

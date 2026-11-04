@@ -1,5 +1,5 @@
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp46-causal-feedback-2887e8b494a1';
-import {makeRoom} from './event-travel.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp46-causal-feedback-ce25f0f81678';
+import {makeRoom} from './event-travel.mjs?v=cp46-causal-feedback-ce25f0f81678';
 
 export const MUSIC_CHILDREN=['resident.child_runner','resident.garden_child'];
 export const MUSIC_FOCUS=[-2.4684,-1.4537,1.1];

@@ -1,5 +1,5 @@
-import {ACTOR_DOMAINS} from './catalog.mjs?v=cp46-causal-feedback-2887e8b494a1';
-import {PROFILES} from './community.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {ACTOR_DOMAINS} from './catalog.mjs?v=cp46-causal-feedback-ce25f0f81678';
+import {PROFILES} from './community.mjs?v=cp46-causal-feedback-ce25f0f81678';
 const role=id=>PROFILES[id]?.label||'这位居民';
 const moving=a=>a&&['walk','yield','fold_umbrella'].includes(a.mode);
 const reached=a=>a&&a.reservation!==null&&!moving(a)&&a.path.length===0;

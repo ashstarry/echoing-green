@@ -1,8 +1,8 @@
-import {rainingAt} from './local-cloud.mjs?v=cp46-causal-feedback-2887e8b494a1';
-import {makeRoom} from './event-travel.mjs?v=cp46-causal-feedback-2887e8b494a1';
-import {createInteraction,advanceInteraction,interactionStep,INTERACTION_RECIPES} from './interaction-sequence.mjs?v=cp46-causal-feedback-2887e8b494a1';
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp46-causal-feedback-2887e8b494a1';
-import {CRAFT_KINDS,CRAFT_PLACES,CRAFT_NAMES} from './craft-design.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {rainingAt} from './local-cloud.mjs?v=cp46-causal-feedback-ce25f0f81678';
+import {makeRoom} from './event-travel.mjs?v=cp46-causal-feedback-ce25f0f81678';
+import {createInteraction,advanceInteraction,interactionStep,INTERACTION_RECIPES} from './interaction-sequence.mjs?v=cp46-causal-feedback-ce25f0f81678';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp46-causal-feedback-ce25f0f81678';
+import {CRAFT_KINDS,CRAFT_PLACES,CRAFT_NAMES} from './craft-design.mjs?v=cp46-causal-feedback-ce25f0f81678';
 const D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 const adults=['resident.customer_one','resident.customer_two','resident.customer_three','resident.market_browser','resident.strolling_parent','resident.courier','resident.postman'];
 export function ensureCraft(s){return s.craftWorld??={next:1,jobs:[],props:[],tokens:[],leaves:[],eventId:null,phase:'idle',history:[],steamer:0,steamerTarget:0,pair:null,delivery:null,pending:null};}

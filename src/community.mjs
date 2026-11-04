@@ -1,7 +1,7 @@
-import {rainingAt} from './local-cloud.mjs?v=cp46-causal-feedback-2887e8b494a1';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp46-causal-feedback-2887e8b494a1';
-import {advanceSceneEvent,requestSceneEvent,sceneTask} from './scene-events.mjs?v=cp46-causal-feedback-2887e8b494a1';
-import {CADENCE,varied,stableUnit} from './cadence.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {rainingAt} from './local-cloud.mjs?v=cp46-causal-feedback-ce25f0f81678';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp46-causal-feedback-ce25f0f81678';
+import {advanceSceneEvent,requestSceneEvent,sceneTask} from './scene-events.mjs?v=cp46-causal-feedback-ce25f0f81678';
+import {CADENCE,varied,stableUnit} from './cadence.mjs?v=cp46-causal-feedback-ce25f0f81678';
 export const ACTIVITIES={
  hop:{label:'找一块空地跳两下',range:[3,6],zone:'playground'},follow:{label:'跟着孩子换个位置',range:[4,8],zone:'family'},
  play:{label:'给街坊弹一段琴',range:[18,35]},

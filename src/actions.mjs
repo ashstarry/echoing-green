@@ -1,4 +1,4 @@
-import {requestResidentAction} from './resident-actions.mjs?v=cp46-causal-feedback-2887e8b494a1';
+import {requestResidentAction} from './resident-actions.mjs?v=cp46-causal-feedback-ce25f0f81678';
 // Executable local action trials; semantic expansion waits for reviewed behavior.
 export const ACTION_LIBRARY=[
  {id:'children_play',label:'孩子玩起来',description:'花园小孩走到空地，停稳后跳两下，再换个位置。',entities:['resident.garden_child','resident.child_runner'],activities:['hop'],decisions:{}},
