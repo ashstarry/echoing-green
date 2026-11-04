@@ -1,6 +1,6 @@
 {
-  "active": "app/runtime-cp44",
-  "api_source_commit": "b689df06a3e5123c4c23c98f704a62c7388c8f31",
+  "active": "app/runtime-cp45",
+  "api_source_commit": "30e8a71fd1c585e0572c3c13c09865983209bb24",
   "files": [
     {
       "original": "app/runtime-cp17/src/catalog.mjs",
@@ -9057,882 +9057,6 @@
       "repository_sha256": "c3de886c8b3e56e9c84e0b2a8f048fddaded6b75c66d3322f23ec0584a3a429e"
     },
     {
-      "original": "app/echoing-green-api/.gitignore",
-      "repository": "development/api/.gitignore",
-      "sha256": "5ca3c39bdc1288c108a1931b3f6bc5795464b6253e9457390617774259deed0c",
-      "repository_sha256": "5ca3c39bdc1288c108a1931b3f6bc5795464b6253e9457390617774259deed0c"
-    },
-    {
-      "original": "app/echoing-green-api/.npmrc",
-      "repository": "development/api/.npmrc",
-      "sha256": "a3909ac0447c469fda12c57374993be70f47ce73e49fd3124678c7c047f2214d",
-      "repository_sha256": "a3909ac0447c469fda12c57374993be70f47ce73e49fd3124678c7c047f2214d"
-    },
-    {
-      "original": "app/echoing-green-api/.openai/hosting.json",
-      "repository": "development/api/.openai/hosting.json",
-      "sha256": "cf7b03e2a7bd7790be3a89e792f71783d84ef8bf40eebcbbb1805bba6375785d",
-      "repository_sha256": "cf7b03e2a7bd7790be3a89e792f71783d84ef8bf40eebcbbb1805bba6375785d"
-    },
-    {
-      "original": "app/echoing-green-api/README.md",
-      "repository": "development/api/README.md",
-      "sha256": "10c03c52349fbb64149625bb6036a7507d120ecea34a9159d801fc3b67f0c73a",
-      "repository_sha256": "10c03c52349fbb64149625bb6036a7507d120ecea34a9159d801fc3b67f0c73a"
-    },
-    {
-      "original": "app/echoing-green-api/app/chatgpt-auth.ts",
-      "repository": "development/api/app/chatgpt-auth.ts",
-      "sha256": "4265a2e7c2dcb3a6f4b7026f762bf5b6e4caec76cc13c0a45987ee9a9f2e42cc",
-      "repository_sha256": "4265a2e7c2dcb3a6f4b7026f762bf5b6e4caec76cc13c0a45987ee9a9f2e42cc"
-    },
-    {
-      "original": "app/echoing-green-api/app/globals.css",
-      "repository": "development/api/app/globals.css",
-      "sha256": "8546d9b115f0addd582f7ceaaa6b1c069310bcc77c43ee7b8acfe0020be3afd7",
-      "repository_sha256": "8546d9b115f0addd582f7ceaaa6b1c069310bcc77c43ee7b8acfe0020be3afd7"
-    },
-    {
-      "original": "app/echoing-green-api/app/layout.tsx",
-      "repository": "development/api/app/layout.tsx",
-      "sha256": "38437bc406fc88d1de22f762bbb30366fe4294ea4c0f42115b3bb6a69d40a21b",
-      "repository_sha256": "38437bc406fc88d1de22f762bbb30366fe4294ea4c0f42115b3bb6a69d40a21b"
-    },
-    {
-      "original": "app/echoing-green-api/app/page.tsx",
-      "repository": "development/api/app/page.tsx",
-      "sha256": "f166f380609546fb72cf795493124b3aa3048df8497b67b419ebfee5a5c417ef",
-      "repository_sha256": "f166f380609546fb72cf795493124b3aa3048df8497b67b419ebfee5a5c417ef"
-    },
-    {
-      "original": "app/echoing-green-api/cloudflare-env.d.ts",
-      "repository": "development/api/cloudflare-env.d.ts",
-      "sha256": "8b0eca84aa3364cc7ccc43cc3af6beb88dd34ebd410de08690bf094ce39fbcb0",
-      "repository_sha256": "8b0eca84aa3364cc7ccc43cc3af6beb88dd34ebd410de08690bf094ce39fbcb0"
-    },
-    {
-      "original": "app/echoing-green-api/components.json",
-      "repository": "development/api/components.json",
-      "sha256": "31f4ca67a4a62572571003d3d5aac85ee6fbfca67a192924bac6b168d95e98fd",
-      "repository_sha256": "31f4ca67a4a62572571003d3d5aac85ee6fbfca67a192924bac6b168d95e98fd"
-    },
-    {
-      "original": "app/echoing-green-api/components/connector-error.tsx",
-      "repository": "development/api/components/connector-error.tsx",
-      "sha256": "2d0d04559952ce9c9a327cca499f4b99f35d885cccfce375230e116695d3f155",
-      "repository_sha256": "2d0d04559952ce9c9a327cca499f4b99f35d885cccfce375230e116695d3f155"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/accordion.tsx",
-      "repository": "development/api/components/ui/accordion.tsx",
-      "sha256": "a4f153089ba886dfcf73fac26b5c01ca933fa12fbe88df6fb723912bfffdfbb0",
-      "repository_sha256": "a4f153089ba886dfcf73fac26b5c01ca933fa12fbe88df6fb723912bfffdfbb0"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/alert-dialog.tsx",
-      "repository": "development/api/components/ui/alert-dialog.tsx",
-      "sha256": "9a8d950f2b9b4352d5ebb762fb44d5c28c2d353aa29712071973656a8736e311",
-      "repository_sha256": "9a8d950f2b9b4352d5ebb762fb44d5c28c2d353aa29712071973656a8736e311"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/alert.tsx",
-      "repository": "development/api/components/ui/alert.tsx",
-      "sha256": "2cc59b5f7bda91c1670884b1bf46bfc8a2a6f226cef184f5762acc037188885b",
-      "repository_sha256": "2cc59b5f7bda91c1670884b1bf46bfc8a2a6f226cef184f5762acc037188885b"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/aspect-ratio.tsx",
-      "repository": "development/api/components/ui/aspect-ratio.tsx",
-      "sha256": "b1c157886236782cb92d8fbcd4749532aaf6d8aabefd6e157ca40358f902f407",
-      "repository_sha256": "b1c157886236782cb92d8fbcd4749532aaf6d8aabefd6e157ca40358f902f407"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/attachment.tsx",
-      "repository": "development/api/components/ui/attachment.tsx",
-      "sha256": "ae8a25dd1a896d3964e3ef54d97e51221b418cde287dfd794428b89951c5c790",
-      "repository_sha256": "ae8a25dd1a896d3964e3ef54d97e51221b418cde287dfd794428b89951c5c790"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/avatar.tsx",
-      "repository": "development/api/components/ui/avatar.tsx",
-      "sha256": "58a846bf1617b94b9681921db9b8461d0145f311424663d11678a06b6153cb34",
-      "repository_sha256": "58a846bf1617b94b9681921db9b8461d0145f311424663d11678a06b6153cb34"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/badge.tsx",
-      "repository": "development/api/components/ui/badge.tsx",
-      "sha256": "46a0de5224f6a5d5d63d45246534288518dce888f031064bff925bbc7fe6ad97",
-      "repository_sha256": "46a0de5224f6a5d5d63d45246534288518dce888f031064bff925bbc7fe6ad97"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/breadcrumb.tsx",
-      "repository": "development/api/components/ui/breadcrumb.tsx",
-      "sha256": "d4c0831bba2212e778248f54a6ace6ef378df8bba4616d1abf27787a31eabae5",
-      "repository_sha256": "d4c0831bba2212e778248f54a6ace6ef378df8bba4616d1abf27787a31eabae5"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/bubble.tsx",
-      "repository": "development/api/components/ui/bubble.tsx",
-      "sha256": "870cc0c5cfc8a515053f7e41e706a6bd017a909b45f1305fd3b164a52cc4483b",
-      "repository_sha256": "870cc0c5cfc8a515053f7e41e706a6bd017a909b45f1305fd3b164a52cc4483b"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/button-group.tsx",
-      "repository": "development/api/components/ui/button-group.tsx",
-      "sha256": "784c89d8ee683e1bc972ae69e6ea8225a7f63abe22aa1b5fc3423ae8a2a399c0",
-      "repository_sha256": "784c89d8ee683e1bc972ae69e6ea8225a7f63abe22aa1b5fc3423ae8a2a399c0"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/button.tsx",
-      "repository": "development/api/components/ui/button.tsx",
-      "sha256": "cc36af0f8b5019c33cc039fbf03bb952a513072b15b55b53c592b78af3e5f4c4",
-      "repository_sha256": "cc36af0f8b5019c33cc039fbf03bb952a513072b15b55b53c592b78af3e5f4c4"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/calendar.tsx",
-      "repository": "development/api/components/ui/calendar.tsx",
-      "sha256": "3855fbe0d3f8ad3a4b93071f98b76a9f6782d46ec8b05f5d2ddbee1e4e39bc84",
-      "repository_sha256": "3855fbe0d3f8ad3a4b93071f98b76a9f6782d46ec8b05f5d2ddbee1e4e39bc84"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/card.tsx",
-      "repository": "development/api/components/ui/card.tsx",
-      "sha256": "c48dd3b96be90a7066f1aebf294f0af9d00ebcdc367d5d4aca55429ade570c1c",
-      "repository_sha256": "c48dd3b96be90a7066f1aebf294f0af9d00ebcdc367d5d4aca55429ade570c1c"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/carousel.tsx",
-      "repository": "development/api/components/ui/carousel.tsx",
-      "sha256": "b7ea0dda3903d972c186f739e23da61f547bc83b5a0bf13b16856577846d5fc3",
-      "repository_sha256": "b7ea0dda3903d972c186f739e23da61f547bc83b5a0bf13b16856577846d5fc3"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/chart.tsx",
-      "repository": "development/api/components/ui/chart.tsx",
-      "sha256": "45aa5ea4a386f4fb5b8869ff4bab3a08cf89255190ee322043baf84c3e950b6a",
-      "repository_sha256": "45aa5ea4a386f4fb5b8869ff4bab3a08cf89255190ee322043baf84c3e950b6a"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/checkbox.tsx",
-      "repository": "development/api/components/ui/checkbox.tsx",
-      "sha256": "b23ab9d4deeedf2ac8f512c368361ede681aa383437ef48563a6f9b7dbe95f27",
-      "repository_sha256": "b23ab9d4deeedf2ac8f512c368361ede681aa383437ef48563a6f9b7dbe95f27"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/collapsible.tsx",
-      "repository": "development/api/components/ui/collapsible.tsx",
-      "sha256": "c6598e5584f4258b5d9fefadbc5ad6a66888ad58729f4b634a0bb2d9c513188b",
-      "repository_sha256": "c6598e5584f4258b5d9fefadbc5ad6a66888ad58729f4b634a0bb2d9c513188b"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/combobox.tsx",
-      "repository": "development/api/components/ui/combobox.tsx",
-      "sha256": "2d68e78b2dc7e38a085f222dede60a80b4f8229a6e91732c484605e204d46735",
-      "repository_sha256": "2d68e78b2dc7e38a085f222dede60a80b4f8229a6e91732c484605e204d46735"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/command.tsx",
-      "repository": "development/api/components/ui/command.tsx",
-      "sha256": "361193df1e3d64a9e9b5048f045264782fcb387aab3f00f2b805fdcbf538b16a",
-      "repository_sha256": "361193df1e3d64a9e9b5048f045264782fcb387aab3f00f2b805fdcbf538b16a"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/context-menu.tsx",
-      "repository": "development/api/components/ui/context-menu.tsx",
-      "sha256": "2cf1fcf59df0649a3e2a126d1df2f639145f6b6bf5689ee54af1f40ab1245017",
-      "repository_sha256": "2cf1fcf59df0649a3e2a126d1df2f639145f6b6bf5689ee54af1f40ab1245017"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/dialog.tsx",
-      "repository": "development/api/components/ui/dialog.tsx",
-      "sha256": "dce39c6adc47d997bd2567f8b7a72f466b0134715105cd42f9194007b8ecdb14",
-      "repository_sha256": "dce39c6adc47d997bd2567f8b7a72f466b0134715105cd42f9194007b8ecdb14"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/direction.tsx",
-      "repository": "development/api/components/ui/direction.tsx",
-      "sha256": "84ae2ad658207f0e0f367978e5508cd8027cd00c29c41d3d13db21a708c3d1e6",
-      "repository_sha256": "84ae2ad658207f0e0f367978e5508cd8027cd00c29c41d3d13db21a708c3d1e6"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/drawer.tsx",
-      "repository": "development/api/components/ui/drawer.tsx",
-      "sha256": "cb6eaf58eb0757ca91af284e5d925b89a42ad7eb19cb3f44c575a3487aa9350f",
-      "repository_sha256": "cb6eaf58eb0757ca91af284e5d925b89a42ad7eb19cb3f44c575a3487aa9350f"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/dropdown-menu.tsx",
-      "repository": "development/api/components/ui/dropdown-menu.tsx",
-      "sha256": "98f0dcdae38225b73734aceeb9213dd751fea2c72ea520df31003cd133deac8a",
-      "repository_sha256": "98f0dcdae38225b73734aceeb9213dd751fea2c72ea520df31003cd133deac8a"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/empty.tsx",
-      "repository": "development/api/components/ui/empty.tsx",
-      "sha256": "ae95bdcf367a076ae02e7925f14522a148798f72d9651749c6d55497dba584c0",
-      "repository_sha256": "ae95bdcf367a076ae02e7925f14522a148798f72d9651749c6d55497dba584c0"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/field.tsx",
-      "repository": "development/api/components/ui/field.tsx",
-      "sha256": "ba67d76f017ac059fc86cf8c344e0b2991c4322d3619e125498c19b87f6eefbd",
-      "repository_sha256": "ba67d76f017ac059fc86cf8c344e0b2991c4322d3619e125498c19b87f6eefbd"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/form.tsx",
-      "repository": "development/api/components/ui/form.tsx",
-      "sha256": "315b46bb75ab7d1c6061b5d750aa4bedf6e7a455e15e2d7f9182f053d5972b1e",
-      "repository_sha256": "315b46bb75ab7d1c6061b5d750aa4bedf6e7a455e15e2d7f9182f053d5972b1e"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/hover-card.tsx",
-      "repository": "development/api/components/ui/hover-card.tsx",
-      "sha256": "f5d8df42c59370ec14d61bcc54f7d68e9bb7dfa0d6a872b2f7cffc2aafbf23b8",
-      "repository_sha256": "f5d8df42c59370ec14d61bcc54f7d68e9bb7dfa0d6a872b2f7cffc2aafbf23b8"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/input-group.tsx",
-      "repository": "development/api/components/ui/input-group.tsx",
-      "sha256": "6afbd58fea4c438e6252dc4568bddc122e84ababead4ad5cee50ace01100c9a0",
-      "repository_sha256": "6afbd58fea4c438e6252dc4568bddc122e84ababead4ad5cee50ace01100c9a0"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/input-otp.tsx",
-      "repository": "development/api/components/ui/input-otp.tsx",
-      "sha256": "161946daa89f0eda2575b9271c0494e35807c4ffb55598a49f67160c17fec299",
-      "repository_sha256": "161946daa89f0eda2575b9271c0494e35807c4ffb55598a49f67160c17fec299"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/input.tsx",
-      "repository": "development/api/components/ui/input.tsx",
-      "sha256": "8c4612a7c41319ac5049daa3b34b080f9784b6245c17780eb87c127e58e473db",
-      "repository_sha256": "8c4612a7c41319ac5049daa3b34b080f9784b6245c17780eb87c127e58e473db"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/item.tsx",
-      "repository": "development/api/components/ui/item.tsx",
-      "sha256": "6e2144d6d87142dbbe56d568810bf546318c8aa661447ebb0d76ebbf382cb45f",
-      "repository_sha256": "6e2144d6d87142dbbe56d568810bf546318c8aa661447ebb0d76ebbf382cb45f"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/kbd.tsx",
-      "repository": "development/api/components/ui/kbd.tsx",
-      "sha256": "6088c3a5432338b1719c17e9b5d0e1fa74fd1f66060f248fc88909d33a82cd13",
-      "repository_sha256": "6088c3a5432338b1719c17e9b5d0e1fa74fd1f66060f248fc88909d33a82cd13"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/label.tsx",
-      "repository": "development/api/components/ui/label.tsx",
-      "sha256": "a476e41f08b9de5bd447de66a33d8bc2ad18f2fa6b96c064778bab4b6f439f4c",
-      "repository_sha256": "a476e41f08b9de5bd447de66a33d8bc2ad18f2fa6b96c064778bab4b6f439f4c"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/marker.tsx",
-      "repository": "development/api/components/ui/marker.tsx",
-      "sha256": "3d798763f094b2bb5e7ade2d5cd1b9bab498bc8ca7fd4cfaf4e5835bdedc34a0",
-      "repository_sha256": "3d798763f094b2bb5e7ade2d5cd1b9bab498bc8ca7fd4cfaf4e5835bdedc34a0"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/menubar.tsx",
-      "repository": "development/api/components/ui/menubar.tsx",
-      "sha256": "9243af8afcea03703398ccd1c2a8c0a87ad6cbaf2bd272fb609f5b79fe46aebb",
-      "repository_sha256": "9243af8afcea03703398ccd1c2a8c0a87ad6cbaf2bd272fb609f5b79fe46aebb"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/message-scroller.tsx",
-      "repository": "development/api/components/ui/message-scroller.tsx",
-      "sha256": "bb7660a248e4e9589c3816c7c1c199ea1381a70d2c8476ae895b567a7a4d86cf",
-      "repository_sha256": "bb7660a248e4e9589c3816c7c1c199ea1381a70d2c8476ae895b567a7a4d86cf"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/message.tsx",
-      "repository": "development/api/components/ui/message.tsx",
-      "sha256": "9d2952bf3b641081f09aa2739535e6bbd1be0a4946789752a2c20d8aaef43185",
-      "repository_sha256": "9d2952bf3b641081f09aa2739535e6bbd1be0a4946789752a2c20d8aaef43185"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/native-select.tsx",
-      "repository": "development/api/components/ui/native-select.tsx",
-      "sha256": "007516b111fca8c98a6c40c94ab91bb68cc5b52afce1ed1f5e510c3d86e7347c",
-      "repository_sha256": "007516b111fca8c98a6c40c94ab91bb68cc5b52afce1ed1f5e510c3d86e7347c"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/navigation-menu.tsx",
-      "repository": "development/api/components/ui/navigation-menu.tsx",
-      "sha256": "889d358a77de88e9cb6f39ea4895ea4c76eaf01d731b74e44f1c41e97a78a044",
-      "repository_sha256": "889d358a77de88e9cb6f39ea4895ea4c76eaf01d731b74e44f1c41e97a78a044"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/pagination.tsx",
-      "repository": "development/api/components/ui/pagination.tsx",
-      "sha256": "374ad135c3d4ff3ec080a0009cd9745cdd0e12faa89d2b0e86074f11e5127fd1",
-      "repository_sha256": "374ad135c3d4ff3ec080a0009cd9745cdd0e12faa89d2b0e86074f11e5127fd1"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/popover.tsx",
-      "repository": "development/api/components/ui/popover.tsx",
-      "sha256": "31c350309ff5d3034e6ecf1b0eda75ba8855bdbf987fc7ad6d71f0ef07c5a447",
-      "repository_sha256": "31c350309ff5d3034e6ecf1b0eda75ba8855bdbf987fc7ad6d71f0ef07c5a447"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/progress.tsx",
-      "repository": "development/api/components/ui/progress.tsx",
-      "sha256": "c8c26e8f5f041c3cdf4915347dc1d9c022f9448f149990fadcaf303e952fa57d",
-      "repository_sha256": "c8c26e8f5f041c3cdf4915347dc1d9c022f9448f149990fadcaf303e952fa57d"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/radio-group.tsx",
-      "repository": "development/api/components/ui/radio-group.tsx",
-      "sha256": "fe5ce39636d0818c2bf9c4eebddff893d1225fa2c81b5fa4bb8cbb39a8c913ce",
-      "repository_sha256": "fe5ce39636d0818c2bf9c4eebddff893d1225fa2c81b5fa4bb8cbb39a8c913ce"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/resizable.tsx",
-      "repository": "development/api/components/ui/resizable.tsx",
-      "sha256": "bc63958467aa00557c551bb0d96a5ae4c965c1e1ba2380e595949d933b132f7c",
-      "repository_sha256": "bc63958467aa00557c551bb0d96a5ae4c965c1e1ba2380e595949d933b132f7c"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/scroll-area.tsx",
-      "repository": "development/api/components/ui/scroll-area.tsx",
-      "sha256": "8bd9d986b2844c9a87de825c6de4787b6739b36c3dc9a05ccf3eb107160e4043",
-      "repository_sha256": "8bd9d986b2844c9a87de825c6de4787b6739b36c3dc9a05ccf3eb107160e4043"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/select.tsx",
-      "repository": "development/api/components/ui/select.tsx",
-      "sha256": "0b796a108a4eb5ba52d9ad938b7aea36dc56ae66c703a6d0a23dbc24f96daff3",
-      "repository_sha256": "0b796a108a4eb5ba52d9ad938b7aea36dc56ae66c703a6d0a23dbc24f96daff3"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/separator.tsx",
-      "repository": "development/api/components/ui/separator.tsx",
-      "sha256": "6da346505c8629a4668420d2a5ca48891383bbe0b0ceb14163537c671879427e",
-      "repository_sha256": "6da346505c8629a4668420d2a5ca48891383bbe0b0ceb14163537c671879427e"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/sheet.tsx",
-      "repository": "development/api/components/ui/sheet.tsx",
-      "sha256": "63863cf2df8f8973e52b3459ac9bdbf81be1262dbc70eb53d5271ffb03488e16",
-      "repository_sha256": "63863cf2df8f8973e52b3459ac9bdbf81be1262dbc70eb53d5271ffb03488e16"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/sidebar.tsx",
-      "repository": "development/api/components/ui/sidebar.tsx",
-      "sha256": "4a8d73e7730a2b1fcecfca31299ed26db65c2307b84197a59c6ec7c01c7ad28e",
-      "repository_sha256": "4a8d73e7730a2b1fcecfca31299ed26db65c2307b84197a59c6ec7c01c7ad28e"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/skeleton.tsx",
-      "repository": "development/api/components/ui/skeleton.tsx",
-      "sha256": "ba48dd5be5a6a1378bd4e011028654b5bf419f1e7d20ee4b9f8330c1264e7239",
-      "repository_sha256": "ba48dd5be5a6a1378bd4e011028654b5bf419f1e7d20ee4b9f8330c1264e7239"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/slider.tsx",
-      "repository": "development/api/components/ui/slider.tsx",
-      "sha256": "0e37484f4b416e79ac18c655cac961aefacf6e67085cfc2b320ea8af545635a3",
-      "repository_sha256": "0e37484f4b416e79ac18c655cac961aefacf6e67085cfc2b320ea8af545635a3"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/sonner.tsx",
-      "repository": "development/api/components/ui/sonner.tsx",
-      "sha256": "13ccc9b0fe4248e622f83a1d3b2f0566b72b5e04162d7d0c8db8945ecc71b55f",
-      "repository_sha256": "13ccc9b0fe4248e622f83a1d3b2f0566b72b5e04162d7d0c8db8945ecc71b55f"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/spinner.tsx",
-      "repository": "development/api/components/ui/spinner.tsx",
-      "sha256": "3e6e6e8d37fb4069f8e43e55318f8db06fbc36e6c8be0096da3c9337c1c798b9",
-      "repository_sha256": "3e6e6e8d37fb4069f8e43e55318f8db06fbc36e6c8be0096da3c9337c1c798b9"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/switch.tsx",
-      "repository": "development/api/components/ui/switch.tsx",
-      "sha256": "386d4d4deb39f34126f9700fe9bf5393d238485dd94018bba9d154dda84c62ae",
-      "repository_sha256": "386d4d4deb39f34126f9700fe9bf5393d238485dd94018bba9d154dda84c62ae"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/table.tsx",
-      "repository": "development/api/components/ui/table.tsx",
-      "sha256": "20e5a7f224959c6b75802995706a97e9da171f693d4b6b1b436388fcd9df96f3",
-      "repository_sha256": "20e5a7f224959c6b75802995706a97e9da171f693d4b6b1b436388fcd9df96f3"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/tabs.tsx",
-      "repository": "development/api/components/ui/tabs.tsx",
-      "sha256": "865d0194331b9b2be36723fa79d3575dc83078b4cb941cafee87cb72fc2cff46",
-      "repository_sha256": "865d0194331b9b2be36723fa79d3575dc83078b4cb941cafee87cb72fc2cff46"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/textarea.tsx",
-      "repository": "development/api/components/ui/textarea.tsx",
-      "sha256": "253cdeb487c73beaaccdf47fc163e36e7d5b7ae6ddf09a4f64998a109a112979",
-      "repository_sha256": "253cdeb487c73beaaccdf47fc163e36e7d5b7ae6ddf09a4f64998a109a112979"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/toggle-group.tsx",
-      "repository": "development/api/components/ui/toggle-group.tsx",
-      "sha256": "69f643e889e933f05c1439084480d8646f66a161c7d1cf0730ee926382ade35e",
-      "repository_sha256": "69f643e889e933f05c1439084480d8646f66a161c7d1cf0730ee926382ade35e"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/toggle.tsx",
-      "repository": "development/api/components/ui/toggle.tsx",
-      "sha256": "ba4d0b0a2b2fee75dc36dfc19e32082e721024b919050c97fd5dc70faa924e16",
-      "repository_sha256": "ba4d0b0a2b2fee75dc36dfc19e32082e721024b919050c97fd5dc70faa924e16"
-    },
-    {
-      "original": "app/echoing-green-api/components/ui/tooltip.tsx",
-      "repository": "development/api/components/ui/tooltip.tsx",
-      "sha256": "a0784eb77831a799fad7991df4f1b666f876201565a80175e1aa68733574a2e4",
-      "repository_sha256": "a0784eb77831a799fad7991df4f1b666f876201565a80175e1aa68733574a2e4"
-    },
-    {
-      "original": "app/echoing-green-api/db/index.ts",
-      "repository": "development/api/db/index.ts",
-      "sha256": "dc7610b00b918e0ffff1360a63626f16655ced3064b2eaf96095a4101fb14bcd",
-      "repository_sha256": "dc7610b00b918e0ffff1360a63626f16655ced3064b2eaf96095a4101fb14bcd"
-    },
-    {
-      "original": "app/echoing-green-api/db/schema.ts",
-      "repository": "development/api/db/schema.ts",
-      "sha256": "13ddacbf0be50e054d450a6c642b7fdc1aa943fd6b99084711e07e58b600390d",
-      "repository_sha256": "13ddacbf0be50e054d450a6c642b7fdc1aa943fd6b99084711e07e58b600390d"
-    },
-    {
-      "original": "app/echoing-green-api/drizzle.config.ts",
-      "repository": "development/api/drizzle.config.ts",
-      "sha256": "af081f7384aaeb0082cf422e29f139d137ca2f6a57c69b2c37b9fb1f8479867b",
-      "repository_sha256": "af081f7384aaeb0082cf422e29f139d137ca2f6a57c69b2c37b9fb1f8479867b"
-    },
-    {
-      "original": "app/echoing-green-api/drizzle/meta/_journal.json",
-      "repository": "development/api/drizzle/meta/_journal.json",
-      "sha256": "90cb374e093894d0efce6f1830d873a42aadd8ba49d2f024495e5cb2e1c8c303",
-      "repository_sha256": "90cb374e093894d0efce6f1830d873a42aadd8ba49d2f024495e5cb2e1c8c303"
-    },
-    {
-      "original": "app/echoing-green-api/eslint.config.mjs",
-      "repository": "development/api/eslint.config.mjs",
-      "sha256": "eeda7faabe9560fa9fdb26675b0011fa78461ca7061989732f5da9245b87e315",
-      "repository_sha256": "eeda7faabe9560fa9fdb26675b0011fa78461ca7061989732f5da9245b87e315"
-    },
-    {
-      "original": "app/echoing-green-api/examples/d1/app/api/notes/route.ts",
-      "repository": "development/api/examples/d1/app/api/notes/route.ts",
-      "sha256": "a3d4a74fd53b7bf53e2df41f169d9d9d44a8b22aeb6d92f4e754956079af8909",
-      "repository_sha256": "a3d4a74fd53b7bf53e2df41f169d9d9d44a8b22aeb6d92f4e754956079af8909"
-    },
-    {
-      "original": "app/echoing-green-api/examples/d1/db/schema.ts",
-      "repository": "development/api/examples/d1/db/schema.ts",
-      "sha256": "d89eabd95716ce404f5f7ca2a254220435be8ddce7c899d7ef461ff22ec80454",
-      "repository_sha256": "d89eabd95716ce404f5f7ca2a254220435be8ddce7c899d7ef461ff22ec80454"
-    },
-    {
-      "original": "app/echoing-green-api/hooks/use-mobile.ts",
-      "repository": "development/api/hooks/use-mobile.ts",
-      "sha256": "ad0936f84f1df79d3697bfbff9c18f8ad58431c1cbaf2359c6a853b0fcc9f28b",
-      "repository_sha256": "ad0936f84f1df79d3697bfbff9c18f8ad58431c1cbaf2359c6a853b0fcc9f28b"
-    },
-    {
-      "original": "app/echoing-green-api/lib/connector-context.ts",
-      "repository": "development/api/lib/connector-context.ts",
-      "sha256": "bbddff68689cb0f6926fecd4b8b96f12f2054277c296e97b0df07d4ad5ece24e",
-      "repository_sha256": "bbddff68689cb0f6926fecd4b8b96f12f2054277c296e97b0df07d4ad5ece24e"
-    },
-    {
-      "original": "app/echoing-green-api/lib/connector-contract.mts",
-      "repository": "development/api/lib/connector-contract.mts",
-      "sha256": "e1a7b24a8793af34b595690d9b1300c897c7321c14f215cedf58ad95799d7c3e",
-      "repository_sha256": "e1a7b24a8793af34b595690d9b1300c897c7321c14f215cedf58ad95799d7c3e"
-    },
-    {
-      "original": "app/echoing-green-api/lib/connector-errors.mts",
-      "repository": "development/api/lib/connector-errors.mts",
-      "sha256": "a22edf13d6873ae832c4a2a0d579fc666c73ec996ef0722d39172649d38f0871",
-      "repository_sha256": "a22edf13d6873ae832c4a2a0d579fc666c73ec996ef0722d39172649d38f0871"
-    },
-    {
-      "original": "app/echoing-green-api/lib/connector-preview.d.ts",
-      "repository": "development/api/lib/connector-preview.d.ts",
-      "sha256": "abd69a94f7f61f1359063bb557574faae35e8ff5a028cc4c04b9ee248ef52642",
-      "repository_sha256": "abd69a94f7f61f1359063bb557574faae35e8ff5a028cc4c04b9ee248ef52642"
-    },
-    {
-      "original": "app/echoing-green-api/lib/connectors.ts",
-      "repository": "development/api/lib/connectors.ts",
-      "sha256": "1c93d747e384c8e17e3e3dd5361b24412babf5eba2a11d2ae7a75f4e0924112c",
-      "repository_sha256": "1c93d747e384c8e17e3e3dd5361b24412babf5eba2a11d2ae7a75f4e0924112c"
-    },
-    {
-      "original": "app/echoing-green-api/lib/utils.ts",
-      "repository": "development/api/lib/utils.ts",
-      "sha256": "53f3d3d070f0a9082934da25b875f9499855c2b0693868dd28be8c23d8730f68",
-      "repository_sha256": "53f3d3d070f0a9082934da25b875f9499855c2b0693868dd28be8c23d8730f68"
-    },
-    {
-      "original": "app/echoing-green-api/next.config.ts",
-      "repository": "development/api/next.config.ts",
-      "sha256": "614bce25b089c3f19b1e17a6346c74b858034040154c6621e7d35303004767cc",
-      "repository_sha256": "614bce25b089c3f19b1e17a6346c74b858034040154c6621e7d35303004767cc"
-    },
-    {
-      "original": "app/echoing-green-api/package-lock.json",
-      "repository": "development/api/package-lock.json",
-      "sha256": "eedaeab6870c0f70f9db869fcaa24abae9b0f945cbc9acb8a43b6e7ed6bcbfca",
-      "repository_sha256": "eedaeab6870c0f70f9db869fcaa24abae9b0f945cbc9acb8a43b6e7ed6bcbfca"
-    },
-    {
-      "original": "app/echoing-green-api/package.json",
-      "repository": "development/api/package.json",
-      "sha256": "eb7b53ec5bdce1db5a8576b2ffc3b63ddd8c5fdee0f97dcb341674abbf69843a",
-      "repository_sha256": "eb7b53ec5bdce1db5a8576b2ffc3b63ddd8c5fdee0f97dcb341674abbf69843a"
-    },
-    {
-      "original": "app/echoing-green-api/postcss.config.mjs",
-      "repository": "development/api/postcss.config.mjs",
-      "sha256": "dfac7ac2d86d326a0e5adb024e7943c181393ed17a5fcb8f0315b24c7da6ddde",
-      "repository_sha256": "dfac7ac2d86d326a0e5adb024e7943c181393ed17a5fcb8f0315b24c7da6ddde"
-    },
-    {
-      "original": "app/echoing-green-api/public/favicon.svg",
-      "repository": "development/api/public/favicon.svg",
-      "sha256": "e6d2e59b7b5bbb0342e0fb496dfc262decbfe4426bbb7b047aec8d467d1dc6f7",
-      "repository_sha256": "e6d2e59b7b5bbb0342e0fb496dfc262decbfe4426bbb7b047aec8d467d1dc6f7"
-    },
-    {
-      "original": "app/echoing-green-api/runtime/atmosphere.mjs",
-      "repository": "development/api/runtime/atmosphere.mjs",
-      "sha256": "b9dfe54f05f42545c3ac35ee69f317b0d611299ec95ef09553848eae6b81d9b3",
-      "repository_sha256": "b9dfe54f05f42545c3ac35ee69f317b0d611299ec95ef09553848eae6b81d9b3"
-    },
-    {
-      "original": "app/echoing-green-api/runtime/boat-world.mjs",
-      "repository": "development/api/runtime/boat-world.mjs",
-      "sha256": "0b511772333cb390970bac3e40dab7190d9bf3aaf7bdba9af2d4caca96b6e2fd",
-      "repository_sha256": "0b511772333cb390970bac3e40dab7190d9bf3aaf7bdba9af2d4caca96b6e2fd"
-    },
-    {
-      "original": "app/echoing-green-api/runtime/cadence.mjs",
-      "repository": "development/api/runtime/cadence.mjs",
-      "sha256": "8a15769d627d9839e275f57bae1bf499eb534fd7e913eda98846f55667035db5",
-      "repository_sha256": "8a15769d627d9839e275f57bae1bf499eb534fd7e913eda98846f55667035db5"
-    },
-    {
-      "original": "app/echoing-green-api/runtime/catalog.mjs",
-      "repository": "development/api/runtime/catalog.mjs",
-      "sha256": "aeaaf7096cf617e04a3778cd87820916bbd524c6c72041cc08cdacd1ee91fbb1",
-      "repository_sha256": "aeaaf7096cf617e04a3778cd87820916bbd524c6c72041cc08cdacd1ee91fbb1"
-    },
-    {
-      "original": "app/echoing-green-api/runtime/community.mjs",
-      "repository": "development/api/runtime/community.mjs",
-      "sha256": "15cd6e68026a7cc1daf730281193a92ce681998b478b18bed1ebb62e64e8229d",
-      "repository_sha256": "15cd6e68026a7cc1daf730281193a92ce681998b478b18bed1ebb62e64e8229d"
-    },
-    {
-      "original": "app/echoing-green-api/runtime/craft-design.mjs",
-      "repository": "development/api/runtime/craft-design.mjs",
-      "sha256": "bb0ecb3e9b74068f7808804f4497c71c33de9d5c65a423da83b096ca7bc0998e",
-      "repository_sha256": "bb0ecb3e9b74068f7808804f4497c71c33de9d5c65a423da83b096ca7bc0998e"
-    },
-    {
-      "original": "app/echoing-green-api/runtime/craft-world.mjs",
-      "repository": "development/api/runtime/craft-world.mjs",
-      "sha256": "8b96d49b0cb140dabb5fa531c80d90fb80dd45db56a95d4224f86f2258087a66",
-      "repository_sha256": "8b96d49b0cb140dabb5fa531c80d90fb80dd45db56a95d4224f86f2258087a66"
-    },
-    {
-      "original": "app/echoing-green-api/runtime/event-design.mjs",
-      "repository": "development/api/runtime/event-design.mjs",
-      "sha256": "fdf97b2cd12be4af4dc5324c0e64c6bd9027f6113c4aaa8377e851d639e5b225",
-      "repository_sha256": "fdf97b2cd12be4af4dc5324c0e64c6bd9027f6113c4aaa8377e851d639e5b225"
-    },
-    {
-      "original": "app/echoing-green-api/runtime/event-travel.mjs",
-      "repository": "development/api/runtime/event-travel.mjs",
-      "sha256": "ee645fc5bbf6496457b8b99b323b5f570978148d481db9c7de62906ca230833a",
-      "repository_sha256": "ee645fc5bbf6496457b8b99b323b5f570978148d481db9c7de62906ca230833a"
-    },
-    {
-      "original": "app/echoing-green-api/runtime/explicit-intents.mjs",
-      "repository": "development/api/runtime/explicit-intents.mjs",
-      "sha256": "bc47972018271ffbe3f3dad645fc679d7bba3a8d6b9de8c2b643e03a680c0b6f",
-      "repository_sha256": "bc47972018271ffbe3f3dad645fc679d7bba3a8d6b9de8c2b643e03a680c0b6f"
-    },
-    {
-      "original": "app/echoing-green-api/runtime/explicit-scenes.mjs",
-      "repository": "development/api/runtime/explicit-scenes.mjs",
-      "sha256": "2d1180faeba1ce3d05aa8b34004d3f159a072e1c313ace130df0fc7417716cd8",
-      "repository_sha256": "2d1180faeba1ce3d05aa8b34004d3f159a072e1c313ace130df0fc7417716cd8"
-    },
-    {
-      "original": "app/echoing-green-api/runtime/fox-behavior.mjs",
-      "repository": "development/api/runtime/fox-behavior.mjs",
-      "sha256": "ce9de818e92aa83fb6bda06c67b15040a79074cc9744b49dd3a7a748b49fd75c",
-      "repository_sha256": "ce9de818e92aa83fb6bda06c67b15040a79074cc9744b49dd3a7a748b49fd75c"
-    },
-    {
-      "original": "app/echoing-green-api/runtime/group-layout.mjs",
-      "repository": "development/api/runtime/group-layout.mjs",
-      "sha256": "d51bbea436600d7c9b85c4797ed8199b39ebdaa92a99fa9f2d13621da872c64b",
-      "repository_sha256": "d51bbea436600d7c9b85c4797ed8199b39ebdaa92a99fa9f2d13621da872c64b"
-    },
-    {
-      "original": "app/echoing-green-api/runtime/interaction-sequence.mjs",
-      "repository": "development/api/runtime/interaction-sequence.mjs",
-      "sha256": "9e6847c9b163df833f2171092107c545b0778ab6530e36a060fe65a4b68cefca",
-      "repository_sha256": "9e6847c9b163df833f2171092107c545b0778ab6530e36a060fe65a4b68cefca"
-    },
-    {
-      "original": "app/echoing-green-api/runtime/life-plans.mjs",
-      "repository": "development/api/runtime/life-plans.mjs",
-      "sha256": "edecf5160c7513b2b952f9be80d84f5f9eb3b96566da6de1b09542911cb4246e",
-      "repository_sha256": "edecf5160c7513b2b952f9be80d84f5f9eb3b96566da6de1b09542911cb4246e"
-    },
-    {
-      "original": "app/echoing-green-api/runtime/local-cloud.mjs",
-      "repository": "development/api/runtime/local-cloud.mjs",
-      "sha256": "c05772f689fd4c208486bf74bf8bccc8b2705ec8c6e78a2181af1e1821a96614",
-      "repository_sha256": "c05772f689fd4c208486bf74bf8bccc8b2705ec8c6e78a2181af1e1821a96614"
-    },
-    {
-      "original": "app/echoing-green-api/runtime/local-walkers.mjs",
-      "repository": "development/api/runtime/local-walkers.mjs",
-      "sha256": "40372a8e08d003987cef9fa67929a5f7863b945be18b34938a23f399234e69a8",
-      "repository_sha256": "40372a8e08d003987cef9fa67929a5f7863b945be18b34938a23f399234e69a8"
-    },
-    {
-      "original": "app/echoing-green-api/runtime/motion.mjs",
-      "repository": "development/api/runtime/motion.mjs",
-      "sha256": "02872f9a0e3dc29410af16755d66bf20234bfd8cd760d420ef73a382b5de2f31",
-      "repository_sha256": "02872f9a0e3dc29410af16755d66bf20234bfd8cd760d420ef73a382b5de2f31"
-    },
-    {
-      "original": "app/echoing-green-api/runtime/navigation.mjs",
-      "repository": "development/api/runtime/navigation.mjs",
-      "sha256": "69e4705ed8403f1f755c64525e6ff44e8e4c317131f36a98b9f22ee98b88274e",
-      "repository_sha256": "69e4705ed8403f1f755c64525e6ff44e8e4c317131f36a98b9f22ee98b88274e"
-    },
-    {
-      "original": "app/echoing-green-api/runtime/neighborhood-world.mjs",
-      "repository": "development/api/runtime/neighborhood-world.mjs",
-      "sha256": "72c0603cbb2322ddd9f8530d7015381017e364ea7ed7beaf8ad45d495d75e5e4",
-      "repository_sha256": "72c0603cbb2322ddd9f8530d7015381017e364ea7ed7beaf8ad45d495d75e5e4"
-    },
-    {
-      "original": "app/echoing-green-api/runtime/object-actions.mjs",
-      "repository": "development/api/runtime/object-actions.mjs",
-      "sha256": "a8c02912155cd2617bf58b914f205d38814610f61a4eade94bac8b06729a4dc8",
-      "repository_sha256": "a8c02912155cd2617bf58b914f205d38814610f61a4eade94bac8b06729a4dc8"
-    },
-    {
-      "original": "app/echoing-green-api/runtime/paper-world.mjs",
-      "repository": "development/api/runtime/paper-world.mjs",
-      "sha256": "737198f7aaa192e367369056a98223542746b220865072054249a06b370cb4a8",
-      "repository_sha256": "737198f7aaa192e367369056a98223542746b220865072054249a06b370cb4a8"
-    },
-    {
-      "original": "app/echoing-green-api/runtime/passengers.mjs",
-      "repository": "development/api/runtime/passengers.mjs",
-      "sha256": "c4b4b923279e5105cc01a7e562d916257863525b87cb6d256552348785d1a260",
-      "repository_sha256": "c4b4b923279e5105cc01a7e562d916257863525b87cb6d256552348785d1a260"
-    },
-    {
-      "original": "app/echoing-green-api/runtime/resident-actions.mjs",
-      "repository": "development/api/runtime/resident-actions.mjs",
-      "sha256": "3d346b616062cb784de73b988f1852feb64e7ca90073a9cf266d16699efc8511",
-      "repository_sha256": "3d346b616062cb784de73b988f1852feb64e7ca90073a9cf266d16699efc8511"
-    },
-    {
-      "original": "app/echoing-green-api/runtime/scene-events.mjs",
-      "repository": "development/api/runtime/scene-events.mjs",
-      "sha256": "d124fb99f1d9dbedccfbbe83ada0614016221aa176e1a4855b8439b30e7eb454",
-      "repository_sha256": "d124fb99f1d9dbedccfbbe83ada0614016221aa176e1a4855b8439b30e7eb454"
-    },
-    {
-      "original": "app/echoing-green-api/runtime/town-response.mjs",
-      "repository": "development/api/runtime/town-response.mjs",
-      "sha256": "2f35f8714029a0d0dee6df41b9fcc4f13342d50051615154cff880a5f72ab46d",
-      "repository_sha256": "2f35f8714029a0d0dee6df41b9fcc4f13342d50051615154cff880a5f72ab46d"
-    },
-    {
-      "original": "app/echoing-green-api/scripts/build-verified.sh",
-      "repository": "development/api/scripts/build-verified.sh",
-      "sha256": "2ae5329ac860076070c9217a43106a15cb5ecf907a0f7baeb9ef903f76b53c68",
-      "repository_sha256": "2ae5329ac860076070c9217a43106a15cb5ecf907a0f7baeb9ef903f76b53c68"
-    },
-    {
-      "original": "app/echoing-green-api/scripts/connector-preview/connector-preview-session.mjs",
-      "repository": "development/api/scripts/connector-preview/connector-preview-session.mjs",
-      "sha256": "57224ad185a25115a14fccc68d3217e55b199260c3dd98a2c807beffec1a0a9b",
-      "repository_sha256": "57224ad185a25115a14fccc68d3217e55b199260c3dd98a2c807beffec1a0a9b"
-    },
-    {
-      "original": "app/echoing-green-api/scripts/connector-preview/host-binding.mjs",
-      "repository": "development/api/scripts/connector-preview/host-binding.mjs",
-      "sha256": "9e44ab6864133a5c82f834a5904ebb7d6104cb783c24efba3c0fe1a161182cea",
-      "repository_sha256": "9e44ab6864133a5c82f834a5904ebb7d6104cb783c24efba3c0fe1a161182cea"
-    },
-    {
-      "original": "app/echoing-green-api/scripts/connector-preview/protocol.mjs",
-      "repository": "development/api/scripts/connector-preview/protocol.mjs",
-      "sha256": "111e062ebf08d3f180130f5bc3dcb3c1414c1d7be3c032c9d675a61c0c7513a8",
-      "repository_sha256": "111e062ebf08d3f180130f5bc3dcb3c1414c1d7be3c032c9d675a61c0c7513a8"
-    },
-    {
-      "original": "app/echoing-green-api/scripts/connector-preview/worker.mjs",
-      "repository": "development/api/scripts/connector-preview/worker.mjs",
-      "sha256": "bd9c98fc68f29d975fe10508dfc9029bb681dc5789a62861d5c938bdea2064bb",
-      "repository_sha256": "bd9c98fc68f29d975fe10508dfc9029bb681dc5789a62861d5c938bdea2064bb"
-    },
-    {
-      "original": "app/echoing-green-api/scripts/execution-profile.mjs",
-      "repository": "development/api/scripts/execution-profile.mjs",
-      "sha256": "2e71116f4d2b70cff8bb70436f8dd5c709ec7ff62893424530f404e0193d3630",
-      "repository_sha256": "2e71116f4d2b70cff8bb70436f8dd5c709ec7ff62893424530f404e0193d3630"
-    },
-    {
-      "original": "app/echoing-green-api/scripts/install-ci.mjs",
-      "repository": "development/api/scripts/install-ci.mjs",
-      "sha256": "4a5a92d60a08d0ba54effd8373da2da06284312c55b767287c68a0bec7200da7",
-      "repository_sha256": "4a5a92d60a08d0ba54effd8373da2da06284312c55b767287c68a0bec7200da7"
-    },
-    {
-      "original": "app/echoing-green-api/scripts/install-ci.sh",
-      "repository": "development/api/scripts/install-ci.sh",
-      "sha256": "10d8764a61be50351dc3496e13588270de7956f0aa5f1189c49cabb2d89fe5c0",
-      "repository_sha256": "10d8764a61be50351dc3496e13588270de7956f0aa5f1189c49cabb2d89fe5c0"
-    },
-    {
-      "original": "app/echoing-green-api/scripts/install-pnpm.sh",
-      "repository": "development/api/scripts/install-pnpm.sh",
-      "sha256": "a684c02c2b493dfbf262a66252a5cd36f81ca995a4024761728662ae63aa40c0",
-      "repository_sha256": "a684c02c2b493dfbf262a66252a5cd36f81ca995a4024761728662ae63aa40c0"
-    },
-    {
-      "original": "app/echoing-green-api/scripts/npm-install.mjs",
-      "repository": "development/api/scripts/npm-install.mjs",
-      "sha256": "9715c6a32d1d4a0289ef6376a0e819c3b6a6416b8a9877733d9fb4339ce626b6",
-      "repository_sha256": "9715c6a32d1d4a0289ef6376a0e819c3b6a6416b8a9877733d9fb4339ce626b6"
-    },
-    {
-      "original": "app/echoing-green-api/scripts/pnpm-install.mjs",
-      "repository": "development/api/scripts/pnpm-install.mjs",
-      "sha256": "a83164e344c1947053def83b546be8115deaa827314bbaead7afe6b6451c5cdf",
-      "repository_sha256": "a83164e344c1947053def83b546be8115deaa827314bbaead7afe6b6451c5cdf"
-    },
-    {
-      "original": "app/echoing-green-api/scripts/run-framework.mjs",
-      "repository": "development/api/scripts/run-framework.mjs",
-      "sha256": "9bf9f41a29314cabe0238b8e9c540ec3f7b5a6adafc7c8fb6c3940722d061dca",
-      "repository_sha256": "9bf9f41a29314cabe0238b8e9c540ec3f7b5a6adafc7c8fb6c3940722d061dca"
-    },
-    {
-      "original": "app/echoing-green-api/scripts/sites-env.mjs",
-      "repository": "development/api/scripts/sites-env.mjs",
-      "sha256": "21d7bde6acb9f716287e652c1b0e43ae4803d79be367ca2192fcba14740b5338",
-      "repository_sha256": "21d7bde6acb9f716287e652c1b0e43ae4803d79be367ca2192fcba14740b5338"
-    },
-    {
-      "original": "app/echoing-green-api/scripts/sites-env.sh",
-      "repository": "development/api/scripts/sites-env.sh",
-      "sha256": "d18af7b222db748c9de257d5955b9d7f77ec350dab6321f114f0bc44c20388ac",
-      "repository_sha256": "d18af7b222db748c9de257d5955b9d7f77ec350dab6321f114f0bc44c20388ac"
-    },
-    {
-      "original": "app/echoing-green-api/scripts/tool-environment.mjs",
-      "repository": "development/api/scripts/tool-environment.mjs",
-      "sha256": "6da99286e0eb7905595ca851e68983bedf94a0f93814819d61f2b1f3a0342ba2",
-      "repository_sha256": "6da99286e0eb7905595ca851e68983bedf94a0f93814819d61f2b1f3a0342ba2"
-    },
-    {
-      "original": "app/echoing-green-api/scripts/vite/connector-preview-plugin.mjs",
-      "repository": "development/api/scripts/vite/connector-preview-plugin.mjs",
-      "sha256": "a6a9fe2086e302f94a3f91e3c1a68a45bb3aa07d4a79faf01b14732191eb4e80",
-      "repository_sha256": "a6a9fe2086e302f94a3f91e3c1a68a45bb3aa07d4a79faf01b14732191eb4e80"
-    },
-    {
-      "original": "app/echoing-green-api/scripts/vite/sites-vite-plugin.LICENSE",
-      "repository": "development/api/scripts/vite/sites-vite-plugin.LICENSE",
-      "sha256": "7de1e115d165f176e68f962acdb809b5ab8d8ae78d3981e0701392b2ac50c713",
-      "repository_sha256": "7de1e115d165f176e68f962acdb809b5ab8d8ae78d3981e0701392b2ac50c713"
-    },
-    {
-      "original": "app/echoing-green-api/scripts/vite/sites-vite-plugin.ts",
-      "repository": "development/api/scripts/vite/sites-vite-plugin.ts",
-      "sha256": "07af20e7097d9ed1d76f7c446d02997550b8fc5ca89668b249e25eabd62c6834",
-      "repository_sha256": "07af20e7097d9ed1d76f7c446d02997550b8fc5ca89668b249e25eabd62c6834"
-    },
-    {
-      "original": "app/echoing-green-api/server/decision-core.mjs",
-      "repository": "development/api/server/decision-core.mjs",
-      "sha256": "6535cea18b5e979616a91abb5ad1f5745c99860da606f65e38e84cc1fe4279c0",
-      "repository_sha256": "6535cea18b5e979616a91abb5ad1f5745c99860da606f65e38e84cc1fe4279c0"
-    },
-    {
-      "original": "app/echoing-green-api/server/gateway.mjs",
-      "repository": "development/api/server/gateway.mjs",
-      "sha256": "311e01f37614d5219a10eb9506828681309576b1ed3299b9ed05f6bfdfc3bf10",
-      "repository_sha256": "311e01f37614d5219a10eb9506828681309576b1ed3299b9ed05f6bfdfc3bf10"
-    },
-    {
-      "original": "app/echoing-green-api/tests/explicit-scenes.test.mjs",
-      "repository": "development/api/tests/explicit-scenes.test.mjs",
-      "sha256": "fd28d5967218f960d2ab36553f233fd1b804a38686956c081de03dba18693811",
-      "repository_sha256": "fd28d5967218f960d2ab36553f233fd1b804a38686956c081de03dba18693811"
-    },
-    {
-      "original": "app/echoing-green-api/tests/gateway.test.mjs",
-      "repository": "development/api/tests/gateway.test.mjs",
-      "sha256": "98aa233664543456afa2976109ae9db6f23b87f0658b4ed4b9acf2ed2df59467",
-      "repository_sha256": "98aa233664543456afa2976109ae9db6f23b87f0658b4ed4b9acf2ed2df59467"
-    },
-    {
-      "original": "app/echoing-green-api/tests/semantic-composition.test.mjs",
-      "repository": "development/api/tests/semantic-composition.test.mjs",
-      "sha256": "b404d867453b73720ead2574a5c13265390de0d9d402b68db83590b231afc24f",
-      "repository_sha256": "b404d867453b73720ead2574a5c13265390de0d9d402b68db83590b231afc24f"
-    },
-    {
-      "original": "app/echoing-green-api/tests/semantic-generalization.test.mjs",
-      "repository": "development/api/tests/semantic-generalization.test.mjs",
-      "sha256": "095a4524df24393abb1b4f997dd0d77625447aaaa91ffbe80ba4b076fbeabc55",
-      "repository_sha256": "095a4524df24393abb1b4f997dd0d77625447aaaa91ffbe80ba4b076fbeabc55"
-    },
-    {
-      "original": "app/echoing-green-api/tsconfig.json",
-      "repository": "development/api/tsconfig.json",
-      "sha256": "a4c1cc83b63ef9d39641d3babaefffa063dccbbc93338e18017b5013d713163e",
-      "repository_sha256": "a4c1cc83b63ef9d39641d3babaefffa063dccbbc93338e18017b5013d713163e"
-    },
-    {
-      "original": "app/echoing-green-api/vendor/shadcn-tailwind-4.13.0.LICENSE.md",
-      "repository": "development/api/vendor/shadcn-tailwind-4.13.0.LICENSE.md",
-      "sha256": "1564074e13439397221ffd522e2e504d56561994a23d371aa5e3ad43e4f5423f",
-      "repository_sha256": "1564074e13439397221ffd522e2e504d56561994a23d371aa5e3ad43e4f5423f"
-    },
-    {
-      "original": "app/echoing-green-api/vendor/shadcn-tailwind-4.13.0.css",
-      "repository": "development/api/vendor/shadcn-tailwind-4.13.0.css",
-      "sha256": "bc7d83425702955b4cb67cb14ede9d603f9d912376d57a2d81d661094d2a782a",
-      "repository_sha256": "bc7d83425702955b4cb67cb14ede9d603f9d912376d57a2d81d661094d2a782a"
-    },
-    {
-      "original": "app/echoing-green-api/vite.config.ts",
-      "repository": "development/api/vite.config.ts",
-      "sha256": "22ff558b1636d251e076f74c1697c7166079861667af10922d6bc505cb8f8290",
-      "repository_sha256": "22ff558b1636d251e076f74c1697c7166079861667af10922d6bc505cb8f8290"
-    },
-    {
-      "original": "app/echoing-green-api/worker/index.ts",
-      "repository": "development/api/worker/index.ts",
-      "sha256": "245f56fd6367a03c52892b1bdd190eb7a3a6440c9eacc3650e64a9a5f34fb872",
-      "repository_sha256": "245f56fd6367a03c52892b1bdd190eb7a3a6440c9eacc3650e64a9a5f34fb872"
-    },
-    {
       "original": "work/art-cp13/export_web_asset.py",
       "repository": "development/work/art-cp13/export_web_asset.py",
       "sha256": "5532a9c84dddc93b2a5abb552e0d274b412b88f89c29d3f25755e57d701a8dc8",
@@ -13531,6 +12655,1704 @@
       "repository": "development/work/runtime-cp44/prepare-public.py",
       "sha256": "6a0b53abfbbdbef322b57d0a963df11ffc41a9718e95c6a6cf04b68b7cd783f3",
       "repository_sha256": "fadd4d36e5f40073fb9bb0234a1d2a8766aa7f94e8823f04f2bb145f03183b99"
+    },
+    {
+      "original": "app/runtime-cp45/src/neighborhood-world.mjs",
+      "repository": "development/app/runtime-cp45/src/neighborhood-world.mjs",
+      "sha256": "44fe421d84f5a8e4257e920c1f4700813d14b74a1359ef29f05196a7badfefa1",
+      "repository_sha256": "44fe421d84f5a8e4257e920c1f4700813d14b74a1359ef29f05196a7badfefa1"
+    },
+    {
+      "original": "app/runtime-cp45/src/cadence.mjs",
+      "repository": "development/app/runtime-cp45/src/cadence.mjs",
+      "sha256": "8a15769d627d9839e275f57bae1bf499eb534fd7e913eda98846f55667035db5",
+      "repository_sha256": "8a15769d627d9839e275f57bae1bf499eb534fd7e913eda98846f55667035db5"
+    },
+    {
+      "original": "app/runtime-cp45/src/reaction-feedback.mjs",
+      "repository": "development/app/runtime-cp45/src/reaction-feedback.mjs",
+      "sha256": "32eba1d827aa283d1313b742c01b5c9df76a79f1269b8bf6fe7274694b46c1d8",
+      "repository_sha256": "32eba1d827aa283d1313b742c01b5c9df76a79f1269b8bf6fe7274694b46c1d8"
+    },
+    {
+      "original": "app/runtime-cp45/src/group-layout.mjs",
+      "repository": "development/app/runtime-cp45/src/group-layout.mjs",
+      "sha256": "d51bbea436600d7c9b85c4797ed8199b39ebdaa92a99fa9f2d13621da872c64b",
+      "repository_sha256": "d51bbea436600d7c9b85c4797ed8199b39ebdaa92a99fa9f2d13621da872c64b"
+    },
+    {
+      "original": "app/runtime-cp45/src/sound-cues.mjs",
+      "repository": "development/app/runtime-cp45/src/sound-cues.mjs",
+      "sha256": "454b750447d2ad03998af5f2f65b6c906336e716d2d8714afc1f8a4a2cffcad4",
+      "repository_sha256": "454b750447d2ad03998af5f2f65b6c906336e716d2d8714afc1f8a4a2cffcad4"
+    },
+    {
+      "original": "app/runtime-cp45/src/response-markers.mjs",
+      "repository": "development/app/runtime-cp45/src/response-markers.mjs",
+      "sha256": "76ee57e614983b6f993965bff8d780e21c74e1b90d142488a5599e4a5c475d12",
+      "repository_sha256": "76ee57e614983b6f993965bff8d780e21c74e1b90d142488a5599e4a5c475d12"
+    },
+    {
+      "original": "app/runtime-cp45/src/group-view.mjs",
+      "repository": "development/app/runtime-cp45/src/group-view.mjs",
+      "sha256": "ef992b04897b2928f425258f7ae1f893c407592f44114d875354599424e6a4a3",
+      "repository_sha256": "ef992b04897b2928f425258f7ae1f893c407592f44114d875354599424e6a4a3"
+    },
+    {
+      "original": "app/runtime-cp45/src/fox-view.mjs",
+      "repository": "development/app/runtime-cp45/src/fox-view.mjs",
+      "sha256": "626f55fd3952456b9596056209be3e18b3771119ad7c83584bc45d87bcad21f7",
+      "repository_sha256": "626f55fd3952456b9596056209be3e18b3771119ad7c83584bc45d87bcad21f7"
+    },
+    {
+      "original": "app/runtime-cp45/src/explicit-scenes.mjs",
+      "repository": "development/app/runtime-cp45/src/explicit-scenes.mjs",
+      "sha256": "2d1180faeba1ce3d05aa8b34004d3f159a072e1c313ace130df0fc7417716cd8",
+      "repository_sha256": "2d1180faeba1ce3d05aa8b34004d3f159a072e1c313ace130df0fc7417716cd8"
+    },
+    {
+      "original": "app/runtime-cp45/src/town-response.mjs",
+      "repository": "development/app/runtime-cp45/src/town-response.mjs",
+      "sha256": "2f35f8714029a0d0dee6df41b9fcc4f13342d50051615154cff880a5f72ab46d",
+      "repository_sha256": "2f35f8714029a0d0dee6df41b9fcc4f13342d50051615154cff880a5f72ab46d"
+    },
+    {
+      "original": "app/runtime-cp45/src/scene-events.mjs",
+      "repository": "development/app/runtime-cp45/src/scene-events.mjs",
+      "sha256": "d124fb99f1d9dbedccfbbe83ada0614016221aa176e1a4855b8439b30e7eb454",
+      "repository_sha256": "d124fb99f1d9dbedccfbbe83ada0614016221aa176e1a4855b8439b30e7eb454"
+    },
+    {
+      "original": "app/runtime-cp45/src/response-signals.mjs",
+      "repository": "development/app/runtime-cp45/src/response-signals.mjs",
+      "sha256": "600f2be6cce2b31525770f4a90b421647b5cf52604ebbbc45284f1521fb020c6",
+      "repository_sha256": "600f2be6cce2b31525770f4a90b421647b5cf52604ebbbc45284f1521fb020c6"
+    },
+    {
+      "original": "app/runtime-cp45/src/i18n.mjs",
+      "repository": "development/app/runtime-cp45/src/i18n.mjs",
+      "sha256": "6301eb946a2beef4ba4cc0f7919e0f040af0cbc9207a464607cb0ee60c33e0a1",
+      "repository_sha256": "6301eb946a2beef4ba4cc0f7919e0f040af0cbc9207a464607cb0ee60c33e0a1"
+    },
+    {
+      "original": "app/runtime-cp45/src/resident-wardrobe.mjs",
+      "repository": "development/app/runtime-cp45/src/resident-wardrobe.mjs",
+      "sha256": "c2569c1b893a72e605ffed0b5e2857e0d39771829dbc9405924db649d6be6f99",
+      "repository_sha256": "c2569c1b893a72e605ffed0b5e2857e0d39771829dbc9405924db649d6be6f99"
+    },
+    {
+      "original": "app/runtime-cp45/src/art-direction.mjs",
+      "repository": "development/app/runtime-cp45/src/art-direction.mjs",
+      "sha256": "df803e51e8a346bdf746a8d516679f2f6c61a2e09081f81f53dff2ab343349cc",
+      "repository_sha256": "df803e51e8a346bdf746a8d516679f2f6c61a2e09081f81f53dff2ab343349cc"
+    },
+    {
+      "original": "app/runtime-cp45/src/boat-view.mjs",
+      "repository": "development/app/runtime-cp45/src/boat-view.mjs",
+      "sha256": "a5ffd72944b28d3516b708dd9d66c3cf68024ccda502625da73b0305a6101243",
+      "repository_sha256": "a5ffd72944b28d3516b708dd9d66c3cf68024ccda502625da73b0305a6101243"
+    },
+    {
+      "original": "app/runtime-cp45/src/action-availability.mjs",
+      "repository": "development/app/runtime-cp45/src/action-availability.mjs",
+      "sha256": "bb03c88ba585e0b1d50df9ba01b655e5c99b12bd6422867b5bda6b5f7b18cf83",
+      "repository_sha256": "bb03c88ba585e0b1d50df9ba01b655e5c99b12bd6422867b5bda6b5f7b18cf83"
+    },
+    {
+      "original": "app/runtime-cp45/src/motion.mjs",
+      "repository": "development/app/runtime-cp45/src/motion.mjs",
+      "sha256": "32786121effdfc7a507442a37206e01adb5a58479b96d1f70efdfff45a90a416",
+      "repository_sha256": "32786121effdfc7a507442a37206e01adb5a58479b96d1f70efdfff45a90a416"
+    },
+    {
+      "original": "app/runtime-cp45/src/view-director.mjs",
+      "repository": "development/app/runtime-cp45/src/view-director.mjs",
+      "sha256": "893eb98fb068bc59aa27a3e3ce20b0a39bb709777eb1ecd81e0495f1d2cc6a81",
+      "repository_sha256": "893eb98fb068bc59aa27a3e3ce20b0a39bb709777eb1ecd81e0495f1d2cc6a81"
+    },
+    {
+      "original": "app/runtime-cp45/src/craft-english.mjs",
+      "repository": "development/app/runtime-cp45/src/craft-english.mjs",
+      "sha256": "aa2d25a9e14b8a11975240207f40879392cda09becab9aaf27775b056e7581b7",
+      "repository_sha256": "aa2d25a9e14b8a11975240207f40879392cda09becab9aaf27775b056e7581b7"
+    },
+    {
+      "original": "app/runtime-cp45/src/event-sfx.mjs",
+      "repository": "development/app/runtime-cp45/src/event-sfx.mjs",
+      "sha256": "80b0555ac33e45896d6760b75f9fb72a1325d2e779ef54ed4411e23efb927977",
+      "repository_sha256": "80b0555ac33e45896d6760b75f9fb72a1325d2e779ef54ed4411e23efb927977"
+    },
+    {
+      "original": "app/runtime-cp45/src/paper-world.mjs",
+      "repository": "development/app/runtime-cp45/src/paper-world.mjs",
+      "sha256": "737198f7aaa192e367369056a98223542746b220865072054249a06b370cb4a8",
+      "repository_sha256": "737198f7aaa192e367369056a98223542746b220865072054249a06b370cb4a8"
+    },
+    {
+      "original": "app/runtime-cp45/src/firework-timbre.mjs",
+      "repository": "development/app/runtime-cp45/src/firework-timbre.mjs",
+      "sha256": "aaca5baf18b57436f35e9ada9c285d311695e7d432a7c30ef4297cfd35102915",
+      "repository_sha256": "aaca5baf18b57436f35e9ada9c285d311695e7d432a7c30ef4297cfd35102915"
+    },
+    {
+      "original": "app/runtime-cp45/src/boat-world.mjs",
+      "repository": "development/app/runtime-cp45/src/boat-world.mjs",
+      "sha256": "c2380b686b703d75c847f4bbf5f6876d27da25ad1515225b6bf7e33d191365b3",
+      "repository_sha256": "c2380b686b703d75c847f4bbf5f6876d27da25ad1515225b6bf7e33d191365b3"
+    },
+    {
+      "original": "app/runtime-cp45/src/interaction-sequence.mjs",
+      "repository": "development/app/runtime-cp45/src/interaction-sequence.mjs",
+      "sha256": "77c5959d435fee5f5b95fe8c42158d38fc78812b5a0ecbb7e6553ddd3a164c1d",
+      "repository_sha256": "77c5959d435fee5f5b95fe8c42158d38fc78812b5a0ecbb7e6553ddd3a164c1d"
+    },
+    {
+      "original": "app/runtime-cp45/src/foot-support.mjs",
+      "repository": "development/app/runtime-cp45/src/foot-support.mjs",
+      "sha256": "e366b3cce1d078686b8953c852046a582206bd714920c056c11629a184e74fbb",
+      "repository_sha256": "e366b3cce1d078686b8953c852046a582206bd714920c056c11629a184e74fbb"
+    },
+    {
+      "original": "app/runtime-cp45/src/life-plans.mjs",
+      "repository": "development/app/runtime-cp45/src/life-plans.mjs",
+      "sha256": "e33c5f9b9306f4fe1b9b258b9d6f9bc8a95d4dbc530101b7ec66ae2e007486e8",
+      "repository_sha256": "e33c5f9b9306f4fe1b9b258b9d6f9bc8a95d4dbc530101b7ec66ae2e007486e8"
+    },
+    {
+      "original": "app/runtime-cp45/src/firework-score.mjs",
+      "repository": "development/app/runtime-cp45/src/firework-score.mjs",
+      "sha256": "2cead36845561e5ba535b8e3fd87a75126f353379316836039d3143c0c279f68",
+      "repository_sha256": "2cead36845561e5ba535b8e3fd87a75126f353379316836039d3143c0c279f68"
+    },
+    {
+      "original": "app/runtime-cp45/src/wish-suggestions.mjs",
+      "repository": "development/app/runtime-cp45/src/wish-suggestions.mjs",
+      "sha256": "e6ace030635cbfb3cacfc59fb6b1e9428f1c730b37206fd902d135450b960f9a",
+      "repository_sha256": "e6ace030635cbfb3cacfc59fb6b1e9428f1c730b37206fd902d135450b960f9a"
+    },
+    {
+      "original": "app/runtime-cp45/src/resident-action-view.mjs",
+      "repository": "development/app/runtime-cp45/src/resident-action-view.mjs",
+      "sha256": "549bb78b0922cee2cba6a5ee4efc6833d2617175b68e928b56fbdc31b64f063f",
+      "repository_sha256": "549bb78b0922cee2cba6a5ee4efc6833d2617175b68e928b56fbdc31b64f063f"
+    },
+    {
+      "original": "app/runtime-cp45/src/fox-behavior.mjs",
+      "repository": "development/app/runtime-cp45/src/fox-behavior.mjs",
+      "sha256": "17a9d37b70a53f245fdb289559bea5f1060b6e5bbb444e1835187666b0cb7a8f",
+      "repository_sha256": "17a9d37b70a53f245fdb289559bea5f1060b6e5bbb444e1835187666b0cb7a8f"
+    },
+    {
+      "original": "app/runtime-cp45/src/deployment-config.mjs",
+      "repository": "development/app/runtime-cp45/src/deployment-config.mjs",
+      "sha256": "493cd0f38ec98d64f8398998230447aa627d218d409309b23134cd0d59725c59",
+      "repository_sha256": "493cd0f38ec98d64f8398998230447aa627d218d409309b23134cd0d59725c59"
+    },
+    {
+      "original": "app/runtime-cp45/src/prop-attachment.mjs",
+      "repository": "development/app/runtime-cp45/src/prop-attachment.mjs",
+      "sha256": "06dca8612fd4559590d33a22894d7d3895477f7c35bdbbbc88fa26509aaa32ee",
+      "repository_sha256": "06dca8612fd4559590d33a22894d7d3895477f7c35bdbbbc88fa26509aaa32ee"
+    },
+    {
+      "original": "app/runtime-cp45/src/navigation.mjs",
+      "repository": "development/app/runtime-cp45/src/navigation.mjs",
+      "sha256": "69e4705ed8403f1f755c64525e6ff44e8e4c317131f36a98b9f22ee98b88274e",
+      "repository_sha256": "69e4705ed8403f1f755c64525e6ff44e8e4c317131f36a98b9f22ee98b88274e"
+    },
+    {
+      "original": "app/runtime-cp45/src/intent-view.mjs",
+      "repository": "development/app/runtime-cp45/src/intent-view.mjs",
+      "sha256": "c1d009bc9ba9dcfed4ce2688d7fcc519b8457644d74d6f2070000d3ee6b4a379",
+      "repository_sha256": "c1d009bc9ba9dcfed4ce2688d7fcc519b8457644d74d6f2070000d3ee6b4a379"
+    },
+    {
+      "original": "app/runtime-cp45/src/object-actions.mjs",
+      "repository": "development/app/runtime-cp45/src/object-actions.mjs",
+      "sha256": "a8c02912155cd2617bf58b914f205d38814610f61a4eade94bac8b06729a4dc8",
+      "repository_sha256": "a8c02912155cd2617bf58b914f205d38814610f61a4eade94bac8b06729a4dc8"
+    },
+    {
+      "original": "app/runtime-cp45/src/i18n-en.mjs",
+      "repository": "development/app/runtime-cp45/src/i18n-en.mjs",
+      "sha256": "ec4922baaad5883e603c38fe0fce6b8c2ba65ec54fbef236fc1d20af488c2b07",
+      "repository_sha256": "ec4922baaad5883e603c38fe0fce6b8c2ba65ec54fbef236fc1d20af488c2b07"
+    },
+    {
+      "original": "app/runtime-cp45/src/paper-view.mjs",
+      "repository": "development/app/runtime-cp45/src/paper-view.mjs",
+      "sha256": "6350db830fec73eb540ef0e32ba36cf29abc93e902ff6590a44b3cf2801c5415",
+      "repository_sha256": "6350db830fec73eb540ef0e32ba36cf29abc93e902ff6590a44b3cf2801c5415"
+    },
+    {
+      "original": "app/runtime-cp45/src/resident-actions.mjs",
+      "repository": "development/app/runtime-cp45/src/resident-actions.mjs",
+      "sha256": "3d346b616062cb784de73b988f1852feb64e7ca90073a9cf266d16699efc8511",
+      "repository_sha256": "3d346b616062cb784de73b988f1852feb64e7ca90073a9cf266d16699efc8511"
+    },
+    {
+      "original": "app/runtime-cp45/src/event-space.mjs",
+      "repository": "development/app/runtime-cp45/src/event-space.mjs",
+      "sha256": "6f2986a7430e373362e67f144278292e3246efb17125cb77ba987b11abe1a454",
+      "repository_sha256": "6f2986a7430e373362e67f144278292e3246efb17125cb77ba987b11abe1a454"
+    },
+    {
+      "original": "app/runtime-cp45/src/small-props.mjs",
+      "repository": "development/app/runtime-cp45/src/small-props.mjs",
+      "sha256": "755e2532c269af6cca66cbced6a6bd5d170a60368c967dc66038299904f98ef6",
+      "repository_sha256": "755e2532c269af6cca66cbced6a6bd5d170a60368c967dc66038299904f98ef6"
+    },
+    {
+      "original": "app/runtime-cp45/src/group-crowd.mjs",
+      "repository": "development/app/runtime-cp45/src/group-crowd.mjs",
+      "sha256": "64b6ca7102413b7fd4165b2063f4a2d5d015f5e40a4cb84f9e3ecb5e823eba89",
+      "repository_sha256": "64b6ca7102413b7fd4165b2063f4a2d5d015f5e40a4cb84f9e3ecb5e823eba89"
+    },
+    {
+      "original": "app/runtime-cp45/src/fireworks.mjs",
+      "repository": "development/app/runtime-cp45/src/fireworks.mjs",
+      "sha256": "1d375258dd48cdf49e88bfe74390c4089480b93562d24b297032580f80b98ff1",
+      "repository_sha256": "1d375258dd48cdf49e88bfe74390c4089480b93562d24b297032580f80b98ff1"
+    },
+    {
+      "original": "app/runtime-cp45/src/catalog.mjs",
+      "repository": "development/app/runtime-cp45/src/catalog.mjs",
+      "sha256": "aeaaf7096cf617e04a3778cd87820916bbd524c6c72041cc08cdacd1ee91fbb1",
+      "repository_sha256": "aeaaf7096cf617e04a3778cd87820916bbd524c6c72041cc08cdacd1ee91fbb1"
+    },
+    {
+      "original": "app/runtime-cp45/src/lantern-view.mjs",
+      "repository": "development/app/runtime-cp45/src/lantern-view.mjs",
+      "sha256": "ed54d6bfd2752a895c8e00da3ff78a7928bf114c1bb683fa2272b311d0fa6ffc",
+      "repository_sha256": "ed54d6bfd2752a895c8e00da3ff78a7928bf114c1bb683fa2272b311d0fa6ffc"
+    },
+    {
+      "original": "app/runtime-cp45/src/local-cloud.mjs",
+      "repository": "development/app/runtime-cp45/src/local-cloud.mjs",
+      "sha256": "03c4cda4ccff75a50c8ad6bacbad2e0ff501885942b6c734d1d82b769327f1b5",
+      "repository_sha256": "03c4cda4ccff75a50c8ad6bacbad2e0ff501885942b6c734d1d82b769327f1b5"
+    },
+    {
+      "original": "app/runtime-cp45/src/life-view.mjs",
+      "repository": "development/app/runtime-cp45/src/life-view.mjs",
+      "sha256": "da8362c4f0f0c4dc6f2fab50500480e239b6c4386b2e3df605c79e007847c488",
+      "repository_sha256": "da8362c4f0f0c4dc6f2fab50500480e239b6c4386b2e3df605c79e007847c488"
+    },
+    {
+      "original": "app/runtime-cp45/src/environment-view.mjs",
+      "repository": "development/app/runtime-cp45/src/environment-view.mjs",
+      "sha256": "7ea10027caa8374843c7ee2a9cfbdb47c949a04df60b66c2cb1d0265f80da39d",
+      "repository_sha256": "7ea10027caa8374843c7ee2a9cfbdb47c949a04df60b66c2cb1d0265f80da39d"
+    },
+    {
+      "original": "app/runtime-cp45/src/event-design.mjs",
+      "repository": "development/app/runtime-cp45/src/event-design.mjs",
+      "sha256": "fdf97b2cd12be4af4dc5324c0e64c6bd9027f6113c4aaa8377e851d639e5b225",
+      "repository_sha256": "fdf97b2cd12be4af4dc5324c0e64c6bd9027f6113c4aaa8377e851d639e5b225"
+    },
+    {
+      "original": "app/runtime-cp45/src/arm-ik.mjs",
+      "repository": "development/app/runtime-cp45/src/arm-ik.mjs",
+      "sha256": "982aacb3cdcdbbff0a8d83624ef02c3c595907fbd71ed34229928706b0180bc4",
+      "repository_sha256": "982aacb3cdcdbbff0a8d83624ef02c3c595907fbd71ed34229928706b0180bc4"
+    },
+    {
+      "original": "app/runtime-cp45/src/local-walkers.mjs",
+      "repository": "development/app/runtime-cp45/src/local-walkers.mjs",
+      "sha256": "40372a8e08d003987cef9fa67929a5f7863b945be18b34938a23f399234e69a8",
+      "repository_sha256": "40372a8e08d003987cef9fa67929a5f7863b945be18b34938a23f399234e69a8"
+    },
+    {
+      "original": "app/runtime-cp45/src/passengers.mjs",
+      "repository": "development/app/runtime-cp45/src/passengers.mjs",
+      "sha256": "3698c3711107a49782ee63851eca720ca81b8561ba6288b0a0d8e24fc3b4b7f1",
+      "repository_sha256": "3698c3711107a49782ee63851eca720ca81b8561ba6288b0a0d8e24fc3b4b7f1"
+    },
+    {
+      "original": "app/runtime-cp45/src/reaction-plan.mjs",
+      "repository": "development/app/runtime-cp45/src/reaction-plan.mjs",
+      "sha256": "b2e0c42b831125a8bcc6d698cfe156232a28bdcbc718248d74814bfb9748e372",
+      "repository_sha256": "b2e0c42b831125a8bcc6d698cfe156232a28bdcbc718248d74814bfb9748e372"
+    },
+    {
+      "original": "app/runtime-cp45/src/atmosphere.mjs",
+      "repository": "development/app/runtime-cp45/src/atmosphere.mjs",
+      "sha256": "b9dfe54f05f42545c3ac35ee69f317b0d611299ec95ef09553848eae6b81d9b3",
+      "repository_sha256": "b9dfe54f05f42545c3ac35ee69f317b0d611299ec95ef09553848eae6b81d9b3"
+    },
+    {
+      "original": "app/runtime-cp45/src/simulation.mjs",
+      "repository": "development/app/runtime-cp45/src/simulation.mjs",
+      "sha256": "80185fa67b2b0b2b00d0ed616afe10e8476f8a8f0d0d0972459e7154603b11f7",
+      "repository_sha256": "80185fa67b2b0b2b00d0ed616afe10e8476f8a8f0d0d0972459e7154603b11f7"
+    },
+    {
+      "original": "app/runtime-cp45/src/event-props.mjs",
+      "repository": "development/app/runtime-cp45/src/event-props.mjs",
+      "sha256": "c2ff777936bfd29adb81e8742722f6c47bf6351214ad4ffad0e872ae198f5dc2",
+      "repository_sha256": "c2ff777936bfd29adb81e8742722f6c47bf6351214ad4ffad0e872ae198f5dc2"
+    },
+    {
+      "original": "app/runtime-cp45/src/neighborhood-labels.mjs",
+      "repository": "development/app/runtime-cp45/src/neighborhood-labels.mjs",
+      "sha256": "6113e317952a3136eb44ea13d9375324be187d0453a5079c1a19fbf19ce8aa24",
+      "repository_sha256": "6113e317952a3136eb44ea13d9375324be187d0453a5079c1a19fbf19ce8aa24"
+    },
+    {
+      "original": "app/runtime-cp45/src/style.css",
+      "repository": "development/app/runtime-cp45/src/style.css",
+      "sha256": "0f137c88a6667b60b1cb397022d03d26be59b0fda1f12762d9bd80a86466da8b",
+      "repository_sha256": "0f137c88a6667b60b1cb397022d03d26be59b0fda1f12762d9bd80a86466da8b"
+    },
+    {
+      "original": "app/runtime-cp45/src/main.mjs",
+      "repository": "development/app/runtime-cp45/src/main.mjs",
+      "sha256": "95e756dfa40e36d51290f2ac6f41427c0f326c29f5faa28b92c5aea6d5f3c813",
+      "repository_sha256": "95e756dfa40e36d51290f2ac6f41427c0f326c29f5faa28b92c5aea6d5f3c813"
+    },
+    {
+      "original": "app/runtime-cp45/src/input-session.mjs",
+      "repository": "development/app/runtime-cp45/src/input-session.mjs",
+      "sha256": "81081a763e23da76cdbc71e52c3d3358ed24157a576dbf43d9658d32f2073341",
+      "repository_sha256": "81081a763e23da76cdbc71e52c3d3358ed24157a576dbf43d9658d32f2073341"
+    },
+    {
+      "original": "app/runtime-cp45/src/lantern-scene.mjs",
+      "repository": "development/app/runtime-cp45/src/lantern-scene.mjs",
+      "sha256": "05eebe316103f8be3250b7908f42ab6b18db7c7439d24b0540c5a9f8cdb12d89",
+      "repository_sha256": "05eebe316103f8be3250b7908f42ab6b18db7c7439d24b0540c5a9f8cdb12d89"
+    },
+    {
+      "original": "app/runtime-cp45/src/event-travel.mjs",
+      "repository": "development/app/runtime-cp45/src/event-travel.mjs",
+      "sha256": "ee645fc5bbf6496457b8b99b323b5f570978148d481db9c7de62906ca230833a",
+      "repository_sha256": "ee645fc5bbf6496457b8b99b323b5f570978148d481db9c7de62906ca230833a"
+    },
+    {
+      "original": "app/runtime-cp45/src/explicit-intents.mjs",
+      "repository": "development/app/runtime-cp45/src/explicit-intents.mjs",
+      "sha256": "bc47972018271ffbe3f3dad645fc679d7bba3a8d6b9de8c2b643e03a680c0b6f",
+      "repository_sha256": "bc47972018271ffbe3f3dad645fc679d7bba3a8d6b9de8c2b643e03a680c0b6f"
+    },
+    {
+      "original": "app/runtime-cp45/src/actions.mjs",
+      "repository": "development/app/runtime-cp45/src/actions.mjs",
+      "sha256": "9abcf6e923f85e4d3e2b24d2bdb7760bdf350b09b3373cf520992db7cbdbaaf2",
+      "repository_sha256": "9abcf6e923f85e4d3e2b24d2bdb7760bdf350b09b3373cf520992db7cbdbaaf2"
+    },
+    {
+      "original": "app/runtime-cp45/src/presentation.mjs",
+      "repository": "development/app/runtime-cp45/src/presentation.mjs",
+      "sha256": "0a18106af79e4488a81ed380d43ba37a2a14161d4be02e8dd7d7f937a28f0857",
+      "repository_sha256": "0a18106af79e4488a81ed380d43ba37a2a14161d4be02e8dd7d7f937a28f0857"
+    },
+    {
+      "original": "app/runtime-cp45/src/snow-cover.mjs",
+      "repository": "development/app/runtime-cp45/src/snow-cover.mjs",
+      "sha256": "b9ce0527a589009d7c7c6bdb87e747247ffeb11e5b71ecd83ade80af1551b173",
+      "repository_sha256": "b9ce0527a589009d7c7c6bdb87e747247ffeb11e5b71ecd83ade80af1551b173"
+    },
+    {
+      "original": "app/runtime-cp45/src/craft-design.mjs",
+      "repository": "development/app/runtime-cp45/src/craft-design.mjs",
+      "sha256": "16774942450920986d8bdedc74b338d1bfe96ada0c80dc5af658185976fe67f2",
+      "repository_sha256": "16774942450920986d8bdedc74b338d1bfe96ada0c80dc5af658185976fe67f2"
+    },
+    {
+      "original": "app/runtime-cp45/src/chiptune-score.mjs",
+      "repository": "development/app/runtime-cp45/src/chiptune-score.mjs",
+      "sha256": "975aaec5cecc8edec8565d591811a0ae7ad1a5965cef80ca3d371aa96adf124b",
+      "repository_sha256": "975aaec5cecc8edec8565d591811a0ae7ad1a5965cef80ca3d371aa96adf124b"
+    },
+    {
+      "original": "app/runtime-cp45/src/community.mjs",
+      "repository": "development/app/runtime-cp45/src/community.mjs",
+      "sha256": "bdab364d9fa1c9fc6dd7e91089ffa969a09945ca12d42162d60576d29f427210",
+      "repository_sha256": "bdab364d9fa1c9fc6dd7e91089ffa969a09945ca12d42162d60576d29f427210"
+    },
+    {
+      "original": "app/runtime-cp45/src/neighborhood-view.mjs",
+      "repository": "development/app/runtime-cp45/src/neighborhood-view.mjs",
+      "sha256": "7f71aa5490cee94d526cb9629de70fc1d86910fc0a92a4d7185591f6165ff682",
+      "repository_sha256": "7f71aa5490cee94d526cb9629de70fc1d86910fc0a92a4d7185591f6165ff682"
+    },
+    {
+      "original": "app/runtime-cp45/src/quick-wishes.mjs",
+      "repository": "development/app/runtime-cp45/src/quick-wishes.mjs",
+      "sha256": "66ca741d891390ad0e1c6d80c56923b17ffa52f828f976ff06034f330d0fbbe8",
+      "repository_sha256": "66ca741d891390ad0e1c6d80c56923b17ffa52f828f976ff06034f330d0fbbe8"
+    },
+    {
+      "original": "app/runtime-cp45/src/diner-action-view.mjs",
+      "repository": "development/app/runtime-cp45/src/diner-action-view.mjs",
+      "sha256": "e7c5e41adef33500ba72ef552a98e2d90b8194c70fd4f6932295e5e4f59f509f",
+      "repository_sha256": "e7c5e41adef33500ba72ef552a98e2d90b8194c70fd4f6932295e5e4f59f509f"
+    },
+    {
+      "original": "app/runtime-cp45/src/event-travel-view.mjs",
+      "repository": "development/app/runtime-cp45/src/event-travel-view.mjs",
+      "sha256": "8bd5107c0c28865d18d7c54a8f05fae1c4f6cb056642aa70e37c1d1ffd7f021d",
+      "repository_sha256": "8bd5107c0c28865d18d7c54a8f05fae1c4f6cb056642aa70e37c1d1ffd7f021d"
+    },
+    {
+      "original": "app/runtime-cp45/src/train-journey.mjs",
+      "repository": "development/app/runtime-cp45/src/train-journey.mjs",
+      "sha256": "9996843c3c31c201011ac175ac0f095593046cd6ea2593e3fd31d0380deefde2",
+      "repository_sha256": "9996843c3c31c201011ac175ac0f095593046cd6ea2593e3fd31d0380deefde2"
+    },
+    {
+      "original": "app/runtime-cp45/src/craft-world.mjs",
+      "repository": "development/app/runtime-cp45/src/craft-world.mjs",
+      "sha256": "c9ff4e897b437f0c51f6d5011268a3c0a4b8fcc66b121ec2fe46db211810d642",
+      "repository_sha256": "c9ff4e897b437f0c51f6d5011268a3c0a4b8fcc66b121ec2fe46db211810d642"
+    },
+    {
+      "original": "app/runtime-cp45/src/craft-view.mjs",
+      "repository": "development/app/runtime-cp45/src/craft-view.mjs",
+      "sha256": "4c322cda0b9fc2ac1c39b54704fcd10c3d5b1d1f525ee79efa0a7d94f15e0128",
+      "repository_sha256": "4c322cda0b9fc2ac1c39b54704fcd10c3d5b1d1f525ee79efa0a7d94f15e0128"
+    },
+    {
+      "original": "app/runtime-cp45/src/passenger-view.mjs",
+      "repository": "development/app/runtime-cp45/src/passenger-view.mjs",
+      "sha256": "9de757222a4093fe64af945209e47b869cc290f0fc0f4952d8ec36664115b998",
+      "repository_sha256": "9de757222a4093fe64af945209e47b869cc290f0fc0f4952d8ec36664115b998"
+    },
+    {
+      "original": "app/runtime-cp45/src/local-cloud-view.mjs",
+      "repository": "development/app/runtime-cp45/src/local-cloud-view.mjs",
+      "sha256": "64626ee0102022921c31e3fded85b8af2d97938f83a2c122b0505523d1356279",
+      "repository_sha256": "64626ee0102022921c31e3fded85b8af2d97938f83a2c122b0505523d1356279"
+    },
+    {
+      "original": "app/runtime-cp45/src/fox-path.mjs",
+      "repository": "development/app/runtime-cp45/src/fox-path.mjs",
+      "sha256": "124893c4a3458934dbd9d324bfb285ac0d6a04dcb641e0d0a3619d1188d8b3a9",
+      "repository_sha256": "124893c4a3458934dbd9d324bfb285ac0d6a04dcb641e0d0a3619d1188d8b3a9"
+    },
+    {
+      "original": "app/runtime-cp45/src/object-action-view.mjs",
+      "repository": "development/app/runtime-cp45/src/object-action-view.mjs",
+      "sha256": "9f7831e8e83d6791b34eaf9ec15ac94ec158b6720081cb2abfd7afcbde328393",
+      "repository_sha256": "9f7831e8e83d6791b34eaf9ec15ac94ec158b6720081cb2abfd7afcbde328393"
+    },
+    {
+      "original": "app/runtime-cp45/src/sound.mjs",
+      "repository": "development/app/runtime-cp45/src/sound.mjs",
+      "sha256": "0d0aab910862ebb7e6d2aefa7c19abeb2022bfcbf80e8fe976dc8fa6bb4938cb",
+      "repository_sha256": "0d0aab910862ebb7e6d2aefa7c19abeb2022bfcbf80e8fe976dc8fa6bb4938cb"
+    },
+    {
+      "original": "app/runtime-cp45/src/celestial-phase.mjs",
+      "repository": "development/app/runtime-cp45/src/celestial-phase.mjs",
+      "sha256": "433c088aba69dd909a98505f41155c21d95d2c724472bbfbaa51d01116400d2b",
+      "repository_sha256": "433c088aba69dd909a98505f41155c21d95d2c724472bbfbaa51d01116400d2b"
+    },
+    {
+      "original": "app/runtime-cp45/tests/fox-naturalness.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/fox-naturalness.test.mjs",
+      "sha256": "86c10e838c4db118bca9e9c571acbb1ea9695b3dca75f6d9a1cb371d4071a370",
+      "repository_sha256": "86c10e838c4db118bca9e9c571acbb1ea9695b3dca75f6d9a1cb371d4071a370"
+    },
+    {
+      "original": "app/runtime-cp45/tests/core-depth.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/core-depth.test.mjs",
+      "sha256": "487a93b935281f6d0848dcce5c8c0f6eb52cda7148aa680f3f7c29e8e9fcba07",
+      "repository_sha256": "487a93b935281f6d0848dcce5c8c0f6eb52cda7148aa680f3f7c29e8e9fcba07"
+    },
+    {
+      "original": "app/runtime-cp45/tests/macro-confidence.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/macro-confidence.test.mjs",
+      "sha256": "393bd8c0a3f941a137d76161b5bda140931dfaa27cd6ff6cc016f14cbcb27270",
+      "repository_sha256": "393bd8c0a3f941a137d76161b5bda140931dfaa27cd6ff6cc016f14cbcb27270"
+    },
+    {
+      "original": "app/runtime-cp45/tests/response-v26.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/response-v26.test.mjs",
+      "sha256": "94526bfed725b02e5fecc7e55823e5b7fefaaf3e1e4e97c0848f94e84cd6819e",
+      "repository_sha256": "94526bfed725b02e5fecc7e55823e5b7fefaaf3e1e4e97c0848f94e84cd6819e"
+    },
+    {
+      "original": "app/runtime-cp45/tests/input-session.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/input-session.test.mjs",
+      "sha256": "6d56b8fe9b1781aaa13038a73ccd9048ad203eded933e5091ee60aa1be6f07f0",
+      "repository_sha256": "6d56b8fe9b1781aaa13038a73ccd9048ad203eded933e5091ee60aa1be6f07f0"
+    },
+    {
+      "original": "app/runtime-cp45/tests/collective-weather.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/collective-weather.test.mjs",
+      "sha256": "ac398feefe0fd7b515f7a2bfd1f72e21cdbf27918074ab82c083a25e3e99148e",
+      "repository_sha256": "ac398feefe0fd7b515f7a2bfd1f72e21cdbf27918074ab82c083a25e3e99148e"
+    },
+    {
+      "original": "app/runtime-cp45/tests/simulation.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/simulation.test.mjs",
+      "sha256": "0b32d839e6ac0c0057564dd9798820fa72a96d35dc8da0c1ae439e7660a1feb6",
+      "repository_sha256": "0b32d839e6ac0c0057564dd9798820fa72a96d35dc8da0c1ae439e7660a1feb6"
+    },
+    {
+      "original": "app/runtime-cp45/tests/actions.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/actions.test.mjs",
+      "sha256": "38deb9858ef7606d6c12f02b470eec9c134ef84e7c50c4d0ccf92fbffdad4650",
+      "repository_sha256": "38deb9858ef7606d6c12f02b470eec9c134ef84e7c50c4d0ccf92fbffdad4650"
+    },
+    {
+      "original": "app/runtime-cp45/tests/foot-support.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/foot-support.test.mjs",
+      "sha256": "e76c140be21148ac9c74f3e1f6ffca29ef8644ab785e3c0e24770f5d48cb8149",
+      "repository_sha256": "e76c140be21148ac9c74f3e1f6ffca29ef8644ab785e3c0e24770f5d48cb8149"
+    },
+    {
+      "original": "app/runtime-cp45/tests/motion.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/motion.test.mjs",
+      "sha256": "7236e5499d9e4f2e06d149cdfb3fe8ceccc80e2e9788e5a3f9e6a6f98a692837",
+      "repository_sha256": "7236e5499d9e4f2e06d149cdfb3fe8ceccc80e2e9788e5a3f9e6a6f98a692837"
+    },
+    {
+      "original": "app/runtime-cp45/tests/craft-life.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/craft-life.test.mjs",
+      "sha256": "33265c77af452c4d1aac7963e7d0e79627faae1572b21f677c44d60e4d04eadd",
+      "repository_sha256": "33265c77af452c4d1aac7963e7d0e79627faae1572b21f677c44d60e4d04eadd"
+    },
+    {
+      "original": "app/runtime-cp45/tests/free-text-feedback.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/free-text-feedback.test.mjs",
+      "sha256": "1fa7f35702514b4e154a7936d3963f99213204596d8711e8b36d592f41086cc2",
+      "repository_sha256": "1fa7f35702514b4e154a7936d3963f99213204596d8711e8b36d592f41086cc2"
+    },
+    {
+      "original": "app/runtime-cp45/tests/response-signals.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/response-signals.test.mjs",
+      "sha256": "3745e68b59115a55b34cd79e19c889d2a263b110a4055f94d2cf8268b4f10de3",
+      "repository_sha256": "3745e68b59115a55b34cd79e19c889d2a263b110a4055f94d2cf8268b4f10de3"
+    },
+    {
+      "original": "app/runtime-cp45/tests/semantic-composition.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/semantic-composition.test.mjs",
+      "sha256": "df1956f1e1bf39a58e0767d88e89524d54a7141b0c22b9429978c97340657006",
+      "repository_sha256": "df1956f1e1bf39a58e0767d88e89524d54a7141b0c22b9429978c97340657006"
+    },
+    {
+      "original": "app/runtime-cp45/tests/response-v25.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/response-v25.test.mjs",
+      "sha256": "cbd2b47b3e3951f5b56b1ae388bbbb64437e051bba2f40604c1ea57dcaafe96f",
+      "repository_sha256": "cbd2b47b3e3951f5b56b1ae388bbbb64437e051bba2f40604c1ea57dcaafe96f"
+    },
+    {
+      "original": "app/runtime-cp45/tests/sound-cues.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/sound-cues.test.mjs",
+      "sha256": "bcaaaf5d004f40dc61d4389c74b44bea8ac5e5f81f9b9285ba5f49c57bda55f9",
+      "repository_sha256": "bcaaaf5d004f40dc61d4389c74b44bea8ac5e5f81f9b9285ba5f49c57bda55f9"
+    },
+    {
+      "original": "app/runtime-cp45/tests/reaction.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/reaction.test.mjs",
+      "sha256": "d18cca96c99dbb9e7e8c07e3e51b0cd0e423a3adbe702693871e831ae9571c09",
+      "repository_sha256": "d18cca96c99dbb9e7e8c07e3e51b0cd0e423a3adbe702693871e831ae9571c09"
+    },
+    {
+      "original": "app/runtime-cp45/tests/neighborhood.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/neighborhood.test.mjs",
+      "sha256": "e49324df29a036e9450aa09b32edeb1bbae719b47804f0e91f852e1c51d3823d",
+      "repository_sha256": "e49324df29a036e9450aa09b32edeb1bbae719b47804f0e91f852e1c51d3823d"
+    },
+    {
+      "original": "app/runtime-cp45/tests/event-travel.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/event-travel.test.mjs",
+      "sha256": "4db144d6167052fd6dfb5d994bf66450392297bfc0784033f095a8d97384b6b0",
+      "repository_sha256": "4db144d6167052fd6dfb5d994bf66450392297bfc0784033f095a8d97384b6b0"
+    },
+    {
+      "original": "app/runtime-cp45/tests/paper-reuse.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/paper-reuse.test.mjs",
+      "sha256": "98c8185cf1f72acedf0ff72003e7a1758f35c26041c3de6dc7b6baf8087a69e3",
+      "repository_sha256": "98c8185cf1f72acedf0ff72003e7a1758f35c26041c3de6dc7b6baf8087a69e3"
+    },
+    {
+      "original": "app/runtime-cp45/tests/intent-runtime.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/intent-runtime.test.mjs",
+      "sha256": "5d6ec9a6e9bf6784c17742481e52331cc614ad2a6c62782393974975d177f6eb",
+      "repository_sha256": "5d6ec9a6e9bf6784c17742481e52331cc614ad2a6c62782393974975d177f6eb"
+    },
+    {
+      "original": "app/runtime-cp45/tests/view-framing.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/view-framing.test.mjs",
+      "sha256": "8f858a82fc83f0ae6d6fe2c39294d467612f069963386613fb9de1d0ef87df2a",
+      "repository_sha256": "8f858a82fc83f0ae6d6fe2c39294d467612f069963386613fb9de1d0ef87df2a"
+    },
+    {
+      "original": "app/runtime-cp45/tests/train-readiness.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/train-readiness.test.mjs",
+      "sha256": "7216745574624f75852cc2683f9b3e57706c2c7a333ec2bc63c8ef3af4cdc4b7",
+      "repository_sha256": "7216745574624f75852cc2683f9b3e57706c2c7a333ec2bc63c8ef3af4cdc4b7"
+    },
+    {
+      "original": "app/runtime-cp45/tests/live-save-upgrade.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/live-save-upgrade.test.mjs",
+      "sha256": "dfc21d229672af1f25ab467b64a4145fba4c514f27a8c796371b4ab101555205",
+      "repository_sha256": "dfc21d229672af1f25ab467b64a4145fba4c514f27a8c796371b4ab101555205"
+    },
+    {
+      "original": "app/runtime-cp45/tests/lantern-night.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/lantern-night.test.mjs",
+      "sha256": "87f8d74ecdffaae3f804cb70cd8c9cf4cd556362f6a83df8d5ed68f662fa0d5a",
+      "repository_sha256": "87f8d74ecdffaae3f804cb70cd8c9cf4cd556362f6a83df8d5ed68f662fa0d5a"
+    },
+    {
+      "original": "app/runtime-cp45/tests/scene-events.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/scene-events.test.mjs",
+      "sha256": "8c016d3e949e02fc0b848d12a4563c9749286fde4f344839ec5a03a5cc7326b3",
+      "repository_sha256": "8c016d3e949e02fc0b848d12a4563c9749286fde4f344839ec5a03a5cc7326b3"
+    },
+    {
+      "original": "app/runtime-cp45/tests/community.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/community.test.mjs",
+      "sha256": "ebf2338de93d192b2dedc8b643df1033d96d35aa79ebd29b0f47ce8326c824f2",
+      "repository_sha256": "ebf2338de93d192b2dedc8b643df1033d96d35aa79ebd29b0f47ce8326c824f2"
+    },
+    {
+      "original": "app/runtime-cp45/tests/explicit-scenes.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/explicit-scenes.test.mjs",
+      "sha256": "ba85bd8e4dd3e6af01000b204e17df1f854b6bfc04a72f5624d378fba9c6579f",
+      "repository_sha256": "ba85bd8e4dd3e6af01000b204e17df1f854b6bfc04a72f5624d378fba9c6579f"
+    },
+    {
+      "original": "app/runtime-cp45/tests/i18n-and-mood.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/i18n-and-mood.test.mjs",
+      "sha256": "12e673ff289abb3569e97f0cd8327dc51ef2d0a1071c9c4097071550e7bffd4f",
+      "repository_sha256": "12e673ff289abb3569e97f0cd8327dc51ef2d0a1071c9c4097071550e7bffd4f"
+    },
+    {
+      "original": "app/runtime-cp45/tests/firework-timbre.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/firework-timbre.test.mjs",
+      "sha256": "33a0268b0e28c3a65b0bbb5cbcd0fb1af551fd03ec92326bcdc9f1810fefc2b0",
+      "repository_sha256": "33a0268b0e28c3a65b0bbb5cbcd0fb1af551fd03ec92326bcdc9f1810fefc2b0"
+    },
+    {
+      "original": "app/runtime-cp45/tests/wish-suggestions.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/wish-suggestions.test.mjs",
+      "sha256": "43e1ac7bc814edcaac08724980411d0e18498ad61287fbb443eed7a30e709edb",
+      "repository_sha256": "43e1ac7bc814edcaac08724980411d0e18498ad61287fbb443eed7a30e709edb"
+    },
+    {
+      "original": "app/runtime-cp45/tests/rich-actions.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/rich-actions.test.mjs",
+      "sha256": "cefd27e4db18e6ce66411ab1015bd404a29991dce1fe1204015d494fad2ea9c2",
+      "repository_sha256": "cefd27e4db18e6ce66411ab1015bd404a29991dce1fe1204015d494fad2ea9c2"
+    },
+    {
+      "original": "app/runtime-cp45/tests/crowd-stability.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/crowd-stability.test.mjs",
+      "sha256": "1f2bd94a975f75ca4a1161882e475156c355587bb221cb869d9d720d7a4ba48b",
+      "repository_sha256": "1f2bd94a975f75ca4a1161882e475156c355587bb221cb869d9d720d7a4ba48b"
+    },
+    {
+      "original": "app/runtime-cp45/tests/default-preferences.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/default-preferences.test.mjs",
+      "sha256": "96b24e77abe19fb7aa55d4c7b41753aaf64a8ca6027bba025f6a7f9807c64b4b",
+      "repository_sha256": "96b24e77abe19fb7aa55d4c7b41753aaf64a8ca6027bba025f6a7f9807c64b4b"
+    },
+    {
+      "original": "app/runtime-cp45/tests/event-feedback.test.mjs",
+      "repository": "development/app/runtime-cp45/tests/event-feedback.test.mjs",
+      "sha256": "25b8f0474931d37756e939d085265ed88d602361e0734760b7d38499dd62a79b",
+      "repository_sha256": "25b8f0474931d37756e939d085265ed88d602361e0734760b7d38499dd62a79b"
+    },
+    {
+      "original": "app/runtime-cp45/tests/fixtures/macro-confidence-regressions.json",
+      "repository": "development/app/runtime-cp45/tests/fixtures/macro-confidence-regressions.json",
+      "sha256": "08ccc62145ec02f62b3af5f363be556a07443cbe352ffa6316d2ae59fd4cb72d",
+      "repository_sha256": "08ccc62145ec02f62b3af5f363be556a07443cbe352ffa6316d2ae59fd4cb72d"
+    },
+    {
+      "original": "app/runtime-cp45/tests/fixtures/ui-source-strings.json",
+      "repository": "development/app/runtime-cp45/tests/fixtures/ui-source-strings.json",
+      "sha256": "c3de886c8b3e56e9c84e0b2a8f048fddaded6b75c66d3322f23ec0584a3a429e",
+      "repository_sha256": "c3de886c8b3e56e9c84e0b2a8f048fddaded6b75c66d3322f23ec0584a3a429e"
+    },
+    {
+      "original": "app/runtime-cp45/scripts/build.mjs",
+      "repository": "development/app/runtime-cp45/scripts/build.mjs",
+      "sha256": "6e3b5291a9dfa18165b2ac1f88a226ace4670327668a7d44dd78a3e661f5ba24",
+      "repository_sha256": "6e3b5291a9dfa18165b2ac1f88a226ace4670327668a7d44dd78a3e661f5ba24"
+    },
+    {
+      "original": "app/runtime-cp45/package.json",
+      "repository": "development/app/runtime-cp45/package.json",
+      "sha256": "053edef3308482d287b287ec0706dc7d3fba992258e1bf0945c3fc7ff584eabc",
+      "repository_sha256": "6f1a12e7f74587578a4f74baf14f2fa58e926aaf43fb41478d036fdd4374d67f"
+    },
+    {
+      "original": "app/runtime-cp45/package-lock.json",
+      "repository": "development/app/runtime-cp45/package-lock.json",
+      "sha256": "c8cc0f25042102e428016a7dc6be183022a2fd89c66c13a1cc27e91d870083e4",
+      "repository_sha256": "c8cc0f25042102e428016a7dc6be183022a2fd89c66c13a1cc27e91d870083e4"
+    },
+    {
+      "original": "app/runtime-cp45/index.html",
+      "repository": "development/app/runtime-cp45/index.html",
+      "sha256": "7182056ff18afe2cafcb4695296712bb076635d4bbecb1b1d529956e611d7cdb",
+      "repository_sha256": "7182056ff18afe2cafcb4695296712bb076635d4bbecb1b1d529956e611d7cdb"
+    },
+    {
+      "original": "app/runtime-cp45/semantic-contract.json",
+      "repository": "development/app/runtime-cp45/semantic-contract.json",
+      "sha256": "8a26b07a3f1a76477ad62fa4158bb2e9f32d7445973527b9a258c684ec2d374a",
+      "repository_sha256": "8a26b07a3f1a76477ad62fa4158bb2e9f32d7445973527b9a258c684ec2d374a"
+    },
+    {
+      "original": "app/runtime-cp45/server.mjs",
+      "repository": "development/app/runtime-cp45/server.mjs",
+      "sha256": "5ef65478ff8bd5d1c1ef6cf8a30e4d0d0a359750aa22702834d205b07f784bf8",
+      "repository_sha256": "5ef65478ff8bd5d1c1ef6cf8a30e4d0d0a359750aa22702834d205b07f784bf8"
+    },
+    {
+      "original": "app/runtime-cp45/decision-api.mjs",
+      "repository": "development/app/runtime-cp45/decision-api.mjs",
+      "sha256": "cd31877f63caf10b3edb2e975a458dd22addb748e558236e50f566b107121a20",
+      "repository_sha256": "65fca9211860f26b2929c7163baba01bfe73534a4c2f88c23dccb16dde2cc580"
+    },
+    {
+      "original": "app/echoing-green-api/.gitignore",
+      "repository": "development/api/.gitignore",
+      "sha256": "5ca3c39bdc1288c108a1931b3f6bc5795464b6253e9457390617774259deed0c",
+      "repository_sha256": "5ca3c39bdc1288c108a1931b3f6bc5795464b6253e9457390617774259deed0c"
+    },
+    {
+      "original": "app/echoing-green-api/.npmrc",
+      "repository": "development/api/.npmrc",
+      "sha256": "a3909ac0447c469fda12c57374993be70f47ce73e49fd3124678c7c047f2214d",
+      "repository_sha256": "a3909ac0447c469fda12c57374993be70f47ce73e49fd3124678c7c047f2214d"
+    },
+    {
+      "original": "app/echoing-green-api/.openai/hosting.json",
+      "repository": "development/api/.openai/hosting.json",
+      "sha256": "cf7b03e2a7bd7790be3a89e792f71783d84ef8bf40eebcbbb1805bba6375785d",
+      "repository_sha256": "cf7b03e2a7bd7790be3a89e792f71783d84ef8bf40eebcbbb1805bba6375785d"
+    },
+    {
+      "original": "app/echoing-green-api/README.md",
+      "repository": "development/api/README.md",
+      "sha256": "10c03c52349fbb64149625bb6036a7507d120ecea34a9159d801fc3b67f0c73a",
+      "repository_sha256": "10c03c52349fbb64149625bb6036a7507d120ecea34a9159d801fc3b67f0c73a"
+    },
+    {
+      "original": "app/echoing-green-api/app/chatgpt-auth.ts",
+      "repository": "development/api/app/chatgpt-auth.ts",
+      "sha256": "4265a2e7c2dcb3a6f4b7026f762bf5b6e4caec76cc13c0a45987ee9a9f2e42cc",
+      "repository_sha256": "4265a2e7c2dcb3a6f4b7026f762bf5b6e4caec76cc13c0a45987ee9a9f2e42cc"
+    },
+    {
+      "original": "app/echoing-green-api/app/globals.css",
+      "repository": "development/api/app/globals.css",
+      "sha256": "8546d9b115f0addd582f7ceaaa6b1c069310bcc77c43ee7b8acfe0020be3afd7",
+      "repository_sha256": "8546d9b115f0addd582f7ceaaa6b1c069310bcc77c43ee7b8acfe0020be3afd7"
+    },
+    {
+      "original": "app/echoing-green-api/app/layout.tsx",
+      "repository": "development/api/app/layout.tsx",
+      "sha256": "38437bc406fc88d1de22f762bbb30366fe4294ea4c0f42115b3bb6a69d40a21b",
+      "repository_sha256": "38437bc406fc88d1de22f762bbb30366fe4294ea4c0f42115b3bb6a69d40a21b"
+    },
+    {
+      "original": "app/echoing-green-api/app/page.tsx",
+      "repository": "development/api/app/page.tsx",
+      "sha256": "f166f380609546fb72cf795493124b3aa3048df8497b67b419ebfee5a5c417ef",
+      "repository_sha256": "f166f380609546fb72cf795493124b3aa3048df8497b67b419ebfee5a5c417ef"
+    },
+    {
+      "original": "app/echoing-green-api/cloudflare-env.d.ts",
+      "repository": "development/api/cloudflare-env.d.ts",
+      "sha256": "8b0eca84aa3364cc7ccc43cc3af6beb88dd34ebd410de08690bf094ce39fbcb0",
+      "repository_sha256": "8b0eca84aa3364cc7ccc43cc3af6beb88dd34ebd410de08690bf094ce39fbcb0"
+    },
+    {
+      "original": "app/echoing-green-api/components.json",
+      "repository": "development/api/components.json",
+      "sha256": "31f4ca67a4a62572571003d3d5aac85ee6fbfca67a192924bac6b168d95e98fd",
+      "repository_sha256": "31f4ca67a4a62572571003d3d5aac85ee6fbfca67a192924bac6b168d95e98fd"
+    },
+    {
+      "original": "app/echoing-green-api/components/connector-error.tsx",
+      "repository": "development/api/components/connector-error.tsx",
+      "sha256": "2d0d04559952ce9c9a327cca499f4b99f35d885cccfce375230e116695d3f155",
+      "repository_sha256": "2d0d04559952ce9c9a327cca499f4b99f35d885cccfce375230e116695d3f155"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/accordion.tsx",
+      "repository": "development/api/components/ui/accordion.tsx",
+      "sha256": "a4f153089ba886dfcf73fac26b5c01ca933fa12fbe88df6fb723912bfffdfbb0",
+      "repository_sha256": "a4f153089ba886dfcf73fac26b5c01ca933fa12fbe88df6fb723912bfffdfbb0"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/alert-dialog.tsx",
+      "repository": "development/api/components/ui/alert-dialog.tsx",
+      "sha256": "9a8d950f2b9b4352d5ebb762fb44d5c28c2d353aa29712071973656a8736e311",
+      "repository_sha256": "9a8d950f2b9b4352d5ebb762fb44d5c28c2d353aa29712071973656a8736e311"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/alert.tsx",
+      "repository": "development/api/components/ui/alert.tsx",
+      "sha256": "2cc59b5f7bda91c1670884b1bf46bfc8a2a6f226cef184f5762acc037188885b",
+      "repository_sha256": "2cc59b5f7bda91c1670884b1bf46bfc8a2a6f226cef184f5762acc037188885b"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/aspect-ratio.tsx",
+      "repository": "development/api/components/ui/aspect-ratio.tsx",
+      "sha256": "b1c157886236782cb92d8fbcd4749532aaf6d8aabefd6e157ca40358f902f407",
+      "repository_sha256": "b1c157886236782cb92d8fbcd4749532aaf6d8aabefd6e157ca40358f902f407"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/attachment.tsx",
+      "repository": "development/api/components/ui/attachment.tsx",
+      "sha256": "ae8a25dd1a896d3964e3ef54d97e51221b418cde287dfd794428b89951c5c790",
+      "repository_sha256": "ae8a25dd1a896d3964e3ef54d97e51221b418cde287dfd794428b89951c5c790"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/avatar.tsx",
+      "repository": "development/api/components/ui/avatar.tsx",
+      "sha256": "58a846bf1617b94b9681921db9b8461d0145f311424663d11678a06b6153cb34",
+      "repository_sha256": "58a846bf1617b94b9681921db9b8461d0145f311424663d11678a06b6153cb34"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/badge.tsx",
+      "repository": "development/api/components/ui/badge.tsx",
+      "sha256": "46a0de5224f6a5d5d63d45246534288518dce888f031064bff925bbc7fe6ad97",
+      "repository_sha256": "46a0de5224f6a5d5d63d45246534288518dce888f031064bff925bbc7fe6ad97"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/breadcrumb.tsx",
+      "repository": "development/api/components/ui/breadcrumb.tsx",
+      "sha256": "d4c0831bba2212e778248f54a6ace6ef378df8bba4616d1abf27787a31eabae5",
+      "repository_sha256": "d4c0831bba2212e778248f54a6ace6ef378df8bba4616d1abf27787a31eabae5"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/bubble.tsx",
+      "repository": "development/api/components/ui/bubble.tsx",
+      "sha256": "870cc0c5cfc8a515053f7e41e706a6bd017a909b45f1305fd3b164a52cc4483b",
+      "repository_sha256": "870cc0c5cfc8a515053f7e41e706a6bd017a909b45f1305fd3b164a52cc4483b"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/button-group.tsx",
+      "repository": "development/api/components/ui/button-group.tsx",
+      "sha256": "784c89d8ee683e1bc972ae69e6ea8225a7f63abe22aa1b5fc3423ae8a2a399c0",
+      "repository_sha256": "784c89d8ee683e1bc972ae69e6ea8225a7f63abe22aa1b5fc3423ae8a2a399c0"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/button.tsx",
+      "repository": "development/api/components/ui/button.tsx",
+      "sha256": "cc36af0f8b5019c33cc039fbf03bb952a513072b15b55b53c592b78af3e5f4c4",
+      "repository_sha256": "cc36af0f8b5019c33cc039fbf03bb952a513072b15b55b53c592b78af3e5f4c4"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/calendar.tsx",
+      "repository": "development/api/components/ui/calendar.tsx",
+      "sha256": "3855fbe0d3f8ad3a4b93071f98b76a9f6782d46ec8b05f5d2ddbee1e4e39bc84",
+      "repository_sha256": "3855fbe0d3f8ad3a4b93071f98b76a9f6782d46ec8b05f5d2ddbee1e4e39bc84"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/card.tsx",
+      "repository": "development/api/components/ui/card.tsx",
+      "sha256": "c48dd3b96be90a7066f1aebf294f0af9d00ebcdc367d5d4aca55429ade570c1c",
+      "repository_sha256": "c48dd3b96be90a7066f1aebf294f0af9d00ebcdc367d5d4aca55429ade570c1c"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/carousel.tsx",
+      "repository": "development/api/components/ui/carousel.tsx",
+      "sha256": "b7ea0dda3903d972c186f739e23da61f547bc83b5a0bf13b16856577846d5fc3",
+      "repository_sha256": "b7ea0dda3903d972c186f739e23da61f547bc83b5a0bf13b16856577846d5fc3"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/chart.tsx",
+      "repository": "development/api/components/ui/chart.tsx",
+      "sha256": "45aa5ea4a386f4fb5b8869ff4bab3a08cf89255190ee322043baf84c3e950b6a",
+      "repository_sha256": "45aa5ea4a386f4fb5b8869ff4bab3a08cf89255190ee322043baf84c3e950b6a"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/checkbox.tsx",
+      "repository": "development/api/components/ui/checkbox.tsx",
+      "sha256": "b23ab9d4deeedf2ac8f512c368361ede681aa383437ef48563a6f9b7dbe95f27",
+      "repository_sha256": "b23ab9d4deeedf2ac8f512c368361ede681aa383437ef48563a6f9b7dbe95f27"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/collapsible.tsx",
+      "repository": "development/api/components/ui/collapsible.tsx",
+      "sha256": "c6598e5584f4258b5d9fefadbc5ad6a66888ad58729f4b634a0bb2d9c513188b",
+      "repository_sha256": "c6598e5584f4258b5d9fefadbc5ad6a66888ad58729f4b634a0bb2d9c513188b"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/combobox.tsx",
+      "repository": "development/api/components/ui/combobox.tsx",
+      "sha256": "2d68e78b2dc7e38a085f222dede60a80b4f8229a6e91732c484605e204d46735",
+      "repository_sha256": "2d68e78b2dc7e38a085f222dede60a80b4f8229a6e91732c484605e204d46735"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/command.tsx",
+      "repository": "development/api/components/ui/command.tsx",
+      "sha256": "361193df1e3d64a9e9b5048f045264782fcb387aab3f00f2b805fdcbf538b16a",
+      "repository_sha256": "361193df1e3d64a9e9b5048f045264782fcb387aab3f00f2b805fdcbf538b16a"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/context-menu.tsx",
+      "repository": "development/api/components/ui/context-menu.tsx",
+      "sha256": "2cf1fcf59df0649a3e2a126d1df2f639145f6b6bf5689ee54af1f40ab1245017",
+      "repository_sha256": "2cf1fcf59df0649a3e2a126d1df2f639145f6b6bf5689ee54af1f40ab1245017"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/dialog.tsx",
+      "repository": "development/api/components/ui/dialog.tsx",
+      "sha256": "dce39c6adc47d997bd2567f8b7a72f466b0134715105cd42f9194007b8ecdb14",
+      "repository_sha256": "dce39c6adc47d997bd2567f8b7a72f466b0134715105cd42f9194007b8ecdb14"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/direction.tsx",
+      "repository": "development/api/components/ui/direction.tsx",
+      "sha256": "84ae2ad658207f0e0f367978e5508cd8027cd00c29c41d3d13db21a708c3d1e6",
+      "repository_sha256": "84ae2ad658207f0e0f367978e5508cd8027cd00c29c41d3d13db21a708c3d1e6"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/drawer.tsx",
+      "repository": "development/api/components/ui/drawer.tsx",
+      "sha256": "cb6eaf58eb0757ca91af284e5d925b89a42ad7eb19cb3f44c575a3487aa9350f",
+      "repository_sha256": "cb6eaf58eb0757ca91af284e5d925b89a42ad7eb19cb3f44c575a3487aa9350f"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/dropdown-menu.tsx",
+      "repository": "development/api/components/ui/dropdown-menu.tsx",
+      "sha256": "98f0dcdae38225b73734aceeb9213dd751fea2c72ea520df31003cd133deac8a",
+      "repository_sha256": "98f0dcdae38225b73734aceeb9213dd751fea2c72ea520df31003cd133deac8a"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/empty.tsx",
+      "repository": "development/api/components/ui/empty.tsx",
+      "sha256": "ae95bdcf367a076ae02e7925f14522a148798f72d9651749c6d55497dba584c0",
+      "repository_sha256": "ae95bdcf367a076ae02e7925f14522a148798f72d9651749c6d55497dba584c0"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/field.tsx",
+      "repository": "development/api/components/ui/field.tsx",
+      "sha256": "ba67d76f017ac059fc86cf8c344e0b2991c4322d3619e125498c19b87f6eefbd",
+      "repository_sha256": "ba67d76f017ac059fc86cf8c344e0b2991c4322d3619e125498c19b87f6eefbd"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/form.tsx",
+      "repository": "development/api/components/ui/form.tsx",
+      "sha256": "315b46bb75ab7d1c6061b5d750aa4bedf6e7a455e15e2d7f9182f053d5972b1e",
+      "repository_sha256": "315b46bb75ab7d1c6061b5d750aa4bedf6e7a455e15e2d7f9182f053d5972b1e"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/hover-card.tsx",
+      "repository": "development/api/components/ui/hover-card.tsx",
+      "sha256": "f5d8df42c59370ec14d61bcc54f7d68e9bb7dfa0d6a872b2f7cffc2aafbf23b8",
+      "repository_sha256": "f5d8df42c59370ec14d61bcc54f7d68e9bb7dfa0d6a872b2f7cffc2aafbf23b8"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/input-group.tsx",
+      "repository": "development/api/components/ui/input-group.tsx",
+      "sha256": "6afbd58fea4c438e6252dc4568bddc122e84ababead4ad5cee50ace01100c9a0",
+      "repository_sha256": "6afbd58fea4c438e6252dc4568bddc122e84ababead4ad5cee50ace01100c9a0"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/input-otp.tsx",
+      "repository": "development/api/components/ui/input-otp.tsx",
+      "sha256": "161946daa89f0eda2575b9271c0494e35807c4ffb55598a49f67160c17fec299",
+      "repository_sha256": "161946daa89f0eda2575b9271c0494e35807c4ffb55598a49f67160c17fec299"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/input.tsx",
+      "repository": "development/api/components/ui/input.tsx",
+      "sha256": "8c4612a7c41319ac5049daa3b34b080f9784b6245c17780eb87c127e58e473db",
+      "repository_sha256": "8c4612a7c41319ac5049daa3b34b080f9784b6245c17780eb87c127e58e473db"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/item.tsx",
+      "repository": "development/api/components/ui/item.tsx",
+      "sha256": "6e2144d6d87142dbbe56d568810bf546318c8aa661447ebb0d76ebbf382cb45f",
+      "repository_sha256": "6e2144d6d87142dbbe56d568810bf546318c8aa661447ebb0d76ebbf382cb45f"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/kbd.tsx",
+      "repository": "development/api/components/ui/kbd.tsx",
+      "sha256": "6088c3a5432338b1719c17e9b5d0e1fa74fd1f66060f248fc88909d33a82cd13",
+      "repository_sha256": "6088c3a5432338b1719c17e9b5d0e1fa74fd1f66060f248fc88909d33a82cd13"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/label.tsx",
+      "repository": "development/api/components/ui/label.tsx",
+      "sha256": "a476e41f08b9de5bd447de66a33d8bc2ad18f2fa6b96c064778bab4b6f439f4c",
+      "repository_sha256": "a476e41f08b9de5bd447de66a33d8bc2ad18f2fa6b96c064778bab4b6f439f4c"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/marker.tsx",
+      "repository": "development/api/components/ui/marker.tsx",
+      "sha256": "3d798763f094b2bb5e7ade2d5cd1b9bab498bc8ca7fd4cfaf4e5835bdedc34a0",
+      "repository_sha256": "3d798763f094b2bb5e7ade2d5cd1b9bab498bc8ca7fd4cfaf4e5835bdedc34a0"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/menubar.tsx",
+      "repository": "development/api/components/ui/menubar.tsx",
+      "sha256": "9243af8afcea03703398ccd1c2a8c0a87ad6cbaf2bd272fb609f5b79fe46aebb",
+      "repository_sha256": "9243af8afcea03703398ccd1c2a8c0a87ad6cbaf2bd272fb609f5b79fe46aebb"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/message-scroller.tsx",
+      "repository": "development/api/components/ui/message-scroller.tsx",
+      "sha256": "bb7660a248e4e9589c3816c7c1c199ea1381a70d2c8476ae895b567a7a4d86cf",
+      "repository_sha256": "bb7660a248e4e9589c3816c7c1c199ea1381a70d2c8476ae895b567a7a4d86cf"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/message.tsx",
+      "repository": "development/api/components/ui/message.tsx",
+      "sha256": "9d2952bf3b641081f09aa2739535e6bbd1be0a4946789752a2c20d8aaef43185",
+      "repository_sha256": "9d2952bf3b641081f09aa2739535e6bbd1be0a4946789752a2c20d8aaef43185"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/native-select.tsx",
+      "repository": "development/api/components/ui/native-select.tsx",
+      "sha256": "007516b111fca8c98a6c40c94ab91bb68cc5b52afce1ed1f5e510c3d86e7347c",
+      "repository_sha256": "007516b111fca8c98a6c40c94ab91bb68cc5b52afce1ed1f5e510c3d86e7347c"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/navigation-menu.tsx",
+      "repository": "development/api/components/ui/navigation-menu.tsx",
+      "sha256": "889d358a77de88e9cb6f39ea4895ea4c76eaf01d731b74e44f1c41e97a78a044",
+      "repository_sha256": "889d358a77de88e9cb6f39ea4895ea4c76eaf01d731b74e44f1c41e97a78a044"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/pagination.tsx",
+      "repository": "development/api/components/ui/pagination.tsx",
+      "sha256": "374ad135c3d4ff3ec080a0009cd9745cdd0e12faa89d2b0e86074f11e5127fd1",
+      "repository_sha256": "374ad135c3d4ff3ec080a0009cd9745cdd0e12faa89d2b0e86074f11e5127fd1"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/popover.tsx",
+      "repository": "development/api/components/ui/popover.tsx",
+      "sha256": "31c350309ff5d3034e6ecf1b0eda75ba8855bdbf987fc7ad6d71f0ef07c5a447",
+      "repository_sha256": "31c350309ff5d3034e6ecf1b0eda75ba8855bdbf987fc7ad6d71f0ef07c5a447"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/progress.tsx",
+      "repository": "development/api/components/ui/progress.tsx",
+      "sha256": "c8c26e8f5f041c3cdf4915347dc1d9c022f9448f149990fadcaf303e952fa57d",
+      "repository_sha256": "c8c26e8f5f041c3cdf4915347dc1d9c022f9448f149990fadcaf303e952fa57d"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/radio-group.tsx",
+      "repository": "development/api/components/ui/radio-group.tsx",
+      "sha256": "fe5ce39636d0818c2bf9c4eebddff893d1225fa2c81b5fa4bb8cbb39a8c913ce",
+      "repository_sha256": "fe5ce39636d0818c2bf9c4eebddff893d1225fa2c81b5fa4bb8cbb39a8c913ce"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/resizable.tsx",
+      "repository": "development/api/components/ui/resizable.tsx",
+      "sha256": "bc63958467aa00557c551bb0d96a5ae4c965c1e1ba2380e595949d933b132f7c",
+      "repository_sha256": "bc63958467aa00557c551bb0d96a5ae4c965c1e1ba2380e595949d933b132f7c"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/scroll-area.tsx",
+      "repository": "development/api/components/ui/scroll-area.tsx",
+      "sha256": "8bd9d986b2844c9a87de825c6de4787b6739b36c3dc9a05ccf3eb107160e4043",
+      "repository_sha256": "8bd9d986b2844c9a87de825c6de4787b6739b36c3dc9a05ccf3eb107160e4043"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/select.tsx",
+      "repository": "development/api/components/ui/select.tsx",
+      "sha256": "0b796a108a4eb5ba52d9ad938b7aea36dc56ae66c703a6d0a23dbc24f96daff3",
+      "repository_sha256": "0b796a108a4eb5ba52d9ad938b7aea36dc56ae66c703a6d0a23dbc24f96daff3"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/separator.tsx",
+      "repository": "development/api/components/ui/separator.tsx",
+      "sha256": "6da346505c8629a4668420d2a5ca48891383bbe0b0ceb14163537c671879427e",
+      "repository_sha256": "6da346505c8629a4668420d2a5ca48891383bbe0b0ceb14163537c671879427e"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/sheet.tsx",
+      "repository": "development/api/components/ui/sheet.tsx",
+      "sha256": "63863cf2df8f8973e52b3459ac9bdbf81be1262dbc70eb53d5271ffb03488e16",
+      "repository_sha256": "63863cf2df8f8973e52b3459ac9bdbf81be1262dbc70eb53d5271ffb03488e16"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/sidebar.tsx",
+      "repository": "development/api/components/ui/sidebar.tsx",
+      "sha256": "4a8d73e7730a2b1fcecfca31299ed26db65c2307b84197a59c6ec7c01c7ad28e",
+      "repository_sha256": "4a8d73e7730a2b1fcecfca31299ed26db65c2307b84197a59c6ec7c01c7ad28e"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/skeleton.tsx",
+      "repository": "development/api/components/ui/skeleton.tsx",
+      "sha256": "ba48dd5be5a6a1378bd4e011028654b5bf419f1e7d20ee4b9f8330c1264e7239",
+      "repository_sha256": "ba48dd5be5a6a1378bd4e011028654b5bf419f1e7d20ee4b9f8330c1264e7239"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/slider.tsx",
+      "repository": "development/api/components/ui/slider.tsx",
+      "sha256": "0e37484f4b416e79ac18c655cac961aefacf6e67085cfc2b320ea8af545635a3",
+      "repository_sha256": "0e37484f4b416e79ac18c655cac961aefacf6e67085cfc2b320ea8af545635a3"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/sonner.tsx",
+      "repository": "development/api/components/ui/sonner.tsx",
+      "sha256": "13ccc9b0fe4248e622f83a1d3b2f0566b72b5e04162d7d0c8db8945ecc71b55f",
+      "repository_sha256": "13ccc9b0fe4248e622f83a1d3b2f0566b72b5e04162d7d0c8db8945ecc71b55f"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/spinner.tsx",
+      "repository": "development/api/components/ui/spinner.tsx",
+      "sha256": "3e6e6e8d37fb4069f8e43e55318f8db06fbc36e6c8be0096da3c9337c1c798b9",
+      "repository_sha256": "3e6e6e8d37fb4069f8e43e55318f8db06fbc36e6c8be0096da3c9337c1c798b9"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/switch.tsx",
+      "repository": "development/api/components/ui/switch.tsx",
+      "sha256": "386d4d4deb39f34126f9700fe9bf5393d238485dd94018bba9d154dda84c62ae",
+      "repository_sha256": "386d4d4deb39f34126f9700fe9bf5393d238485dd94018bba9d154dda84c62ae"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/table.tsx",
+      "repository": "development/api/components/ui/table.tsx",
+      "sha256": "20e5a7f224959c6b75802995706a97e9da171f693d4b6b1b436388fcd9df96f3",
+      "repository_sha256": "20e5a7f224959c6b75802995706a97e9da171f693d4b6b1b436388fcd9df96f3"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/tabs.tsx",
+      "repository": "development/api/components/ui/tabs.tsx",
+      "sha256": "865d0194331b9b2be36723fa79d3575dc83078b4cb941cafee87cb72fc2cff46",
+      "repository_sha256": "865d0194331b9b2be36723fa79d3575dc83078b4cb941cafee87cb72fc2cff46"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/textarea.tsx",
+      "repository": "development/api/components/ui/textarea.tsx",
+      "sha256": "253cdeb487c73beaaccdf47fc163e36e7d5b7ae6ddf09a4f64998a109a112979",
+      "repository_sha256": "253cdeb487c73beaaccdf47fc163e36e7d5b7ae6ddf09a4f64998a109a112979"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/toggle-group.tsx",
+      "repository": "development/api/components/ui/toggle-group.tsx",
+      "sha256": "69f643e889e933f05c1439084480d8646f66a161c7d1cf0730ee926382ade35e",
+      "repository_sha256": "69f643e889e933f05c1439084480d8646f66a161c7d1cf0730ee926382ade35e"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/toggle.tsx",
+      "repository": "development/api/components/ui/toggle.tsx",
+      "sha256": "ba4d0b0a2b2fee75dc36dfc19e32082e721024b919050c97fd5dc70faa924e16",
+      "repository_sha256": "ba4d0b0a2b2fee75dc36dfc19e32082e721024b919050c97fd5dc70faa924e16"
+    },
+    {
+      "original": "app/echoing-green-api/components/ui/tooltip.tsx",
+      "repository": "development/api/components/ui/tooltip.tsx",
+      "sha256": "a0784eb77831a799fad7991df4f1b666f876201565a80175e1aa68733574a2e4",
+      "repository_sha256": "a0784eb77831a799fad7991df4f1b666f876201565a80175e1aa68733574a2e4"
+    },
+    {
+      "original": "app/echoing-green-api/db/index.ts",
+      "repository": "development/api/db/index.ts",
+      "sha256": "dc7610b00b918e0ffff1360a63626f16655ced3064b2eaf96095a4101fb14bcd",
+      "repository_sha256": "dc7610b00b918e0ffff1360a63626f16655ced3064b2eaf96095a4101fb14bcd"
+    },
+    {
+      "original": "app/echoing-green-api/db/schema.ts",
+      "repository": "development/api/db/schema.ts",
+      "sha256": "13ddacbf0be50e054d450a6c642b7fdc1aa943fd6b99084711e07e58b600390d",
+      "repository_sha256": "13ddacbf0be50e054d450a6c642b7fdc1aa943fd6b99084711e07e58b600390d"
+    },
+    {
+      "original": "app/echoing-green-api/drizzle.config.ts",
+      "repository": "development/api/drizzle.config.ts",
+      "sha256": "af081f7384aaeb0082cf422e29f139d137ca2f6a57c69b2c37b9fb1f8479867b",
+      "repository_sha256": "af081f7384aaeb0082cf422e29f139d137ca2f6a57c69b2c37b9fb1f8479867b"
+    },
+    {
+      "original": "app/echoing-green-api/drizzle/meta/_journal.json",
+      "repository": "development/api/drizzle/meta/_journal.json",
+      "sha256": "90cb374e093894d0efce6f1830d873a42aadd8ba49d2f024495e5cb2e1c8c303",
+      "repository_sha256": "90cb374e093894d0efce6f1830d873a42aadd8ba49d2f024495e5cb2e1c8c303"
+    },
+    {
+      "original": "app/echoing-green-api/eslint.config.mjs",
+      "repository": "development/api/eslint.config.mjs",
+      "sha256": "eeda7faabe9560fa9fdb26675b0011fa78461ca7061989732f5da9245b87e315",
+      "repository_sha256": "eeda7faabe9560fa9fdb26675b0011fa78461ca7061989732f5da9245b87e315"
+    },
+    {
+      "original": "app/echoing-green-api/examples/d1/app/api/notes/route.ts",
+      "repository": "development/api/examples/d1/app/api/notes/route.ts",
+      "sha256": "a3d4a74fd53b7bf53e2df41f169d9d9d44a8b22aeb6d92f4e754956079af8909",
+      "repository_sha256": "a3d4a74fd53b7bf53e2df41f169d9d9d44a8b22aeb6d92f4e754956079af8909"
+    },
+    {
+      "original": "app/echoing-green-api/examples/d1/db/schema.ts",
+      "repository": "development/api/examples/d1/db/schema.ts",
+      "sha256": "d89eabd95716ce404f5f7ca2a254220435be8ddce7c899d7ef461ff22ec80454",
+      "repository_sha256": "d89eabd95716ce404f5f7ca2a254220435be8ddce7c899d7ef461ff22ec80454"
+    },
+    {
+      "original": "app/echoing-green-api/hooks/use-mobile.ts",
+      "repository": "development/api/hooks/use-mobile.ts",
+      "sha256": "ad0936f84f1df79d3697bfbff9c18f8ad58431c1cbaf2359c6a853b0fcc9f28b",
+      "repository_sha256": "ad0936f84f1df79d3697bfbff9c18f8ad58431c1cbaf2359c6a853b0fcc9f28b"
+    },
+    {
+      "original": "app/echoing-green-api/lib/connector-context.ts",
+      "repository": "development/api/lib/connector-context.ts",
+      "sha256": "bbddff68689cb0f6926fecd4b8b96f12f2054277c296e97b0df07d4ad5ece24e",
+      "repository_sha256": "bbddff68689cb0f6926fecd4b8b96f12f2054277c296e97b0df07d4ad5ece24e"
+    },
+    {
+      "original": "app/echoing-green-api/lib/connector-contract.mts",
+      "repository": "development/api/lib/connector-contract.mts",
+      "sha256": "e1a7b24a8793af34b595690d9b1300c897c7321c14f215cedf58ad95799d7c3e",
+      "repository_sha256": "e1a7b24a8793af34b595690d9b1300c897c7321c14f215cedf58ad95799d7c3e"
+    },
+    {
+      "original": "app/echoing-green-api/lib/connector-errors.mts",
+      "repository": "development/api/lib/connector-errors.mts",
+      "sha256": "a22edf13d6873ae832c4a2a0d579fc666c73ec996ef0722d39172649d38f0871",
+      "repository_sha256": "a22edf13d6873ae832c4a2a0d579fc666c73ec996ef0722d39172649d38f0871"
+    },
+    {
+      "original": "app/echoing-green-api/lib/connector-preview.d.ts",
+      "repository": "development/api/lib/connector-preview.d.ts",
+      "sha256": "abd69a94f7f61f1359063bb557574faae35e8ff5a028cc4c04b9ee248ef52642",
+      "repository_sha256": "abd69a94f7f61f1359063bb557574faae35e8ff5a028cc4c04b9ee248ef52642"
+    },
+    {
+      "original": "app/echoing-green-api/lib/connectors.ts",
+      "repository": "development/api/lib/connectors.ts",
+      "sha256": "1c93d747e384c8e17e3e3dd5361b24412babf5eba2a11d2ae7a75f4e0924112c",
+      "repository_sha256": "1c93d747e384c8e17e3e3dd5361b24412babf5eba2a11d2ae7a75f4e0924112c"
+    },
+    {
+      "original": "app/echoing-green-api/lib/utils.ts",
+      "repository": "development/api/lib/utils.ts",
+      "sha256": "53f3d3d070f0a9082934da25b875f9499855c2b0693868dd28be8c23d8730f68",
+      "repository_sha256": "53f3d3d070f0a9082934da25b875f9499855c2b0693868dd28be8c23d8730f68"
+    },
+    {
+      "original": "app/echoing-green-api/next.config.ts",
+      "repository": "development/api/next.config.ts",
+      "sha256": "614bce25b089c3f19b1e17a6346c74b858034040154c6621e7d35303004767cc",
+      "repository_sha256": "614bce25b089c3f19b1e17a6346c74b858034040154c6621e7d35303004767cc"
+    },
+    {
+      "original": "app/echoing-green-api/package-lock.json",
+      "repository": "development/api/package-lock.json",
+      "sha256": "eedaeab6870c0f70f9db869fcaa24abae9b0f945cbc9acb8a43b6e7ed6bcbfca",
+      "repository_sha256": "eedaeab6870c0f70f9db869fcaa24abae9b0f945cbc9acb8a43b6e7ed6bcbfca"
+    },
+    {
+      "original": "app/echoing-green-api/package.json",
+      "repository": "development/api/package.json",
+      "sha256": "eb7b53ec5bdce1db5a8576b2ffc3b63ddd8c5fdee0f97dcb341674abbf69843a",
+      "repository_sha256": "eb7b53ec5bdce1db5a8576b2ffc3b63ddd8c5fdee0f97dcb341674abbf69843a"
+    },
+    {
+      "original": "app/echoing-green-api/postcss.config.mjs",
+      "repository": "development/api/postcss.config.mjs",
+      "sha256": "dfac7ac2d86d326a0e5adb024e7943c181393ed17a5fcb8f0315b24c7da6ddde",
+      "repository_sha256": "dfac7ac2d86d326a0e5adb024e7943c181393ed17a5fcb8f0315b24c7da6ddde"
+    },
+    {
+      "original": "app/echoing-green-api/public/favicon.svg",
+      "repository": "development/api/public/favicon.svg",
+      "sha256": "e6d2e59b7b5bbb0342e0fb496dfc262decbfe4426bbb7b047aec8d467d1dc6f7",
+      "repository_sha256": "e6d2e59b7b5bbb0342e0fb496dfc262decbfe4426bbb7b047aec8d467d1dc6f7"
+    },
+    {
+      "original": "app/echoing-green-api/runtime/atmosphere.mjs",
+      "repository": "development/api/runtime/atmosphere.mjs",
+      "sha256": "b9dfe54f05f42545c3ac35ee69f317b0d611299ec95ef09553848eae6b81d9b3",
+      "repository_sha256": "b9dfe54f05f42545c3ac35ee69f317b0d611299ec95ef09553848eae6b81d9b3"
+    },
+    {
+      "original": "app/echoing-green-api/runtime/boat-world.mjs",
+      "repository": "development/api/runtime/boat-world.mjs",
+      "sha256": "c2380b686b703d75c847f4bbf5f6876d27da25ad1515225b6bf7e33d191365b3",
+      "repository_sha256": "c2380b686b703d75c847f4bbf5f6876d27da25ad1515225b6bf7e33d191365b3"
+    },
+    {
+      "original": "app/echoing-green-api/runtime/cadence.mjs",
+      "repository": "development/api/runtime/cadence.mjs",
+      "sha256": "8a15769d627d9839e275f57bae1bf499eb534fd7e913eda98846f55667035db5",
+      "repository_sha256": "8a15769d627d9839e275f57bae1bf499eb534fd7e913eda98846f55667035db5"
+    },
+    {
+      "original": "app/echoing-green-api/runtime/catalog.mjs",
+      "repository": "development/api/runtime/catalog.mjs",
+      "sha256": "aeaaf7096cf617e04a3778cd87820916bbd524c6c72041cc08cdacd1ee91fbb1",
+      "repository_sha256": "aeaaf7096cf617e04a3778cd87820916bbd524c6c72041cc08cdacd1ee91fbb1"
+    },
+    {
+      "original": "app/echoing-green-api/runtime/community.mjs",
+      "repository": "development/api/runtime/community.mjs",
+      "sha256": "bdab364d9fa1c9fc6dd7e91089ffa969a09945ca12d42162d60576d29f427210",
+      "repository_sha256": "bdab364d9fa1c9fc6dd7e91089ffa969a09945ca12d42162d60576d29f427210"
+    },
+    {
+      "original": "app/echoing-green-api/runtime/craft-design.mjs",
+      "repository": "development/api/runtime/craft-design.mjs",
+      "sha256": "16774942450920986d8bdedc74b338d1bfe96ada0c80dc5af658185976fe67f2",
+      "repository_sha256": "16774942450920986d8bdedc74b338d1bfe96ada0c80dc5af658185976fe67f2"
+    },
+    {
+      "original": "app/echoing-green-api/runtime/craft-world.mjs",
+      "repository": "development/api/runtime/craft-world.mjs",
+      "sha256": "c9ff4e897b437f0c51f6d5011268a3c0a4b8fcc66b121ec2fe46db211810d642",
+      "repository_sha256": "c9ff4e897b437f0c51f6d5011268a3c0a4b8fcc66b121ec2fe46db211810d642"
+    },
+    {
+      "original": "app/echoing-green-api/runtime/event-design.mjs",
+      "repository": "development/api/runtime/event-design.mjs",
+      "sha256": "fdf97b2cd12be4af4dc5324c0e64c6bd9027f6113c4aaa8377e851d639e5b225",
+      "repository_sha256": "fdf97b2cd12be4af4dc5324c0e64c6bd9027f6113c4aaa8377e851d639e5b225"
+    },
+    {
+      "original": "app/echoing-green-api/runtime/event-travel.mjs",
+      "repository": "development/api/runtime/event-travel.mjs",
+      "sha256": "ee645fc5bbf6496457b8b99b323b5f570978148d481db9c7de62906ca230833a",
+      "repository_sha256": "ee645fc5bbf6496457b8b99b323b5f570978148d481db9c7de62906ca230833a"
+    },
+    {
+      "original": "app/echoing-green-api/runtime/explicit-intents.mjs",
+      "repository": "development/api/runtime/explicit-intents.mjs",
+      "sha256": "bc47972018271ffbe3f3dad645fc679d7bba3a8d6b9de8c2b643e03a680c0b6f",
+      "repository_sha256": "bc47972018271ffbe3f3dad645fc679d7bba3a8d6b9de8c2b643e03a680c0b6f"
+    },
+    {
+      "original": "app/echoing-green-api/runtime/explicit-scenes.mjs",
+      "repository": "development/api/runtime/explicit-scenes.mjs",
+      "sha256": "2d1180faeba1ce3d05aa8b34004d3f159a072e1c313ace130df0fc7417716cd8",
+      "repository_sha256": "2d1180faeba1ce3d05aa8b34004d3f159a072e1c313ace130df0fc7417716cd8"
+    },
+    {
+      "original": "app/echoing-green-api/runtime/fox-behavior.mjs",
+      "repository": "development/api/runtime/fox-behavior.mjs",
+      "sha256": "17a9d37b70a53f245fdb289559bea5f1060b6e5bbb444e1835187666b0cb7a8f",
+      "repository_sha256": "17a9d37b70a53f245fdb289559bea5f1060b6e5bbb444e1835187666b0cb7a8f"
+    },
+    {
+      "original": "app/echoing-green-api/runtime/fox-path.mjs",
+      "repository": "development/api/runtime/fox-path.mjs",
+      "sha256": "124893c4a3458934dbd9d324bfb285ac0d6a04dcb641e0d0a3619d1188d8b3a9",
+      "repository_sha256": "124893c4a3458934dbd9d324bfb285ac0d6a04dcb641e0d0a3619d1188d8b3a9"
+    },
+    {
+      "original": "app/echoing-green-api/runtime/group-layout.mjs",
+      "repository": "development/api/runtime/group-layout.mjs",
+      "sha256": "d51bbea436600d7c9b85c4797ed8199b39ebdaa92a99fa9f2d13621da872c64b",
+      "repository_sha256": "d51bbea436600d7c9b85c4797ed8199b39ebdaa92a99fa9f2d13621da872c64b"
+    },
+    {
+      "original": "app/echoing-green-api/runtime/interaction-sequence.mjs",
+      "repository": "development/api/runtime/interaction-sequence.mjs",
+      "sha256": "77c5959d435fee5f5b95fe8c42158d38fc78812b5a0ecbb7e6553ddd3a164c1d",
+      "repository_sha256": "77c5959d435fee5f5b95fe8c42158d38fc78812b5a0ecbb7e6553ddd3a164c1d"
+    },
+    {
+      "original": "app/echoing-green-api/runtime/life-plans.mjs",
+      "repository": "development/api/runtime/life-plans.mjs",
+      "sha256": "e33c5f9b9306f4fe1b9b258b9d6f9bc8a95d4dbc530101b7ec66ae2e007486e8",
+      "repository_sha256": "e33c5f9b9306f4fe1b9b258b9d6f9bc8a95d4dbc530101b7ec66ae2e007486e8"
+    },
+    {
+      "original": "app/echoing-green-api/runtime/local-cloud.mjs",
+      "repository": "development/api/runtime/local-cloud.mjs",
+      "sha256": "03c4cda4ccff75a50c8ad6bacbad2e0ff501885942b6c734d1d82b769327f1b5",
+      "repository_sha256": "03c4cda4ccff75a50c8ad6bacbad2e0ff501885942b6c734d1d82b769327f1b5"
+    },
+    {
+      "original": "app/echoing-green-api/runtime/local-walkers.mjs",
+      "repository": "development/api/runtime/local-walkers.mjs",
+      "sha256": "40372a8e08d003987cef9fa67929a5f7863b945be18b34938a23f399234e69a8",
+      "repository_sha256": "40372a8e08d003987cef9fa67929a5f7863b945be18b34938a23f399234e69a8"
+    },
+    {
+      "original": "app/echoing-green-api/runtime/motion.mjs",
+      "repository": "development/api/runtime/motion.mjs",
+      "sha256": "32786121effdfc7a507442a37206e01adb5a58479b96d1f70efdfff45a90a416",
+      "repository_sha256": "32786121effdfc7a507442a37206e01adb5a58479b96d1f70efdfff45a90a416"
+    },
+    {
+      "original": "app/echoing-green-api/runtime/navigation.mjs",
+      "repository": "development/api/runtime/navigation.mjs",
+      "sha256": "69e4705ed8403f1f755c64525e6ff44e8e4c317131f36a98b9f22ee98b88274e",
+      "repository_sha256": "69e4705ed8403f1f755c64525e6ff44e8e4c317131f36a98b9f22ee98b88274e"
+    },
+    {
+      "original": "app/echoing-green-api/runtime/neighborhood-world.mjs",
+      "repository": "development/api/runtime/neighborhood-world.mjs",
+      "sha256": "44fe421d84f5a8e4257e920c1f4700813d14b74a1359ef29f05196a7badfefa1",
+      "repository_sha256": "44fe421d84f5a8e4257e920c1f4700813d14b74a1359ef29f05196a7badfefa1"
+    },
+    {
+      "original": "app/echoing-green-api/runtime/object-actions.mjs",
+      "repository": "development/api/runtime/object-actions.mjs",
+      "sha256": "a8c02912155cd2617bf58b914f205d38814610f61a4eade94bac8b06729a4dc8",
+      "repository_sha256": "a8c02912155cd2617bf58b914f205d38814610f61a4eade94bac8b06729a4dc8"
+    },
+    {
+      "original": "app/echoing-green-api/runtime/paper-world.mjs",
+      "repository": "development/api/runtime/paper-world.mjs",
+      "sha256": "737198f7aaa192e367369056a98223542746b220865072054249a06b370cb4a8",
+      "repository_sha256": "737198f7aaa192e367369056a98223542746b220865072054249a06b370cb4a8"
+    },
+    {
+      "original": "app/echoing-green-api/runtime/passengers.mjs",
+      "repository": "development/api/runtime/passengers.mjs",
+      "sha256": "3698c3711107a49782ee63851eca720ca81b8561ba6288b0a0d8e24fc3b4b7f1",
+      "repository_sha256": "3698c3711107a49782ee63851eca720ca81b8561ba6288b0a0d8e24fc3b4b7f1"
+    },
+    {
+      "original": "app/echoing-green-api/runtime/resident-actions.mjs",
+      "repository": "development/api/runtime/resident-actions.mjs",
+      "sha256": "3d346b616062cb784de73b988f1852feb64e7ca90073a9cf266d16699efc8511",
+      "repository_sha256": "3d346b616062cb784de73b988f1852feb64e7ca90073a9cf266d16699efc8511"
+    },
+    {
+      "original": "app/echoing-green-api/runtime/scene-events.mjs",
+      "repository": "development/api/runtime/scene-events.mjs",
+      "sha256": "d124fb99f1d9dbedccfbbe83ada0614016221aa176e1a4855b8439b30e7eb454",
+      "repository_sha256": "d124fb99f1d9dbedccfbbe83ada0614016221aa176e1a4855b8439b30e7eb454"
+    },
+    {
+      "original": "app/echoing-green-api/runtime/town-response.mjs",
+      "repository": "development/api/runtime/town-response.mjs",
+      "sha256": "2f35f8714029a0d0dee6df41b9fcc4f13342d50051615154cff880a5f72ab46d",
+      "repository_sha256": "2f35f8714029a0d0dee6df41b9fcc4f13342d50051615154cff880a5f72ab46d"
+    },
+    {
+      "original": "app/echoing-green-api/scripts/build-verified.sh",
+      "repository": "development/api/scripts/build-verified.sh",
+      "sha256": "2ae5329ac860076070c9217a43106a15cb5ecf907a0f7baeb9ef903f76b53c68",
+      "repository_sha256": "2ae5329ac860076070c9217a43106a15cb5ecf907a0f7baeb9ef903f76b53c68"
+    },
+    {
+      "original": "app/echoing-green-api/scripts/connector-preview/connector-preview-session.mjs",
+      "repository": "development/api/scripts/connector-preview/connector-preview-session.mjs",
+      "sha256": "57224ad185a25115a14fccc68d3217e55b199260c3dd98a2c807beffec1a0a9b",
+      "repository_sha256": "57224ad185a25115a14fccc68d3217e55b199260c3dd98a2c807beffec1a0a9b"
+    },
+    {
+      "original": "app/echoing-green-api/scripts/connector-preview/host-binding.mjs",
+      "repository": "development/api/scripts/connector-preview/host-binding.mjs",
+      "sha256": "9e44ab6864133a5c82f834a5904ebb7d6104cb783c24efba3c0fe1a161182cea",
+      "repository_sha256": "9e44ab6864133a5c82f834a5904ebb7d6104cb783c24efba3c0fe1a161182cea"
+    },
+    {
+      "original": "app/echoing-green-api/scripts/connector-preview/protocol.mjs",
+      "repository": "development/api/scripts/connector-preview/protocol.mjs",
+      "sha256": "111e062ebf08d3f180130f5bc3dcb3c1414c1d7be3c032c9d675a61c0c7513a8",
+      "repository_sha256": "111e062ebf08d3f180130f5bc3dcb3c1414c1d7be3c032c9d675a61c0c7513a8"
+    },
+    {
+      "original": "app/echoing-green-api/scripts/connector-preview/worker.mjs",
+      "repository": "development/api/scripts/connector-preview/worker.mjs",
+      "sha256": "bd9c98fc68f29d975fe10508dfc9029bb681dc5789a62861d5c938bdea2064bb",
+      "repository_sha256": "bd9c98fc68f29d975fe10508dfc9029bb681dc5789a62861d5c938bdea2064bb"
+    },
+    {
+      "original": "app/echoing-green-api/scripts/execution-profile.mjs",
+      "repository": "development/api/scripts/execution-profile.mjs",
+      "sha256": "2e71116f4d2b70cff8bb70436f8dd5c709ec7ff62893424530f404e0193d3630",
+      "repository_sha256": "2e71116f4d2b70cff8bb70436f8dd5c709ec7ff62893424530f404e0193d3630"
+    },
+    {
+      "original": "app/echoing-green-api/scripts/install-ci.mjs",
+      "repository": "development/api/scripts/install-ci.mjs",
+      "sha256": "4a5a92d60a08d0ba54effd8373da2da06284312c55b767287c68a0bec7200da7",
+      "repository_sha256": "4a5a92d60a08d0ba54effd8373da2da06284312c55b767287c68a0bec7200da7"
+    },
+    {
+      "original": "app/echoing-green-api/scripts/install-ci.sh",
+      "repository": "development/api/scripts/install-ci.sh",
+      "sha256": "10d8764a61be50351dc3496e13588270de7956f0aa5f1189c49cabb2d89fe5c0",
+      "repository_sha256": "10d8764a61be50351dc3496e13588270de7956f0aa5f1189c49cabb2d89fe5c0"
+    },
+    {
+      "original": "app/echoing-green-api/scripts/install-pnpm.sh",
+      "repository": "development/api/scripts/install-pnpm.sh",
+      "sha256": "a684c02c2b493dfbf262a66252a5cd36f81ca995a4024761728662ae63aa40c0",
+      "repository_sha256": "a684c02c2b493dfbf262a66252a5cd36f81ca995a4024761728662ae63aa40c0"
+    },
+    {
+      "original": "app/echoing-green-api/scripts/npm-install.mjs",
+      "repository": "development/api/scripts/npm-install.mjs",
+      "sha256": "9715c6a32d1d4a0289ef6376a0e819c3b6a6416b8a9877733d9fb4339ce626b6",
+      "repository_sha256": "9715c6a32d1d4a0289ef6376a0e819c3b6a6416b8a9877733d9fb4339ce626b6"
+    },
+    {
+      "original": "app/echoing-green-api/scripts/pnpm-install.mjs",
+      "repository": "development/api/scripts/pnpm-install.mjs",
+      "sha256": "a83164e344c1947053def83b546be8115deaa827314bbaead7afe6b6451c5cdf",
+      "repository_sha256": "a83164e344c1947053def83b546be8115deaa827314bbaead7afe6b6451c5cdf"
+    },
+    {
+      "original": "app/echoing-green-api/scripts/run-framework.mjs",
+      "repository": "development/api/scripts/run-framework.mjs",
+      "sha256": "9bf9f41a29314cabe0238b8e9c540ec3f7b5a6adafc7c8fb6c3940722d061dca",
+      "repository_sha256": "9bf9f41a29314cabe0238b8e9c540ec3f7b5a6adafc7c8fb6c3940722d061dca"
+    },
+    {
+      "original": "app/echoing-green-api/scripts/sites-env.mjs",
+      "repository": "development/api/scripts/sites-env.mjs",
+      "sha256": "21d7bde6acb9f716287e652c1b0e43ae4803d79be367ca2192fcba14740b5338",
+      "repository_sha256": "21d7bde6acb9f716287e652c1b0e43ae4803d79be367ca2192fcba14740b5338"
+    },
+    {
+      "original": "app/echoing-green-api/scripts/sites-env.sh",
+      "repository": "development/api/scripts/sites-env.sh",
+      "sha256": "d18af7b222db748c9de257d5955b9d7f77ec350dab6321f114f0bc44c20388ac",
+      "repository_sha256": "d18af7b222db748c9de257d5955b9d7f77ec350dab6321f114f0bc44c20388ac"
+    },
+    {
+      "original": "app/echoing-green-api/scripts/tool-environment.mjs",
+      "repository": "development/api/scripts/tool-environment.mjs",
+      "sha256": "6da99286e0eb7905595ca851e68983bedf94a0f93814819d61f2b1f3a0342ba2",
+      "repository_sha256": "6da99286e0eb7905595ca851e68983bedf94a0f93814819d61f2b1f3a0342ba2"
+    },
+    {
+      "original": "app/echoing-green-api/scripts/vite/connector-preview-plugin.mjs",
+      "repository": "development/api/scripts/vite/connector-preview-plugin.mjs",
+      "sha256": "a6a9fe2086e302f94a3f91e3c1a68a45bb3aa07d4a79faf01b14732191eb4e80",
+      "repository_sha256": "a6a9fe2086e302f94a3f91e3c1a68a45bb3aa07d4a79faf01b14732191eb4e80"
+    },
+    {
+      "original": "app/echoing-green-api/scripts/vite/sites-vite-plugin.LICENSE",
+      "repository": "development/api/scripts/vite/sites-vite-plugin.LICENSE",
+      "sha256": "7de1e115d165f176e68f962acdb809b5ab8d8ae78d3981e0701392b2ac50c713",
+      "repository_sha256": "7de1e115d165f176e68f962acdb809b5ab8d8ae78d3981e0701392b2ac50c713"
+    },
+    {
+      "original": "app/echoing-green-api/scripts/vite/sites-vite-plugin.ts",
+      "repository": "development/api/scripts/vite/sites-vite-plugin.ts",
+      "sha256": "07af20e7097d9ed1d76f7c446d02997550b8fc5ca89668b249e25eabd62c6834",
+      "repository_sha256": "07af20e7097d9ed1d76f7c446d02997550b8fc5ca89668b249e25eabd62c6834"
+    },
+    {
+      "original": "app/echoing-green-api/server/decision-core.mjs",
+      "repository": "development/api/server/decision-core.mjs",
+      "sha256": "4c8466134134cdd41da08e7d3704006075397789cb43c64c3e9db5194360c59e",
+      "repository_sha256": "4c8466134134cdd41da08e7d3704006075397789cb43c64c3e9db5194360c59e"
+    },
+    {
+      "original": "app/echoing-green-api/server/gateway.mjs",
+      "repository": "development/api/server/gateway.mjs",
+      "sha256": "311e01f37614d5219a10eb9506828681309576b1ed3299b9ed05f6bfdfc3bf10",
+      "repository_sha256": "311e01f37614d5219a10eb9506828681309576b1ed3299b9ed05f6bfdfc3bf10"
+    },
+    {
+      "original": "app/echoing-green-api/tests/explicit-scenes.test.mjs",
+      "repository": "development/api/tests/explicit-scenes.test.mjs",
+      "sha256": "fd28d5967218f960d2ab36553f233fd1b804a38686956c081de03dba18693811",
+      "repository_sha256": "fd28d5967218f960d2ab36553f233fd1b804a38686956c081de03dba18693811"
+    },
+    {
+      "original": "app/echoing-green-api/tests/gateway.test.mjs",
+      "repository": "development/api/tests/gateway.test.mjs",
+      "sha256": "98aa233664543456afa2976109ae9db6f23b87f0658b4ed4b9acf2ed2df59467",
+      "repository_sha256": "98aa233664543456afa2976109ae9db6f23b87f0658b4ed4b9acf2ed2df59467"
+    },
+    {
+      "original": "app/echoing-green-api/tests/semantic-composition.test.mjs",
+      "repository": "development/api/tests/semantic-composition.test.mjs",
+      "sha256": "b404d867453b73720ead2574a5c13265390de0d9d402b68db83590b231afc24f",
+      "repository_sha256": "b404d867453b73720ead2574a5c13265390de0d9d402b68db83590b231afc24f"
+    },
+    {
+      "original": "app/echoing-green-api/tests/semantic-generalization.test.mjs",
+      "repository": "development/api/tests/semantic-generalization.test.mjs",
+      "sha256": "095a4524df24393abb1b4f997dd0d77625447aaaa91ffbe80ba4b076fbeabc55",
+      "repository_sha256": "095a4524df24393abb1b4f997dd0d77625447aaaa91ffbe80ba4b076fbeabc55"
+    },
+    {
+      "original": "app/echoing-green-api/tests/train-readiness.test.mjs",
+      "repository": "development/api/tests/train-readiness.test.mjs",
+      "sha256": "69d8e68495773979ac12736eab7f724c063505c1d7f3dd730bab9818a5f48cfa",
+      "repository_sha256": "69d8e68495773979ac12736eab7f724c063505c1d7f3dd730bab9818a5f48cfa"
+    },
+    {
+      "original": "app/echoing-green-api/tsconfig.json",
+      "repository": "development/api/tsconfig.json",
+      "sha256": "a4c1cc83b63ef9d39641d3babaefffa063dccbbc93338e18017b5013d713163e",
+      "repository_sha256": "a4c1cc83b63ef9d39641d3babaefffa063dccbbc93338e18017b5013d713163e"
+    },
+    {
+      "original": "app/echoing-green-api/vendor/shadcn-tailwind-4.13.0.LICENSE.md",
+      "repository": "development/api/vendor/shadcn-tailwind-4.13.0.LICENSE.md",
+      "sha256": "1564074e13439397221ffd522e2e504d56561994a23d371aa5e3ad43e4f5423f",
+      "repository_sha256": "1564074e13439397221ffd522e2e504d56561994a23d371aa5e3ad43e4f5423f"
+    },
+    {
+      "original": "app/echoing-green-api/vendor/shadcn-tailwind-4.13.0.css",
+      "repository": "development/api/vendor/shadcn-tailwind-4.13.0.css",
+      "sha256": "bc7d83425702955b4cb67cb14ede9d603f9d912376d57a2d81d661094d2a782a",
+      "repository_sha256": "bc7d83425702955b4cb67cb14ede9d603f9d912376d57a2d81d661094d2a782a"
+    },
+    {
+      "original": "app/echoing-green-api/vite.config.ts",
+      "repository": "development/api/vite.config.ts",
+      "sha256": "22ff558b1636d251e076f74c1697c7166079861667af10922d6bc505cb8f8290",
+      "repository_sha256": "22ff558b1636d251e076f74c1697c7166079861667af10922d6bc505cb8f8290"
+    },
+    {
+      "original": "app/echoing-green-api/worker/index.ts",
+      "repository": "development/api/worker/index.ts",
+      "sha256": "245f56fd6367a03c52892b1bdd190eb7a3a6440c9eacc3650e64a9a5f34fb872",
+      "repository_sha256": "245f56fd6367a03c52892b1bdd190eb7a3a6440c9eacc3650e64a9a5f34fb872"
+    },
+    {
+      "original": "work/runtime-cp45/sync-public-source.py",
+      "repository": "development/work/runtime-cp45/sync-public-source.py",
+      "sha256": "94a2531314834abc0ab372ee7ced366c6cba3309ab9eddc1f3dd52e1518f64af",
+      "repository_sha256": "94a2531314834abc0ab372ee7ced366c6cba3309ab9eddc1f3dd52e1518f64af"
+    },
+    {
+      "original": "work/runtime-cp45/sync-api-core.py",
+      "repository": "development/work/runtime-cp45/sync-api-core.py",
+      "sha256": "d5b65077c6b6f5cb5b2cab092481211f3ba80d75582463e057097245059d1a22",
+      "repository_sha256": "d5b65077c6b6f5cb5b2cab092481211f3ba80d75582463e057097245059d1a22"
+    },
+    {
+      "original": "work/runtime-cp45/audit-all-hints.mjs",
+      "repository": "development/work/runtime-cp45/audit-all-hints.mjs",
+      "sha256": "8a0d7d8397ca7966837c9e85355e967e589da1daff2c4f4edf67c9bb2bee447e",
+      "repository_sha256": "8a0d7d8397ca7966837c9e85355e967e589da1daff2c4f4edf67c9bb2bee447e"
+    },
+    {
+      "original": "work/runtime-cp45/audit-final.mjs",
+      "repository": "development/work/runtime-cp45/audit-final.mjs",
+      "sha256": "59e6f74907e882d13abae5468b1f00cb041715e00f2ca305db1becbc842d9298",
+      "repository_sha256": "59e6f74907e882d13abae5468b1f00cb041715e00f2ca305db1becbc842d9298"
+    },
+    {
+      "original": "work/runtime-cp45/prepare-public.py",
+      "repository": "development/work/runtime-cp45/prepare-public.py",
+      "sha256": "a411e35af07b1e4506762b98fb81741d30e5e8601122a4f3f9ae01715645046f",
+      "repository_sha256": "a411e35af07b1e4506762b98fb81741d30e5e8601122a4f3f9ae01715645046f"
+    },
+    {
+      "original": "work/runtime-cp45/trace-slow.mjs",
+      "repository": "development/work/runtime-cp45/trace-slow.mjs",
+      "sha256": "db1562cf7bfca14e249a24c5933c030033a9b9abcfc0fb8762dab48b55d7e885",
+      "repository_sha256": "db1562cf7bfca14e249a24c5933c030033a9b9abcfc0fb8762dab48b55d7e885"
+    },
+    {
+      "original": "work/runtime-cp45/audit-third.mjs",
+      "repository": "development/work/runtime-cp45/audit-third.mjs",
+      "sha256": "d405ba606cd0cf37b8f0838b5471e7de5931c7be31cda3684796ab6b44f42058",
+      "repository_sha256": "d405ba606cd0cf37b8f0838b5471e7de5931c7be31cda3684796ab6b44f42058"
+    },
+    {
+      "original": "work/runtime-cp45/audit.mjs",
+      "repository": "development/work/runtime-cp45/audit.mjs",
+      "sha256": "ec8b4fc6903532c774d37aebc910a1a4852cbc3f967ced430107ce3df2126bc8",
+      "repository_sha256": "ec8b4fc6903532c774d37aebc910a1a4852cbc3f967ced430107ce3df2126bc8"
+    },
+    {
+      "original": "work/runtime-cp45/audit-warm10.mjs",
+      "repository": "development/work/runtime-cp45/audit-warm10.mjs",
+      "sha256": "9103bcff94b98aa87ccd66e466f305144e2b35648d77057f0b02b060a50e584d",
+      "repository_sha256": "9103bcff94b98aa87ccd66e466f305144e2b35648d77057f0b02b060a50e584d"
     }
   ],
   "omitted_nonruntime_metadata": [

@@ -1,8 +1,8 @@
-import {makeRoom} from './event-travel.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {groupPlaces} from './group-layout.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {pathTo,navigationGraph} from './navigation.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {moverBlocks} from './motion.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
+import {makeRoom} from './event-travel.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {groupPlaces} from './group-layout.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {pathTo,navigationGraph} from './navigation.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {moverBlocks} from './motion.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
 const D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 const angle=(a,b)=>Math.atan2(Math.sin(b-a),Math.cos(b-a));
@@ -35,7 +35,7 @@ export function advanceGroupCrowd(s,nav,dt){
    if(e.slots[a.id]!==goal)continue;
   }
   if(c.waitFor?.length){const same=c.waitGoal===goal&&c.waitFor.every(w=>{const b=s.actors.find(b=>b.id===w.id);return b&&D(b.p,w.p)<.10;});if(same){if((home||a.interactionLock)&&s.time>=(c.courtesyAt||0)){const obstruction=c.waitFor.map(w=>s.actors.find(b=>b.id===w.id)).filter(Boolean).sort((x,y)=>D(x.p,a.p)-D(y.p,a.p))[0];makeRoom(s,nav,a,obstruction?.p||target);c.courtesyAt=s.time+1;}settle();turn(a,a.lookTarget,dt);continue;}c.waitFor=[];c.route=[];c.direction=null;c.passUntil=0;c.watchAt=s.time;c.watchP=a.p.slice();c.watchDistance=a.walked;c.goalProgressAt=s.time;c.bestRemaining=D(a.p,target);}
-  if(s.time-(c.goalProgressAt||0)>2){const blockers=s.actors.filter(b=>b!==a&&Math.abs(b.p[2]-a.p[2])<1&&D(b.p,a.p)<.86&&(!b.mobile||!b.path.length||a.id>b.id));if(blockers.length){c.waitFor=blockers.map(b=>({id:b.id,p:b.p.slice()}));c.waitGoal=goal;settle();continue;}}
+  if(s.time-(c.goalProgressAt||0)>2){const partner=s.craftWorld?.jobs.find(j=>j.actor===a.id&&j.status==='running')?.context.partner;const blockers=s.actors.filter(b=>b!==a&&b.id!==partner&&Math.abs(b.p[2]-a.p[2])<1&&D(b.p,a.p)<(a.interactionLock?.23*(a.scale+b.scale)+.07:.86)&&(!b.mobile||!b.path.length||a.id>b.id));if(blockers.length){c.waitFor=blockers.map(b=>({id:b.id,p:b.p.slice()}));c.waitGoal=goal;settle();continue;}}
   if(s.time<c.yieldUntil){settle();continue;}
   if(s.time-c.watchAt>=.85){const progress=D(c.watchP,a.p),travel=a.walked-c.watchDistance;c.watchAt=s.time;c.watchP=a.p.slice();c.watchDistance=a.walked;if(progress<.08&&travel>.10){c.yieldUntil=s.time+patience(a.id);c.route=[];c.replan=c.yieldUntil;c.passUntil=0;c.direction=null;settle();continue;}}
 

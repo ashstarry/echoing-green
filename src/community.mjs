@@ -1,7 +1,7 @@
-import {rainingAt} from './local-cloud.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {advanceSceneEvent,requestSceneEvent,sceneTask} from './scene-events.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {CADENCE,varied,stableUnit} from './cadence.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
+import {rainingAt} from './local-cloud.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {advanceSceneEvent,requestSceneEvent,sceneTask} from './scene-events.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {CADENCE,varied,stableUnit} from './cadence.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
 export const ACTIVITIES={
  hop:{label:'找一块空地跳两下',range:[3,6],zone:'playground'},follow:{label:'跟着孩子换个位置',range:[4,8],zone:'family'},
  play:{label:'给街坊弹一段琴',range:[18,35]},
@@ -16,7 +16,7 @@ export function createCommunity(nav){return Object.fromEntries(Object.entries(PR
 export function requestFestival(s){if(s.worldEvent?.phase==='show'){s.worldEvent.until=Math.max(s.worldEvent.until,s.time+18);s.festivalUntil=s.worldEvent.until;s.planRevision++;return;}s.worldEvent={kind:'festival',phase:s.weather==='rain'?'postponed':'prepare',started:s.time,until:s.time+varied(CADENCE.festivalPrepare,'festival',s.revision),revision:(s.worldEvent?.revision||0)+1};s.planRevision++;s.festivalUntil=0;}
 export function updateDirector(s,dt,emit,nav){
  advanceSceneEvent(s,nav,dt,emit);
- if(s.festivalAuto&&!s.sceneEvent&&['dusk','night'].includes(s.day_phase)&&s.time>=s.festivalNextAt)requestSceneEvent(s,{festival:'fireworks'},emit,{automatic:true});
+ if(!['listening','running','closing'].includes(s.inputSession?.phase)&&s.festivalAuto&&!s.sceneEvent&&['dusk','night'].includes(s.day_phase)&&s.time>=s.festivalNextAt)requestSceneEvent(s,{festival:'fireworks'},emit,{automatic:true});
  s.effectiveMusic=s.sceneEvent?.kind==='music'&&!s.sceneEvent.silentMusic&&['gather','active'].includes(s.sceneEvent.phase)?'play':rainingAt(s,nav.activities.spaces.residents['resident.musician'].position)&&!s.musicManual||s.sceneEvent?.kind==='festival'&&s.sceneEvent.phase==='active'?'rest':s.music;
  for(const[id,d]of Object.entries(s.diners)){const festival=s.sceneEvent?.kind==='festival'&&['gather','active'].includes(s.sceneEvent.phase);const policy=d.manualPolicy||(s.dining!=='auto'?s.dining:s.weather==='rain'?'inside':festival||s.occasion==='supper'?'dine':'auto');if(d.effectivePolicy!==policy){d.effectivePolicy=policy;d.policy=policy;d.wait=Math.min(d.wait,varied([1,4],id,s.planRevision));}}
 }
@@ -75,6 +75,6 @@ export function updateResidents(s,nav,dt){
   if(r.activity==='kite')r.gesture=(.5-.5*Math.cos(phase*3.5))*Math.min(1,phase);
   if(r.activity==='chat'){const buddy=a?.chatPartner||p.buddy;if(!buddy)r.gesture=0;else{const turn=(s.time%7)<3.5;if((id<buddy)!==turn)r.gesture*=.12;}}
   const safe=a?.mobile&&!a.atHome?nav.activities.spaces.nodes[a.node]?.umbrellaClear:nav.activities.spaces.residents[id]?.umbrellaClear;const covered=a?.mobile&&!a.atHome?nav.activities.spaces.nodes[a.node]?.covered:nav.activities.spaces.residents[id]?.covered;
-  const eligible=p.role==='walker'||['garden','watch'].includes(p.role);const want=eligible&&!s.localWalkers?.[id]&&rainingAt(s,origin)&&!a?.interactionLock&&safe&&!covered&&!a?.path?.length&&!['resident.water_visitor','resident.water_companion','resident.kite_child'].includes(id);r.umbrellaOpen+=(Number(want)-r.umbrellaOpen)*Math.min(1,dt*3.5);
+  const eligible=p.role==='walker'||['garden','watch'].includes(p.role);const localUmbrella=(r.cloudUmbrellaUntil||0)>s.time&&safe&&!covered;const want=localUmbrella||eligible&&!s.localWalkers?.[id]&&rainingAt(s,origin)&&!a?.interactionLock&&safe&&!covered&&!a?.path?.length&&!['resident.water_visitor','resident.water_companion','resident.kite_child'].includes(id);r.umbrellaOpen+=(Number(want)-r.umbrellaOpen)*Math.min(1,dt*3.5);
  }
 }

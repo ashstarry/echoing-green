@@ -4,7 +4,7 @@ A living, cut-paper miniature town. Current scene: Borrowed Wind Town / 借风�
 
 English is the first-visit default. Music is enabled by default; browser autoplay rules may require your first click or keypress. Language and sound choices are saved locally.
 
-The town simulates life in your browser and pauses when you leave. Snow, rain, fireworks and market gatherings are short events with arrivals, a main scene, and a gentle closing. A new large event replaces the pending one after the current scene has wound down. Sparse event sounds accompany selected fireworks, market opening and closing; the master sound switch controls both music and effects. Use weather buttons, the Town journal and selectable actions to explore. Free-text wishes use a separately hosted secure Jev proxy; no provider credentials are included in this repository or in GitHub Pages.
+The town simulates life in your browser and pauses when you leave. Snow, rain, fireworks and market gatherings are short events with arrivals, a main scene, and a gentle closing. One user-triggered interaction runs at a time. Input and activity choices stay locked until it finishes. Activities continue while their visible response progresses and wind down when that response settles or stalls; there is no fixed 15-second cutoff. Tram greetings appear only when the tram and traveler are ready. Sparse event sounds accompany selected fireworks, market opening and closing; the master sound switch controls both music and effects. Use weather buttons, the Town journal and selectable actions to explore. Free-text wishes use a separately hosted secure Jev proxy; no provider credentials are included in this repository or in GitHub Pages.
 
 ## Run locally
 
@@ -24,4 +24,4 @@ Never add API keys, private configuration, raw API logs or research archives. `s
 
 ## Editable source and project history
 
-The complete current development project, API source mirror, earlier runtime source checkpoints and authoring scripts are in [development/](development/README.md). The root remains the live GitHub Pages site.
+See [development/](development/README.md) for current editable code, API source, tests and authoring history.

@@ -12,7 +12,7 @@ function start(s,nav,e,requestGesture){
  const w=ensureNeighborhood(s);w.eventId=e.id;w.jobs=[];w.phase='working';w.kind=e.kind;w.completedAt=null;w.doorTarget=0;w.windowTarget=0;w.bloomTarget=0;w.accent++;w.started=s.time;w.before={cycling:s.cycling,animals:s.animals};e.slotsAssigned=true;e.slots={};e.neighborhoodStarted=true;e.openRideLane=true;
  // Replacing a display is finite and soft; the same physical IDs are not duplicated.
  for(const p of w.props)p.retireAt=s.time;
- const used=new Set(),nodes=[],candidates=s.actors.filter(a=>a.mobile&&!a.eventOnly&&!a.manual&&!e.protectedIds?.includes(a.id)&&!s.residentActions[a.id]?.requested);
+ const used=new Set(),nodes=[],candidates=s.actors.filter(a=>nav.grid[`${Math.round((a.p[0]-nav.origin[0])/nav.step)},${Math.round((a.p[1]-nav.origin[1])/nav.step)}`]!==undefined&&a.mobile&&!a.eventOnly&&!a.manual&&!e.protectedIds?.includes(a.id)&&!s.residentActions[a.id]?.requested);
  const pick=(p,child=false,home=false)=>{const goal=home?nearest(nav,p):null;const cost=a=>{if(!home)return D(a.p,p);const path=pathTo(nav,a.node,goal);if(!path.length)return Infinity;return path.reduce((n,id,i)=>n+(i?D(nav.nodes[path[i-1]],nav.nodes[id]):0),0);};const options=candidates.filter(a=>!used.has(a.id)&&(child?a.id==='resident.child_runner':ADULTS.includes(a.id)||home&&a.id==='resident.postman')).sort((a,b)=>cost(a)-cost(b));const a=options[0];if(a)used.add(a.id);return a;};
  function job(recipe,type,supply,destination,opts={}){
   const a=pick(supply,opts.child,recipe==='home_host');if(!a)return null;const supplyNode=nearest(nav,supply,nodes),destinationNode=nearest(nav,destination,nodes);if(supplyNode===undefined||destinationNode===undefined)return null;nodes.push(destinationNode);

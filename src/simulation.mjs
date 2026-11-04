@@ -1,32 +1,33 @@
-import {ensureBoat,advanceBoat,validateBoat} from './boat-world.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {ensureCloud,requestCloud,advanceCloud,validateCloud} from './local-cloud.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {ensureCraft,advanceCraft,validateCraft} from './craft-world.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {ensureJourney,requestJourney,advanceJourney,validateJourney} from './train-journey.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {ensureFoxBehavior,validateFox} from './fox-behavior.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {ensureNeighborhood,advanceNeighborhood,validateNeighborhood} from './neighborhood-world.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {ensurePaperWorld,advancePaperWorld,validatePaperWorld} from './paper-world.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {advanceGroupCrowd} from './group-crowd.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {eventPose} from './group-layout.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {ensureEventTravel,advanceEventTravel,eventGuestPositions,syncGuestActors,makeRoom,validateEventTravel} from './event-travel.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {requestSceneEvent,sceneTask,holdsEventPlace,validateSceneEvents,EVENT_TIMING} from './scene-events.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {eventCenter,eventScore} from './event-space.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {stimulateTown,advanceTownResponse,validateTownResponse} from './town-response.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {createIntentRuntime,advanceIntentRuntime,validateIntentRuntime} from './life-plans.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {createPassengers,advancePassengers,validatePassengers,requestPassengerAction} from './passengers.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {advanceObjectControls,validateObjectControls} from './object-actions.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {createLocalWalkers,advanceLocalWalkers,validateLocalWalkers} from './local-walkers.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {createResidentActions,advanceResidentActions,validateResidentActions,requestResidentAction,RESIDENT_CAPABILITIES} from './resident-actions.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {createCommunity,updateDirector,updateResidents,wantedTask,routineTask,setResidentTask,ACTIVITIES,PROFILES,requestFestival} from './community.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {CADENCE,varied,stableUnit} from './cadence.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {createTrain,stepTrain,clamp,createMovers,advanceMovers,createDiners,advanceDiners,moverBlocks} from './motion.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {validateDecision,labels,ACTOR_DOMAINS} from './catalog.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
+import {advanceInput,recoverInput} from './input-session.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {ensureBoat,advanceBoat,validateBoat} from './boat-world.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {ensureCloud,requestCloud,advanceCloud,validateCloud} from './local-cloud.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {ensureCraft,advanceCraft,validateCraft} from './craft-world.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {ensureJourney,requestJourney,advanceJourney,validateJourney} from './train-journey.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {ensureFoxBehavior,validateFox} from './fox-behavior.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {ensureNeighborhood,advanceNeighborhood,validateNeighborhood} from './neighborhood-world.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {ensurePaperWorld,advancePaperWorld,validatePaperWorld} from './paper-world.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {advanceGroupCrowd} from './group-crowd.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {eventPose} from './group-layout.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {ensureEventTravel,advanceEventTravel,eventGuestPositions,syncGuestActors,makeRoom,validateEventTravel} from './event-travel.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {requestSceneEvent,sceneTask,holdsEventPlace,validateSceneEvents,EVENT_TIMING} from './scene-events.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {eventCenter,eventScore} from './event-space.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {stimulateTown,advanceTownResponse,validateTownResponse} from './town-response.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {createIntentRuntime,advanceIntentRuntime,validateIntentRuntime} from './life-plans.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {createPassengers,advancePassengers,validatePassengers,requestPassengerAction} from './passengers.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {advanceObjectControls,validateObjectControls} from './object-actions.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {createLocalWalkers,advanceLocalWalkers,validateLocalWalkers} from './local-walkers.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {createResidentActions,advanceResidentActions,validateResidentActions,requestResidentAction,RESIDENT_CAPABILITIES} from './resident-actions.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {createCommunity,updateDirector,updateResidents,wantedTask,routineTask,setResidentTask,ACTIVITIES,PROFILES,requestFestival} from './community.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {CADENCE,varied,stableUnit} from './cadence.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {createTrain,stepTrain,clamp,createMovers,advanceMovers,createDiners,advanceDiners,moverBlocks} from './motion.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {validateDecision,labels,ACTOR_DOMAINS} from './catalog.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
 export const VERSION=13, DT=.05;
 const distance=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 export function createWorld(nav,seed=62417){
  if(!nav.noStopping){const lanes=Object.values(nav.activities?.clips||{}).filter(c=>['creature_walk','ride'].includes(c.motion));nav.noStopping=new Set(nav.nodes.map((p,i)=>lanes.some(c=>c.samples.some((q,k)=>k%8===0&&distance(p,q)<(c.motion==='ride'?.72:(c.dynamic_clearance||c.radius||.3)+.50)))?i:-1).filter(i=>i>=0));}
- const s={sceneEvent:null,eventSequence:0,eventWeather:{rain:0,snow:0,cover:0},intentRuntime:createIntentRuntime(),day_phase:'dusk',dayWeights:{dawn:0,day:0,dusk:1,night:0},passengers:createPassengers(nav.activities?.boarding),objectControls:{},localWalkers:createLocalWalkers(nav.activities?.localRoutes),residentActions:createResidentActions(),availableRoutes:Object.keys(nav.activities?.localRoutes||{}),roleOverrides:{},occasion:'ordinary',lastOccasion:'ordinary',lastWeather:'clear',weatherChangedAt:0,afterRainUntil:0,musicManual:false,effectiveMusic:'play',musicGatherUntil:0,occasionUntil:0,planRevision:0,worldEvent:{kind:'ordinary',phase:'ongoing',started:0,until:0,revision:0},residents:createCommunity(nav),version:VERSION,seed:seed>>>0,tick:0,time:0,revision:0,paused:false,windPhase:0,windSpeed:.35,weather:'clear',breeze:'gentle',light:'warm',music:'play',street:'wander',birds:'fly',trainPolicy:'auto',dining:'auto',pond:'swim',animals:'wander',cycling:'ride',festivalAuto:false,festivalUntil:0,festivalStarted:0,festivalStop:null,festivalNextAt:38,train:createTrain(nav.activities?.rail),movers:createMovers(nav.activities),diners:createDiners(nav.activities?.diners),actors:[],events:[],commands:[],stats:{moves:0,yields:0,completed:0,rejected:0},navSignature:nav.nodes.length};
+ const s={inputSession:null,sceneEvent:null,eventSequence:0,eventWeather:{rain:0,snow:0,cover:0},intentRuntime:createIntentRuntime(),day_phase:'dusk',dayWeights:{dawn:0,day:0,dusk:1,night:0},passengers:createPassengers(nav.activities?.boarding),objectControls:{},localWalkers:createLocalWalkers(nav.activities?.localRoutes),residentActions:createResidentActions(),availableRoutes:Object.keys(nav.activities?.localRoutes||{}),roleOverrides:{},occasion:'ordinary',lastOccasion:'ordinary',lastWeather:'clear',weatherChangedAt:0,afterRainUntil:0,musicManual:false,effectiveMusic:'play',musicGatherUntil:0,occasionUntil:0,planRevision:0,worldEvent:{kind:'ordinary',phase:'ongoing',started:0,until:0,revision:0},residents:createCommunity(nav),version:VERSION,seed:seed>>>0,tick:0,time:0,revision:0,paused:false,windPhase:0,windSpeed:.35,weather:'clear',breeze:'gentle',light:'warm',music:'play',street:'wander',birds:'fly',trainPolicy:'auto',dining:'auto',pond:'swim',animals:'wander',cycling:'ride',festivalAuto:false,festivalUntil:0,festivalStarted:0,festivalStop:null,festivalNextAt:38,train:createTrain(nav.activities?.rail),movers:createMovers(nav.activities),diners:createDiners(nav.activities?.diners),actors:[],events:[],commands:[],stats:{moves:0,yields:0,completed:0,rejected:0},navSignature:nav.nodes.length};
  for(const a of nav.actors){s.actors.push({manual:false,task:'stroll',taskRevision:0,reservation:null,lookTarget:null,walked:0,speed:0,actualSpeed:0,gaitWeight:0,intent:'wander',eventOnly:!!a.eventOnly,mobile:!a.eventOnly&&!!a.entry?.length,id:a.id,p:[...a.position],yaw:a.yaw,scale:a.scale[2],node:a.entry.at(-1)??a.nearest[0],path:[],segment:0,target:null,mode:'idle',wait:['resident.garden_child','resident.kite_child','resident.child_parent'].includes(a.id)?.7+s.actors.length*.16:1.3+(s.actors.length*1.2)%6.2,phase:s.actors.length*.8,entry:a.entry,atHome:true,blocked:0});}
  const first=['resident.garden_child','resident.kite_child','resident.child_runner','resident.child_parent'];s.actors.sort((a,b)=>(first.includes(a.id)?first.indexOf(a.id):99)-(first.includes(b.id)?first.indexOf(b.id):99));
  for(const a of s.actors)if(a.mobile){a.wait=.15+stableUnit(a.id)*1.8;s.residentActions[a.id].nextAt=8+stableUnit(a.id)*3;}stimulateTown(s,[],{opening:true});
@@ -97,7 +98,7 @@ export function step(s,nav,dt=DT){if(s.paused)return;if(dt!==DT)throw Error('模
  a.blocked=0;a.mode='walk';a.speed=Math.min(speed,a.speed+dt*1.2);a.walked+=travel;a.actualSpeed=travel/dt;const wanted=Math.atan2(target[1]-a.p[1],target[0]-a.p[0])+Math.PI/2;let delta=Math.atan2(Math.sin(wanted-a.yaw),Math.cos(wanted-a.yaw));a.yaw+=Math.max(-dt*3,Math.min(dt*3,delta));a.p=candidate;const ix=Math.round((a.p[0]-nav.origin[0])/nav.step),iy=Math.round((a.p[1]-nav.origin[1])/nav.step),floorNode=nav.grid[`${ix},${iy}`];if(floorNode!==undefined){a.p[2]=nav.nodes[floorNode][2]-.02*a.scale+.006;a.node=floorNode;}s.stats.moves++;
  if(d<=travel+.00001){a.node=n;a.segment++;if(a.segment>=a.path.length){a.path=[];a.target=null;a.mode='idle';if(a.detouring){a.detouring=false;a.wait=a.eventYieldUntil>s.time?3.5:.2;a.reservation=a.responseDestination??null;continue;}a.wait=varied((a.responseUntil||0)>s.time&&!['shelter','fireworks'].includes(a.task)?[3,6]:(ACTIVITIES[a.task]?.range||CADENCE.rest),a.id,s.residents[a.id].cycle);const r=s.residents[a.id];r.started=s.time;r.until=s.time+a.wait;r.reason=a.task==='shelter'?(nav.activities.spaces.nodes[a.node].covered?'在屋檐下等雨小些':'在门前撑伞，等雨小些'):'已经到了，'+(ACTIVITIES[a.task]?.label||'休息一会');a.lookTarget=a.task==='kite'?[2.5,-1,4]:a.task==='follow'?(s.actors.find(b=>b.id==='resident.kite_child')?.p||null):a.task==='fireworks'?FIREWORK_FOCUS.slice():a.task==='lotus'?[8,-1.5,.7]:a.task==='listen'?[-2.47,-1.45,1.2]:a.task==='browse'?(nav.activities.spaces.residents[a.workstation]?.position||[-1,3,1.2]):null;if(a.task==='chat'){const other=s.actors.filter(b=>b!==a).sort((b,c)=>distance(a.p,b.p)-distance(a.p,c.p))[0];a.lookTarget=other?.p?.slice()||null;}r.needs[a.task==='chat'?'social':a.task==='rest'?'rest':'curiosity']=.1;s.stats.completed++;}}
  }
- syncGuestActors(s);
+ syncGuestActors(s);advanceInput(s,nav);
 }
 export function serialize(s){return JSON.stringify(s);}
 export function restore(raw,nav){const s=typeof raw==='string'?JSON.parse(raw):structuredClone(raw);
@@ -123,7 +124,7 @@ export function restore(raw,nav){const s=typeof raw==='string'?JSON.parse(raw):s
  if(!s.residents||Object.keys(s.residents).length!==Object.keys(PROFILES).length||!s.worldEvent||!['ordinary','festival'].includes(s.worldEvent.kind)||!['ongoing','prepare','show','linger','postponed'].includes(s.worldEvent.phase)||!Number.isFinite(s.planRevision))throw Error('居民意图存档无效');
  for(const[id,r]of Object.entries(s.residents)){if(!Object.hasOwn(PROFILES,id)||!Object.hasOwn(ACTIVITIES,r.activity)||!Number.isFinite(r.until)||!Number.isFinite(r.started)||!Number.isFinite(r.umbrellaOpen)||r.umbrellaOpen<0||r.umbrellaOpen>1||!r.lookTarget?.every(Number.isFinite))throw Error('居民活动存档无效');}
  for(const[id,r]of Object.entries(s.roleOverrides||{}))if(!Object.hasOwn(PROFILES,id)||!Object.hasOwn(ACTIVITIES,r.activity)||!Number.isFinite(r.until))throw Error('角色活动存档无效');
- validateBoat(s,nav.activities?.boatRoute);validateCloud(s,nav);validateCraft(s,nav);validateJourney(s);ensureFoxBehavior(s);validateFox(s,nav.activities.foxRoaming);validateNeighborhood(s,nav);validatePaperWorld(s,nav);validateEventTravel(s,nav);validateSceneEvents(s,nav);validateTownResponse(s);validateIntentRuntime(s);validateDecision({day_phase:s.day_phase});if(!s.dayWeights||Object.values(s.dayWeights).some(x=>!Number.isFinite(x)||x<0||x>1))throw Error('日夜存档无效');validatePassengers(s,nav.activities?.boarding);validateObjectControls(s);validateResidentActions(s);validateLocalWalkers(s,nav.activities?.localRoutes);return s;}
+ validateBoat(s,nav.activities?.boatRoute);validateCloud(s,nav);validateCraft(s,nav);validateJourney(s);ensureFoxBehavior(s);validateFox(s,nav.activities.foxRoaming);validateNeighborhood(s,nav);validatePaperWorld(s,nav);validateEventTravel(s,nav);validateSceneEvents(s,nav);validateTownResponse(s);validateIntentRuntime(s);validateDecision({day_phase:s.day_phase});if(!s.dayWeights||Object.values(s.dayWeights).some(x=>!Number.isFinite(x)||x<0||x>1))throw Error('日夜存档无效');validatePassengers(s,nav.activities?.boarding);validateObjectControls(s);validateResidentActions(s);validateLocalWalkers(s,nav.activities?.localRoutes);recoverInput(s);return s;}
 
 export function captureIntent(s){return {...Object.fromEntries(['weather','breeze','light','music','street','birds','dining','pond','animals','cycling','occasion','day_phase'].map(k=>[k,s[k]])),train:s.trainPolicy,festival:s.festivalAuto?'auto':s.festivalUntil>s.time?'fireworks':'quiet',...Object.fromEntries(Object.entries(ACTOR_DOMAINS).map(([k,id])=>[k,s.actors.find(a=>a.id===id)?.intent||'keep']))};}
 

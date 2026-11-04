@@ -1,5 +1,5 @@
-import {createEventSfx} from './event-sfx.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {writeText} from './i18n.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
+import {createEventSfx} from './event-sfx.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {writeText} from './i18n.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
 
 // User-approved loop master, played unchanged. Keep the same track across events.
 export function createSound(button){

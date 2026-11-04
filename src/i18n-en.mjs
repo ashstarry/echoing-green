@@ -1,4 +1,4 @@
-import {CRAFT_EN} from './craft-english.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
+import {CRAFT_EN} from './craft-english.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
 // Source strings remain stable in the simulation and saves. Only presentation is translated.
 export const EN=Object.fromEntries(`
 言外=Echoing Green
@@ -986,3 +986,25 @@ Object.assign(EN,{'试试这句':'Try this wish','晚市':'Market','花火':'Fir
 Object.assign(EN,{'借一缕晨光':'First light','看纸雪飘落':'Paper snow','逛逛晚市':'Market glow','等一场花火':'Sky in bloom'});
 
 EN['换一句灵感']='Another idea';
+
+Object.assign(EN,{
+ '靠站时接过电车捎来的包裹，走向街坊并交接':'Receive a parcel from the stopped tram and carry it to a neighbor',
+ '旅客上车、邻居送行、电车出发；后续乘车归日常生活':'Board, wave goodbye, and set off; the ride continues as daily life',
+ '迎接已到站的旅客，下车或在站边招呼，不额外安排整圈':'Welcome a traveler at the station, without waiting for another lap',
+ '电车或旅客还没准备好，靠站后再来迎送。':'The tram or traveler is not ready yet. Try once they are at the station.',
+ '正在回应…':'Responding…',
+ '小镇正在回应 · 结束后可尝试下一句':'The town is responding · another wish when this ends',
+ '这一段正在收尾…':'This little moment is winding down…',
+ '这一段结束了 · 可以再试一句':'This moment is complete · try another wish',
+ '这次暂时没有展开 · 可以换一句再试':'This moment could not unfold · try another wish',
+ '互动已暂停 · 继续后再体验下一件事':'This moment is paused · resume to continue',
+ '小镇还在回应上一句话，请等这一段结束。':'The town is still responding. Let this moment finish first.',
+ '这一句已经结束，请再试一次。':'This wish has ended. Please try again.',
+ '电车还在路上，靠站后再来迎送。':'The tram is on its way. Try a greeting when it stops here.',
+ '旅客正在上下车，等他站稳后再试。':'The traveler is boarding or stepping off. Try once they are ready.',
+ '这时还没有归来的旅客，先试试另一件小事。':'No traveler is returning just now. Try another little moment.',
+ '旅客已经是这个状态了。':'The traveler is already doing that.',
+ '上车，和邻居道别':'Board and wave goodbye',
+ '电车停在站边，旅客拿起捎来的小包裹，准备交给街坊。':'The tram waits as its traveler takes a little parcel to a neighbor.',
+ '邻居挥手道别，电车带着旅客出发了。':'Neighbors wave goodbye as the tram sets off.'
+});

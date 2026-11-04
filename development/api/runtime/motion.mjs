@@ -1,5 +1,5 @@
 import {avoidBoat} from './boat-world.mjs';
-import {advanceFox,suspendFox} from './fox-behavior.mjs';
+import {advanceFox} from './fox-behavior.mjs';
 import {needsClearPromenade} from './event-design.mjs';
 import {makeRoom} from './event-travel.mjs';
 import {CADENCE,varied} from './cadence.mjs';
@@ -23,7 +23,7 @@ export function railPose(path,d){const p=sampleRail(path,d),a=sampleRail(path,d-
 export function stationDistance(path){let best=0,score=Infinity;for(let i=0;i<path.points.length;i++){const p=path.points[i],d=(p[0]+.6)**2+(p[1]+6.9)**2;if(d<score){score=d;best=i;}}return path.lengths[best];}
 export function createTrain(path){if(!path)return null;const stop=stationDistance(path);return {distance:stop-4.3,nextStop:stop,speed:.5,mode:'cruise',remaining:0,arrivals:0,departures:0,laps:0,hold:false,doorOpen:0,dwellDuration:16,arrivedAt:-1};}
 export function stepTrain(s,path,dt,emit){const tr=s.train;if(!tr||!path)return;
- if(tr.mode==='dwell'){tr.speed=0;tr.doorOpen+=clamp((tr.hold||tr.passengerHold||tr.remaining>2?1:0)-tr.doorOpen,-dt*.75,dt*.75);tr.remaining=Math.max(0,tr.remaining-dt);if(tr.remaining===0&&!tr.hold&&!tr.passengerHold){tr.mode='depart';tr.nextStop+=path.length;tr.departures++;emit('电车关上车门，继续绕镇行驶。');}return;}
+ if(tr.mode==='dwell'){tr.speed=0;tr.doorOpen+=clamp((tr.hold||(tr.passengerHold||s.trainJourney?.stationHold)||tr.remaining>2?1:0)-tr.doorOpen,-dt*.75,dt*.75);tr.remaining=Math.max(0,tr.remaining-dt);if(tr.remaining===0&&!tr.hold&&!(tr.passengerHold||s.trainJourney?.stationHold)){tr.mode='depart';tr.nextStop+=path.length;tr.departures++;emit('电车关上车门，继续绕镇行驶。');}return;}
  tr.doorOpen=Math.max(0,tr.doorOpen-dt*.75);
  const left=Math.max(0,tr.nextStop-tr.distance),target=Math.min(.62,Math.max(0,Math.sqrt(2*.20*left)-.20*dt));tr.speed+=clamp(target-tr.speed,-.26*dt,.18*dt);const move=Math.min(left,tr.speed*dt);tr.distance+=move;
  if(left<2.1&&tr.mode!=='arrive'){tr.mode='arrive';emit('电车正在减速进站。');}
@@ -33,7 +33,7 @@ export function stepTrain(s,path,dt,emit){const tr=s.train;if(!tr||!path)return;
 export function sampleClip(clip,clock){const n=clip.samples.length-1,at=clamp(clock/clip.duration*n,0,n),i=Math.floor(at),j=Math.min(n,i+1),u=at-i,a=clip.samples[i],b=clip.samples[j],da=Math.atan2(Math.sin(b[3]-a[3]),Math.cos(b[3]-a[3]));return {p:a.slice(0,3).map((v,k)=>v+(b[k]-v)*u),yaw:a[3]+da*u,pitch:(a[4]||0)+((b[4]||0)-(a[4]||0))*u,bank:(a[5]||0)+((b[5]||0)-(a[5]||0))*u};}
 export function createMovers(activities){return Object.fromEntries(Object.entries(activities?.clips||{}).map(([id,c])=>[id,{clock:0,distance:0,footDown:0,stopWait:0,stopIndex:0,completedStops:0,tripState:'ride',blocked:false,wait:0,speed:1,strideWeight:1,clearTime:0,restUntil:0,nextPause:varied([3,7],id),pauses:0,intent:c.motion==='creature_walk'?'explore':c.motion,...sampleClip(c,0)}]));}
 export function advanceMovers(s,activities,dt,nav=null,requestGesture=()=>{}){for(const[id,m]of Object.entries(s.movers||{})){
- const clip=activities.clips[id];if(avoidBoat(s,id,m,clip,dt,activities.boatRoute))continue;if(id==='animal.garden_fox'){const clearing=needsClearPromenade(s.sceneEvent?.kind)&&['gather','active','closing'].includes(s.sceneEvent.phase);if(clearing||m.eventHome){suspendFox(s);if(advanceEventFox(s,m,clip,dt))continue;}if(advanceFox(s,activities.foxRoaming,dt,requestGesture))continue;}const ground=['creature_walk','ride'].includes(clip.motion),policy=clip.motion==='fly'?s.birds:clip.motion==='ride'?s.cycling:clip.motion==='swim'?s.pond:s.animals;
+ const clip=activities.clips[id];if(avoidBoat(s,id,m,clip,dt,activities.boatRoute))continue;if(id==='animal.garden_fox'){const clearing=needsClearPromenade(s.sceneEvent?.kind)&&['gather','active','closing'].includes(s.sceneEvent.phase);if(advanceFox(s,activities.foxRoaming,dt,requestGesture,{clearing}))continue;}const ground=['creature_walk','ride'].includes(clip.motion),policy=clip.motion==='fly'?s.birds:clip.motion==='ride'?s.cycling:clip.motion==='swim'?s.pond:s.animals;
  if(clip.motion==='creature_walk'&&s.time>=m.nextPause&&s.time>=m.restUntil){m.pauses++;m.restUntil=s.time+varied([2.5,6],id,m.pauses);m.nextPause=m.restUntil+varied([3,7],id,m.pauses);}
  const eventRest=clip.motion==='creature_walk'&&needsClearPromenade(s.sceneEvent?.kind);
  const wantsRest=eventRest||policy==='rest'||s.time<m.restUntil||(clip.motion==='ride'&&(s.weather==='rain'||s.worldEvent?.kind==='festival'));
@@ -68,11 +68,4 @@ function advanceCycle(s,id,m,clip,dt,nav){
  if(s.cycling==='rest'&&!eventParking&&m.blocked&&m.wait>2){m.tripState='parked';m.stopWait=0;m.speed=0;return true;}
  if(left<.004||move>=left-.00001){m.clock=target;Object.assign(m,sampleClip(clip,target));m.stopIndex=(m.stopIndex+1)%stops.length;m.stopWait=varied([11,19],id,m.completedStops++);m.tripState='parked';m.speed=0;}
  return true;
-}
-
-function advanceEventFox(s,m,clip,dt){
- const active=needsClearPromenade(s.sceneEvent?.kind)&&['gather','active','closing'].includes(s.sceneEvent.phase);
- if(s.objectControls?.['animal.garden_fox']?.target===0&&s.objectControls?.['animal.garden_fox']?.action!=='stretch'){m.speed=0;m.strideWeight+=(0-m.strideWeight)*Math.min(1,dt*8);m.intent='rest';return true;}
- if(active&&!m.eventHome)m.eventHome={p:m.p.slice(),yaw:m.yaw};
- if(!m.eventHome)return false;const target=active?[5.15,1.7,.624]:m.eventHome.p,dx=target[0]-m.p[0],dy=target[1]-m.p[1],d=Math.hypot(dx,dy),desiredYaw=d>.005?Math.atan2(dy,dx)+Math.PI:m.eventHome.yaw,remaining=Math.atan2(Math.sin(desiredYaw-m.yaw),Math.cos(desiredYaw-m.yaw));m.yaw+=clamp(remaining,-dt*2.6,dt*2.6);const move=Math.min(d,.72*dt*Math.max(0,Math.cos(Math.atan2(Math.sin(desiredYaw-m.yaw),Math.cos(desiredYaw-m.yaw))))),candidate=m.p.map((x,k)=>x+(target[k]-x)*move/(d||1));if(s.actors.some(a=>Math.abs(a.p[2]-candidate[2])<1&&Math.hypot(a.p[0]-candidate[0],a.p[1]-candidate[1])<.78&&Math.hypot(a.p[0]-candidate[0],a.p[1]-candidate[1])<Math.hypot(a.p[0]-m.p[0],a.p[1]-m.p[1])-1e-6)){m.speed=0;m.strideWeight+=(0-m.strideWeight)*Math.min(1,dt*8);m.intent='yield';return true;}m.speed=move/(.72*dt);m.strideWeight+=(Number(move>.001)-m.strideWeight)*Math.min(1,dt*8);m.intent=active?'head_for_garden':'return_to_garden';if(d>.005){m.p=m.p.map((x,k)=>x+(target[k]-x)*move/d);m.distance+=move;}else if(!active&&Math.abs(Math.atan2(Math.sin(m.eventHome.yaw-m.yaw),Math.cos(m.eventHome.yaw-m.yaw)))<.04){m.p=m.eventHome.p;delete m.eventHome;}return true;
 }

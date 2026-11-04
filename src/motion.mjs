@@ -1,8 +1,8 @@
-import {avoidBoat} from './boat-world.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {advanceFox} from './fox-behavior.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {needsClearPromenade} from './event-design.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {makeRoom} from './event-travel.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {CADENCE,varied} from './cadence.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
+import {avoidBoat} from './boat-world.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {advanceFox} from './fox-behavior.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {needsClearPromenade} from './event-design.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {makeRoom} from './event-travel.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {CADENCE,varied} from './cadence.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
 export const TAU=Math.PI*2;
 export const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 export const ease=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
@@ -23,7 +23,7 @@ export function railPose(path,d){const p=sampleRail(path,d),a=sampleRail(path,d-
 export function stationDistance(path){let best=0,score=Infinity;for(let i=0;i<path.points.length;i++){const p=path.points[i],d=(p[0]+.6)**2+(p[1]+6.9)**2;if(d<score){score=d;best=i;}}return path.lengths[best];}
 export function createTrain(path){if(!path)return null;const stop=stationDistance(path);return {distance:stop-4.3,nextStop:stop,speed:.5,mode:'cruise',remaining:0,arrivals:0,departures:0,laps:0,hold:false,doorOpen:0,dwellDuration:16,arrivedAt:-1};}
 export function stepTrain(s,path,dt,emit){const tr=s.train;if(!tr||!path)return;
- if(tr.mode==='dwell'){tr.speed=0;tr.doorOpen+=clamp((tr.hold||tr.passengerHold||tr.remaining>2?1:0)-tr.doorOpen,-dt*.75,dt*.75);tr.remaining=Math.max(0,tr.remaining-dt);if(tr.remaining===0&&!tr.hold&&!tr.passengerHold){tr.mode='depart';tr.nextStop+=path.length;tr.departures++;emit('电车关上车门，继续绕镇行驶。');}return;}
+ if(tr.mode==='dwell'){tr.speed=0;tr.doorOpen+=clamp((tr.hold||(tr.passengerHold||s.trainJourney?.stationHold)||tr.remaining>2?1:0)-tr.doorOpen,-dt*.75,dt*.75);tr.remaining=Math.max(0,tr.remaining-dt);if(tr.remaining===0&&!tr.hold&&!(tr.passengerHold||s.trainJourney?.stationHold)){tr.mode='depart';tr.nextStop+=path.length;tr.departures++;emit('电车关上车门，继续绕镇行驶。');}return;}
  tr.doorOpen=Math.max(0,tr.doorOpen-dt*.75);
  const left=Math.max(0,tr.nextStop-tr.distance),target=Math.min(.62,Math.max(0,Math.sqrt(2*.20*left)-.20*dt));tr.speed+=clamp(target-tr.speed,-.26*dt,.18*dt);const move=Math.min(left,tr.speed*dt);tr.distance+=move;
  if(left<2.1&&tr.mode!=='arrive'){tr.mode='arrive';emit('电车正在减速进站。');}

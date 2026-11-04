@@ -1,6 +1,6 @@
-import {requestLocalDestination} from './local-walkers.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {PROFILES} from './community.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {stableUnit,varied} from './cadence.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
+import {requestLocalDestination} from './local-walkers.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {PROFILES} from './community.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {stableUnit,varied} from './cadence.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
 // Counts refer to distinct, executable intentions, not interpolation frames or body parts.
 export const RESIDENT_ACTIONS={
  walk_street:{label:'沿街走到另一处',duration:60,navTask:'stroll'},

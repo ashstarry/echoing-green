@@ -1,9 +1,9 @@
-import {eventKind} from './scene-events.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {stimulateTown} from './town-response.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {requestPassengerAction} from './passengers.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {requestObjectAction} from './object-actions.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {validateDecision} from './catalog.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
+import {eventKind} from './scene-events.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {stimulateTown} from './town-response.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {requestPassengerAction} from './passengers.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {requestObjectAction} from './object-actions.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {validateDecision} from './catalog.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
 
 // Compound goals reuse tested movements, with real completion/occupation checks between steps.
 export const LIFE_PLANS={
@@ -48,12 +48,12 @@ function startResident(s,j,action,apply){const id=j.target;
  const r=s.residentActions[id],before=r.completed;requestResidentAction(s,id,action);return{type:'resident',action,before};
 }
 function complete(s,j){const m=j.monitor;if(!m)return false;if(m.type==='boat')return s.boatJourney?.completedControl===m.value;if(m.type==='fox')return s.foxBehavior?.completedControl===m.value;if(m.type==='immediate')return true;if(m.type==='wait'||m.type==='activity')return s.time>=m.until;if(m.type==='diner')return s.diners[j.target].phase===m.value;if(m.type==='resident'){const r=s.residentActions[j.target];return r.completed>m.before&&r.lastAction===m.action;}
- if(m.type==='passenger'){const p=s.passengers[j.target];return m.value==='ride_once'?p.completedTrips>m.before:p.phase==='waiting';}return false;
+ if(m.type==='passenger'){const p=s.passengers[j.target];if(m.value==='ride_once'&&s.inputSession?.requestIds?.includes(j.requestId))return p.phase==='riding'&&s.train.mode!=='dwell';return m.value==='ride_once'?p.completedTrips>m.before:p.phase==='waiting';}return false;
 }
 export function advanceIntentRuntime(s,nav,dt,apply,emit){
  const runtime=s.intentRuntime,catalog=nav.activities.objectCatalog||{};
  if(s.day_phase!==runtime.lastDay){runtime.lastDay=s.day_phase;const jobs=s.day_phase==='night'?[['resident.quiet_reader','close_book'],['resident.elder','sip_tea'],['resident.upper_diner_0','inside']]:s.day_phase==='dawn'?[['resident.gardener','inspect_leaf'],['resident.vendor_bread','wipe_counter'],['resident.quiet_reader','read_pages']]:s.day_phase==='day'?[['resident.gardener','water_plants'],['resident.vendor_flower','offer_food']]:[['resident.musician','play_music'],['resident.vendor_lamp','greet']];runtime.daily=jobs.map(([target,action],i)=>({target,action,at:s.time+2+i*2.8}));}
- for(const item of runtime.daily){if(item.done||s.time<item.at)continue;if(s.sceneEvent&&s.sceneEvent.phase!=='release'||s.weather==='rain'||s.residentActions[item.target]?.requested||s.residentActions[item.target]?.queuedByUser||runtime.jobs.some(j=>j.target===item.target&&!['done','failed','cancelled'].includes(j.status))){item.done=true;continue;}queueIntent(s,[{...item,kind:'resident'}],{source:'day_rhythm'},catalog);item.done=true;}
+ for(const item of runtime.daily){if(item.done||s.time<item.at)continue;if(['listening','running','closing'].includes(s.inputSession?.phase)){item.done=true;continue;}if(s.sceneEvent&&s.sceneEvent.phase!=='release'||s.weather==='rain'||s.residentActions[item.target]?.requested||s.residentActions[item.target]?.queuedByUser||runtime.jobs.some(j=>j.target===item.target&&!['done','failed','cancelled'].includes(j.status))){item.done=true;continue;}queueIntent(s,[{...item,kind:'resident'}],{source:'day_rhythm'},catalog);item.done=true;}
  // Apply the macros from one utterance atomically: the event policy sees the
  // complete request, rather than treating each field as another new event.
  const groups=new Map();for(const j of runtime.jobs)if(j.kind==='macro'&&j.status==='pending'&&j.step===0){if(!groups.has(j.requestId))groups.set(j.requestId,[]);groups.get(j.requestId).push(j);}

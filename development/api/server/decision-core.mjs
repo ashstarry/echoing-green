@@ -1005,9 +1005,9 @@ export const contract={
       "label": "电车上的一段旅程",
       "choices": {
         "keep": "保持当前行程",
-        "deliver": "用现有电车捎一件包裹，旅客回来后与街坊交接",
-        "depart": "请现有旅客乘电车绕镇一程，邻居送行，回来后再下车",
-        "welcome": "迎接这位旅客回来：在车上的人到站下车，尚在站台的人先完成一程再归来",
+        "deliver": "靠站时接过电车捎来的包裹，走向街坊并交接",
+        "depart": "旅客上车、邻居送行、电车出发；后续乘车归日常生活",
+        "welcome": "迎接已到站的旅客，下车或在站边招呼，不额外安排整圈",
         "rest": "先不安排新的乘车，已上车的人安全到站再下车"
       },
       "kind": "macro",
@@ -20338,6 +20338,8 @@ export function normalizeState(input={}){
  if(Number.isInteger(input.paper_count)&&input.paper_count>=0&&input.paper_count<=6)s.paper_count=input.paper_count;
  if(typeof input.selected_entity==='string'&&(contract.fields[input.selected_entity]?.kind==='resident'||registry.entities.some(e=>e.id===input.selected_entity)))s.selected_entity=input.selected_entity;
  if(['waiting','riding'].includes(input.passenger_phase))s.passenger_phase=input.passenger_phase;
+ if(typeof input.train_at_station==='boolean')s.train_at_station=input.train_at_station;
+ if(typeof input.traveler_available==='boolean')s.traveler_available=input.traveler_available;
  if(['open','closed'].includes(input.reader_book))s.reader_book=input.reader_book;if(typeof input.festival_auto==='boolean')s.festival_auto=input.festival_auto;
  s.individual_overrides={light:input.individual_overrides?.light===true,breeze:input.individual_overrides?.breeze===true};return s;
 }
@@ -20413,7 +20415,7 @@ export function makeRequest(text,state={}){
  questions['scope:cloud'].instructions='明确或诗意邀请这朵小云移动、只给某个角落一小片雨、局部雨停=yes。只说全镇下雨、雨停=no。';
  questions.weather.instructions+=' 小雨云只在一个角落/花园/集市下雨或沿街移动属于cloud，weather=keep。局部雨不等于全镇天气。';
  questions['scope:weather'].instructions+=' Only a small cloud moving or raining on one named corner/garden is local cloud, choose no for global weather.';
- questions.journey.instructions+=' 把包裹/礼物托现有电车捎一程，或希望列车带一件小物回来交给街坊，选deliver。已有真实包裹装车、随车、下车和交接；没有跨世界目的地或新增人。';
+ questions.journey.instructions+=' 列车带一件小物回来交给街坊选deliver：靠站时拿起已经捎来的包裹，走向街坊并交接，不额外等整圈。depart展示真实上车、送行、开走，余下旅程归日常生活。只有current.train_at_station不是false且current.traveler_available不是false时，迎送和包裹交接才可立即开始；否则不要安排等待。没有跨世界目的地或新增人。';
  questions['scope:journey'].instructions+=' 电车捎来包裹/托列车带小礼物也选yes。';
  questions['object.boat'].instructions='现有小木船可cruise：收桨、松绳，在池塘内走一小程再回泊；dock：提前回泊；rest：先平稳停下；row只在原处摆桨；bob系泊轻摇。想让船看看池塘另一边/水路带它出去一小程可以cruise，不能出海、离开池塘或乘人。';
  questions.intent_status.instructions+=' 热茶点心、借伞同行、落叶整理、有限纪念角、晾晒收布、现有雨云移动与局部降雨、现有船在池塘内离岸回泊、电车带包裹交接都已经实现；这些相关诗意愿望属于change，不是新造物件。';
@@ -20472,6 +20474,7 @@ export function parsePlan(raw,request){
   if(key==='craft'&&['recall','putaway'].includes(action)&&state.memory_count===0)reason='纪念角暂时还是空的，先留下一件小物吧。';
   if(key==='paper'&&['read','collect'].includes(action)&&state.paper_count===0)reason='树边还没有纸笺，先留一张吧。';
   if(key==='resident.station_traveler'&&((action==='ride_once'&&state.passenger_phase==='riding')||(action==='alight'&&state.passenger_phase==='waiting')))reason='已经是这个状态';
+  if((key==='journey'&&action!=='rest'||key==='resident.station_traveler'&&['ride_once','alight','stay'].includes(action))&&(state.train_at_station===false||state.traveler_available===false))reason='电车或旅客还没准备好，靠站后再来迎送。';
   if(key==='light'&&!['global','both'].includes(raw.answers.lighting_coverage.choice))reason='仅针对局部灯具，不改变全镇灯光';
   if(d.kind==='macro'&&state[key]===action&&!state.individual_overrides?.[key]&&['train','festival'].includes(key)&&!(key==='festival'&&(action==='fireworks'||action==='quiet'&&state.festival_auto)))reason='已经是这个状态';if(key==='festival'&&action==='auto'&&state.festival_auto)reason='已经是这个状态';
   if(reason){skipped.push({target:key,label,target_label:d.label,reason});continue;}

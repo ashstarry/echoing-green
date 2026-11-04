@@ -9,11 +9,11 @@ export function advancePassengers(s,activities,dt){const config=activities?.boar
  const open=['prepare_board','board','prepare_exit','alight'].includes(p.phase);p.door+=Math.max(-dt*1.5,Math.min(dt*1.5,Number(open)-p.door));p.ramp+=Math.max(-dt*.8,Math.min(dt*.8,Number(open&&p.door>.98)-p.ramp));
  if(['prepare_board','board','secure','prepare_exit','alight','close_exit'].includes(p.phase))tr.passengerHold=true;
  if(p.phase==='prepare_board'&&p.door>.99&&p.ramp>.99&&!waitingForHands){p.phase='board';p.clock=0;p.vehicle=config.vehicle;}
- else if(p.phase==='board'){p.clock+=dt;if(p.clock>=config.boardDuration){p.phase='secure';p.clock=0;p.exitArrival=p.cancelTrip?tr.arrivals:tr.arrivals+1;p.cancelTrip=false;}}
+ else if(p.phase==='board'){p.clock+=dt*(s.inputSession?.phase==='running'?1.65:1);if(p.clock>=config.boardDuration){p.phase='secure';p.clock=0;p.exitArrival=p.cancelTrip?tr.arrivals:tr.arrivals+1;p.cancelTrip=false;}}
  else if(p.phase==='secure'&&p.door<.01&&p.ramp<.01){p.phase='riding';p.clock=0;}
  else if(p.phase==='riding'&&tr.mode==='dwell'&&tr.arrivals>=p.exitArrival){p.phase='prepare_exit';p.clock=0;tr.passengerHold=true;}
  else if(p.phase==='prepare_exit'&&p.door>.99&&p.ramp>.99){p.phase='alight';p.clock=0;}
- else if(p.phase==='alight'){p.clock+=dt;if(p.clock>=config.exitDuration){p.phase='close_exit';p.clock=0;p.vehicle=null;p.completedTrips++;p.requested=false;p.nextTripAt=s.time+80+(p.completedTrips%3)*19;if(p.mode==='once')p.mode='stay';}}
+ else if(p.phase==='alight'){p.clock+=dt*(s.inputSession?.phase==='running'?1.65:1);if(p.clock>=config.exitDuration){p.phase='close_exit';p.clock=0;p.vehicle=null;p.completedTrips++;p.requested=false;p.nextTripAt=s.time+80+(p.completedTrips%3)*19;if(p.mode==='once')p.mode='stay';}}
  else if(p.phase==='close_exit'&&p.door<.01&&p.ramp<.01){p.phase='waiting';p.clock=0;}
 }
 export function validatePassengers(s,config){if(!config){if(Object.keys(s.passengers||{}).length)throw Error('未开放的乘车存档');return;}const p=s.passengers?.[config.actor];if(!p||!['waiting','prepare_board','board','secure','riding','prepare_exit','alight','close_exit'].includes(p.phase)||!['auto','once','stay'].includes(p.mode)||!['clock','door','ramp','exitArrival','nextTripAt','completedTrips'].every(k=>Number.isFinite(p[k])))throw Error('乘车存档无效');}

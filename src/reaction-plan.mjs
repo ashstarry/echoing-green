@@ -1,5 +1,5 @@
-import {ACTOR_DOMAINS} from './catalog.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
-import {PROFILES} from './community.mjs?v=cp44-wish-reroll-8bb3b9f2122a';
+import {ACTOR_DOMAINS} from './catalog.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {PROFILES} from './community.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
 const role=id=>PROFILES[id]?.label||'这位居民';
 const moving=a=>a&&['walk','yield','fold_umbrella'].includes(a.mode);
 const reached=a=>a&&a.reservation!==null&&!moving(a)&&a.path.length===0;
