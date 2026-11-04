@@ -9,5 +9,4 @@ work/
 private/
 outputs/
 
-# Versioned source scripts; private data exclusions above still apply.
 !/development/work/
