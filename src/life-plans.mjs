@@ -1,9 +1,9 @@
-import {eventKind} from './scene-events.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
-import {stimulateTown} from './town-response.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
-import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
-import {requestPassengerAction} from './passengers.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
-import {requestObjectAction} from './object-actions.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
-import {validateDecision} from './catalog.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {eventKind} from './scene-events.mjs?v=cp45-responsive-episodes-e28490733a86';
+import {stimulateTown} from './town-response.mjs?v=cp45-responsive-episodes-e28490733a86';
+import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp45-responsive-episodes-e28490733a86';
+import {requestPassengerAction} from './passengers.mjs?v=cp45-responsive-episodes-e28490733a86';
+import {requestObjectAction} from './object-actions.mjs?v=cp45-responsive-episodes-e28490733a86';
+import {validateDecision} from './catalog.mjs?v=cp45-responsive-episodes-e28490733a86';
 
 // Compound goals reuse tested movements, with real completion/occupation checks between steps.
 export const LIFE_PLANS={

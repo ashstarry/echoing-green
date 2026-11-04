@@ -1,9 +1,9 @@
-import {smallProps} from './small-props.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {smallProps} from './small-props.mjs?v=cp45-responsive-episodes-e28490733a86';
 import * as THREE from 'three';
-import {makeArmSolver} from './arm-ik.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
-import {handWorldPoint} from './prop-attachment.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
-import {interactionStep,INTERACTION_PRIMITIVES} from './interaction-sequence.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
-import {HOME} from './neighborhood-world.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {makeArmSolver} from './arm-ik.mjs?v=cp45-responsive-episodes-e28490733a86';
+import {handWorldPoint} from './prop-attachment.mjs?v=cp45-responsive-episodes-e28490733a86';
+import {interactionStep,INTERACTION_PRIMITIVES} from './interaction-sequence.mjs?v=cp45-responsive-episodes-e28490733a86';
+import {HOME} from './neighborhood-world.mjs?v=cp45-responsive-episodes-e28490733a86';
 const ease=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};
 export function createNeighborhoodView({scene,entities,parts,sockets}){
  const shared=smallProps(scene);

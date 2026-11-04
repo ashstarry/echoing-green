@@ -1,6 +1,6 @@
-import {PROFILES} from './community.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
-import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
-import {stableUnit} from './cadence.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {PROFILES} from './community.mjs?v=cp45-responsive-episodes-e28490733a86';
+import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp45-responsive-episodes-e28490733a86';
+import {stableUnit} from './cadence.mjs?v=cp45-responsive-episodes-e28490733a86';
 
 const live=j=>!['done','failed','cancelled'].includes(j.status);
 const safeToBlend=action=>action&&!RESIDENT_ACTIONS[action]?.route&&!RESIDENT_ACTIONS[action]?.navTask&&!['sip_tea','taste_food','feed_pond','look_pond'].includes(action);

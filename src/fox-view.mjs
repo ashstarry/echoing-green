@@ -1,4 +1,4 @@
-import * as THREE from 'three';import{foxPose}from'./fox-behavior.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import * as THREE from 'three';import{foxPose}from'./fox-behavior.mjs?v=cp45-responsive-episodes-e28490733a86';
 const PITCH=new THREE.Vector3(0,0,-1),UP=new THREE.Vector3(0,1,0);
 export function createFoxView({entities,parts}){const id='animal.garden_fox',root=entities.get(id),base=new Map([...parts].filter(([k])=>k.startsWith(id+'/')).map(([k,p])=>[k,p.quaternion.clone()]));function rotate(name,axis,angle){const p=parts.get(id+'/'+name),b=base.get(id+'/'+name);if(p&&b)p.quaternion.copy(b).multiply(new THREE.Quaternion().setFromAxisAngle(axis,angle));}
  const displayed={headPitch:0,headTurn:0,tail:0,front:0,back:0,lift:0};

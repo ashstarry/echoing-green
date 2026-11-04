@@ -1,5 +1,5 @@
-import {createInteraction,advanceInteraction,interactionStep,INTERACTION_RECIPES} from './interaction-sequence.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
-import {navigationGraph} from './navigation.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {createInteraction,advanceInteraction,interactionStep,INTERACTION_RECIPES} from './interaction-sequence.mjs?v=cp45-responsive-episodes-e28490733a86';
+import {navigationGraph} from './navigation.mjs?v=cp45-responsive-episodes-e28490733a86';
 export const PAPER_MODES=new Set(['paper_hang','paper_share','paper_read','paper_collect']);
 export const PAPER_LIMIT=6;
 const STATIONS=[{write:[-2.88,-.56],hang:[-2.72,.24],receive:[-2.4,.88]},{write:[1.92,2],hang:[2.24,.24],receive:[2.88,.72]},{write:[3.04,-.08],hang:[1.44,-1.68],receive:[2.08,-1.68]}];

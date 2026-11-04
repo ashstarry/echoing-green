@@ -6,7 +6,7 @@ The repository root remains the published GitHub Pages site. This directory cont
 | --- | --- |
 | `app/runtime-cp45/` | Current frontend, local decision server, tests, contract and build script. Start here. |
 | `api/` | Source mirror of the deployed Sites Jev proxy, including its gateway, tests and deployment configuration. |
-| `app/runtime-cp17/` … `app/runtime-cp44/` | Earlier runtime source checkpoints, for project history and compatibility testing. |
+| `app/runtime-cp17/` … `app/runtime-cp45/` | Earlier runtime source checkpoints, for project history and compatibility testing. |
 | `work/` | Project-authored Blender modeling, lighting, rig/export, simulation, evaluation and release scripts. |
 | `source-provenance.json` | Original paths and hashes; the API mirror identifies its source commit. |
 

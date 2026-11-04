@@ -1,10 +1,10 @@
-import {actionAvailability} from './action-availability.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
-import {requestSceneEvent,eventKind} from './scene-events.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
-import {requestCloud} from './local-cloud.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
-import {interactionStep} from './interaction-sequence.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
-import {RESIDENT_ACTIONS} from './resident-actions.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
-import {PROFILES} from './community.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
-import {FIREWORK_BURSTS,FIREWORK_FLIGHT} from './firework-score.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {actionAvailability} from './action-availability.mjs?v=cp45-responsive-episodes-e28490733a86';
+import {requestSceneEvent,eventKind} from './scene-events.mjs?v=cp45-responsive-episodes-e28490733a86';
+import {requestCloud} from './local-cloud.mjs?v=cp45-responsive-episodes-e28490733a86';
+import {interactionStep} from './interaction-sequence.mjs?v=cp45-responsive-episodes-e28490733a86';
+import {RESIDENT_ACTIONS} from './resident-actions.mjs?v=cp45-responsive-episodes-e28490733a86';
+import {PROFILES} from './community.mjs?v=cp45-responsive-episodes-e28490733a86';
+import {FIREWORK_BURSTS,FIREWORK_FLIGHT} from './firework-score.mjs?v=cp45-responsive-episodes-e28490733a86';
 const terminal=j=>['done','cancelled','failed'].includes(j.status);
 export const INPUT_IDLE_SECONDS=2.8;
 export const inputBusy=s=>['listening','running','closing'].includes(s.inputSession?.phase);

@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {createResponseSignals,responseGlowAlpha,GLOW_SECONDS,MAX_GLOWS} from './response-signals.mjs?v=cp45-responsive-episodes-0d52aa6d7b9c';
+import {createResponseSignals,responseGlowAlpha,GLOW_SECONDS,MAX_GLOWS} from './response-signals.mjs?v=cp45-responsive-episodes-e28490733a86';
 const supported=new Set(['animal','duck','fish','boat','bicycle','parked_bicycle','tram','windmill','door','plant','tree','water_lantern']);
 export function createResponseMarkers({scene,entities,parts=new Map(),registry={entities:[]},nav}){
  const signals=createResponseSignals(),marks=new Map(),rows=new Map(registry.entities.map(e=>[e.id,e])),anchors=new Map();
