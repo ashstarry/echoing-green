@@ -1,9 +1,9 @@
 import * as THREE from 'three';
-import {smallProps} from './small-props.mjs?v=cp46-causal-feedback-ce25f0f81678';
-import {makeArmSolver} from './arm-ik.mjs?v=cp46-causal-feedback-ce25f0f81678';
-import {handWorldPoint} from './prop-attachment.mjs?v=cp46-causal-feedback-ce25f0f81678';
-import {interactionStep,INTERACTION_PRIMITIVES} from './interaction-sequence.mjs?v=cp46-causal-feedback-ce25f0f81678';
-import {CRAFT_PLACES} from './craft-design.mjs?v=cp46-causal-feedback-ce25f0f81678';
+import {smallProps} from './small-props.mjs?v=cp47-expressive-life-23cf705c6924';
+import {makeArmSolver} from './arm-ik.mjs?v=cp47-expressive-life-23cf705c6924';
+import {handWorldPoint} from './prop-attachment.mjs?v=cp47-expressive-life-23cf705c6924';
+import {interactionStep,INTERACTION_PRIMITIVES} from './interaction-sequence.mjs?v=cp47-expressive-life-23cf705c6924';
+import {CRAFT_PLACES} from './craft-design.mjs?v=cp47-expressive-life-23cf705c6924';
 const ease=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};
 const world=p=>new THREE.Vector3(p[0],p[2],-p[1]);
 export function createCraftView({scene,entities,parts,sockets}){
@@ -14,7 +14,7 @@ export function createCraftView({scene,entities,parts,sockets}){
  const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(CRAFT_PLACES.laundry.anchors.map(world)),new THREE.LineBasicMaterial({color:0xb5a17d}));group.add(line);for(const p of CRAFT_PLACES.laundry.anchors){const pole=new THREE.Mesh(new THREE.CylinderGeometry(.024,.032,1.05,6),kit.materials.wood);pole.position.copy(world([p[0],p[1],1.15]));group.add(pole);}
  function make(p){const root=new THREE.Group(),visual=kit.make(p.type,p.color||p.slot||0);root.userData.entity_id='craft.prop.'+p.id;root.userData.owner_entity=p.owner;root.userData.craft_prop_id=p.id;root.add(visual);group.add(root);entities.set(root.userData.entity_id,root);if(p.type==='keepsake'){
    if(p.design==='leaf'){const m=new THREE.Mesh(kit.geometries.leaf,kit.materials.leaf);m.scale.setScalar(.45);m.position.y=.022;visual.add(m);}else if(p.design==='flower'){for(let i=0;i<5;i++){const m=new THREE.Mesh(kit.geometries.sphere,kit.materials.pink);m.scale.set(.025,.009,.035);m.position.set(Math.sin(i*1.257)*.03,.023,Math.cos(i*1.257)*.03);visual.add(m);}}else if(p.design==='ticket'){for(let i=0;i<3;i++)kit.box(visual,0,.018,-.03+i*.03,.10,.003,.005,kit.materials.indigo);}
-  }const o={root,visual,type:p.type};objects.set(p.id,o);return o;}
+  }if(p.type==='parcel')visual.scale.setScalar(1.25);const o={root,visual,type:p.type};objects.set(p.id,o);return o;}
  function head(id,pitch){const p=parts.get(id+'/anim_head'),b=base.get(id+'/anim_head');if(p&&b)p.quaternion.copy(b.q).multiply(q.setFromAxisAngle(X,pitch));}
  function actorTarget(id,p){return entities.get(id)?.worldToLocal(world(p));}
  function pose(j,s){const action=j.cancelledPose||interactionStep(j)?.action,clock=j.cancelledPose?j.cancelClock:j.clock,duration=INTERACTION_PRIMITIVES[action]?.seconds||1,weight=['approach','carry','pair_walk','wait_for'].includes(action)?1:ease(clock/.35),p=s.craftWorld.props.find(p=>p.id===j.prop),id=j.actor,root=entities.get(id);if(!root)return;let left=null,right=null;
@@ -36,12 +36,20 @@ export function createCraftView({scene,entities,parts,sockets}){
   if(left)solve(id,'left',left,weight);if(right)solve(id,'right',right,weight);
  }
  return{group,ids:['effect.everyday_crafts','component.restaurant_steamer'],frame(s){const w=s.craftWorld;if(!w)return;const jobs=w.jobs.filter(j=>j.status==='running');for(const j of jobs)pose(j,s);
+  const delivery=w.delivery;if(delivery&&['receiving','returning_gift'].includes(delivery.phase)){
+   const u=delivery.phase==='receiving'?ease((s.time-delivery.phaseAt)/1.4):1-ease((s.time-delivery.phaseAt)/2.3);
+   solve('resident.station_traveler','left',[-.17,.76+.52*u,.32],1);solve('resident.station_traveler','right',[.17,.76+.52*u,.32],1);head('resident.station_traveler',-.23*u);
+  }
+
   steamer.userData.lid.position.y=.25+w.steamer*.25;steamer.userData.lid.rotation.z=w.steamer*.32;steamMat.opacity=w.steamer*.28;for(const [i,m]of ribbons.entries()){m.visible=w.steamer>.01;m.position.y=steamer.position.y+.55+Math.sin(s.time*1.2+i)*.035;m.rotation.z=Math.sin(s.time*1.4+i)*.15;m.scale.y=.85+Math.sin(s.time*1.6+i)*.1;}
+  // A modest, permanent luggage tray makes the gift's source visible above
+  // the tram roof; its contents are lifted by the traveler's actual hands.
+  const car=entities.get('tram.tram_car_front');if(car&&!car.userData.giftTray){const tray=new THREE.Group();tray.name='Tram gift luggage tray';tray.position.set(-.56,1.28,-.44);kit.box(tray,0,0,0,.55,.035,.40,kit.materials.wood);for(const z of[-.20,.20])kit.box(tray,0,.065,z,.55,.13,.025,kit.materials.gold);for(const x of[-.27,.27])kit.box(tray,x,.065,0,.025,.13,.40,kit.materials.gold);car.add(tray);car.userData.giftTray=tray;}
   const pouring=jobs.find(j=>interactionStep(j)?.action==='pour');pot.position.copy(potHome);pot.quaternion.identity();if(pouring){handWorldPoint({entities,parts,sockets},pouring.actor,'right',pot.position);pot.position.y-=.06;const blend=Math.min(ease(pouring.clock/.5),ease((3.4-pouring.clock)/.5));pot.position.lerp(potHome,1-blend);pot.quaternion.copy(entities.get(pouring.actor).getWorldQuaternion(q)).multiply(new THREE.Quaternion().setFromAxisAngle(X,.55*Math.sin(Math.PI*pouring.clock/3.4)));}
   for(const p of w.props){const o=objects.get(p.id)||make(p),j=jobs.find(j=>j.actor===p.owner&&(j.prop===p.id||j.context.oldProp===p.id||j.context.basket===p.id)),action=j?.cancelledPose||interactionStep(j)?.action,clock=j?.cancelledPose?j.cancelClock:j?.clock||0,duration=INTERACTION_PRIMITIVES[action]?.seconds||1,root=o.root;root.userData.owner_entity=p.owner;root.userData.memory_token=p.type==='keepsake';root.visible=p.location!=='stored'&&(p.location!=='supply'||action==='take'||['tea_cup','snack_plate'].includes(p.type));if(!root.visible)continue;root.scale.setScalar(p.retireAt?Math.max(.001,1-ease((s.time-p.retireAt)/3)):1);root.quaternion.identity();
    if(p.location==='supply'&&action!=='take'){root.position.copy(world(p.source||p.anchor));}
    else if(['placed','display','hung'].includes(p.location)&&!['take','collect'].includes(action)){root.position.copy(world(p.anchor));root.rotation.y=p.type==='cloth'?.42:p.type==='keepsake'?.646:.18;if(p.location==='hung'){root.rotation.z=Math.sin(s.time*.9+(p.color||0))*.04*s.windSpeed/.35;root.rotation.x=Math.sin(s.time*1.3+(p.color||0))*.045;}}
-   else if(['vehicle','boarding','unloading'].includes(p.location)){const car=entities.get('tram.tram_car_front');if(car){const rack=car.localToWorld(new THREE.Vector3(.72,.28,-.10));root.position.copy(rack);root.quaternion.copy(car.getWorldQuaternion(q));const pp=s.passengers['resident.station_traveler'];if(p.location!=='vehicle'){const hand=handWorldPoint({entities,parts,sockets},p.owner,'left',new THREE.Vector3());hand.y-=.08;const u=p.location==='boarding'?ease((pp.clock-12)/3.6):1-ease(pp.clock/2.2);root.position.copy(hand).lerp(rack,u);}}}
+   else if(['vehicle','boarding','unloading','collecting'].includes(p.location)){const car=entities.get('tram.tram_car_front');if(car){const rack=car.localToWorld(new THREE.Vector3(-.56,1.32,-.44));root.position.copy(rack);root.quaternion.copy(car.getWorldQuaternion(q));const pp=s.passengers['resident.station_traveler'];if(p.location!=='vehicle'){const hand=handWorldPoint({entities,parts,sockets},p.owner,'left',new THREE.Vector3());if(p.location==='collecting')hand.add(handWorldPoint({entities,parts,sockets},p.owner,'right',new THREE.Vector3())).multiplyScalar(.5);hand.y-=.06;const u=p.location==='collecting'?1-ease((s.time-w.delivery.phaseAt)/1.4):p.location==='boarding'?ease((pp.clock-12)/3.6):1-ease(pp.clock/2.2);root.position.copy(hand).lerp(rack,u);}}}
    else{const actor=entities.get(p.owner);if(!actor)continue;const side=p.side||(['tea_cup','umbrella'].includes(p.type)?'right':'left');handWorldPoint({entities,parts,sockets},p.owner,side,v);if(['cloth','parcel','snack_plate','leaf_basket'].includes(p.type)){const other=handWorldPoint({entities,parts,sockets},p.owner,'right',new THREE.Vector3());v.add(other).multiplyScalar(.5);}root.position.copy(v);root.quaternion.copy(actor.getWorldQuaternion(q));
     if(p.type==='tea_cup'||p.type==='snack_plate'||p.type==='parcel')root.position.y-=.06;if(p.type==='broom')root.position.y-=.57;if(p.type==='leaf_basket')root.position.y-=.18;
     if(p.type==='broom'&&action==='sweep'){const tip=actor.localToWorld(new THREE.Vector3(.10+Math.sin(clock*3)*.22,.07,.49)),grip=handWorldPoint({entities,parts,sockets},p.owner,'left',new THREE.Vector3()),direction=grip.clone().sub(tip);root.position.copy(tip);root.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),direction.clone().normalize());root.scale.y=direction.length()/.60;}

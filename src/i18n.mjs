@@ -1,4 +1,4 @@
-import {EN} from './i18n-en.mjs?v=cp46-causal-feedback-ce25f0f81678';
+import {EN} from './i18n-en.mjs?v=cp47-expressive-life-23cf705c6924';
 let locale='en';try{const saved=localStorage.getItem('afterwords.locale.v1');if(saved==='zh'||saved==='en')locale=saved;}catch{}
 const cache=new Map(),keys=Object.keys(EN).sort((a,b)=>b.length-a.length),listeners=new Set();
 export const getLocale=()=>locale;

@@ -1,6 +1,6 @@
-import {LANTERN_STATIONS} from './lantern-scene.mjs?v=cp46-causal-feedback-ce25f0f81678';
-import {createInteraction,advanceInteraction,interactionStep} from './interaction-sequence.mjs?v=cp46-causal-feedback-ce25f0f81678';
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp46-causal-feedback-ce25f0f81678';
+import {LANTERN_STATIONS} from './lantern-scene.mjs?v=cp47-expressive-life-23cf705c6924';
+import {createInteraction,advanceInteraction,interactionStep} from './interaction-sequence.mjs?v=cp47-expressive-life-23cf705c6924';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp47-expressive-life-23cf705c6924';
 export const NEIGHBORHOOD_KINDS=new Set(['homecoming','prepare','reopen','spring','lantern']);
 export const HOME={door:[-5.947,-1.723,.77],yaw:25*Math.PI/180,host:[-5.76,-2.48,.628],guest:[-4.96,-2.48,.628]};
 const ADULTS=['resident.customer_one','resident.customer_two','resident.customer_three','resident.market_browser','resident.strolling_parent','resident.courier'];
@@ -19,7 +19,7 @@ function start(s,nav,e,requestGesture){
   const a=pick(supply,opts.child,recipe.startsWith('home'));if(!a)return null;const supplyNode=nearest(nav,supply,nodes),destinationNode=nearest(nav,destination,nodes);if(supplyNode===undefined||destinationNode===undefined)return null;nodes.push(destinationNode);
   const pos=nav.nodes[destinationNode],look=opts.look||[pos[0],pos[1]+1,pos[2]+.7],anchor=opts.anchor||[pos[0]+(look[0]-pos[0])*.58,pos[1]+(look[1]-pos[1])*.58,pos[2]+.02];
   const prop=type?{id:'neighborhood-prop-'+w.next++,type,owner:a.id,location:recipe==='home_arrive'?'hand':['wipe_place','wipe_surface'].includes(recipe)&&type==='bench'?'placed':'supply',anchor,supply:nav.nodes[supplyNode].slice(0,3),created:s.time,unfold:0,mode:e.kind}:null;if(prop)w.props.push(prop);
-  const j=createInteraction({id:e.id+':'+a.id,recipe,actor:a.id,prop:prop?.id||null,context:{eventId:e.id,supplyNode,destinationNode,look,supplyLook:[nav.nodes[supplyNode][0],nav.nodes[supplyNode][1]+1,1.2],anchor,...opts}});w.jobs.push(j);
+  const j=createInteraction({id:e.id+':'+a.id,recipe,actor:a.id,prop:prop?.id||null,context:{eventId:e.id,pace:s.inputSession?.phase==='running'?1.18:1,supplyNode,destinationNode,look,supplyLook:[nav.nodes[supplyNode][0],nav.nodes[supplyNode][1]+1,1.2],anchor,...opts}});w.jobs.push(j);
   a.path=[];a.wait=.1;a.reservation=null;a.taskRevision=-1;delete a.courtesyDestination;delete a.courtesyExpires;delete a.courtesyArrivedAt;const r=s.residentActions[a.id];r.action=null;r.queued=null;r.cancelRemaining=0;lock(s,j,e,recipe==='home_host'||['wipe_place','wipe_surface'].includes(recipe)?'destination':'supply');return j;
  }
  if(e.kind==='lantern'){

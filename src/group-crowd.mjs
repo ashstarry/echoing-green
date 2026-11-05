@@ -1,8 +1,8 @@
-import {makeRoom} from './event-travel.mjs?v=cp46-causal-feedback-ce25f0f81678';
-import {groupPlaces} from './group-layout.mjs?v=cp46-causal-feedback-ce25f0f81678';
-import {pathTo,navigationGraph} from './navigation.mjs?v=cp46-causal-feedback-ce25f0f81678';
-import {moverBlocks} from './motion.mjs?v=cp46-causal-feedback-ce25f0f81678';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp46-causal-feedback-ce25f0f81678';
+import {makeRoom} from './event-travel.mjs?v=cp47-expressive-life-23cf705c6924';
+import {groupPlaces} from './group-layout.mjs?v=cp47-expressive-life-23cf705c6924';
+import {pathTo,navigationGraph} from './navigation.mjs?v=cp47-expressive-life-23cf705c6924';
+import {moverBlocks} from './motion.mjs?v=cp47-expressive-life-23cf705c6924';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp47-expressive-life-23cf705c6924';
 const D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 const angle=(a,b)=>Math.atan2(Math.sin(b-a),Math.cos(b-a));
@@ -47,7 +47,7 @@ export function advanceGroupCrowd(s,nav,dt){
   }
   if(!c.route.length){a.mode='yield';a.path=[];a.actualSpeed=0;continue;}
   while(c.at<c.route.length-1&&D(a.p,nav.nodes[c.route[c.at]])<.18)c.at++;
-  const next=nav.nodes[c.route[c.at]],yaw=Math.atan2(next[1]-a.p[1],next[0]-a.p[0]),baseSpeed=Math.min(a.courtesyDestination!==undefined?.78:e?.kind==='quiet'?.68:e?.kind==='music'?.83:1.0,Math.max(.08,D(a.p,target)*2.4)),people=s.actors.filter(b=>b!==a&&Math.abs(b.p[2]-a.p[2])<1.0&&D(b.p,a.p)<1.5);let best=null;
+  const next=nav.nodes[c.route[c.at]],yaw=Math.atan2(next[1]-a.p[1],next[0]-a.p[0]),baseSpeed=Math.min(a.courtesyDestination!==undefined?.78:e?.kind==='quiet'?.68:e?.kind==='music'?.83:a.interactionLock&&s.inputSession?.phase==='running'?1.12:1.0,Math.max(.08,D(a.p,target)*2.4)),people=s.actors.filter(b=>b!==a&&Math.abs(b.p[2]-a.p[2])<1.0&&D(b.p,a.p)<1.5);let best=null;
   for(const offset of [0,.30,-.30,.60,-.60,.95,-.95,1.3,-1.3,Math.PI/2,-Math.PI/2])for(const factor of [1,.55]){
    if(c.passUntil>s.time&&Math.abs(offset)>.2&&Math.sign(offset)!==c.passSide)continue;
    const theta=yaw+offset,alignment=Math.max(.08,Math.cos(theta+Math.PI/2-a.yaw)),velocity=[Math.cos(theta)*baseSpeed*factor*alignment,Math.sin(theta)*baseSpeed*factor*alignment],p=[a.p[0]+velocity[0]*dt,a.p[1]+velocity[1]*dt,a.p[2]],probeTime=Math.min(.22,D(a.p,next)/baseSpeed),probe=[a.p[0]+velocity[0]*probeTime,a.p[1]+velocity[1]*probeTime,a.p[2]],n=nodeAt(nav,p),nn=nodeAt(nav,probe);if(n===undefined||nn===undefined||graph.components[n]!==graph.components[a.node]||Math.abs(nav.nodes[n][2]-a.p[2])>.17||(!moverClear(p)&&moverClear(a.p)))continue;

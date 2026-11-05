@@ -1,5 +1,6 @@
 export function actionAvailability(s,item){const t=s.train,p=s.passengers?.['resident.station_traveler'],atStation=t?.mode==='dwell';
  if(item.target==='journey'&&item.action!=='rest'){
+  if(s.craftWorld?.delivery&&!['delivered','cancelled'].includes(s.craftWorld.delivery.phase))return{available:false,reason:'The traveler is still delivering this gift.'};
   if(s.eventGuests?.['resident.station_traveler']?.active)return{available:false,reason:'The traveler is returning to the platform.'};
   if(!atStation)return{available:false,reason:'电车还在路上，靠站后再来迎送。'};
   if(item.action==='depart'&&p?.phase!=='waiting')return{available:false,reason:'旅客正在上下车，等他站稳后再试。'};

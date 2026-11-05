@@ -1,4 +1,4 @@
-import {ease,legPose,railPose,stationDistance} from './motion.mjs?v=cp46-causal-feedback-ce25f0f81678';
+import {ease,legPose,railPose,stationDistance} from './motion.mjs?v=cp47-expressive-life-23cf705c6924';
 const mix=(a,b,t)=>a+(b-a)*t;const angle=(a,b,t)=>a+Math.atan2(Math.sin(b-a),Math.cos(b-a))*t;const lerp=(a,b,t)=>a.map((x,i)=>mix(x,b[i],t));
 export function createPassengers(config){if(!config)return{};return{[config.actor]:{phase:'waiting',mode:'auto',clock:0,door:0,ramp:0,vehicle:null,exitArrival:0,nextTripAt:15,completedTrips:0,requested:false}};}
 export function requestPassengerAction(s,id,action){const p=s.passengers?.[id];if(!p)throw Error('这个乘车流程还未开放');if(action==='ride_once'){if(p.phase!=='waiting')throw Error('旅客已经在这趟行程中');p.mode='once';p.requested=true;p.nextTripAt=s.time;const hands=s.residentActions[id];if(hands?.action)hands.cancelRemaining=.65;}else if(action==='stay'){p.mode='stay';p.requested=false;if(p.phase==='prepare_board')p.phase='close_exit';else if(p.phase==='board'||p.phase==='secure')p.cancelTrip=true;else if(p.phase==='riding')p.exitArrival=s.train.arrivals+(s.train.mode==='dwell'?0:1);}else if(action==='alight'){if(p.phase==='waiting')throw Error('旅客已经在站台上');if(p.phase==='prepare_board'){p.phase='close_exit';p.mode='stay';return;}if(p.phase==='board'||p.phase==='secure')p.cancelTrip=true;p.mode='once';p.exitArrival=s.train.arrivals+(s.train.mode==='dwell'?0:1);}else throw Error('未开放的乘车动作');s.revision++;}
@@ -6,7 +6,7 @@ export function advancePassengers(s,activities,dt){const config=activities?.boar
  if(p.phase==='waiting'&&(s.eventGuests?.[config.actor]?.active||!p.requested&&['festival','market','supper','reunion','lantern','music','quiet'].includes(s.sceneEvent?.kind))){p.nextTripAt=s.time+12;return;}
  const waitingForHands=!!s.residentActions[config.actor]?.action;
  if(p.phase==='waiting'&&p.mode!=='stay'&&s.time>=p.nextTripAt&&tr.mode==='dwell'){p.phase='prepare_board';p.clock=0;}
- const open=['prepare_board','board','prepare_exit','alight'].includes(p.phase);p.door+=Math.max(-dt*1.5,Math.min(dt*1.5,Number(open)-p.door));p.ramp+=Math.max(-dt*.8,Math.min(dt*.8,Number(open&&p.door>.98)-p.ramp));
+ const open=['prepare_board','board','prepare_exit','alight'].includes(p.phase)||['expecting','collecting','receiving','returning_gift'].includes(s.craftWorld?.delivery?.phase);p.door+=Math.max(-dt*1.5,Math.min(dt*1.5,Number(open)-p.door));p.ramp+=Math.max(-dt*.8,Math.min(dt*.8,Number(open&&p.door>.98)-p.ramp));
  if(['prepare_board','board','secure','prepare_exit','alight','close_exit'].includes(p.phase))tr.passengerHold=true;
  if(p.phase==='prepare_board'&&p.door>.99&&p.ramp>.99&&!waitingForHands){p.phase='board';p.clock=0;p.vehicle=config.vehicle;}
  else if(p.phase==='board'){p.clock+=dt*(s.inputSession?.phase==='running'?1.65:1);if(p.clock>=config.boardDuration){p.phase='secure';p.clock=0;p.exitArrival=p.cancelTrip?tr.arrivals:tr.arrivals+1;p.cancelTrip=false;}}
@@ -53,7 +53,7 @@ export function passengerPose(s,activities){const c=activities.boarding,p=s.pass
   else{ground=home;yaw=c.homeYaw;}
  }
  const onTrip=['board','secure','riding','prepare_exit','alight'].includes(p.phase);if(!onTrip)return{root:[...home,c.homeYaw],legs:null,arms:0,torso:0};
- ground[2]=floor(ground);if(p.phase==='board'&&t>=4.9&&t<8.4||p.phase==='alight'&&t>=9.4&&t<12.9)crouch=Math.max(.5,Math.min(1,(ground[2]-(car.p[2]+.13-.30))/.30));const drop=.30*crouch,root=[ground[0],ground[1],ground[2]-.02*S+.006-drop,yaw];
+ ground[2]=floor(ground);if(p.phase==='board'&&t>=4.9&&t<8.4||p.phase==='alight'&&t>=9.4&&t<12.9)crouch=Math.max(.5,Math.min(1,(ground[2]-(car.p[2]+.13-.30))/.30));if(s.giftPickup)crouch=0;const drop=.30*crouch,root=[ground[0],ground[1],ground[2]-.02*S+.006-drop,yaw];
  if(feetLocked)root[2]=mix(car.p[2]+.13-.02*S+.006-.30,car.p[2]+.13-.31,seatBlend);
  const legs={};for(const side of ['left','right']){const sign=side==='left'?-1:1,base=legPose(walked,S,side,walk),bias=(.045+.105*(sideStep?0:walk))*crouch,lateral=sideStep?base.footY*sideStep:0,fc=[(sign*.10+lateral)*S,(-.01+(sideStep?0:base.footY)-bias)*S],wx=root[0]+Math.cos(yaw)*fc[0]-Math.sin(yaw)*fc[1],wy=root[1]+Math.sin(yaw)*fc[0]+Math.cos(yaw)*fc[1];let footY=(sideStep?0:base.footY)-bias,pitch=0,ankleZ;
   if(feetLocked){const anchor=cp([.48,.087,.13]),dx=anchor[0]-root[0],dy=anchor[1]-root[1];footY=(-Math.sin(yaw)*dx+Math.cos(yaw)*dy)/S+.01;ankleZ=car.p[2]+.13+.09*S+.006;}

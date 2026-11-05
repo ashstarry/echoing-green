@@ -13,5 +13,5 @@ export function lanternLightFactor(s,position=[0,0,0]){
  const zone=Math.max(0,Math.min(7,(position[0]+8)*.45)),amount=lanternDisplay(s,zone);
  const clock=s.time-(e.illuminationAt??e.started)-zone*.35;
  const wave=clock>0?Math.exp(-(((clock-1.2)/1.1)**2)):0;
- return 1+amount*(.22+.16*wave);
+ return 1+amount*(.38+.10*wave);
 }

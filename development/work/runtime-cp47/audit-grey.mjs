@@ -1,0 +1,3 @@
+import{readFileSync,writeFileSync}from'node:fs';import{setup,station,execute}from'./audit-utils.mjs';
+const output=process.argv[2]||'grey-audit-final';const cases=JSON.parse(readFileSync('outputs/runtime-checkpoint-47/frozen-grey-cases.json'));const rows=[];
+for(const [seed,warm]of [[62417,10],[90210,120]])for(const c of cases){const{s,nav}=setup(seed,warm);if(c.id==='parcel')station(s,nav);const result=execute(s,nav,c.items,c.zh);const row={id:c.id,seed,warm,text:c.zh,...result};rows.push(row);console.log(JSON.stringify({id:c.id,seed,seconds:row.seconds,outcome:row.outcome,error:row.error,incomplete:row.recipes?.filter(j=>j.status!=='done').map(j=>j.recipe),music:row.music}));writeFileSync('outputs/runtime-checkpoint-47/'+output+'.json',JSON.stringify(rows,null,2));}
