@@ -1,7 +1,7 @@
 import * as THREE from 'three';
-import {createPavingSupport} from './foot-support.mjs?v=cp47-expressive-life-7673d851eb71';
-import {actionSubjects,subjectAlpha} from './action-subjects.mjs?v=cp47-expressive-life-7673d851eb71';
-import {createResponseSignals,responseGlowAlpha,GLOW_SECONDS,MAX_GLOWS} from './response-signals.mjs?v=cp47-expressive-life-7673d851eb71';
+import {createPavingSupport} from './foot-support.mjs?v=cp48-fox-footsteps-a505aa60f82d';
+import {actionSubjects,subjectAlpha} from './action-subjects.mjs?v=cp48-fox-footsteps-a505aa60f82d';
+import {createResponseSignals,responseGlowAlpha,GLOW_SECONDS,MAX_GLOWS} from './response-signals.mjs?v=cp48-fox-footsteps-a505aa60f82d';
 const supported=new Set(['animal','duck','fish','boat','bicycle','parked_bicycle','tram','windmill','door','plant','tree','water_lantern']);
 export function createResponseMarkers({scene,entities,parts=new Map(),registry={entities:[]},nav}){
  const paving=createPavingSupport(nav?.activities?.paving);let lastTime=-1;const signals=createResponseSignals(),marks=new Map(),rows=new Map(registry.entities.map(e=>[e.id,e])),anchors=new Map();
@@ -23,7 +23,7 @@ export function createResponseMarkers({scene,entities,parts=new Map(),registry={
  function support(id,root,s){
   root.getWorldPosition(point);if(id.startsWith('resident.')){point.y=feetFloor(id,root,s);const a=s.actors.find(a=>a.id===id);return{width:1.16*(a?.scale||1),depth:1.04*(a?.scale||1)};}
   let base=anchors.get(id);if(!base){root.updateWorldMatrix(true,true);box.setFromObject(root);box.getSize(size);base={offset:box.min.y-point.y,width:Math.max(.55,Math.min(2.6,size.x+.22)),depth:Math.max(.5,Math.min(1.65,size.z+.22))};anchors.set(id,base);}
-  point.y+=base.offset+.012;if(id==='animal.garden_fox'&&s.movers?.[id])point.y=s.movers[id].p[2]+.042;const kind=id.startsWith('animal.duck_')?'duck':rows.get(id)?.kind;if(['fish','duck','water_lantern'].includes(kind))point.y=Math.max(point.y,.64);return base;
+  point.y+=base.offset+.012;if(id==='animal.garden_fox'&&s.movers?.[id]){const floor=paving?.highest([point.x-.12,point.x+.12,-point.z-.12,-point.z+.12]);point.y=floor===null||floor===undefined?s.movers[id].p[2]+.042:floor+.012;}const kind=id.startsWith('animal.duck_')?'duck':rows.get(id)?.kind;if(['fish','duck','water_lantern'].includes(kind))point.y=Math.max(point.y,.64);return base;
  }
  function visible(id,s){if(['inside','enter'].includes(s.diners?.[id]?.phase))return false;if(s.passengers?.[id]?.phase==='riding')return false;let root=entities.get(id);for(let o=root;o;o=o.parent)if(!o.visible)return false;return !!root;}
  return{request(id,action,key){signals.request(id,action,key);},frame(s){

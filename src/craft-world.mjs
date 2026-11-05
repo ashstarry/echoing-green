@@ -1,8 +1,8 @@
-import {rainingAt} from './local-cloud.mjs?v=cp47-expressive-life-7673d851eb71';
-import {makeRoom} from './event-travel.mjs?v=cp47-expressive-life-7673d851eb71';
-import {createInteraction,advanceInteraction,interactionStep,INTERACTION_RECIPES} from './interaction-sequence.mjs?v=cp47-expressive-life-7673d851eb71';
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp47-expressive-life-7673d851eb71';
-import {CRAFT_KINDS,CRAFT_PLACES,CRAFT_NAMES} from './craft-design.mjs?v=cp47-expressive-life-7673d851eb71';
+import {rainingAt} from './local-cloud.mjs?v=cp48-fox-footsteps-a505aa60f82d';
+import {makeRoom} from './event-travel.mjs?v=cp48-fox-footsteps-a505aa60f82d';
+import {createInteraction,advanceInteraction,interactionStep,INTERACTION_RECIPES} from './interaction-sequence.mjs?v=cp48-fox-footsteps-a505aa60f82d';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp48-fox-footsteps-a505aa60f82d';
+import {CRAFT_KINDS,CRAFT_PLACES,CRAFT_NAMES} from './craft-design.mjs?v=cp48-fox-footsteps-a505aa60f82d';
 const D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 const adults=['resident.customer_one','resident.customer_two','resident.customer_three','resident.market_browser','resident.strolling_parent','resident.courier','resident.postman'];
 export function ensureCraft(s){return s.craftWorld??={next:1,jobs:[],props:[],tokens:[],leaves:[],eventId:null,phase:'idle',history:[],steamer:0,steamerTarget:0,pair:null,delivery:null,pending:null};}

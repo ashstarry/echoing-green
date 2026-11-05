@@ -1,10 +1,11 @@
-import {actionAvailability} from './action-availability.mjs?v=cp47-expressive-life-7673d851eb71';
-import {requestSceneEvent,eventKind} from './scene-events.mjs?v=cp47-expressive-life-7673d851eb71';
-import {requestCloud} from './local-cloud.mjs?v=cp47-expressive-life-7673d851eb71';
-import {interactionStep} from './interaction-sequence.mjs?v=cp47-expressive-life-7673d851eb71';
-import {RESIDENT_ACTIONS} from './resident-actions.mjs?v=cp47-expressive-life-7673d851eb71';
-import {PROFILES} from './community.mjs?v=cp47-expressive-life-7673d851eb71';
-import {FIREWORK_BURSTS,FIREWORK_FLIGHT} from './firework-score.mjs?v=cp47-expressive-life-7673d851eb71';
+import {lanternDisplay} from './lantern-scene.mjs?v=cp48-fox-footsteps-a505aa60f82d';
+import {actionAvailability} from './action-availability.mjs?v=cp48-fox-footsteps-a505aa60f82d';
+import {requestSceneEvent,eventKind} from './scene-events.mjs?v=cp48-fox-footsteps-a505aa60f82d';
+import {requestCloud} from './local-cloud.mjs?v=cp48-fox-footsteps-a505aa60f82d';
+import {interactionStep} from './interaction-sequence.mjs?v=cp48-fox-footsteps-a505aa60f82d';
+import {RESIDENT_ACTIONS} from './resident-actions.mjs?v=cp48-fox-footsteps-a505aa60f82d';
+import {PROFILES} from './community.mjs?v=cp48-fox-footsteps-a505aa60f82d';
+import {FIREWORK_BURSTS,FIREWORK_FLIGHT} from './firework-score.mjs?v=cp48-fox-footsteps-a505aa60f82d';
 const terminal=j=>['done','cancelled','failed'].includes(j.status);
 export const INPUT_IDLE_SECONDS=2.8;
 export const inputBusy=s=>['listening','running','closing'].includes(s.inputSession?.phase);
@@ -32,6 +33,7 @@ function sample(s,q){const values={},ids=new Set(q.items.filter(i=>i.kind==='res
   if(e.kind==='festival'&&s.festivalUntil>s.time){const age=s.time-s.festivalStarted,stop=s.festivalStop===null?Infinity:s.festivalStop-s.festivalStarted;if(FIREWORK_BURSTS.some(at=>at-FIREWORK_FLIGHT<=stop&&age>=at-FIREWORK_FLIGHT&&age<at+5.8))put('firework',Math.floor(age*4));}
   for(const kind of['rain','snow','cover'])put('weather.'+kind,s.eventWeather[kind]);
  }
+ if(ownScene&&e.kind==='lantern')for(let lamp=0;lamp<14;lamp++)put('lantern.'+lamp,lanternDisplay(s,lamp));
  if(ownScene)for(const a of s.actors)if((a.eventYieldUntil||0)-5>=q.started-.1&&(a.courtesyDestination!==undefined||a.detouring))ids.add(a.id);
  const pulse=s.townResponse;if(pulse&&pulse.id!=='opening'&&pulse.theme!=='opening')for(const p of pulse.pending||[])if(p.dispatched!==undefined&&p.dispatched>=q.started-.1)ids.add(p.id);
  for(const [name,w]of [['paper',s.paperWorld],['neighbor',s.neighborhoodWorld],['craft',s.craftWorld]]){
@@ -74,7 +76,7 @@ function hasWork(s,q){const macro=new Set(q.items.filter(i=>i.kind==='macro').ma
 export function advanceInput(s,nav){const q=s.inputSession;if(!inputBusy(s)||q.phase==='listening')return;
  if(q.phase==='running'&&!q.sceneId){const e=s.sceneEvent,kind=q.expectedSceneKind??eventKind(Object.fromEntries(q.items.filter(i=>i.kind==='macro').map(i=>[i.target,i.action])));if(kind&&e?.kind===kind)q.sceneId=e.id;else if(kind&&e?.next?.kind===kind){q.sceneId=e.next.id;q.transitionId=e.id;}else if(e?.phase==='closing'&&q.items.some(i=>i.kind==='macro'&&['weather','festival','occasion'].includes(i.target)&&['clear','quiet','ordinary'].includes(i.action)))q.sceneId=e.id;}
 
- if(q.phase==='closing'){const packing=[s.paperWorld,s.neighborhoodWorld,s.craftWorld].some(w=>w?.jobs.some(j=>j.status==='running'&&j.cancelClock<2.5));const cloud=q.items.some(i=>i.target==='cloud')&&s.localCloud.phase!=='home',sky=q.sceneId&&s.festivalUntil>s.time,weather=q.sceneId&&Math.max(s.eventWeather.rain,s.eventWeather.snow)>.04;if(s.time-q.closingAt>2.6&&!packing&&!cloud&&!sky&&!weather){q.phase='done';q.ended=s.time;for(const a of s.actors)if(a.interactionLock&&!s.craftWorld.jobs.some(j=>j.id===a.interactionLock&&j.status==='running')){delete a.interactionLock;delete a.interactionDestination;}}return;}
+ if(q.phase==='closing'){const packing=[s.paperWorld,s.neighborhoodWorld,s.craftWorld].some(w=>w?.jobs.some(j=>j.status==='running'&&j.cancelClock<2.5));const cloud=q.items.some(i=>i.target==='cloud')&&s.localCloud.phase!=='home',sky=q.sceneId&&s.festivalUntil>s.time,weather=q.sceneId&&Math.max(s.eventWeather.rain,s.eventWeather.snow)>.04,lantern=q.sceneId===s.sceneEvent?.id&&s.sceneEvent?.kind==='lantern'&&s.sceneEvent.phase==='closing';if(s.time-q.closingAt>2.6&&!packing&&!cloud&&!sky&&!weather&&!lantern){q.phase='done';q.ended=s.time;for(const a of s.actors)if(a.interactionLock&&!s.craftWorld.jobs.some(j=>j.id===a.interactionLock&&j.status==='running')){delete a.interactionLock;delete a.interactionDestination;}}return;}
  if(s.time-q.lastSample<.2)return;q.lastSample=s.time;const values=sample(s,q);let changed=false;for(const[k,v]of Object.entries(values)){if(q.observed[k]!==undefined&&Math.abs(v-q.observed[k])>(k.includes('actor.')||['boat0','boat1','fox0','fox1'].includes(k)?.025:.015))changed=true;}q.observed=values;if(changed){q.lastProgress=s.time;q.progressSamples++;}
  const jobs=q.requestIds.flatMap(id=>s.intentRuntime.jobs.filter(j=>j.requestId===id));if(jobs.some(j=>j.status==='failed')){close(s,q,'stalled');return;}
  if(q.items.some(i=>i.target==='boat.pond_boat')&&s.boatJourney.blocked>1.8){close(s,q,'stalled');return;}

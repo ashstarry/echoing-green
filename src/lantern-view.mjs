@@ -1,8 +1,8 @@
-import {interactionStep} from './interaction-sequence.mjs?v=cp47-expressive-life-7673d851eb71';
-import {handWorldPoint} from './prop-attachment.mjs?v=cp47-expressive-life-7673d851eb71';
+import {interactionStep} from './interaction-sequence.mjs?v=cp48-fox-footsteps-a505aa60f82d';
+import {handWorldPoint} from './prop-attachment.mjs?v=cp48-fox-footsteps-a505aa60f82d';
 import * as THREE from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
-import {lanternDisplay,LANTERN_STATIONS} from './lantern-scene.mjs?v=cp47-expressive-life-7673d851eb71';
+import {lanternDisplay,LANTERN_STATIONS} from './lantern-scene.mjs?v=cp48-fox-footsteps-a505aa60f82d';
 
 function paperLampGeometry(){
  const pieces=[];
@@ -34,7 +34,7 @@ export function createLanternView({scene,entities,parts,sockets}){
  const poolMat=new THREE.ShaderMaterial({transparent:true,depthWrite:false,depthTest:true,toneMapped:false,vertexShader:'attribute float lampWarmth;varying vec2 vUv;varying float vWarm;void main(){vUv=uv;vWarm=lampWarmth;gl_Position=projectionMatrix*modelViewMatrix*instanceMatrix*vec4(position,1.);}',fragmentShader:'varying vec2 vUv;varying float vWarm;void main(){float r=length(vUv-.5);float a=exp(-r*r*19.)*.19*vWarm;if(a<.002)discard;gl_FragColor=vec4(1.,.63,.28,a);}'});
  const pools=new THREE.InstancedMesh(poolGeo,poolMat,positions.length+LANTERN_STATIONS.length);pools.frustumCulled=false;pools.renderOrder=1;pools.userData.runtime_effect_id='effect.lantern_ground_warmth';scene.add(pools);
  const dummy=new THREE.Object3D(),point=new THREE.Vector3(),lampColor=new THREE.Color();let visibleCount=0,lastLevels=[];
- function level(s,i){const glow=lanternDisplay(s,i*.55),night=s.dayWeights?.night||0;return .025+night*.28+glow*1.05;}
+ function level(s,i){const glow=lanternDisplay(s,i),night=s.dayWeights?.night||0;return .025+night*.28+glow*1.05;}
  function finishLamp(i,s){const glow=level(s,i);lastLevels[i]=glow;warmth.setX(i,glow);lampColor.setRGB(1,1,1).multiplyScalar(.57+.43*Math.min(1,glow));lamps.setColorAt(i,lampColor);dummy.position.y=.674;dummy.rotation.set(0,0,0);dummy.scale.set(2.15,1,1.8);dummy.updateMatrix();pools.setMatrixAt(i,dummy.matrix);}
 
  const ease=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};

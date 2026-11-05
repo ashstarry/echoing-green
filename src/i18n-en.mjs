@@ -1,4 +1,4 @@
-import {CRAFT_EN} from './craft-english.mjs?v=cp47-expressive-life-7673d851eb71';
+import {CRAFT_EN} from './craft-english.mjs?v=cp48-fox-footsteps-a505aa60f82d';
 // Source strings remain stable in the simulation and saves. Only presentation is translated.
 export const EN=Object.fromEntries(`
 言外=Echoing Green
@@ -1066,3 +1066,7 @@ Object.assign(EN,{"抬起前爪，低头舔一舔": "Lifting a paw for a little 
 Object.assign(EN,{"走近电车的小行李架": "Walking to the tram’s little luggage tray", "双手取下礼物，举起来看看": "Lifting the gift for a closer look", "旅客走近电车的小行李架，取下街坊托带的礼物。": "The traveler walks to the little luggage tray to collect the gift a neighbor sent."});
 
 Object.assign(EN,{"纸灯夜晚": "Paper lantern evening", "纸灯沿街亮起，街坊拿起纸灯，把暖光带到街边。": "Paper lamps light along the streets as neighbors carry their warm glow outside."});
+
+Object.assign(EN,{'狐狸步态':'Fox walking animation'});
+
+Object.assign(EN,{'停一步，看看来打招呼的小狐狸':'Pausing to meet the little fox'});

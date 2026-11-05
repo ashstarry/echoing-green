@@ -1,5 +1,5 @@
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp47-expressive-life-7673d851eb71';
-import {makeRoom} from './event-travel.mjs?v=cp47-expressive-life-7673d851eb71';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp48-fox-footsteps-a505aa60f82d';
+import {makeRoom} from './event-travel.mjs?v=cp48-fox-footsteps-a505aa60f82d';
 
 export const MUSIC_CHILDREN=['resident.child_runner','resident.garden_child'];
 export const MUSIC_FOCUS=[-2.4684,-1.4537,1.1];
@@ -15,7 +15,7 @@ export function prepareMusicSpace(s,nav,e){
 }
 export function musicRoaming(nav,original){
  if(extended.has(nav))return extended.get(nav);
- const data={...original,nodes:nav.nodes.filter(p=>p[0]>-4.3&&p[0]<5.2&&p[1]>-3.2&&p[1]<2.3).map(p=>p.slice(0,3))};
+ const data={...original,nodes:nav.nodes.filter(p=>p[0]>-4.3&&p[0]<5.2&&p[1]>-3.2&&p[1]<2.3).map(p=>[p[0],p[1],p[2]-.03])};
  extended.set(nav,data);return data;
 }
 function nearest(nav,p){const graph=navigationGraph(nav),main=graph.components[nav.actors[0].entry.at(-1)];return nav.nodes.map((q,i)=>({i,d:distance(q,p)})).filter(x=>graph.components[x.i]===main).sort((a,b)=>a.d-b.d)[0].i;}
@@ -24,11 +24,11 @@ function route(s,nav,m,destination){
  blocked.delete(start);blocked.delete(goal);blocked.delete(approach);
  let first=pathTo(nav,start,approach,blocked),last=pathTo(nav,approach,goal,blocked);let nodes=first.length&&last.length?[...first,...last.slice(1)]:pathTo(nav,start,goal,blocked);if(!nodes.length)nodes=pathTo(nav,start,goal);
  // Drop collinear grid points, retaining actual corners and continuous ground contact.
- const points=[m.p.slice()];for(let i=1;i<nodes.length;i++){const p=nav.nodes[nodes[i]],a=nav.nodes[nodes[i-1]],b=nav.nodes[nodes[i+1]];if(!b||Math.abs((p[0]-a[0])*(b[1]-p[1])-(p[1]-a[1])*(b[0]-p[0]))>.001)points.push(p.slice(0,3));}
+ const points=[m.p.slice()];for(let i=1;i<nodes.length;i++){const p=nav.nodes[nodes[i]],a=nav.nodes[nodes[i-1]],b=nav.nodes[nodes[i+1]];if(!b||Math.abs((p[0]-a[0])*(b[1]-p[1])-(p[1]-a[1])*(b[0]-p[0]))>.001)points.push([p[0],p[1],p[2]-.03]);}
  return points;
 }
 export function advanceMusicFox(s,nav,dt,gesture){
- const e=s.sceneEvent,m=s.movers[FOX];if(!m)return false;
+ const e=s.sceneEvent,m=s.movers[FOX];if(!m)return false;const control=s.objectControls?.[FOX];if(e?.kind==='music'&&control&&control.started>=e.started){if(s.musicCircle?.eventId===e.id)s.musicCircle.phase='done';return false;}
  if(e?.kind==='music'&&['gather','active'].includes(e.phase)&&s.musicCircle?.eventId!==e.id){
   s.musicCircle={eventId:e.id,phase:'approach',started:s.time,path:route(s,nav,m,[-3.04,.24]),at:1,blocked:0,speed:0,children:{},home:m.p.slice(),distance:0};
   const r=s.residentActions['resident.musician'];if(r?.action)r.cancelRemaining=.35;gesture('resident.musician','play_music');
