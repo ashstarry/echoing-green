@@ -44,6 +44,7 @@ Serve this directory with any static HTTP server. No build step is required for 
 
 Never add API keys, private configuration, raw API logs or research archives. `src/deployment-config.mjs` may contain only a public proxy URL. The provider key belongs in the proxy host’s secret storage, never in frontend environment variables or repository files.
 ''')
+with (out/'.gitignore').open('a') as f:f.write('\n# Ignore desktop-generated vendor copies.\nvendor/**/* 2\nvendor/**/* 2.*\n')
 # Keep the editable source entry visible across future frontend releases.
 if (out/'development').exists():
  with (out/'README.md').open('a') as f:f.write('\n## Editable source and project history\n\nSee [development/](development/README.md) for current editable code, API source, tests and authoring history.\n')

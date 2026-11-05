@@ -10,3 +10,7 @@ private/
 outputs/
 
 !/development/work/
+
+# Ignore byte-identical desktop-generated vendor copies.
+vendor/**/* 2
+vendor/**/* 2.*
