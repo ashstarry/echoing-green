@@ -1,0 +1,9 @@
+import * as THREE from 'three';
+export function createBoatView({scene,entities,parts,data}){const boat=entities.get('boat.pond_boat');if(!boat||!data)return{frame(){},ids:[]};const original={q:boat.quaternion.clone(),p:boat.getWorldPosition(new THREE.Vector3())},base=new Map([...parts].filter(([k])=>k.startsWith('boat.pond_boat/')).map(([k,p])=>[k,p.quaternion.clone()]));
+ const rope=new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(),new THREE.Vector3(),new THREE.Vector3()]),new THREE.LineBasicMaterial({color:0xa68b61,transparent:true,opacity:.8}));rope.userData.runtime_effect_id='effect.boat_mooring';scene.add(rope);const Y=new THREE.Vector3(0,1,0),X=new THREE.Vector3(1,0,0);
+ function place(o,p){const v=new THREE.Vector3(p[0],p[2],-p[1]);if(o.parent)o.parent.worldToLocal(v);o.position.copy(v);}
+ return{ids:['effect.boat_mooring'],frame(s){const b=s.boatJourney;if(!b)return;place(boat,[b.p[0],b.p[1],b.p[2]+Math.sin(s.time*1.7)*.012]);boat.quaternion.copy(original.q).multiply(new THREE.Quaternion().setFromAxisAngle(X,Math.sin(s.time*1.1)*.012));for(const [i,side]of ['left','right'].entries()){const id='boat.pond_boat/oar_'+side,o=parts.get(id),q=base.get(id);if(o&&q)o.quaternion.copy(q).multiply(new THREE.Quaternion().setFromAxisAngle(Y,(data.oarFold?.[i]||0)*b.fold));}
+  rope.visible=b.tether>.01;rope.material.opacity=b.tether*.75;const dock=new THREE.Vector3(5.51,.81,2.27),end=boat.localToWorld(new THREE.Vector3(-.85,.25,0)),mid=dock.clone().lerp(end,.5);mid.y-=.12;const attr=rope.geometry.attributes.position;for(const[i,p]of[dock,mid,end].entries())attr.setXYZ(i,p.x,p.y,p.z);attr.needsUpdate=true;rope.geometry.computeBoundingSphere();
+  for(const[id,f]of Object.entries(b.floats)){const o=entities.get(id);if(o)place(o,[f.p[0],f.p[1],f.p[2]+Math.sin(s.time*1.3+id.length)*.008]);}
+ }};
+}

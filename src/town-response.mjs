@@ -1,6 +1,6 @@
-import {PROFILES} from './community.mjs?v=cp48-fox-footsteps-a505aa60f82d';
-import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp48-fox-footsteps-a505aa60f82d';
-import {stableUnit} from './cadence.mjs?v=cp48-fox-footsteps-a505aa60f82d';
+import {PROFILES} from './community.mjs?v=cp49-washi-focus-9ef126f2acb5';
+import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp49-washi-focus-9ef126f2acb5';
+import {stableUnit} from './cadence.mjs?v=cp49-washi-focus-9ef126f2acb5';
 
 const live=j=>!['done','failed','cancelled'].includes(j.status);
 const safeToBlend=action=>action&&!RESIDENT_ACTIONS[action]?.route&&!RESIDENT_ACTIONS[action]?.navTask&&!['sip_tea','taste_food','feed_pond','look_pond'].includes(action);

@@ -1,4 +1,4 @@
-import {actionAvailability} from './action-availability.mjs?v=cp48-fox-footsteps-a505aa60f82d';
+import {actionAvailability} from './action-availability.mjs?v=cp49-washi-focus-9ef126f2acb5';
 // Curated examples use the same finite executor as the activity buttons.
 // Rotation changes only the grey hint; it never performs an activity on its own.
 const macro=(target,action)=>({kind:'macro',target,action});

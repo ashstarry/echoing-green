@@ -1,6 +1,6 @@
-import {moverBlocks} from './motion.mjs?v=cp48-fox-footsteps-a505aa60f82d';
-import {pathTo,navigationGraph} from './navigation.mjs?v=cp48-fox-footsteps-a505aa60f82d';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp48-fox-footsteps-a505aa60f82d';
+import {moverBlocks} from './motion.mjs?v=cp49-washi-focus-9ef126f2acb5';
+import {pathTo,navigationGraph} from './navigation.mjs?v=cp49-washi-focus-9ef126f2acb5';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp49-washi-focus-9ef126f2acb5';
 const dist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 const turn=(a,b,n)=>a+Math.max(-n,Math.min(n,Math.atan2(Math.sin(b-a),Math.cos(b-a))));
 const live=j=>!['done','cancelled','failed'].includes(j.status);

@@ -1,0 +1,69 @@
+import * as THREE from 'three';
+import {smallProps} from './small-props.mjs';
+import {makeArmSolver} from './arm-ik.mjs';
+import {handWorldPoint} from './prop-attachment.mjs';
+import {interactionStep,INTERACTION_PRIMITIVES} from './interaction-sequence.mjs';
+import {CRAFT_PLACES} from './craft-design.mjs';
+const ease=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};
+const world=p=>new THREE.Vector3(p[0],p[2],-p[1]);
+export function createCraftView({scene,entities,parts,sockets}){
+ const kit=smallProps(scene),group=new THREE.Group();group.name='Reusable everyday craft props';group.userData.runtime_effect_id='effect.everyday_crafts';scene.add(group);const objects=new Map(),base=new Map([...parts].map(([id,o])=>[id,{p:o.position.clone(),q:o.quaternion.clone(),s:o.scale.clone()}])),solve=makeArmSolver({entities,parts,sockets,base});
+ const steamer=kit.make('steamer'),pot=kit.make('teapot');steamer.position.copy(world(CRAFT_PLACES.tea.steamer));steamer.userData.entity_id='component.restaurant_steamer';pot.position.copy(world(CRAFT_PLACES.tea.cup)).add(new THREE.Vector3(.22,0,-.08));group.add(steamer,pot);entities.set('component.restaurant_steamer',steamer);const potHome=pot.position.clone();const basket=kit.make('basket');basket.position.copy(world([CRAFT_PLACES.laundry.source[0],CRAFT_PLACES.laundry.source[1],.66]));group.add(basket);
+ const steamMat=new THREE.MeshBasicMaterial({color:0xf8e5c5,transparent:true,opacity:0,side:THREE.DoubleSide,depthWrite:false});const ribbons=[];for(let i=0;i<3;i++){const geo=new THREE.PlaneGeometry(.055,.52,1,7);const mesh=new THREE.Mesh(geo,steamMat);mesh.position.copy(steamer.position).add(new THREE.Vector3((i-1)*.12,.55,0));mesh.rotation.y=i*.8;group.add(mesh);ribbons.push(mesh);}
+ const leaves=new THREE.InstancedMesh(kit.geometries.leaf,kit.materials.leaf,64);leaves.frustumCulled=false;leaves.castShadow=false;group.add(leaves);const dummy=new THREE.Object3D(),q=new THREE.Quaternion(),X=new THREE.Vector3(1,0,0),v=new THREE.Vector3();
+ const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(CRAFT_PLACES.laundry.anchors.map(world)),new THREE.LineBasicMaterial({color:0xb5a17d}));group.add(line);for(const p of CRAFT_PLACES.laundry.anchors){const pole=new THREE.Mesh(new THREE.CylinderGeometry(.024,.032,1.05,6),kit.materials.wood);pole.position.copy(world([p[0],p[1],1.15]));group.add(pole);}
+ function make(p){const root=new THREE.Group(),visual=kit.make(p.type,p.color||p.slot||0);root.userData.entity_id='craft.prop.'+p.id;root.userData.owner_entity=p.owner;root.userData.craft_prop_id=p.id;root.add(visual);group.add(root);entities.set(root.userData.entity_id,root);if(p.type==='keepsake'){
+   if(p.design==='leaf'){const m=new THREE.Mesh(kit.geometries.leaf,kit.materials.leaf);m.scale.setScalar(.45);m.position.y=.022;visual.add(m);}else if(p.design==='flower'){for(let i=0;i<5;i++){const m=new THREE.Mesh(kit.geometries.sphere,kit.materials.pink);m.scale.set(.025,.009,.035);m.position.set(Math.sin(i*1.257)*.03,.023,Math.cos(i*1.257)*.03);visual.add(m);}}else if(p.design==='ticket'){for(let i=0;i<3;i++)kit.box(visual,0,.018,-.03+i*.03,.10,.003,.005,kit.materials.indigo);}
+  }if(p.type==='parcel')visual.scale.setScalar(1.25);const o={root,visual,type:p.type};objects.set(p.id,o);return o;}
+ function head(id,pitch){const p=parts.get(id+'/anim_head'),b=base.get(id+'/anim_head');if(p&&b)p.quaternion.copy(b.q).multiply(q.setFromAxisAngle(X,pitch));}
+ function actorTarget(id,p){return entities.get(id)?.worldToLocal(world(p));}
+ function pose(j,s){const action=j.cancelledPose||interactionStep(j)?.action,clock=j.cancelledPose?j.cancelClock:j.clock,duration=INTERACTION_PRIMITIVES[action]?.seconds||1,weight=['approach','carry','pair_walk','wait_for'].includes(action)?1:ease(clock/.35),p=s.craftWorld.props.find(p=>p.id===j.prop),id=j.actor,root=entities.get(id);if(!root)return;let left=null,right=null;
+  if(p?.location==='hand'&&p.owner===id){left=[-.16,.73,.28];right=[.16,.73,.28];}
+  if(action==='open'||action==='close'){left=[-.15,.72,.34];right=[.18,.86+.12*Math.sin(clock/duration*Math.PI),.43];head(id,.12);}
+  if(action==='pour'){left=[-.14,.75,.30];right=[.17,.87,.36];head(id,.16);}
+  if(action==='take'||action==='collect'){const u=ease(clock/duration);left=[-.18,.50+.23*u,.34];right=[.18,.53+.20*u,.34];head(id,.18*(1-u));}
+  if(action==='unfold'||action==='fold'){const u=action==='unfold'?ease(clock/duration):1-ease(clock/duration);left=[-.09-.12*u,.82,.29];right=[.09+.12*u,.82,.29];head(id,.13);}
+  if(action==='offer'||action==='receive'){left=[-.14,.79,.40];right=[.14,.79,.40];head(id,.09);}
+  if(action==='sip'||action==='taste'){left=[-.12,.86,.22];right=[.11,.97+.09*Math.sin(clock/4.5*Math.PI),.22];head(id,-.05*Math.sin(clock/4.5*Math.PI));}
+  if(action==='read'){left=[-.15,.84,.27];right=[.15,.84,.27];head(id,.18);}
+  if(action==='sweep'){left=[-.13,.69,.31];right=[.14+Math.sin(clock*3)*.16,.55,.38];head(id,.25);}
+  if(action==='wipe'){left=[-.18,.57,.35];right=[.13+Math.sin(clock*4)*.12,.60,.40];head(id,.19);}
+  if(action==='hang'){const local=actorTarget(id,j.context.anchor);if(local){const u=ease(clock/1.6);left=new THREE.Vector3(-.16,.8,.3).lerp(local,u).toArray();right=[local.x+.12,local.y-.02,local.z];head(id,-.10);}}
+  if(action==='place'){const local=actorTarget(id,j.context.anchor);if(local){const u=ease(clock/2.4);left=new THREE.Vector3(-.16,.73,.28).lerp(local,u).toArray();right=[local.x+.12,local.y+.02,local.z];head(id,.16);}}
+  if(['stow','pack'].includes(action)){left=[-.13,.74-.25*ease(clock/duration),.23];right=[.15,.62,.22];head(id,.12);}
+  if(action==='welcome'){right=[.25,.96+Math.sin(clock*4)*.04,.25];left=[-.16,.62,.16];}
+  if(p?.type==='umbrella'&&p.owner===id&&p.location==='hand'&&(p.open>0||['unfold','close','pair_walk'].includes(action))){const pair=s.craftWorld.pair,actors=pair?.ids.map(id=>s.actors.find(a=>a.id===id));if(actors?.every(Boolean)){const target=actors[0].p.map((x,k)=>(x+actors[1].p[k])/2);target[2]+=1.0;const local=actorTarget(id,target);if(local)right=local.toArray();left=null;}}
+  if(left)solve(id,'left',left,weight);if(right)solve(id,'right',right,weight);
+ }
+ return{group,ids:['effect.everyday_crafts','component.restaurant_steamer'],frame(s){const w=s.craftWorld;if(!w)return;const jobs=w.jobs.filter(j=>j.status==='running');for(const j of jobs)pose(j,s);
+  const delivery=w.delivery;if(delivery&&['receiving','returning_gift'].includes(delivery.phase)){
+   const u=delivery.phase==='receiving'?ease((s.time-delivery.phaseAt)/1.4):1-ease((s.time-delivery.phaseAt)/2.3);
+   solve('resident.station_traveler','left',[-.17,.76+.52*u,.32],1);solve('resident.station_traveler','right',[.17,.76+.52*u,.32],1);head('resident.station_traveler',-.23*u);
+  }
+
+  steamer.userData.lid.position.y=.25+w.steamer*.25;steamer.userData.lid.rotation.z=w.steamer*.32;steamMat.opacity=w.steamer*.28;for(const [i,m]of ribbons.entries()){m.visible=w.steamer>.01;m.position.y=steamer.position.y+.55+Math.sin(s.time*1.2+i)*.035;m.rotation.z=Math.sin(s.time*1.4+i)*.15;m.scale.y=.85+Math.sin(s.time*1.6+i)*.1;}
+  // A modest, permanent luggage tray makes the gift's source visible above
+  // the tram roof; its contents are lifted by the traveler's actual hands.
+  const car=entities.get('tram.tram_car_front');if(car&&!car.userData.giftTray){const tray=new THREE.Group();tray.name='Tram gift luggage tray';tray.position.set(-.56,1.28,-.44);kit.box(tray,0,0,0,.55,.035,.40,kit.materials.wood);for(const z of[-.20,.20])kit.box(tray,0,.065,z,.55,.13,.025,kit.materials.gold);for(const x of[-.27,.27])kit.box(tray,x,.065,0,.025,.13,.40,kit.materials.gold);car.add(tray);car.userData.giftTray=tray;}
+  const pouring=jobs.find(j=>interactionStep(j)?.action==='pour');pot.position.copy(potHome);pot.quaternion.identity();if(pouring){handWorldPoint({entities,parts,sockets},pouring.actor,'right',pot.position);pot.position.y-=.06;const blend=Math.min(ease(pouring.clock/.5),ease((3.4-pouring.clock)/.5));pot.position.lerp(potHome,1-blend);pot.quaternion.copy(entities.get(pouring.actor).getWorldQuaternion(q)).multiply(new THREE.Quaternion().setFromAxisAngle(X,.55*Math.sin(Math.PI*pouring.clock/3.4)));}
+  for(const p of w.props){const o=objects.get(p.id)||make(p),j=jobs.find(j=>j.actor===p.owner&&(j.prop===p.id||j.context.oldProp===p.id||j.context.basket===p.id)),action=j?.cancelledPose||interactionStep(j)?.action,clock=j?.cancelledPose?j.cancelClock:j?.clock||0,duration=INTERACTION_PRIMITIVES[action]?.seconds||1,root=o.root;root.userData.owner_entity=p.owner;root.userData.memory_token=p.type==='keepsake';root.visible=p.location!=='stored'&&(p.location!=='supply'||action==='take'||['tea_cup','snack_plate'].includes(p.type));if(!root.visible)continue;root.scale.setScalar(p.retireAt?Math.max(.001,1-ease((s.time-p.retireAt)/3)):1);root.quaternion.identity();
+   if(p.location==='supply'&&action!=='take'){root.position.copy(world(p.source||p.anchor));}
+   else if(['placed','display','hung'].includes(p.location)&&!['take','collect'].includes(action)){root.position.copy(world(p.anchor));root.rotation.y=p.type==='cloth'?.42:p.type==='keepsake'?.646:.18;if(p.location==='hung'){root.rotation.z=Math.sin(s.time*.9+(p.color||0))*.04*s.windSpeed/.35;root.rotation.x=Math.sin(s.time*1.3+(p.color||0))*.045;}}
+   else if(['vehicle','boarding','unloading','collecting'].includes(p.location)){const car=entities.get('tram.tram_car_front');if(car){const rack=car.localToWorld(new THREE.Vector3(-.56,1.32,-.44));root.position.copy(rack);root.quaternion.copy(car.getWorldQuaternion(q));const pp=s.passengers['resident.station_traveler'];if(p.location!=='vehicle'){const hand=handWorldPoint({entities,parts,sockets},p.owner,'left',new THREE.Vector3());if(p.location==='collecting')hand.add(handWorldPoint({entities,parts,sockets},p.owner,'right',new THREE.Vector3())).multiplyScalar(.5);hand.y-=.06;const u=p.location==='collecting'?1-ease((s.time-w.delivery.phaseAt)/1.4):p.location==='boarding'?ease((pp.clock-12)/3.6):1-ease(pp.clock/2.2);root.position.copy(hand).lerp(rack,u);}}}
+   else{const actor=entities.get(p.owner);if(!actor)continue;const side=p.side||(['tea_cup','umbrella'].includes(p.type)?'right':'left');handWorldPoint({entities,parts,sockets},p.owner,side,v);if(['cloth','parcel','snack_plate','leaf_basket'].includes(p.type)){const other=handWorldPoint({entities,parts,sockets},p.owner,'right',new THREE.Vector3());v.add(other).multiplyScalar(.5);}root.position.copy(v);root.quaternion.copy(actor.getWorldQuaternion(q));
+    if(p.type==='tea_cup'||p.type==='snack_plate'||p.type==='parcel')root.position.y-=.06;if(p.type==='broom')root.position.y-=.57;if(p.type==='leaf_basket')root.position.y-=.18;
+    if(p.type==='broom'&&action==='sweep'){const tip=actor.localToWorld(new THREE.Vector3(.10+Math.sin(clock*3)*.22,.07,.49)),grip=handWorldPoint({entities,parts,sockets},p.owner,'left',new THREE.Vector3()),direction=grip.clone().sub(tip);root.position.copy(tip);root.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),direction.clone().normalize());root.scale.y=direction.length()/.60;}
+    if(p.type==='umbrella')root.quaternion.identity();if(p.type==='keepsake')root.quaternion.multiply(new THREE.Quaternion().setFromAxisAngle(X,-.9));
+    if(action==='take'){const source=p.location==='display'?world(p.anchor):p.type==='keepsake'?actor.localToWorld(new THREE.Vector3(-.15,.48,.12)):world(p.source||p.anchor);root.position.lerp(source,1-ease(clock/duration));}
+    if(action==='offer'&&j.context.partner){const target=handWorldPoint({entities,parts,sockets},j.context.partner,['tea_cup','umbrella'].includes(p.type)?'right':'left',new THREE.Vector3());if(p.type!=='umbrella')target.y-=.06;root.position.lerp(target,ease((clock-.65)/Math.max(.3,duration-.65)));}
+    if(action==='place'||action==='hang')root.position.lerp(world(j.context.anchor),ease((clock-duration*.35)/(duration*.65)));
+    if(action==='collect'&&['cloth','keepsake'].includes(p.type))root.position.copy(world(p.anchor)).lerp(v,ease(clock/duration));
+    if(['stow','pack'].includes(action))root.scale.multiplyScalar(1-ease(clock/duration));
+   }
+   if(o.visual.userData.canopy){let open=p.open;if(action==='unfold')open=ease(clock/duration);if(action==='close'||action==='fold')open=1-ease(clock/duration);o.visual.userData.canopy.scale.set(.08+.92*open,1,.08+.92*open);}
+   if(o.visual.userData.fold){let open=p.open;if(action==='unfold')open=ease(clock/duration);if(action==='fold')open=1-ease(clock/duration);o.visual.userData.fold.rotation.x=-(Math.PI-.12)*(1-open);}
+  }
+  for(const[id,o]of objects)if(!w.props.some(p=>p.id===id)){kit.disposeObject(o.visual);group.remove(o.root);entities.delete(o.root.userData.entity_id);objects.delete(id);}
+  line.visible=w.props.some(p=>p.type==='cloth'&&p.location!=='stored');basket.visible=line.visible;let count=0;for(const [patchIndex,p]of w.leaves.entries()){if(p.amount<.01)continue;const collecting=jobs.find(j=>j.context.patch===patchIndex&&interactionStep(j)?.action==='collect');for(let i=0;i<28;i++){const theta=i*2.399,r=.18+(i%7)*.065,settle=ease((s.time-p.started-i*.04)/3.4),g=p.gather||0;dummy.position.set(p.center[0]+Math.cos(theta)*r*(1-g*.86),p.center[2]+.008+(1-settle)*(1.5+(i%3)*.2),-p.center[1]+Math.sin(theta)*r*(1-g*.86));if(collecting){const h=handWorldPoint({entities,parts,sockets},collecting.actor,'left',new THREE.Vector3());dummy.position.lerp(h,ease(collecting.clock/1.6));}dummy.rotation.set(0,i*.8,s.time<p.started+3.4?Math.sin(s.time*2+i)*.2:0);dummy.scale.setScalar(.8+(i%4)*.12);dummy.updateMatrix();leaves.setMatrixAt(count++,dummy.matrix);}}leaves.count=count;leaves.visible=count>0;leaves.instanceMatrix.needsUpdate=true;
+ },snapshot:()=>({objects:objects.size,memoryTokens:[...objects.values()].filter(o=>o.root.userData.memory_token).map(o=>o.root.userData.entity_id)})};
+}

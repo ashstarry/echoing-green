@@ -1,5 +1,5 @@
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp48-fox-footsteps-a505aa60f82d';
-import {makeRoom} from './event-travel.mjs?v=cp48-fox-footsteps-a505aa60f82d';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp49-washi-focus-9ef126f2acb5';
+import {makeRoom} from './event-travel.mjs?v=cp49-washi-focus-9ef126f2acb5';
 
 export const MUSIC_CHILDREN=['resident.child_runner','resident.garden_child'];
 export const MUSIC_FOCUS=[-2.4684,-1.4537,1.1];

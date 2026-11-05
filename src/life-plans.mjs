@@ -1,9 +1,9 @@
-import {eventKind} from './scene-events.mjs?v=cp48-fox-footsteps-a505aa60f82d';
-import {stimulateTown} from './town-response.mjs?v=cp48-fox-footsteps-a505aa60f82d';
-import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp48-fox-footsteps-a505aa60f82d';
-import {requestPassengerAction} from './passengers.mjs?v=cp48-fox-footsteps-a505aa60f82d';
-import {requestObjectAction} from './object-actions.mjs?v=cp48-fox-footsteps-a505aa60f82d';
-import {validateDecision} from './catalog.mjs?v=cp48-fox-footsteps-a505aa60f82d';
+import {eventKind} from './scene-events.mjs?v=cp49-washi-focus-9ef126f2acb5';
+import {stimulateTown} from './town-response.mjs?v=cp49-washi-focus-9ef126f2acb5';
+import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp49-washi-focus-9ef126f2acb5';
+import {requestPassengerAction} from './passengers.mjs?v=cp49-washi-focus-9ef126f2acb5';
+import {requestObjectAction} from './object-actions.mjs?v=cp49-washi-focus-9ef126f2acb5';
+import {validateDecision} from './catalog.mjs?v=cp49-washi-focus-9ef126f2acb5';
 
 // Compound goals reuse tested movements, with real completion/occupation checks between steps.
 export const LIFE_PLANS={

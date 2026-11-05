@@ -1,5 +1,5 @@
-import {createEventSfx} from './event-sfx.mjs?v=cp48-fox-footsteps-a505aa60f82d';
-import {writeText} from './i18n.mjs?v=cp48-fox-footsteps-a505aa60f82d';
+import {createEventSfx} from './event-sfx.mjs?v=cp49-washi-focus-9ef126f2acb5';
+import {writeText} from './i18n.mjs?v=cp49-washi-focus-9ef126f2acb5';
 
 // User-approved loop master, played unchanged. Keep the same track across events.
 export function createSound(button){

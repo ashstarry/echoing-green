@@ -1,4 +1,4 @@
-import {EN} from './i18n-en.mjs?v=cp48-fox-footsteps-a505aa60f82d';
+import {EN} from './i18n-en.mjs?v=cp49-washi-focus-9ef126f2acb5';
 let locale='en';try{const saved=localStorage.getItem('afterwords.locale.v1');if(saved==='zh'||saved==='en')locale=saved;}catch{}
 const cache=new Map(),keys=Object.keys(EN).sort((a,b)=>b.length-a.length),listeners=new Set();
 export const getLocale=()=>locale;

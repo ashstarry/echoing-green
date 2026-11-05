@@ -1,4 +1,4 @@
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp48-fox-footsteps-a505aa60f82d';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp49-washi-focus-9ef126f2acb5';
 const FOX='animal.garden_fox',D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 export function foxMeetingActive(s,a){return !!a.foxGreetingFor&&s.foxBehavior?.command==='greet'&&s.foxBehavior.invitedNeighbor===a.id&&s.time<a.foxGreetingUntil;}
 // One neighbor may step out of an old crowd to a free, existing piece of paving.

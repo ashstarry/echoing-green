@@ -1,7 +1,7 @@
-import {inviteFoxNeighbor} from './fox-rendezvous.mjs?v=cp48-fox-footsteps-a505aa60f82d';
-import {rainingAt} from './local-cloud.mjs?v=cp48-fox-footsteps-a505aa60f82d';
-import {varied} from './cadence.mjs?v=cp48-fox-footsteps-a505aa60f82d';
-import {foxCurve,foxBackstep,foxPathPose,foxFloor,foxTurnArc} from './fox-path.mjs?v=cp48-fox-footsteps-a505aa60f82d';
+import {inviteFoxNeighbor} from './fox-rendezvous.mjs?v=cp49-washi-focus-9ef126f2acb5';
+import {rainingAt} from './local-cloud.mjs?v=cp49-washi-focus-9ef126f2acb5';
+import {varied} from './cadence.mjs?v=cp49-washi-focus-9ef126f2acb5';
+import {foxCurve,foxBackstep,foxPathPose,foxFloor,foxTurnArc} from './fox-path.mjs?v=cp49-washi-focus-9ef126f2acb5';
 const ID='animal.garden_fox',D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 // Fox half-width plus a resident's body radius, with a small margin.
 const PERSON_CLEARANCE=.38;

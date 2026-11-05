@@ -9,8 +9,7 @@ work/
 private/
 outputs/
 
-!/development/work/
+# Ignore desktop-generated vendor copies.
+vendor/**/* [0-9]*
 
-# Ignore byte-identical desktop-generated vendor copies.
-vendor/**/* 2
-vendor/**/* 2.*
+!/development/work/
