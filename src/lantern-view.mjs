@@ -1,8 +1,8 @@
-import {interactionStep} from './interaction-sequence.mjs?v=cp47-expressive-life-23cf705c6924';
-import {handWorldPoint} from './prop-attachment.mjs?v=cp47-expressive-life-23cf705c6924';
+import {interactionStep} from './interaction-sequence.mjs?v=cp47-expressive-life-7673d851eb71';
+import {handWorldPoint} from './prop-attachment.mjs?v=cp47-expressive-life-7673d851eb71';
 import * as THREE from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
-import {lanternDisplay,LANTERN_STATIONS} from './lantern-scene.mjs?v=cp47-expressive-life-23cf705c6924';
+import {lanternDisplay,LANTERN_STATIONS} from './lantern-scene.mjs?v=cp47-expressive-life-7673d851eb71';
 
 function paperLampGeometry(){
  const pieces=[];

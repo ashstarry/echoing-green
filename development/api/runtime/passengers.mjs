@@ -6,7 +6,7 @@ export function advancePassengers(s,activities,dt){const config=activities?.boar
  if(p.phase==='waiting'&&(s.eventGuests?.[config.actor]?.active||!p.requested&&['festival','market','supper','reunion','lantern','music','quiet'].includes(s.sceneEvent?.kind))){p.nextTripAt=s.time+12;return;}
  const waitingForHands=!!s.residentActions[config.actor]?.action;
  if(p.phase==='waiting'&&p.mode!=='stay'&&s.time>=p.nextTripAt&&tr.mode==='dwell'){p.phase='prepare_board';p.clock=0;}
- const open=['prepare_board','board','prepare_exit','alight'].includes(p.phase);p.door+=Math.max(-dt*1.5,Math.min(dt*1.5,Number(open)-p.door));p.ramp+=Math.max(-dt*.8,Math.min(dt*.8,Number(open&&p.door>.98)-p.ramp));
+ const open=['prepare_board','board','prepare_exit','alight'].includes(p.phase)||['expecting','collecting','receiving','returning_gift'].includes(s.craftWorld?.delivery?.phase);p.door+=Math.max(-dt*1.5,Math.min(dt*1.5,Number(open)-p.door));p.ramp+=Math.max(-dt*.8,Math.min(dt*.8,Number(open&&p.door>.98)-p.ramp));
  if(['prepare_board','board','secure','prepare_exit','alight','close_exit'].includes(p.phase))tr.passengerHold=true;
  if(p.phase==='prepare_board'&&p.door>.99&&p.ramp>.99&&!waitingForHands){p.phase='board';p.clock=0;p.vehicle=config.vehicle;}
  else if(p.phase==='board'){p.clock+=dt*(s.inputSession?.phase==='running'?1.65:1);if(p.clock>=config.boardDuration){p.phase='secure';p.clock=0;p.exitArrival=p.cancelTrip?tr.arrivals:tr.arrivals+1;p.cancelTrip=false;}}
@@ -53,7 +53,7 @@ export function passengerPose(s,activities){const c=activities.boarding,p=s.pass
   else{ground=home;yaw=c.homeYaw;}
  }
  const onTrip=['board','secure','riding','prepare_exit','alight'].includes(p.phase);if(!onTrip)return{root:[...home,c.homeYaw],legs:null,arms:0,torso:0};
- ground[2]=floor(ground);if(p.phase==='board'&&t>=4.9&&t<8.4||p.phase==='alight'&&t>=9.4&&t<12.9)crouch=Math.max(.5,Math.min(1,(ground[2]-(car.p[2]+.13-.30))/.30));const drop=.30*crouch,root=[ground[0],ground[1],ground[2]-.02*S+.006-drop,yaw];
+ ground[2]=floor(ground);if(p.phase==='board'&&t>=4.9&&t<8.4||p.phase==='alight'&&t>=9.4&&t<12.9)crouch=Math.max(.5,Math.min(1,(ground[2]-(car.p[2]+.13-.30))/.30));if(s.giftPickup)crouch=0;const drop=.30*crouch,root=[ground[0],ground[1],ground[2]-.02*S+.006-drop,yaw];
  if(feetLocked)root[2]=mix(car.p[2]+.13-.02*S+.006-.30,car.p[2]+.13-.31,seatBlend);
  const legs={};for(const side of ['left','right']){const sign=side==='left'?-1:1,base=legPose(walked,S,side,walk),bias=(.045+.105*(sideStep?0:walk))*crouch,lateral=sideStep?base.footY*sideStep:0,fc=[(sign*.10+lateral)*S,(-.01+(sideStep?0:base.footY)-bias)*S],wx=root[0]+Math.cos(yaw)*fc[0]-Math.sin(yaw)*fc[1],wy=root[1]+Math.sin(yaw)*fc[0]+Math.cos(yaw)*fc[1];let footY=(sideStep?0:base.footY)-bias,pitch=0,ankleZ;
   if(feetLocked){const anchor=cp([.48,.087,.13]),dx=anchor[0]-root[0],dy=anchor[1]-root[1];footY=(-Math.sin(yaw)*dx+Math.cos(yaw)*dy)/S+.01;ankleZ=car.p[2]+.13+.09*S+.006;}

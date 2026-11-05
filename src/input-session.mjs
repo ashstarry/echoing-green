@@ -1,10 +1,10 @@
-import {actionAvailability} from './action-availability.mjs?v=cp47-expressive-life-23cf705c6924';
-import {requestSceneEvent,eventKind} from './scene-events.mjs?v=cp47-expressive-life-23cf705c6924';
-import {requestCloud} from './local-cloud.mjs?v=cp47-expressive-life-23cf705c6924';
-import {interactionStep} from './interaction-sequence.mjs?v=cp47-expressive-life-23cf705c6924';
-import {RESIDENT_ACTIONS} from './resident-actions.mjs?v=cp47-expressive-life-23cf705c6924';
-import {PROFILES} from './community.mjs?v=cp47-expressive-life-23cf705c6924';
-import {FIREWORK_BURSTS,FIREWORK_FLIGHT} from './firework-score.mjs?v=cp47-expressive-life-23cf705c6924';
+import {actionAvailability} from './action-availability.mjs?v=cp47-expressive-life-7673d851eb71';
+import {requestSceneEvent,eventKind} from './scene-events.mjs?v=cp47-expressive-life-7673d851eb71';
+import {requestCloud} from './local-cloud.mjs?v=cp47-expressive-life-7673d851eb71';
+import {interactionStep} from './interaction-sequence.mjs?v=cp47-expressive-life-7673d851eb71';
+import {RESIDENT_ACTIONS} from './resident-actions.mjs?v=cp47-expressive-life-7673d851eb71';
+import {PROFILES} from './community.mjs?v=cp47-expressive-life-7673d851eb71';
+import {FIREWORK_BURSTS,FIREWORK_FLIGHT} from './firework-score.mjs?v=cp47-expressive-life-7673d851eb71';
 const terminal=j=>['done','cancelled','failed'].includes(j.status);
 export const INPUT_IDLE_SECONDS=2.8;
 export const inputBusy=s=>['listening','running','closing'].includes(s.inputSession?.phase);

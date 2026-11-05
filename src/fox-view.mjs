@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {foxPose} from './fox-behavior.mjs?v=cp47-expressive-life-23cf705c6924';
+import {foxPose} from './fox-behavior.mjs?v=cp47-expressive-life-7673d851eb71';
 const PITCH=new THREE.Vector3(0,0,-1),UP=new THREE.Vector3(0,1,0);
 // Four joined, flat-shaded paper folds replace the single rigid triangular tail.
 // Each next segment is attached at its predecessor's end, so bends never tear.

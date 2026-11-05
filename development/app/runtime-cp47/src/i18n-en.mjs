@@ -1064,3 +1064,5 @@ EN['回应']='A small response';
 Object.assign(EN,{"抬起前爪，低头舔一舔": "Lifting a paw for a little wash", "望向车门，等候捎来的礼物": "Looking toward the door for the little gift", "走到车门边接礼物": "Walking to the tram door for the gift", "双手接过车里的小礼物": "Receiving the little gift with both hands", "捧好礼物，带去交给街坊": "Carrying the gift to a neighbor", "电车捎来了给街坊的小礼物。旅客望向车门，准备上前接过它。": "The tram has brought a gift for a neighbor. The traveler looks toward the door, ready to collect it.", "旅客看到车门打开，走到门边接礼物。": "The door opens. The traveler steps over to collect the gift.", "旅客双手接住小礼物，准备送给街坊。": "The traveler receives the gift with both hands, ready to bring it to a neighbor."});
 
 Object.assign(EN,{"走近电车的小行李架": "Walking to the tram’s little luggage tray", "双手取下礼物，举起来看看": "Lifting the gift for a closer look", "旅客走近电车的小行李架，取下街坊托带的礼物。": "The traveler walks to the little luggage tray to collect the gift a neighbor sent."});
+
+Object.assign(EN,{"纸灯夜晚": "Paper lantern evening", "纸灯沿街亮起，街坊拿起纸灯，把暖光带到街边。": "Paper lamps light along the streets as neighbors carry their warm glow outside."});

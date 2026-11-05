@@ -1,7 +1,7 @@
 import * as THREE from 'three';
-import {createPavingSupport} from './foot-support.mjs?v=cp47-expressive-life-23cf705c6924';
-import {actionSubjects,subjectAlpha} from './action-subjects.mjs?v=cp47-expressive-life-23cf705c6924';
-import {createResponseSignals,responseGlowAlpha,GLOW_SECONDS,MAX_GLOWS} from './response-signals.mjs?v=cp47-expressive-life-23cf705c6924';
+import {createPavingSupport} from './foot-support.mjs?v=cp47-expressive-life-7673d851eb71';
+import {actionSubjects,subjectAlpha} from './action-subjects.mjs?v=cp47-expressive-life-7673d851eb71';
+import {createResponseSignals,responseGlowAlpha,GLOW_SECONDS,MAX_GLOWS} from './response-signals.mjs?v=cp47-expressive-life-7673d851eb71';
 const supported=new Set(['animal','duck','fish','boat','bicycle','parked_bicycle','tram','windmill','door','plant','tree','water_lantern']);
 export function createResponseMarkers({scene,entities,parts=new Map(),registry={entities:[]},nav}){
  const paving=createPavingSupport(nav?.activities?.paving);let lastTime=-1;const signals=createResponseSignals(),marks=new Map(),rows=new Map(registry.entities.map(e=>[e.id,e])),anchors=new Map();

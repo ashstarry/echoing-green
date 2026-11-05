@@ -1,5 +1,5 @@
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp47-expressive-life-23cf705c6924';
-import {makeRoom} from './event-travel.mjs?v=cp47-expressive-life-23cf705c6924';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp47-expressive-life-7673d851eb71';
+import {makeRoom} from './event-travel.mjs?v=cp47-expressive-life-7673d851eb71';
 
 export const MUSIC_CHILDREN=['resident.child_runner','resident.garden_child'];
 export const MUSIC_FOCUS=[-2.4684,-1.4537,1.1];

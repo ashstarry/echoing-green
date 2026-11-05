@@ -1,9 +1,9 @@
-import {advanceMusicFox,musicRoaming} from './music-circle.mjs?v=cp47-expressive-life-23cf705c6924';
-import {avoidBoat} from './boat-world.mjs?v=cp47-expressive-life-23cf705c6924';
-import {advanceFox} from './fox-behavior.mjs?v=cp47-expressive-life-23cf705c6924';
-import {needsClearPromenade} from './event-design.mjs?v=cp47-expressive-life-23cf705c6924';
-import {makeRoom} from './event-travel.mjs?v=cp47-expressive-life-23cf705c6924';
-import {CADENCE,varied} from './cadence.mjs?v=cp47-expressive-life-23cf705c6924';
+import {advanceMusicFox,musicRoaming} from './music-circle.mjs?v=cp47-expressive-life-7673d851eb71';
+import {avoidBoat} from './boat-world.mjs?v=cp47-expressive-life-7673d851eb71';
+import {advanceFox} from './fox-behavior.mjs?v=cp47-expressive-life-7673d851eb71';
+import {needsClearPromenade} from './event-design.mjs?v=cp47-expressive-life-7673d851eb71';
+import {makeRoom} from './event-travel.mjs?v=cp47-expressive-life-7673d851eb71';
+import {CADENCE,varied} from './cadence.mjs?v=cp47-expressive-life-7673d851eb71';
 export const TAU=Math.PI*2;
 export const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 export const ease=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};

@@ -43,7 +43,7 @@ export function advanceInteraction(job,dt,adapter){
  if(step.when&&!adapter.condition(step.when,job)){job.step++;job.entered=false;job.clock=0;return;}
  const primitive=INTERACTION_PRIMITIVES[step.action];if(!job.entered){job.entered=true;adapter.enter?.(step,job);}
  if(primitive.kind==='move'){adapter.move(step.target,job);if(!adapter.arrived(step.target,job))return;}
- else{if(step.waitFor&&!adapter.condition(step.waitFor,job))return;const duration=step.seconds??primitive.seconds;job.clock=Math.min(duration,job.clock+dt);if(job.clock<duration)return;}
+ else{if(step.waitFor&&!adapter.condition(step.waitFor,job))return;const duration=step.seconds??primitive.seconds;job.clock=Math.min(duration,job.clock+dt*(job.context.pace||1));if(job.clock<duration)return;}
  adapter.commit?.(step,job);job.history.push(step.action);job.step++;job.clock=0;job.entered=false;
  if(job.step>=INTERACTION_RECIPES[job.recipe].length){job.status='done';adapter.finish?.(job);}
 }

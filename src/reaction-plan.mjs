@@ -1,5 +1,5 @@
-import {ACTOR_DOMAINS} from './catalog.mjs?v=cp47-expressive-life-23cf705c6924';
-import {PROFILES} from './community.mjs?v=cp47-expressive-life-23cf705c6924';
+import {ACTOR_DOMAINS} from './catalog.mjs?v=cp47-expressive-life-7673d851eb71';
+import {PROFILES} from './community.mjs?v=cp47-expressive-life-7673d851eb71';
 const role=id=>PROFILES[id]?.label||'这位居民';
 const moving=a=>a&&['walk','yield','fold_umbrella'].includes(a.mode);
 const reached=a=>a&&a.reservation!==null&&!moving(a)&&a.path.length===0;

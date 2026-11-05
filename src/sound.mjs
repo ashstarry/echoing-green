@@ -1,5 +1,5 @@
-import {createEventSfx} from './event-sfx.mjs?v=cp47-expressive-life-23cf705c6924';
-import {writeText} from './i18n.mjs?v=cp47-expressive-life-23cf705c6924';
+import {createEventSfx} from './event-sfx.mjs?v=cp47-expressive-life-7673d851eb71';
+import {writeText} from './i18n.mjs?v=cp47-expressive-life-7673d851eb71';
 
 // User-approved loop master, played unchanged. Keep the same track across events.
 export function createSound(button){

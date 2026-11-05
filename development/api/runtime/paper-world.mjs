@@ -15,7 +15,7 @@ function startPaper(s,nav,e){
  const used=new Set(),candidates=s.actors.filter(a=>ELIGIBLE.includes(a.id)&&a.mobile&&!a.manual&&!e.protectedIds?.includes(a.id)&&!s.residentActions[a.id]?.requested);
  if(['paper_read','paper_collect'].includes(e.kind)){
   const note=w.notes.filter(n=>n.location==='anchor').sort((a,b)=>b.created-a.created)[0];
-  if(note&&candidates.length){const destinationNode=nearest(nav,STATIONS[note.station].hang),actor=candidates.sort((a,b)=>D(a.p,nav.nodes[destinationNode])-D(b.p,nav.nodes[destinationNode]))[0],context={eventId:e.id,writingNode:destinationNode,destinationNode,station:note.station,slot:note.slot,anchor:note.anchor.slice(),oldNote:note.id,occupied:true,writeLook:note.anchor.slice(),look:note.anchor.slice()};
+  if(note&&candidates.length){const destinationNode=nearest(nav,STATIONS[note.station].hang),actor=candidates.sort((a,b)=>D(a.p,nav.nodes[destinationNode])-D(b.p,nav.nodes[destinationNode]))[0],context={eventId:e.id,pace:s.inputSession?.phase==='running'?1.18:1,writingNode:destinationNode,destinationNode,station:note.station,slot:note.slot,anchor:note.anchor.slice(),oldNote:note.id,occupied:true,writeLook:note.anchor.slice(),look:note.anchor.slice()};
    const job=createInteraction({id:e.id+':'+actor.id,recipe:e.kind==='paper_read'?'read_note':'collect_note',actor:actor.id,prop:note.id,context});w.jobs.push(job);actor.path=[];actor.wait=.1;actor.reservation=null;actor.taskRevision=-1;const r=s.residentActions[actor.id];r.action=null;r.queued=null;lock(s,job,e,'destination');
   }return;
  }
@@ -29,7 +29,7 @@ function startPaper(s,nav,e){
   const old=w.notes.find(n=>n.location==='anchor'&&n.slot===slot),id='paper-note-'+w.next++,anchor=paperAnchor(nav,station,slot,actor.scale),note={id,purpose:e.kind,author:actor.id,owner:actor.id,side:'left',location:'supply',stage:'blank',color:(w.next-2)%6,message:String(e.sourceText||'').slice(0,160),created:s.time,slot:null,anchor:null,station};
   w.notes.push(note);let recipient=null,recipientNode=null;
   if(e.kind==='paper_share'){recipient=candidates.filter(a=>!used.has(a.id)).sort((a,b)=>D(a.p,nav.nodes[destinationNode])-D(b.p,nav.nodes[destinationNode]))[0];if(!recipient)continue;used.add(recipient.id);const p=nav.nodes[destinationNode];recipientNode=nearest(nav,config.receive);}
-  const context={eventId:e.id,writingNode,destinationNode,station,slot,anchor,oldNote:old?.id||null,occupied:!!old,recipient:recipient?.id||null,writeLook:[nav.nodes[writingNode][0],nav.nodes[writingNode][1]-1,.9],look:recipient?nav.nodes[recipientNode].slice(0,3):anchor};
+  const context={eventId:e.id,pace:s.inputSession?.phase==='running'?1.18:1,writingNode,destinationNode,station,slot,anchor,oldNote:old?.id||null,occupied:!!old,recipient:recipient?.id||null,writeLook:[nav.nodes[writingNode][0],nav.nodes[writingNode][1]-1,.9],look:recipient?nav.nodes[recipientNode].slice(0,3):anchor};
   w.jobs.push(createInteraction({id:e.id+':'+actor.id,recipe:recipient?'share_note':'hang_note',actor:actor.id,prop:id,context}));
   if(recipient){w.jobs.push(createInteraction({id:e.id+':'+recipient.id,recipe:'receive_note',actor:recipient.id,prop:id,context:{...context,writingNode:recipientNode,destinationNode:recipientNode,look:nav.nodes[destinationNode].slice(0,3),sender:actor.id,occupied:false}}));}
  }

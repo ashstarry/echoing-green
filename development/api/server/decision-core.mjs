@@ -20392,7 +20392,7 @@ export function makeRequest(text,state={}){
  questions['scope:paper'].instructions='列车捎来礼物或包裹不涉及纸笺，no。没有说纸笺/树边的纸时，拿起/收起那件纪念是craft，不是paper，应no。对写、折、悬挂、赠送、阅读、收起纸笺/短笺/心愿纸、把心意留在树边的直接或诗意愿望选yes；不需要命令词。仅谈一般团聚/孤单或过去评价选no。';
  questions['scope:occasion'].instructions='许愿框未点名时，安静一点、放慢下来、热闹一点、相伴或分享饭香等整体邀请默认指整个小镇，选yes，不要求出现大家/居民/全体字样。安静休息、团聚、吃饭、集市都属于本项；明确只针对一个人或一个物件才no。单纯天气/烟花不额外安排occasion。明确保持整体不变、回顾赞美、未执行的假设选no。';
  questions.weather.instructions='Read this as a wish for the miniature town. Rain, drizzle or snow arriving in the proposed scene, even poetically and alongside residents reacting, means rain or snow. Imperative wording is unnecessary. Asking rain/snow to end means clear. Only a future condition (after rain stops), past recollection, hypothetical question or explicit keep-as-is means keep; do not implement a condition immediately.';
- questions.day_phase.instructions='这是许愿框，时间陈述就是让小镇切换到该时段。晨光/破晓=dawn；白昼/日光=day；暮色/夕阳/黄昏=dusk；夜幕降临/入夜/黑夜=night。按明确时段选择，当前不同也仍选目标。只说灯暖或花火而未提时间才keep。';
+ questions.day_phase.instructions='这是许愿框，时间陈述就是让小镇切换到该时段。晨光/破晓=dawn；白昼/日光=day；暮色/夕阳/黄昏=dusk；夜幕降临/入夜/黑夜=night。按明确时段选择，即使当前已经是该时段也仍选目标，让用户可以重播活动。纸灯沿街亮起、纸灯夜晚=night。仅说灯色更暖或花火而未提时间/点亮纸灯活动才keep。';
  questions.light.instructions='只管全镇灯火及各家窗灯。所有窗边、家家户户、整条街的灯都属于global。若同时提水灯/一处灯，仍保留全镇部分；单独水灯才keep。温暖/暖起来选warm，要求更亮选bright，柔和选soft；暖黄昏并非另改灯。';
  questions.music.instructions='请求听琴、琴声陪伴、大家陪着吉他、音乐会、想听树下的旋律，都表示乐手play，虽然可能没有出现演奏这个动词。只改变乐手的演奏状态，不擅自聚集人群；听众聚集由street判断。明确停琴/不要音乐选rest；没有音乐含义keep。';
  questions['scope:music'].instructions='想听琴声/吉他/旋律、让大家听琴或陪伴琴声，都是对音乐的愿望，选yes。只有赞美过去的琴声/假设/明确保持才no。';
@@ -20422,7 +20422,7 @@ export function makeRequest(text,state={}){
  questions.gentle_reply=REPLY_QUESTION;
  questions.intent_status.instructions='许愿输入：有明确或诗意的可行愿望change。只评价/明确保持/假设而非愿望no_change。指代不清clarify；肯定请求全部无法实现unsupported，部分无法实现partial。否定的事不计为不支持。这里支持雨雪风日夜灯火花火晚市、逐人喝茶合书喂鱼上下楼乘车等现有动作。当前有选中对象则代词已明确；未选中而只说红衣/那个人不够明确。读者可参加全镇活动，但不能任意指定移动地点、船没有船夫，不能自行航行、鸟不能归巢。';
  questions['scope:weather'].instructions='Does this wish describe desired rain, drizzle, snow or cessation? Direct statements and poetic scene descriptions count as yes, even with other clauses about residents reacting. No imperative verb is needed. Only mentioning weather as a future condition, past memory, hypothetical question, or explicitly keeping it unchanged means no. Interpret figurative weather as yes when it is the requested scene, but not a mere comparison of emotions.';
- questions['scope:day_phase'].instructions='原话出现晨曦/清晨/白昼/黄昏/夜幕降临等肯定时段陈述，就是切换时间的愿望，选yes。仅回忆/假设/明确不要改变才no。没有时段信息只描述灯色或花火才no。';
+ questions['scope:day_phase'].instructions='原话出现晨曦/清晨/白昼/黄昏/夜幕降临等肯定时段陈述，就是切换时间的愿望，选yes。仅回忆/假设/明确不要改变才no。明确让纸灯沿街亮起/纸灯夜晚也选yes；即使当前已经入夜也可重播点灯。没有时段信息、只描述灯色或花火才no。';
  questions['scope:light'].instructions='未指名单灯时，灯火/灯的颜色或亮度默认全镇。仅指莲花水灯则no；暖黄昏不是灯火变化。';
  questions['scope:breeze'].instructions='是否希望空气中的风改变？只要求风车转速则no。';
  questions.intent_status=baseRequest(text,state,'v5').questions.intent_status;
@@ -20460,7 +20460,7 @@ const TERMINAL=new Set(['no_change','clarify','unsupported','partial']);
 export function parsePlan(raw,request){
  if(raw?.error||!raw?.answers)throw Error('决策服务没有返回有效答案');
  for(const[key,q]of Object.entries(request.questions)){const a=raw.answers[key];if(a?.type!=='choice'||!Object.hasOwn(q.criteria,a.choice)||!a.probabilities||Object.keys(q.criteria).some(v=>!Number.isFinite(a.probabilities[v])||a.probabilities[v]<0||a.probabilities[v]>1))throw Error('决策答案缺失或无效');}
- const scene=explicitScene(JSON.parse(request.state).user_utterance);if(scene){const label=scene.kind==='market'?'夜市开张，街坊到酒楼前等热食。':'定点花火亮起，街坊走向广场并站定仰望。';return{status:'change',items:Object.entries(scene.changes).map(([target,action])=>({kind:'macro',target,action,field:target,label,target_label:scene.kind==='market'?'晚市':'花火大会'})),skipped:[],resolution:{source:scene.rule,raw_status:raw.answers.intent_status.choice,raw_occasion:raw.answers.occasion.choice,raw_festival:raw.answers.festival.choice,raw_mood:raw.answers.atmosphere.choice},summary:label};}
+ const scene=explicitScene(JSON.parse(request.state).user_utterance);if(scene){const label=scene.kind==='lantern'?'纸灯沿街亮起，街坊拿起纸灯，把暖光带到街边。':scene.kind==='market'?'夜市开张，街坊到酒楼前等热食。':'定点花火亮起，街坊走向广场并站定仰望。';return{status:'change',items:Object.entries(scene.changes).map(([target,action])=>({kind:'macro',target,action,field:target,label,target_label:scene.kind==='lantern'?'纸灯夜晚':scene.kind==='market'?'晚市':'花火大会'})),skipped:[],resolution:{source:scene.rule,raw_status:raw.answers.intent_status.choice,raw_occasion:raw.answers.occasion.choice,raw_festival:raw.answers.festival.choice,raw_mood:raw.answers.atmosphere.choice},summary:label};}
  const input=JSON.parse(request.state),state=input.current,explicit=explicitWeather(input.user_utterance),status=explicit?'change':raw.answers.intent_status.choice,items=[],skipped=[],fields=Object.fromEntries(Object.entries(contract.fields).filter(([key])=>Object.hasOwn(request.questions,key)));
  if(request.questions.selected_object){const o=selectedCatalog[state.selected_entity];if(!o?.actions.length)throw Error('选中物件无效');fields.selected_object={label:'选中的物件',kind:'object',members:[o.id],choices:request.questions.selected_object.criteria};}
  for(const [key,d]of Object.entries(fields)){

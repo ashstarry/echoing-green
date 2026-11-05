@@ -1,4 +1,4 @@
-import {FIREWORK_BURSTS,FIREWORK_FLIGHT,AUDIBLE_BURSTS} from './firework-score.mjs?v=cp47-expressive-life-23cf705c6924';
+import {FIREWORK_BURSTS,FIREWORK_FLIGHT,AUDIBLE_BURSTS} from './firework-score.mjs?v=cp47-expressive-life-7673d851eb71';
 
 // Event edges only: no footsteps, continuous crowd noise or sound per resident.
 export function createCueTracker(){

@@ -1,6 +1,6 @@
 {
   "active": "app/runtime-cp47",
-  "api_source_commit": "688e4ad3786050621ff896d6a5be29a1656b29b8",
+  "api_source_commit": "e337d65b4db1dd659ede35134f30e3707738d239",
   "files": [
     {
       "original": "app/runtime-cp17/src/catalog.mjs",
@@ -14405,8 +14405,8 @@
     {
       "original": "app/runtime-cp47/src/explicit-scenes.mjs",
       "repository": "development/app/runtime-cp47/src/explicit-scenes.mjs",
-      "sha256": "2d1180faeba1ce3d05aa8b34004d3f159a072e1c313ace130df0fc7417716cd8",
-      "repository_sha256": "2d1180faeba1ce3d05aa8b34004d3f159a072e1c313ace130df0fc7417716cd8"
+      "sha256": "6439c7ac7ee2e632bb70b9357a2ecfe51d36e7f2d9e15100fc8e80dd7fec1a6a",
+      "repository_sha256": "6439c7ac7ee2e632bb70b9357a2ecfe51d36e7f2d9e15100fc8e80dd7fec1a6a"
     },
     {
       "original": "app/runtime-cp47/src/town-response.mjs",
@@ -14579,8 +14579,8 @@
     {
       "original": "app/runtime-cp47/src/i18n-en.mjs",
       "repository": "development/app/runtime-cp47/src/i18n-en.mjs",
-      "sha256": "401c46d21fb95af7ebd033f8ff150856ea0b1a80ed720cee19f9cf21918d0873",
-      "repository_sha256": "401c46d21fb95af7ebd033f8ff150856ea0b1a80ed720cee19f9cf21918d0873"
+      "sha256": "0cb79fab21de8c5998b1d990337d954a804936b7ff5b5c14a5b2964dff7809dc",
+      "repository_sha256": "0cb79fab21de8c5998b1d990337d954a804936b7ff5b5c14a5b2964dff7809dc"
     },
     {
       "original": "app/runtime-cp47/src/paper-view.mjs",
@@ -15029,8 +15029,8 @@
     {
       "original": "app/runtime-cp47/tests/explicit-scenes.test.mjs",
       "repository": "development/app/runtime-cp47/tests/explicit-scenes.test.mjs",
-      "sha256": "ba85bd8e4dd3e6af01000b204e17df1f854b6bfc04a72f5624d378fba9c6579f",
-      "repository_sha256": "ba85bd8e4dd3e6af01000b204e17df1f854b6bfc04a72f5624d378fba9c6579f"
+      "sha256": "bc5d826c020f8e36cfd47838ab3018e61341d1b5c500ed207b31960332a53754",
+      "repository_sha256": "bc5d826c020f8e36cfd47838ab3018e61341d1b5c500ed207b31960332a53754"
     },
     {
       "original": "app/runtime-cp47/tests/i18n-and-mood.test.mjs",
@@ -15125,8 +15125,8 @@
     {
       "original": "app/runtime-cp47/decision-api.mjs",
       "repository": "development/app/runtime-cp47/decision-api.mjs",
-      "sha256": "d3dc24dae96528ecff571cad1b8b213c3f16a6fbdc3ca29b46db8d076c30e498",
-      "repository_sha256": "d506738dc30688d61e0c320aae068cedc466bae40744a3292d075bfcd0ce0c56"
+      "sha256": "74bf2ecaf1364f71c349e72debb24601f11cc1b73ccbe85bebb2f0f2f7ba39a2",
+      "repository_sha256": "7da9aac38c6c53d52af55526ce068ebf6eecd9e7f60e74c4d50974cb4f559304"
     },
     {
       "original": "app/runtime-cp47/qa-harness.mjs",
@@ -15719,8 +15719,8 @@
     {
       "original": "app/echoing-green-api/runtime/craft-world.mjs",
       "repository": "development/api/runtime/craft-world.mjs",
-      "sha256": "114f2b8752758e2b15e114efc3aae8ec0c52769f68e1d9fbaf142261a4f805c4",
-      "repository_sha256": "114f2b8752758e2b15e114efc3aae8ec0c52769f68e1d9fbaf142261a4f805c4"
+      "sha256": "85b6e0032159b635a25c3efb16aa47b0a421c051df7640c1de260ab00a6ece55",
+      "repository_sha256": "85b6e0032159b635a25c3efb16aa47b0a421c051df7640c1de260ab00a6ece55"
     },
     {
       "original": "app/echoing-green-api/runtime/event-design.mjs",
@@ -15743,14 +15743,14 @@
     {
       "original": "app/echoing-green-api/runtime/explicit-scenes.mjs",
       "repository": "development/api/runtime/explicit-scenes.mjs",
-      "sha256": "2d1180faeba1ce3d05aa8b34004d3f159a072e1c313ace130df0fc7417716cd8",
-      "repository_sha256": "2d1180faeba1ce3d05aa8b34004d3f159a072e1c313ace130df0fc7417716cd8"
+      "sha256": "6439c7ac7ee2e632bb70b9357a2ecfe51d36e7f2d9e15100fc8e80dd7fec1a6a",
+      "repository_sha256": "6439c7ac7ee2e632bb70b9357a2ecfe51d36e7f2d9e15100fc8e80dd7fec1a6a"
     },
     {
       "original": "app/echoing-green-api/runtime/fox-behavior.mjs",
       "repository": "development/api/runtime/fox-behavior.mjs",
-      "sha256": "af51ed070a1e7980c16cad06e5868520bdeb536c1ba1e5f5573d6bec65c0313d",
-      "repository_sha256": "af51ed070a1e7980c16cad06e5868520bdeb536c1ba1e5f5573d6bec65c0313d"
+      "sha256": "715ea68908e239c5e7ff52d3ae82a32dccfadb73f38972b0ba47455930fe1113",
+      "repository_sha256": "715ea68908e239c5e7ff52d3ae82a32dccfadb73f38972b0ba47455930fe1113"
     },
     {
       "original": "app/echoing-green-api/runtime/fox-path.mjs",
@@ -15773,14 +15773,14 @@
     {
       "original": "app/echoing-green-api/runtime/interaction-sequence.mjs",
       "repository": "development/api/runtime/interaction-sequence.mjs",
-      "sha256": "5698f12f8803f5eaf0d7a35c374db52f44fdc0752a529dce71033388de4d4dc1",
-      "repository_sha256": "5698f12f8803f5eaf0d7a35c374db52f44fdc0752a529dce71033388de4d4dc1"
+      "sha256": "45f63efb21c3e2d419dadd13b0cd60aab6cf7f5549238d6cbd37f0bc57fe7b0d",
+      "repository_sha256": "45f63efb21c3e2d419dadd13b0cd60aab6cf7f5549238d6cbd37f0bc57fe7b0d"
     },
     {
       "original": "app/echoing-green-api/runtime/lantern-scene.mjs",
       "repository": "development/api/runtime/lantern-scene.mjs",
-      "sha256": "f970e7ab071123b63443775298227d5aa35f779f11830eda724d6e4ef5bf804a",
-      "repository_sha256": "f970e7ab071123b63443775298227d5aa35f779f11830eda724d6e4ef5bf804a"
+      "sha256": "9867b7926094644d8ab6e1668452c188ba102d055382270e62c4da26704b9aac",
+      "repository_sha256": "9867b7926094644d8ab6e1668452c188ba102d055382270e62c4da26704b9aac"
     },
     {
       "original": "app/echoing-green-api/runtime/life-plans.mjs",
@@ -15821,8 +15821,8 @@
     {
       "original": "app/echoing-green-api/runtime/neighborhood-world.mjs",
       "repository": "development/api/runtime/neighborhood-world.mjs",
-      "sha256": "40f78ff5396e4bfc1e0565c0bf350e128c660657e3727ff741d1b095a519d831",
-      "repository_sha256": "40f78ff5396e4bfc1e0565c0bf350e128c660657e3727ff741d1b095a519d831"
+      "sha256": "42bf892def6c7c99c086e9ba02cde9f57e1bb77b69f545e8a9c7a0bedebc3dfa",
+      "repository_sha256": "42bf892def6c7c99c086e9ba02cde9f57e1bb77b69f545e8a9c7a0bedebc3dfa"
     },
     {
       "original": "app/echoing-green-api/runtime/object-actions.mjs",
@@ -15833,14 +15833,14 @@
     {
       "original": "app/echoing-green-api/runtime/paper-world.mjs",
       "repository": "development/api/runtime/paper-world.mjs",
-      "sha256": "3eac2c2e5c4d70af90823c98b8075ba11e1b21e6e63da3e7bc7a48d80f434cf6",
-      "repository_sha256": "3eac2c2e5c4d70af90823c98b8075ba11e1b21e6e63da3e7bc7a48d80f434cf6"
+      "sha256": "5846f6b435db914ad35b0ceff1c0730e43baf827af31aa672008590693187e5f",
+      "repository_sha256": "5846f6b435db914ad35b0ceff1c0730e43baf827af31aa672008590693187e5f"
     },
     {
       "original": "app/echoing-green-api/runtime/passengers.mjs",
       "repository": "development/api/runtime/passengers.mjs",
-      "sha256": "3698c3711107a49782ee63851eca720ca81b8561ba6288b0a0d8e24fc3b4b7f1",
-      "repository_sha256": "3698c3711107a49782ee63851eca720ca81b8561ba6288b0a0d8e24fc3b4b7f1"
+      "sha256": "be00c390fe0f1d065e16cc1dd81dfdfef38f6c42516c332a32e17bff1f521d5d",
+      "repository_sha256": "be00c390fe0f1d065e16cc1dd81dfdfef38f6c42516c332a32e17bff1f521d5d"
     },
     {
       "original": "app/echoing-green-api/runtime/resident-actions.mjs",
@@ -15971,8 +15971,8 @@
     {
       "original": "app/echoing-green-api/server/decision-core.mjs",
       "repository": "development/api/server/decision-core.mjs",
-      "sha256": "12171a4c51eece8d0c6bc8cb32dda5f80f3cb5e606dac4dd85999264b5aa6a8b",
-      "repository_sha256": "12171a4c51eece8d0c6bc8cb32dda5f80f3cb5e606dac4dd85999264b5aa6a8b"
+      "sha256": "317fc26a1e5bbc3b71ebb2f26199cce81561b30cb711ac3bfaa79d1cb7cb87c2",
+      "repository_sha256": "317fc26a1e5bbc3b71ebb2f26199cce81561b30cb711ac3bfaa79d1cb7cb87c2"
     },
     {
       "original": "app/echoing-green-api/server/gateway.mjs",
@@ -15983,8 +15983,8 @@
     {
       "original": "app/echoing-green-api/tests/explicit-scenes.test.mjs",
       "repository": "development/api/tests/explicit-scenes.test.mjs",
-      "sha256": "fd28d5967218f960d2ab36553f233fd1b804a38686956c081de03dba18693811",
-      "repository_sha256": "fd28d5967218f960d2ab36553f233fd1b804a38686956c081de03dba18693811"
+      "sha256": "453eedee82904a789695a0981c930d782e37b5a24190427eb02a2b81e5bee5dc",
+      "repository_sha256": "453eedee82904a789695a0981c930d782e37b5a24190427eb02a2b81e5bee5dc"
     },
     {
       "original": "app/echoing-green-api/tests/gateway.test.mjs",
@@ -16053,6 +16053,18 @@
       "repository_sha256": "5ffd8f542515b97f16072553ec3f8e72cd15c4aa0a13c9081a34ba3adc9bc77a"
     },
     {
+      "original": "work/runtime-cp47/sync-api-core.py",
+      "repository": "development/work/runtime-cp47/sync-api-core.py",
+      "sha256": "5ce287a765989541f669a49d1dfd0ec35cdf461eb5110e760c8683d4740ae019",
+      "repository_sha256": "5ce287a765989541f669a49d1dfd0ec35cdf461eb5110e760c8683d4740ae019"
+    },
+    {
+      "original": "work/runtime-cp47/test-repeat-night.mjs",
+      "repository": "development/work/runtime-cp47/test-repeat-night.mjs",
+      "sha256": "906bc3937fac2b8315605d4efbafc70a9f57a654857aa5b00ec5702d3dbeb9b6",
+      "repository_sha256": "906bc3937fac2b8315605d4efbafc70a9f57a654857aa5b00ec5702d3dbeb9b6"
+    },
+    {
       "original": "work/runtime-cp47/audit-grey.mjs",
       "repository": "development/work/runtime-cp47/audit-grey.mjs",
       "sha256": "3dc313c627e2ef361b1b1b201096100c31c858df1cd0b792a93c46f18827ef4a",
@@ -16061,8 +16073,8 @@
     {
       "original": "work/runtime-cp47/build-report.py",
       "repository": "development/work/runtime-cp47/build-report.py",
-      "sha256": "09a59eae2b60d307c2d61dbbb47ac4f99529e5878fd8f198f768ce29c6933c23",
-      "repository_sha256": "09a59eae2b60d307c2d61dbbb47ac4f99529e5878fd8f198f768ce29c6933c23"
+      "sha256": "052f970ecf7115b73a43ec0b4ca7259a93cbe0e532743530e49d7328aa751e0d",
+      "repository_sha256": "052f970ecf7115b73a43ec0b4ca7259a93cbe0e532743530e49d7328aa751e0d"
     },
     {
       "original": "work/runtime-cp47/test-language.mjs",
