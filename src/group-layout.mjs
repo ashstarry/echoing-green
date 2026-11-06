@@ -1,5 +1,5 @@
-import {pathTo,navigationGraph} from './navigation.mjs?v=cp50-friendly-fox-d3de906ee97b';
-import {moverBlocks,sampleClip} from './motion.mjs?v=cp50-friendly-fox-d3de906ee97b';
+import {pathTo,navigationGraph} from './navigation.mjs?v=cp50-friendly-fox-1d9659a79416';
+import {moverBlocks,sampleClip} from './motion.mjs?v=cp50-friendly-fox-1d9659a79416';
 export const GROUP_KINDS=new Set(['festival','market','supper','reunion','music','quiet']);
 const D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 const queues=[

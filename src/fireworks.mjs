@@ -1,5 +1,5 @@
-import {FIREWORK_BURSTS,FIREWORK_FLIGHT} from './firework-score.mjs?v=cp50-friendly-fox-d3de906ee97b';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp50-friendly-fox-d3de906ee97b';
+import {FIREWORK_BURSTS,FIREWORK_FLIGHT} from './firework-score.mjs?v=cp50-friendly-fox-1d9659a79416';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp50-friendly-fox-1d9659a79416';
 import * as THREE from 'three';
 // One GPU draw for all rockets, glowing red/gold heads and curved trailing sparks.
 export function createFireworks(scene,camera,renderer){

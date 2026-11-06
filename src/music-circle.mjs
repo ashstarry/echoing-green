@@ -1,5 +1,5 @@
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp50-friendly-fox-d3de906ee97b';
-import {makeRoom} from './event-travel.mjs?v=cp50-friendly-fox-d3de906ee97b';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp50-friendly-fox-1d9659a79416';
+import {makeRoom} from './event-travel.mjs?v=cp50-friendly-fox-1d9659a79416';
 
 export const MUSIC_CHILDREN=['resident.child_runner','resident.garden_child'];
 export const MUSIC_FOCUS=[-2.4684,-1.4537,1.1];
@@ -16,7 +16,8 @@ export function prepareMusicSpace(s,nav,e){
 export function musicRoaming(nav,original){
  if(extended.has(nav))return extended.get(nav);
  const connected=navigationGraph(nav),main=connected.components[nav.actors[0].entry.at(-1)];
- const data={...original,origin:nav.origin,nodes:nav.nodes.filter((p,i)=>connected.components[i]===main&&p[2]<.85).map(p=>[p[0],p[1],p[2]-.03])};
+ const selected=nav.nodes.map((p,i)=>({p,i})).filter(({p,i})=>connected.components[i]===main&&p[2]<.85),index=new Map(selected.map((v,i)=>[v.i,i]));
+ const data={...original,origin:nav.origin,nodes:selected.map(({p})=>[p[0],p[1],p[2]-.03]),adjacency:selected.map(({i})=>connected.edges[i].filter(j=>index.has(j)).map(j=>index.get(j)))};
  extended.set(nav,data);return data;
 }
 function nearest(nav,p){const graph=navigationGraph(nav),main=graph.components[nav.actors[0].entry.at(-1)];return nav.nodes.map((q,i)=>({i,d:distance(q,p)})).filter(x=>graph.components[x.i]===main).sort((a,b)=>a.d-b.d)[0].i;}

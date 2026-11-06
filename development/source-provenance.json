@@ -16943,8 +16943,8 @@
     {
       "original": "app/runtime-cp50/src/music-circle.mjs",
       "repository": "development/app/runtime-cp50/src/music-circle.mjs",
-      "sha256": "40060c2c5c78c7e5777a5cba23c09027092f88649578f3e389b0bff37b8deb2f",
-      "repository_sha256": "40060c2c5c78c7e5777a5cba23c09027092f88649578f3e389b0bff37b8deb2f"
+      "sha256": "ce80930f7b06b22f92c5692123df37e84703bb2734e900cb6b8ff7b2cdca96fd",
+      "repository_sha256": "ce80930f7b06b22f92c5692123df37e84703bb2734e900cb6b8ff7b2cdca96fd"
     },
     {
       "original": "app/runtime-cp50/src/group-view.mjs",
@@ -17093,8 +17093,8 @@
     {
       "original": "app/runtime-cp50/src/fox-behavior.mjs",
       "repository": "development/app/runtime-cp50/src/fox-behavior.mjs",
-      "sha256": "252a2e3892c6a571ba97095b6b0411017ee03606bdd916f3f483adb4c95c37fc",
-      "repository_sha256": "252a2e3892c6a571ba97095b6b0411017ee03606bdd916f3f483adb4c95c37fc"
+      "sha256": "ab3f6d124c352021d86c2c8a1046b67505c35138865d8b54ca5a2dc5e1e36c0d",
+      "repository_sha256": "ab3f6d124c352021d86c2c8a1046b67505c35138865d8b54ca5a2dc5e1e36c0d"
     },
     {
       "original": "app/runtime-cp50/src/deployment-config.mjs",
@@ -17111,8 +17111,8 @@
     {
       "original": "app/runtime-cp50/src/fox-ground-path.mjs",
       "repository": "development/app/runtime-cp50/src/fox-ground-path.mjs",
-      "sha256": "61fec6d0493d657a037b57886b37fb6a0ffc1b6ca5e596048c878fdba4c4b141",
-      "repository_sha256": "61fec6d0493d657a037b57886b37fb6a0ffc1b6ca5e596048c878fdba4c4b141"
+      "sha256": "59889deea5cddb4591546d3c8459d64ed07e33aa0ed69fe9346b0d54ae7aa1c2",
+      "repository_sha256": "59889deea5cddb4591546d3c8459d64ed07e33aa0ed69fe9346b0d54ae7aa1c2"
     },
     {
       "original": "app/runtime-cp50/src/prop-attachment.mjs",
@@ -17261,8 +17261,8 @@
     {
       "original": "app/runtime-cp50/src/fox-rendezvous.mjs",
       "repository": "development/app/runtime-cp50/src/fox-rendezvous.mjs",
-      "sha256": "254cf73ffde7bc8643d3a72899aec6b14bb1ed88719c847ed5f2c321e0367ada",
-      "repository_sha256": "254cf73ffde7bc8643d3a72899aec6b14bb1ed88719c847ed5f2c321e0367ada"
+      "sha256": "a82d7ded6fd2d8bb1cac2c7e29be6fc46fad2729a97dd7970830e5cac7b039f3",
+      "repository_sha256": "a82d7ded6fd2d8bb1cac2c7e29be6fc46fad2729a97dd7970830e5cac7b039f3"
     },
     {
       "original": "app/runtime-cp50/src/event-props.mjs",
@@ -17405,8 +17405,8 @@
     {
       "original": "app/runtime-cp50/src/fox-path.mjs",
       "repository": "development/app/runtime-cp50/src/fox-path.mjs",
-      "sha256": "34d392fab21324a1873c5f938921223e607aedcb97affea1372bee9bd606176f",
-      "repository_sha256": "34d392fab21324a1873c5f938921223e607aedcb97affea1372bee9bd606176f"
+      "sha256": "830679e644b3c7a1474c9321e7a890a27823c18f6a29c52e7be56dda9472bd6b",
+      "repository_sha256": "830679e644b3c7a1474c9321e7a890a27823c18f6a29c52e7be56dda9472bd6b"
     },
     {
       "original": "app/runtime-cp50/src/object-action-view.mjs",
@@ -17669,8 +17669,8 @@
     {
       "original": "app/runtime-cp50/tests/fox-approach.test.mjs",
       "repository": "development/app/runtime-cp50/tests/fox-approach.test.mjs",
-      "sha256": "b58a80f9a704389df0bc7898bfa6fecd1b3ccc640abb3c590fa24f951a8965f0",
-      "repository_sha256": "b58a80f9a704389df0bc7898bfa6fecd1b3ccc640abb3c590fa24f951a8965f0"
+      "sha256": "86cb80d88f93f9cc43710656e182612e15ae2d2410cbeb4b44b5cff00b2e4206",
+      "repository_sha256": "86cb80d88f93f9cc43710656e182612e15ae2d2410cbeb4b44b5cff00b2e4206"
     },
     {
       "original": "app/runtime-cp50/tests/event-feedback.test.mjs",
@@ -18665,8 +18665,8 @@
     {
       "original": "work/runtime-cp50/build-report.py",
       "repository": "development/work/runtime-cp50/build-report.py",
-      "sha256": "eba1e918e977bfa5281279dee8762bc22fcee2b0fcefe5a5b471ec5c377a72db",
-      "repository_sha256": "eba1e918e977bfa5281279dee8762bc22fcee2b0fcefe5a5b471ec5c377a72db"
+      "sha256": "489c670d994d4e5f6893d9be37d3c9d4de9efded189cbaf21131ccd8c374043f",
+      "repository_sha256": "489c670d994d4e5f6893d9be37d3c9d4de9efded189cbaf21131ccd8c374043f"
     },
     {
       "original": "work/runtime-cp50/test-language.mjs",
@@ -18691,6 +18691,18 @@
       "repository": "development/work/runtime-cp50/reproduce-browser.mjs",
       "sha256": "00fae15eaa0b35c70e760b034d7b6b20652210bef262e72ac264d1d35d94cc2b",
       "repository_sha256": "00fae15eaa0b35c70e760b034d7b6b20652210bef262e72ac264d1d35d94cc2b"
+    },
+    {
+      "original": "work/runtime-cp50/replay-long-life.mjs",
+      "repository": "development/work/runtime-cp50/replay-long-life.mjs",
+      "sha256": "57e7c47fb21c9808da38d889dd60b0d398eae939d65f167caaf963616d016a0f",
+      "repository_sha256": "57e7c47fb21c9808da38d889dd60b0d398eae939d65f167caaf963616d016a0f"
+    },
+    {
+      "original": "work/runtime-cp50/long-life.mjs",
+      "repository": "development/work/runtime-cp50/long-life.mjs",
+      "sha256": "4fddc4c0613b24780d3f0b77267b4fc7817d242d76a11866cf8c63f68ba18fda",
+      "repository_sha256": "4fddc4c0613b24780d3f0b77267b4fc7817d242d76a11866cf8c63f68ba18fda"
     }
   ],
   "omitted_nonruntime_metadata": [

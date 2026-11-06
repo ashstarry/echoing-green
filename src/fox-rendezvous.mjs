@@ -1,4 +1,4 @@
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp50-friendly-fox-d3de906ee97b';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp50-friendly-fox-1d9659a79416';
 const FOX='animal.garden_fox',D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 export function foxMeetingActive(s,a){return !!a.foxGreetingFor&&s.foxBehavior?.command==='greet'&&s.foxBehavior.invitedNeighbor===a.id&&s.time<a.foxGreetingUntil;}
 // One neighbor may step out of an old crowd to a free, existing piece of paving.
@@ -19,7 +19,7 @@ export function inviteFoxNeighbor(s,nav,preferredId=null){
 }
 
 export function settleFoxMeeting(s,near){
- const f=s.foxBehavior,c=s.objectControls?.[FOX],a=near?.actor;
+ const f=s.foxBehavior,c=s.objectControls?.[FOX],a=near?.actor;if(a&&f.invitedNeighbor&&f.invitedNeighbor!==a.id){const old=s.actors.find(x=>x.id===f.invitedNeighbor);if(old){delete old.foxGreetingFor;delete old.foxGreetingUntil;old.courtesyExpires=s.time;}f.invitedNeighbor=null;}
  if(!a||c?.preserveOthers||!a.mobile||a.eventOnly||a.interactionLock||a.manual||s.residentActions?.[a.id]?.requested)return;
  a.courtesyDestination=a.node;a.courtesyExpires=s.time+7;a.courtesyArrivedAt=null;
  a.foxGreetingFor=c.action+':'+c.started;a.foxGreetingUntil=s.time+7;

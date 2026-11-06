@@ -2,7 +2,7 @@ const dist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 const angle=(a,b)=>Math.atan2(Math.sin(b-a),Math.cos(b-a));
 const forward=yaw=>[-Math.cos(yaw),-Math.sin(yaw)];
 const grids=new WeakMap();
-export function foxFloor(data,p){let cached=grids.get(data);if(!cached){const origin=data.origin||data.nodes[0]||[0,0];cached={origin,grid:new Map(data.nodes.map(n=>[Math.round((n[0]-origin[0])/.16)+','+Math.round((n[1]-origin[1])/.16),n]))};grids.set(data,cached);}const {origin,grid}=cached,x=Math.round((p[0]-origin[0])/.16),y=Math.round((p[1]-origin[1])/.16);let best=null,d=Infinity;for(let i=-1;i<=1;i++)for(let j=-1;j<=1;j++){const n=grid.get((x+i)+','+(y+j));if(n&&dist(p,n)<d){best=n;d=dist(p,n);}}if(d<.135)return best[2];
+export function foxFloor(data,p){let cached=grids.get(data);if(!cached){const origin=data.origin||data.nodes[0]||[0,0];const grid=new Map();for(const n of data.nodes){const key=Math.round((n[0]-origin[0])/.16)+','+Math.round((n[1]-origin[1])/.16);if(!grid.has(key))grid.set(key,[]);grid.get(key).push(n);}cached={origin,grid};grids.set(data,cached);}const {origin,grid}=cached,x=Math.round((p[0]-origin[0])/.16),y=Math.round((p[1]-origin[1])/.16);let best=null,d=Infinity;for(let i=-1;i<=1;i++)for(let j=-1;j<=1;j++){for(const n of grid.get((x+i)+','+(y+j))||[])if(dist(p,n)<d){best=n;d=dist(p,n);}}if(d<.135)return best[2];
  if(p[0]>=4.0&&p[0]<=5.16&&p[1]>=1.48&&p[1]<=1.90)return .624;return null;}
 
 export function foxCurve(data,start,yaw,end,endYaw,handle){const a=forward(yaw),b=forward(endYaw),p1=[start[0]+a[0]*handle,start[1]+a[1]*handle],p2=[end[0]-b[0]*handle,end[1]-b[1]*handle],out=[];let length=0,lastYaw=yaw;

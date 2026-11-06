@@ -1,9 +1,9 @@
-import {foxMeetingActive} from './fox-rendezvous.mjs?v=cp50-friendly-fox-d3de906ee97b';
-import {makeRoom} from './event-travel.mjs?v=cp50-friendly-fox-d3de906ee97b';
-import {groupPlaces} from './group-layout.mjs?v=cp50-friendly-fox-d3de906ee97b';
-import {pathTo,navigationGraph} from './navigation.mjs?v=cp50-friendly-fox-d3de906ee97b';
-import {moverBlocks} from './motion.mjs?v=cp50-friendly-fox-d3de906ee97b';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp50-friendly-fox-d3de906ee97b';
+import {foxMeetingActive} from './fox-rendezvous.mjs?v=cp50-friendly-fox-1d9659a79416';
+import {makeRoom} from './event-travel.mjs?v=cp50-friendly-fox-1d9659a79416';
+import {groupPlaces} from './group-layout.mjs?v=cp50-friendly-fox-1d9659a79416';
+import {pathTo,navigationGraph} from './navigation.mjs?v=cp50-friendly-fox-1d9659a79416';
+import {moverBlocks} from './motion.mjs?v=cp50-friendly-fox-1d9659a79416';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp50-friendly-fox-1d9659a79416';
 const D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 const angle=(a,b)=>Math.atan2(Math.sin(b-a),Math.cos(b-a));

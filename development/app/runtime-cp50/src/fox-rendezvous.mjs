@@ -19,7 +19,7 @@ export function inviteFoxNeighbor(s,nav,preferredId=null){
 }
 
 export function settleFoxMeeting(s,near){
- const f=s.foxBehavior,c=s.objectControls?.[FOX],a=near?.actor;
+ const f=s.foxBehavior,c=s.objectControls?.[FOX],a=near?.actor;if(a&&f.invitedNeighbor&&f.invitedNeighbor!==a.id){const old=s.actors.find(x=>x.id===f.invitedNeighbor);if(old){delete old.foxGreetingFor;delete old.foxGreetingUntil;old.courtesyExpires=s.time;}f.invitedNeighbor=null;}
  if(!a||c?.preserveOthers||!a.mobile||a.eventOnly||a.interactionLock||a.manual||s.residentActions?.[a.id]?.requested)return;
  a.courtesyDestination=a.node;a.courtesyExpires=s.time+7;a.courtesyArrivedAt=null;
  a.foxGreetingFor=c.action+':'+c.started;a.foxGreetingUntil=s.time+7;
