@@ -1,6 +1,6 @@
 {
   "active": "app/runtime-cp50",
-  "api_source_commit": "e337d65b4db1dd659ede35134f30e3707738d239",
+  "api_source_commit": "d03a1a798867fbffa665650c8868e911a79848a3",
   "files": [
     {
       "original": "app/runtime-cp17/src/catalog.mjs",
@@ -18581,8 +18581,8 @@
     {
       "original": "app/echoing-green-api/server/gateway.mjs",
       "repository": "development/api/server/gateway.mjs",
-      "sha256": "311e01f37614d5219a10eb9506828681309576b1ed3299b9ed05f6bfdfc3bf10",
-      "repository_sha256": "311e01f37614d5219a10eb9506828681309576b1ed3299b9ed05f6bfdfc3bf10"
+      "sha256": "77485e599f468b0adadfce28722045961af1ea0fac0c5ab2ee3a614c2c05c7e1",
+      "repository_sha256": "77485e599f468b0adadfce28722045961af1ea0fac0c5ab2ee3a614c2c05c7e1"
     },
     {
       "original": "app/echoing-green-api/tests/explicit-scenes.test.mjs",
@@ -18593,8 +18593,8 @@
     {
       "original": "app/echoing-green-api/tests/gateway.test.mjs",
       "repository": "development/api/tests/gateway.test.mjs",
-      "sha256": "ccb4c9e94ecf7599dc020e3cef9515834aeb7cee66d2a47b5e02111284239902",
-      "repository_sha256": "ccb4c9e94ecf7599dc020e3cef9515834aeb7cee66d2a47b5e02111284239902"
+      "sha256": "0ad5c1852c0a0585aac3c5e263f1f91c0552039738980daa0f40790ce79a5a4b",
+      "repository_sha256": "0ad5c1852c0a0585aac3c5e263f1f91c0552039738980daa0f40790ce79a5a4b"
     },
     {
       "original": "app/echoing-green-api/tests/local-feedback.test.mjs",
@@ -18677,8 +18677,8 @@
     {
       "original": "work/runtime-cp50/prepare-public.py",
       "repository": "development/work/runtime-cp50/prepare-public.py",
-      "sha256": "ab8eff9a66c7dac71e559938b8adbb17624ea64800059613eec6a03558826e3e",
-      "repository_sha256": "ab8eff9a66c7dac71e559938b8adbb17624ea64800059613eec6a03558826e3e"
+      "sha256": "03ef84f37ce72b5d9d538a84b83b82b14d6dda8caeee4a56472c187b3a5a792b",
+      "repository_sha256": "03ef84f37ce72b5d9d538a84b83b82b14d6dda8caeee4a56472c187b3a5a792b"
     },
     {
       "original": "work/runtime-cp50/audit-utils.mjs",

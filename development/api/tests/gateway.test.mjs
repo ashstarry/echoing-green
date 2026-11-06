@@ -13,3 +13,25 @@ test('Per-IP rate limiter stops requests before a thirteenth provider call',asyn
 test('Core retains all production selection questions',()=>{const r=makeRequest('愿每一个晚归的人都有一盏灯。');assert.equal(Object.keys(r.questions).length,127);assert(r.questions.mood_intent&&r.questions.atmosphere&&r.questions.gentle_reply);});
 
 test('Worker-compatible manual redirects never forward the credential to another host',async()=>{let calls=0;const r=await handleApi(req(),env,async(url,options)=>{calls++;assert.equal(options.redirect,'manual');return new Response(null,{status:302,headers:{Location:'https://example.invalid'}});});assert.equal(r.status,502);assert.equal(calls,1);});
+
+test('The exact old, apex and www HTTPS origins can preflight and submit wishes',async()=>{
+ for(const origin of ['https://ashstarry.github.io','https://koyoi.fun','https://www.koyoi.fun']){
+  const pre=await handleApi(req(undefined,{Origin:origin},'OPTIONS'),env);
+  assert.equal(pre.status,204);assert.equal(pre.headers.get('access-control-allow-origin'),origin);assert.equal(pre.headers.get('vary'),'Origin');
+  let calls=0;const r=await handleApi(req(undefined,{Origin:origin}),env,async(_url,options)=>{calls++;return responseFor(options.body);});
+  assert.equal(r.status,200);assert.equal(r.headers.get('access-control-allow-origin'),origin);assert.equal(calls,1);
+ }
+});
+test('Lookalike domains, HTTP, extra ports and missing origins cannot initiate paid calls',async()=>{
+ let calls=0;const mock=async()=>{calls++;throw Error('must not call');};
+ for(const origin of ['http://koyoi.fun','https://koyoi.fun.evil.invalid','https://sub.koyoi.fun','https://koyoi.fun:443','null','']){
+  for(const method of ['OPTIONS','POST']){const r=await handleApi(req(undefined,{Origin:origin},method),env,mock);assert.equal(r.status,403);assert.equal(r.headers.get('access-control-allow-origin'),null);}
+ }
+ assert.equal(calls,0);
+});
+test('Rate limits remain shared per IP across the permitted domains',async()=>{
+ let calls=0;const mock=async(_url,options)=>{calls++;return responseFor(options.body);};
+ const origins=['https://ashstarry.github.io','https://koyoi.fun','https://www.koyoi.fun'];
+ for(let i=0;i<12;i++)assert.equal((await handleApi(req(undefined,{Origin:origins[i%3],'CF-Connecting-IP':'cross-origin-fixture'}),env,mock)).status,200);
+ assert.equal((await handleApi(req(undefined,{Origin:origins[1],'CF-Connecting-IP':'cross-origin-fixture'}),env,mock)).status,429);assert.equal(calls,12);
+});

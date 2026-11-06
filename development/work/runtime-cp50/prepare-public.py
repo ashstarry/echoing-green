@@ -19,10 +19,13 @@ assets.update(['interaction-catalog.json','lanterns-awake-loop.wav','action-inve
 (out/'assets').mkdir(exist_ok=True)
 for name in sorted(assets):shutil.copy2(app/'public/assets'/name,out/'assets'/name)
 (out/'.nojekyll').write_text('')
+(out/'CNAME').write_text('koyoi.fun\n')
 (out/'.gitignore').write_text('.env\n.env.*\n*.key\n*.pem\n*.log\n.DS_Store\nnode_modules/\nwork/\nprivate/\noutputs/\n')
 (out/'README.md').write_text('''# Koyoi · 今宵
 
 A living, cut-paper miniature town. Current scene: Borrowed Wind Town / 借风町.
+
+Public website: https://koyoi.fun/ . The frontend stays on GitHub Pages; Cloudflare provides the domain and DNS. New visitors begin with the default town, with browser-local saves on this domain.
 
 English is the first-visit default. Music is enabled by default; browser autoplay rules may require your first click or keypress. Language and sound choices are saved locally.
 

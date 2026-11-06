@@ -2,20 +2,21 @@ import {makeRequest,parsePlan,MODEL} from './decision-core.mjs';
 const buckets=new Map();let concurrent=0;
 const MAX_BODY=16_384,WINDOW=60_000,LIMIT=12,MAX_CONCURRENT=6;
 const fail=(error,status)=>({error,status});
-function cors(request,env){const origin=request.headers.get('origin'),allowed=env.ALLOWED_ORIGIN||'https://ashstarry.github.io';return origin===allowed?{'Access-Control-Allow-Origin':allowed,'Vary':'Origin'}:{'Vary':'Origin'};}
+function allowedOrigin(request,env){const origin=request.headers.get('origin');return [env.ALLOWED_ORIGIN||'https://ashstarry.github.io','https://koyoi.fun','https://www.koyoi.fun'].includes(origin);}
+function cors(request,env){const origin=request.headers.get('origin');return allowedOrigin(request,env)?{'Access-Control-Allow-Origin':origin,'Vary':'Origin'}:{'Vary':'Origin'};}
 function reply(request,env,data,status=200,extra={}){return Response.json(data,{status,headers:{...cors(request,env),'Cache-Control':'no-store','X-Content-Type-Options':'nosniff',...extra}});}
 async function readBody(request){let size=0;const pieces=[],reader=request.body?.getReader();if(!reader)throw fail('Please enter a wish.',400);for(;;){const{done,value}=await reader.read();if(done)break;size+=value.length;if(size>MAX_BODY){await reader.cancel();throw fail('This wish is too long.',413);}pieces.push(value);}const bytes=new Uint8Array(size);let offset=0;for(const p of pieces){bytes.set(p,offset);offset+=p.length;}try{return JSON.parse(new TextDecoder().decode(bytes));}catch{throw fail('The request was not valid JSON.',400);}}
 function reserve(ip,now){for(const[k,v]of buckets)if(now-v.start>=WINDOW)buckets.delete(k);let b=buckets.get(ip);if(!b){if(buckets.size>=10_000)return false;b={start:now,count:0};buckets.set(ip,b);}if(b.count>=LIMIT)return false;b.count++;return true;}
 export async function handleApi(request,env={},upstreamFetch=fetch){
- const path=new URL(request.url).pathname,allowed=env.ALLOWED_ORIGIN||'https://ashstarry.github.io';
+ const path=new URL(request.url).pathname;
  if(!['/api/health','/api/decision'].includes(path))return reply(request,env,{error:'Not found.'},404);
  if(request.method==='OPTIONS'){
-  if(request.headers.get('origin')!==allowed)return reply(request,env,{error:'Origin not allowed.'},403);
+  if(!allowedOrigin(request,env))return reply(request,env,{error:'Origin not allowed.'},403);
   return new Response(null,{status:204,headers:{...cors(request,env),'Access-Control-Allow-Methods':'GET, POST, OPTIONS','Access-Control-Allow-Headers':'Content-Type','Access-Control-Max-Age':'600'}});
  }
  if(path==='/api/health')return request.method==='GET'?reply(request,env,{ok:true,application:'echoing-green',semantic:!!env.OPENROUTER_API_KEY,decision_model:MODEL}):reply(request,env,{error:'Method not allowed.'},405);
  if(request.method!=='POST')return reply(request,env,{error:'Method not allowed.'},405);
- if(request.headers.get('origin')!==allowed)return reply(request,env,{error:'Origin not allowed.'},403);
+ if(!allowedOrigin(request,env))return reply(request,env,{error:'Origin not allowed.'},403);
  if(!/^application\/json(?:\s*;|$)/i.test(request.headers.get('content-type')||''))return reply(request,env,{error:'JSON is required.'},415);
  if(!env.OPENROUTER_API_KEY)return reply(request,env,{error:'The wish service is not ready yet.'},503);
  let counted=false,stage='input';
