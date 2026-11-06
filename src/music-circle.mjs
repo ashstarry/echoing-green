@@ -1,5 +1,5 @@
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp50-friendly-fox-1d9659a79416';
-import {makeRoom} from './event-travel.mjs?v=cp50-friendly-fox-1d9659a79416';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp50-friendly-fox-bb1138b1f394';
+import {makeRoom} from './event-travel.mjs?v=cp50-friendly-fox-bb1138b1f394';
 
 export const MUSIC_CHILDREN=['resident.child_runner','resident.garden_child'];
 export const MUSIC_FOCUS=[-2.4684,-1.4537,1.1];

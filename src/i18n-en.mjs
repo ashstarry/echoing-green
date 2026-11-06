@@ -1,4 +1,4 @@
-import {CRAFT_EN} from './craft-english.mjs?v=cp50-friendly-fox-1d9659a79416';
+import {CRAFT_EN} from './craft-english.mjs?v=cp50-friendly-fox-bb1138b1f394';
 // Source strings remain stable in the simulation and saves. Only presentation is translated.
 export const EN=Object.fromEntries(`
 言外=Echoing Green

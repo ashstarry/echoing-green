@@ -17093,8 +17093,8 @@
     {
       "original": "app/runtime-cp50/src/fox-behavior.mjs",
       "repository": "development/app/runtime-cp50/src/fox-behavior.mjs",
-      "sha256": "ab3f6d124c352021d86c2c8a1046b67505c35138865d8b54ca5a2dc5e1e36c0d",
-      "repository_sha256": "ab3f6d124c352021d86c2c8a1046b67505c35138865d8b54ca5a2dc5e1e36c0d"
+      "sha256": "686826adeeb8e326a21cfbf6061a29bc7eb0240dd9229ba4d40cb73942fc3cf7",
+      "repository_sha256": "686826adeeb8e326a21cfbf6061a29bc7eb0240dd9229ba4d40cb73942fc3cf7"
     },
     {
       "original": "app/runtime-cp50/src/deployment-config.mjs",
@@ -17669,8 +17669,8 @@
     {
       "original": "app/runtime-cp50/tests/fox-approach.test.mjs",
       "repository": "development/app/runtime-cp50/tests/fox-approach.test.mjs",
-      "sha256": "86cb80d88f93f9cc43710656e182612e15ae2d2410cbeb4b44b5cff00b2e4206",
-      "repository_sha256": "86cb80d88f93f9cc43710656e182612e15ae2d2410cbeb4b44b5cff00b2e4206"
+      "sha256": "64f5b9515fd0526bcaf718dd7d21ed087f331a24404c3407af47bee03195c189",
+      "repository_sha256": "64f5b9515fd0526bcaf718dd7d21ed087f331a24404c3407af47bee03195c189"
     },
     {
       "original": "app/runtime-cp50/tests/event-feedback.test.mjs",
@@ -18665,8 +18665,8 @@
     {
       "original": "work/runtime-cp50/build-report.py",
       "repository": "development/work/runtime-cp50/build-report.py",
-      "sha256": "489c670d994d4e5f6893d9be37d3c9d4de9efded189cbaf21131ccd8c374043f",
-      "repository_sha256": "489c670d994d4e5f6893d9be37d3c9d4de9efded189cbaf21131ccd8c374043f"
+      "sha256": "78e3de88e605dd8974b7ee9339d39f82cf6768012507b12f87e218c6debd76e5",
+      "repository_sha256": "78e3de88e605dd8974b7ee9339d39f82cf6768012507b12f87e218c6debd76e5"
     },
     {
       "original": "work/runtime-cp50/test-language.mjs",
