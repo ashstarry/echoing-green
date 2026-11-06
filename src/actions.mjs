@@ -1,4 +1,4 @@
-import {requestResidentAction} from './resident-actions.mjs?v=cp50-friendly-fox-e903b4ae61c3';
+import {requestResidentAction} from './resident-actions.mjs?v=cp50-friendly-fox-df77a529727b';
 // Executable local action trials; semantic expansion waits for reviewed behavior.
 export const ACTION_LIBRARY=[
  {id:'children_play',label:'孩子玩起来',description:'花园小孩走到空地，停稳后跳两下，再换个位置。',entities:['resident.garden_child','resident.child_runner'],activities:['hop'],decisions:{}},

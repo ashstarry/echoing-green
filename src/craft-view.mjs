@@ -1,9 +1,9 @@
 import * as THREE from 'three';
-import {smallProps} from './small-props.mjs?v=cp50-friendly-fox-e903b4ae61c3';
-import {makeArmSolver} from './arm-ik.mjs?v=cp50-friendly-fox-e903b4ae61c3';
-import {handWorldPoint} from './prop-attachment.mjs?v=cp50-friendly-fox-e903b4ae61c3';
-import {interactionStep,INTERACTION_PRIMITIVES} from './interaction-sequence.mjs?v=cp50-friendly-fox-e903b4ae61c3';
-import {CRAFT_PLACES} from './craft-design.mjs?v=cp50-friendly-fox-e903b4ae61c3';
+import {smallProps} from './small-props.mjs?v=cp50-friendly-fox-df77a529727b';
+import {makeArmSolver} from './arm-ik.mjs?v=cp50-friendly-fox-df77a529727b';
+import {handWorldPoint} from './prop-attachment.mjs?v=cp50-friendly-fox-df77a529727b';
+import {interactionStep,INTERACTION_PRIMITIVES} from './interaction-sequence.mjs?v=cp50-friendly-fox-df77a529727b';
+import {CRAFT_PLACES} from './craft-design.mjs?v=cp50-friendly-fox-df77a529727b';
 const ease=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};
 const world=p=>new THREE.Vector3(p[0],p[2],-p[1]);
 export function createCraftView({scene,entities,parts,sockets}){

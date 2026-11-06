@@ -7,3 +7,10 @@ for(const[seed,warm]of[[62417,10],[90210,120],[12345,2]])test('A greeting travel
  for(let n=0;n<1600&&inputBusy(s);n++){step(s,nav);const f=s.foxBehavior,m=s.movers[id],span=Math.hypot(m.p[0]-origin[0],m.p[1]-origin[1]);if(span>.02&&firstMove===null)firstMove=n*.05;assert(m.speed>=0&&m.speed<=1);if(!saved&&f.phase==='walk'&&n>40){assert.deepEqual(restore(serialize(s),nav),s);saved=true;}if(f.phase==='greet'){firstGreet??=n*.05;assert(f.greetingTravel>=1.7);assert(span>=1.2);maxPaw=Math.max(maxPaw,foxPose(s).paw);}}
  assert(firstMove<1.0);assert(firstGreet!==null);assert(firstGreet>firstMove+2);assert(maxPaw>.60);assert(saved);assert.equal(s.inputSession.outcome,'completed');
 });
+test('The old lower-left saved position recovers with real footsteps from eight headings',()=>{
+ for(let heading=0;heading<8;heading++){
+  const{s,nav}=setup(62417,10),id='animal.garden_fox',origin=[-3.999818344772281,-2.7990821361673355,.624];Object.assign(s.movers[id],{p:origin.slice(),yaw:heading*Math.PI/4,speed:0});Object.assign(s.foxBehavior,{phase:'look',route:null,clock:0,duration:100,promenade:true});const items=[{kind:'object',target:id,action:'greet'}];runInput(s,items,()=>queueIntent(s,items,{},nav.activities.objectCatalog));let greeted=false,first=null,maxSpan=0,resumed=false;
+  for(let n=0;n<1800&&inputBusy(s);n++){step(s,nav);const m=s.movers[id],span=Math.hypot(m.p[0]-origin[0],m.p[1]-origin[1]);maxSpan=Math.max(maxSpan,span);if(span>.02&&first===null)first=n*.05;greeted||=s.foxBehavior.greeted;if(!resumed&&s.foxBehavior.route?.maneuver==='paving'&&n>20){assert.deepEqual(restore(serialize(s),nav),s);resumed=true;}}
+  assert(first<1.5,'heading '+heading);assert(maxSpan>=1.2);assert(greeted,'heading '+heading);assert.equal(s.inputSession.outcome,'completed');
+ }
+});

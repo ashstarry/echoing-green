@@ -1,4 +1,4 @@
-import {EN} from './i18n-en.mjs?v=cp50-friendly-fox-e903b4ae61c3';
+import {EN} from './i18n-en.mjs?v=cp50-friendly-fox-df77a529727b';
 let locale='en';try{const saved=localStorage.getItem('afterwords.locale.v1');if(saved==='zh'||saved==='en')locale=saved;}catch{}
 const cache=new Map(),keys=Object.keys(EN).sort((a,b)=>b.length-a.length),listeners=new Set();
 export const getLocale=()=>locale;

@@ -37,11 +37,11 @@ export function createFoxView({entities,parts,nav}){
  const phase=(m?.distance||0)*15.5,amplitude=.34+.07*Math.min(1,(m?.speed||0)*.52/.55),poses=locomoting?[0,0,0,0]:[p.front+p.paw,p.back,p.front+p.paw*.90,p.back];lastLegs=[];
  for(let leg=0;leg<4;leg++){
   const name='leg_'+leg,node=parts.get(id+'/'+name),rest=base.get(id+'/'+name),cycle=phase+(leg===0||leg===3?0:Math.PI),step=Math.sin(cycle)*amplitude*gaitWeight,gesture=poses[leg]*(1-Math.min(1,gaitWeight));
-  const knee=model?.knees.get(leg);if(knee)knee.rotation.z=-Math.max(0,Math.sin(cycle))*.26*gaitWeight;rotate(name,PITCH,step+gesture);const swing=.045*Math.max(0,Math.sin(cycle))*gaitWeight;let soleY=null,floorY=null;
+  const knee=model?.knees.get(leg);if(knee)knee.rotation.z=-Math.max(0,Math.sin(cycle))*.26*gaitWeight;rotate(name,PITCH,step+gesture);if(!locomoting&&f?.phase==='greet'&&(leg===0||leg===2)&&node)node.quaternion.multiply(new THREE.Quaternion().setFromAxisAngle(UP,p.headTurn*.45));const swing=.045*Math.max(0,Math.sin(cycle))*gaitWeight;let soleY=null,floorY=null;
   if(node&&rest){node.position.copy(rest.p);const sole=solePoints.get(leg);
    if(sole&&(locomoting||gaitWeight>.05)){
     node.updateWorldMatrix(true,false);const pts=sole.map(p=>node.localToWorld(p.clone())),wx=pts.reduce((v,p)=>v+p.x,0)/pts.length,wz=pts.reduce((v,p)=>v+p.z,0)/pts.length;
-    const support=paving?.highest([wx-.07,wx+.07,-wz-.07,-wz+.07]);floorY=support??((m?.p?.[2]??root.getWorldPosition(new THREE.Vector3()).y)+.03);soleY=Math.min(...pts.map(p=>p.y));
+    const support=paving?.highest([wx-.07,wx+.07,-wz-.07,-wz+.07]);const expected=(m?.p?.[2]??root.getWorldPosition(new THREE.Vector3()).y)+.03;floorY=support!==null&&support!==undefined&&Math.abs(support-expected)<.18?support:expected;soleY=Math.min(...pts.map(p=>p.y));
     const scale=node.parent?.getWorldScale(new THREE.Vector3()).y||1;node.position.y+=(floorY+.008+swing-soleY)/scale;soleY=floorY+.008+swing;
    }else node.position.y+=swing;
   }

@@ -41,7 +41,7 @@ export function createResponseMarkers({scene,entities,parts=new Map(),registry={
  function support(id,root,s){
   root.getWorldPosition(point);if(id.startsWith('resident.')){point.y=feetFloor(id,root,s);const a=s.actors.find(a=>a.id===id);return{width:1.16*(a?.scale||1),depth:1.04*(a?.scale||1)};}
   let base=anchors.get(id);if(!base){root.updateWorldMatrix(true,true);box.setFromObject(root);box.getSize(size);base={offset:box.min.y-point.y,width:Math.max(.55,Math.min(2.6,size.x+.22)),depth:Math.max(.5,Math.min(1.65,size.z+.22))};anchors.set(id,base);}
-  point.y+=base.offset+.012;if(id==='animal.garden_fox'&&s.movers?.[id]){const floor=paving?.highest([point.x-.12,point.x+.12,-point.z-.12,-point.z+.12]);point.y=floor===null||floor===undefined?s.movers[id].p[2]+.042:floor+.012;}const kind=id.startsWith('animal.duck_')?'duck':rows.get(id)?.kind;if(['fish','duck','water_lantern'].includes(kind))point.y=Math.max(point.y,.64);return base;
+  point.y+=base.offset+.012;if(id==='animal.garden_fox'&&s.movers?.[id]){const floor=paving?.highest([point.x-.12,point.x+.12,-point.z-.12,-point.z+.12]);point.y=floor===null||floor===undefined||Math.abs(floor-s.movers[id].p[2]-.03)>.18?s.movers[id].p[2]+.042:floor+.012;}const kind=id.startsWith('animal.duck_')?'duck':rows.get(id)?.kind;if(['fish','duck','water_lantern'].includes(kind))point.y=Math.max(point.y,.64);return base;
  }
  function visible(id,s){if(['inside','enter'].includes(s.diners?.[id]?.phase))return false;if(s.passengers?.[id]?.phase==='riding')return false;let root=entities.get(id);for(let o=root;o;o=o.parent)if(!o.visible)return false;return !!root;}
  return{setEnabled(value){enabled=!!value;},request(id,action,key){signals.request(id,action,key);},frame(s){

@@ -1,11 +1,11 @@
-import {lanternDisplay} from './lantern-scene.mjs?v=cp50-friendly-fox-e903b4ae61c3';
-import {actionAvailability} from './action-availability.mjs?v=cp50-friendly-fox-e903b4ae61c3';
-import {requestSceneEvent,eventKind} from './scene-events.mjs?v=cp50-friendly-fox-e903b4ae61c3';
-import {requestCloud} from './local-cloud.mjs?v=cp50-friendly-fox-e903b4ae61c3';
-import {interactionStep} from './interaction-sequence.mjs?v=cp50-friendly-fox-e903b4ae61c3';
-import {RESIDENT_ACTIONS} from './resident-actions.mjs?v=cp50-friendly-fox-e903b4ae61c3';
-import {PROFILES} from './community.mjs?v=cp50-friendly-fox-e903b4ae61c3';
-import {FIREWORK_BURSTS,FIREWORK_FLIGHT} from './firework-score.mjs?v=cp50-friendly-fox-e903b4ae61c3';
+import {lanternDisplay} from './lantern-scene.mjs?v=cp50-friendly-fox-df77a529727b';
+import {actionAvailability} from './action-availability.mjs?v=cp50-friendly-fox-df77a529727b';
+import {requestSceneEvent,eventKind} from './scene-events.mjs?v=cp50-friendly-fox-df77a529727b';
+import {requestCloud} from './local-cloud.mjs?v=cp50-friendly-fox-df77a529727b';
+import {interactionStep} from './interaction-sequence.mjs?v=cp50-friendly-fox-df77a529727b';
+import {RESIDENT_ACTIONS} from './resident-actions.mjs?v=cp50-friendly-fox-df77a529727b';
+import {PROFILES} from './community.mjs?v=cp50-friendly-fox-df77a529727b';
+import {FIREWORK_BURSTS,FIREWORK_FLIGHT} from './firework-score.mjs?v=cp50-friendly-fox-df77a529727b';
 const terminal=j=>['done','cancelled','failed'].includes(j.status);
 export const INPUT_IDLE_SECONDS=2.8;
 export const inputBusy=s=>['listening','running','closing'].includes(s.inputSession?.phase);
@@ -44,7 +44,7 @@ function sample(s,q){const values={},ids=new Set(q.items.filter(i=>i.kind==='res
  }
  if(macro.has('cloud')){const c=s.localCloud;point('cloud',c.center);put('rain',c.rain);for(const id of Object.keys(c.exposures||{}))ids.add(id);}
  if(macro.has('journey')){const t=s.trainJourney;for(const id of['resident.station_traveler','resident.waiting_passenger','resident.waiting_passenger_2','resident.station_attendant'])ids.add(id);if(['expecting','collecting','receiving','returning_gift'].includes(t.phase)){put('gift.pickup',s.time-t.phaseAt);put('gift.walk',s.craftWorld.delivery.boardClock);}if(['boarding','onboard','returning'].includes(t.phase)){put('train',s.train.distance);put('passenger',s.passengers['resident.station_traveler'].clock);put('door',s.passengers['resident.station_traveler'].door);}}
- for(const i of q.items){if(i.target==='boat.pond_boat'){point('boat',s.boatJourney.p);put('rope',s.boatJourney.tether);put('oar',s.boatJourney.fold);}else if(i.target==='animal.garden_fox'){point('fox',s.movers[i.target].p);const f=s.foxBehavior;if(['greet','bow','play','stretch'].includes(f.phase))put('fox.pose',f.clock);if(f.neighbor)ids.add(f.neighbor);}else if(i.kind==='object'){const m=s.movers[i.target];if(m)point(i.target,m.p);put(i.target+'.value',s.objectControls[i.target]?.value);const owner=s.objectControls[i.target]?.owner;if(owner)ids.add(owner);}}
+ for(const i of q.items){if(i.target==='boat.pond_boat'){point('boat',s.boatJourney.p);put('rope',s.boatJourney.tether);put('oar',s.boatJourney.fold);}else if(i.target==='animal.garden_fox'){point('fox',s.movers[i.target].p);const f=s.foxBehavior;if(['greet','bow','play','stretch'].includes(f.phase))put('fox.pose',f.clock);if(['turn','paving'].includes(f.route?.maneuver)&&s.movers[i.target].speed>.02)put('fox.recovery',s.movers[i.target].distance);if(f.neighbor)ids.add(f.neighbor);}else if(i.kind==='object'){const m=s.movers[i.target];if(m)point(i.target,m.p);put(i.target+'.value',s.objectControls[i.target]?.value);const owner=s.objectControls[i.target]?.owner;if(owner)ids.add(owner);}}
  if(macro.has('day_phase'))for(const[k,v]of Object.entries(s.dayWeights))put('day'+k,v);
  if(macro.has('light'))put('light',s.dayWeights.night||0);
  if(macro.has('dining'))for(const[id,d]of Object.entries(s.diners)){if(['enter','exit','turn'].includes(d.phase))put(id,d.clock);}

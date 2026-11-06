@@ -1,6 +1,6 @@
-import {LANTERN_STATIONS} from './lantern-scene.mjs?v=cp50-friendly-fox-e903b4ae61c3';
-import {createInteraction,advanceInteraction,interactionStep} from './interaction-sequence.mjs?v=cp50-friendly-fox-e903b4ae61c3';
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp50-friendly-fox-e903b4ae61c3';
+import {LANTERN_STATIONS} from './lantern-scene.mjs?v=cp50-friendly-fox-df77a529727b';
+import {createInteraction,advanceInteraction,interactionStep} from './interaction-sequence.mjs?v=cp50-friendly-fox-df77a529727b';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp50-friendly-fox-df77a529727b';
 export const NEIGHBORHOOD_KINDS=new Set(['homecoming','prepare','reopen','spring','lantern']);
 export const HOME={door:[-5.947,-1.723,.77],yaw:25*Math.PI/180,host:[-5.76,-2.48,.628],guest:[-4.96,-2.48,.628]};
 const ADULTS=['resident.customer_one','resident.customer_two','resident.customer_three','resident.market_browser','resident.strolling_parent','resident.courier'];

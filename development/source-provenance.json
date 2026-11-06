@@ -16937,14 +16937,14 @@
     {
       "original": "app/runtime-cp50/src/response-markers.mjs",
       "repository": "development/app/runtime-cp50/src/response-markers.mjs",
-      "sha256": "5ee96edb83001521d6bb4f4322e0b60aad51f3733808e6c95b921e9221bb16ba",
-      "repository_sha256": "5ee96edb83001521d6bb4f4322e0b60aad51f3733808e6c95b921e9221bb16ba"
+      "sha256": "3c5d2fa032ecc159abc0064b50bc2e40fef87932ee2fa2e22fe741decf7942b0",
+      "repository_sha256": "3c5d2fa032ecc159abc0064b50bc2e40fef87932ee2fa2e22fe741decf7942b0"
     },
     {
       "original": "app/runtime-cp50/src/music-circle.mjs",
       "repository": "development/app/runtime-cp50/src/music-circle.mjs",
-      "sha256": "8df58ef967395cb9ff6fd86af69e80a5a6157aa070a71bd21af6e7bd162bdd85",
-      "repository_sha256": "8df58ef967395cb9ff6fd86af69e80a5a6157aa070a71bd21af6e7bd162bdd85"
+      "sha256": "7dcb70a5be2e9c390f6c9d52fa724319f04e79371b6eacff03539155bd0d8d9f",
+      "repository_sha256": "7dcb70a5be2e9c390f6c9d52fa724319f04e79371b6eacff03539155bd0d8d9f"
     },
     {
       "original": "app/runtime-cp50/src/group-view.mjs",
@@ -16955,8 +16955,8 @@
     {
       "original": "app/runtime-cp50/src/fox-view.mjs",
       "repository": "development/app/runtime-cp50/src/fox-view.mjs",
-      "sha256": "ce7c05c89c70c7f45948fbf5f75310ec28957751dd5cf0a0a454a3188a20c021",
-      "repository_sha256": "ce7c05c89c70c7f45948fbf5f75310ec28957751dd5cf0a0a454a3188a20c021"
+      "sha256": "8a03ba2706c3a220249d91995b0b0a77a7f009129a8f4d502f335e565c5d83ea",
+      "repository_sha256": "8a03ba2706c3a220249d91995b0b0a77a7f009129a8f4d502f335e565c5d83ea"
     },
     {
       "original": "app/runtime-cp50/src/explicit-scenes.mjs",
@@ -17093,8 +17093,8 @@
     {
       "original": "app/runtime-cp50/src/fox-behavior.mjs",
       "repository": "development/app/runtime-cp50/src/fox-behavior.mjs",
-      "sha256": "61acb0e7be966110ff926d6f3c596d02907d32ff1e75cccf50d30ef2e7561d1b",
-      "repository_sha256": "61acb0e7be966110ff926d6f3c596d02907d32ff1e75cccf50d30ef2e7561d1b"
+      "sha256": "ea29642d354e94cb1f6d6b6673503ea9f39273e4990ce2cec99f56e7e648de76",
+      "repository_sha256": "ea29642d354e94cb1f6d6b6673503ea9f39273e4990ce2cec99f56e7e648de76"
     },
     {
       "original": "app/runtime-cp50/src/deployment-config.mjs",
@@ -17107,6 +17107,12 @@
       "repository": "development/app/runtime-cp50/src/gentle-reply.mjs",
       "sha256": "362a70e453de23199246bd246638fcb5c0ec24ed50715b3879886e2d39a746af",
       "repository_sha256": "362a70e453de23199246bd246638fcb5c0ec24ed50715b3879886e2d39a746af"
+    },
+    {
+      "original": "app/runtime-cp50/src/fox-ground-path.mjs",
+      "repository": "development/app/runtime-cp50/src/fox-ground-path.mjs",
+      "sha256": "4fc5b5c354d9bb07e80d182ebc82cec253f30a8c1b6561c37bd9671ef94484bf",
+      "repository_sha256": "4fc5b5c354d9bb07e80d182ebc82cec253f30a8c1b6561c37bd9671ef94484bf"
     },
     {
       "original": "app/runtime-cp50/src/prop-attachment.mjs",
@@ -17255,8 +17261,8 @@
     {
       "original": "app/runtime-cp50/src/fox-rendezvous.mjs",
       "repository": "development/app/runtime-cp50/src/fox-rendezvous.mjs",
-      "sha256": "ed81be57356fccd6155eea401a22f0ac7122ceeadde98bb3493f878465c5e8e7",
-      "repository_sha256": "ed81be57356fccd6155eea401a22f0ac7122ceeadde98bb3493f878465c5e8e7"
+      "sha256": "254cf73ffde7bc8643d3a72899aec6b14bb1ed88719c847ed5f2c321e0367ada",
+      "repository_sha256": "254cf73ffde7bc8643d3a72899aec6b14bb1ed88719c847ed5f2c321e0367ada"
     },
     {
       "original": "app/runtime-cp50/src/event-props.mjs",
@@ -17285,8 +17291,8 @@
     {
       "original": "app/runtime-cp50/src/input-session.mjs",
       "repository": "development/app/runtime-cp50/src/input-session.mjs",
-      "sha256": "b44fcfc87584f20e5077f3befb9d38a1493529167b88b18a91cb02dfd95b3602",
-      "repository_sha256": "b44fcfc87584f20e5077f3befb9d38a1493529167b88b18a91cb02dfd95b3602"
+      "sha256": "5c2ab7c2c0e15cc2a201d090333d9a50af8d0e2569c15e3c5a4ea02214457deb",
+      "repository_sha256": "5c2ab7c2c0e15cc2a201d090333d9a50af8d0e2569c15e3c5a4ea02214457deb"
     },
     {
       "original": "app/runtime-cp50/src/lantern-scene.mjs",
@@ -17297,8 +17303,8 @@
     {
       "original": "app/runtime-cp50/src/event-travel.mjs",
       "repository": "development/app/runtime-cp50/src/event-travel.mjs",
-      "sha256": "778c40fd131318575ea5406f2152af4934c146bdc8409e127f13d0e3d5a7ff74",
-      "repository_sha256": "778c40fd131318575ea5406f2152af4934c146bdc8409e127f13d0e3d5a7ff74"
+      "sha256": "4f18800fba5bea29635e9e1ddefac4f754e33a54965e4d736d68efdf84d45f16",
+      "repository_sha256": "4f18800fba5bea29635e9e1ddefac4f754e33a54965e4d736d68efdf84d45f16"
     },
     {
       "original": "app/runtime-cp50/src/explicit-intents.mjs",
@@ -17423,8 +17429,8 @@
     {
       "original": "app/runtime-cp50/tests/fox-naturalness.test.mjs",
       "repository": "development/app/runtime-cp50/tests/fox-naturalness.test.mjs",
-      "sha256": "e97764ff285356cffb5812748f05c6a73f0e906f608a287ec6c37d47c1b6a53e",
-      "repository_sha256": "e97764ff285356cffb5812748f05c6a73f0e906f608a287ec6c37d47c1b6a53e"
+      "sha256": "74a47cf3b80f5e6bccab4e67d2efaa2aa5795274c17f763782df23bc485ad0f1",
+      "repository_sha256": "74a47cf3b80f5e6bccab4e67d2efaa2aa5795274c17f763782df23bc485ad0f1"
     },
     {
       "original": "app/runtime-cp50/tests/core-depth.test.mjs",
@@ -17663,8 +17669,8 @@
     {
       "original": "app/runtime-cp50/tests/fox-approach.test.mjs",
       "repository": "development/app/runtime-cp50/tests/fox-approach.test.mjs",
-      "sha256": "55181b0bfb1d06de2ea87b3defea5f9e5079497ec6a4af19fdc00198976d2fd8",
-      "repository_sha256": "55181b0bfb1d06de2ea87b3defea5f9e5079497ec6a4af19fdc00198976d2fd8"
+      "sha256": "fbf7f49edb4cfc59d64af1c6d0b4db81297ffcfe1f0593c2bdc768a87aacc303",
+      "repository_sha256": "fbf7f49edb4cfc59d64af1c6d0b4db81297ffcfe1f0593c2bdc768a87aacc303"
     },
     {
       "original": "app/runtime-cp50/tests/event-feedback.test.mjs",
@@ -18659,8 +18665,8 @@
     {
       "original": "work/runtime-cp50/build-report.py",
       "repository": "development/work/runtime-cp50/build-report.py",
-      "sha256": "fa9d9049e4ccb3193b924ef55485c6d2e4b5b1b16f5e6dce621610fe93bc204a",
-      "repository_sha256": "fa9d9049e4ccb3193b924ef55485c6d2e4b5b1b16f5e6dce621610fe93bc204a"
+      "sha256": "3278150f56567263c2007559745e2c993c4954ca800c253a6f51c86e4a34a3b1",
+      "repository_sha256": "3278150f56567263c2007559745e2c993c4954ca800c253a6f51c86e4a34a3b1"
     },
     {
       "original": "work/runtime-cp50/test-language.mjs",
