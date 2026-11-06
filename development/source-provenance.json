@@ -1,5 +1,5 @@
 {
-  "active": "app/runtime-cp49",
+  "active": "app/runtime-cp50",
   "api_source_commit": "e337d65b4db1dd659ede35134f30e3707738d239",
   "files": [
     {
@@ -16881,6 +16881,858 @@
       "repository_sha256": "082d195e91ea48268faa5f62aaf1043adc44576ac5500a639e9a66e8ace3078b"
     },
     {
+      "original": "work/runtime-cp49/sync-public-source.py",
+      "repository": "development/work/runtime-cp49/sync-public-source.py",
+      "sha256": "6a6094075cd715636ffa5c6ee9f75ecdfededecbf4b4be380dc4457389dff797",
+      "repository_sha256": "6a6094075cd715636ffa5c6ee9f75ecdfededecbf4b4be380dc4457389dff797"
+    },
+    {
+      "original": "work/runtime-cp49/build-report.py",
+      "repository": "development/work/runtime-cp49/build-report.py",
+      "sha256": "ed84deadcd516677e957c65b65d7b288d1252f526195bc524c685f63984ca3df",
+      "repository_sha256": "ed84deadcd516677e957c65b65d7b288d1252f526195bc524c685f63984ca3df"
+    },
+    {
+      "original": "work/runtime-cp49/prepare-public.py",
+      "repository": "development/work/runtime-cp49/prepare-public.py",
+      "sha256": "adc0ef01a9075f60644b9d0a9e4d0a179c6fb97e16687390b3ed2cd294d95c39",
+      "repository_sha256": "adc0ef01a9075f60644b9d0a9e4d0a179c6fb97e16687390b3ed2cd294d95c39"
+    },
+    {
+      "original": "app/runtime-cp50/src/neighborhood-world.mjs",
+      "repository": "development/app/runtime-cp50/src/neighborhood-world.mjs",
+      "sha256": "42bf892def6c7c99c086e9ba02cde9f57e1bb77b69f545e8a9c7a0bedebc3dfa",
+      "repository_sha256": "42bf892def6c7c99c086e9ba02cde9f57e1bb77b69f545e8a9c7a0bedebc3dfa"
+    },
+    {
+      "original": "app/runtime-cp50/src/cadence.mjs",
+      "repository": "development/app/runtime-cp50/src/cadence.mjs",
+      "sha256": "8a15769d627d9839e275f57bae1bf499eb534fd7e913eda98846f55667035db5",
+      "repository_sha256": "8a15769d627d9839e275f57bae1bf499eb534fd7e913eda98846f55667035db5"
+    },
+    {
+      "original": "app/runtime-cp50/src/reaction-feedback.mjs",
+      "repository": "development/app/runtime-cp50/src/reaction-feedback.mjs",
+      "sha256": "32eba1d827aa283d1313b742c01b5c9df76a79f1269b8bf6fe7274694b46c1d8",
+      "repository_sha256": "32eba1d827aa283d1313b742c01b5c9df76a79f1269b8bf6fe7274694b46c1d8"
+    },
+    {
+      "original": "app/runtime-cp50/src/group-layout.mjs",
+      "repository": "development/app/runtime-cp50/src/group-layout.mjs",
+      "sha256": "da4eb8f7a7c0874736216f0a663b2bf32ec5509081604c4ca444df4a662ee38b",
+      "repository_sha256": "da4eb8f7a7c0874736216f0a663b2bf32ec5509081604c4ca444df4a662ee38b"
+    },
+    {
+      "original": "app/runtime-cp50/src/sound-cues.mjs",
+      "repository": "development/app/runtime-cp50/src/sound-cues.mjs",
+      "sha256": "454b750447d2ad03998af5f2f65b6c906336e716d2d8714afc1f8a4a2cffcad4",
+      "repository_sha256": "454b750447d2ad03998af5f2f65b6c906336e716d2d8714afc1f8a4a2cffcad4"
+    },
+    {
+      "original": "app/runtime-cp50/src/action-subjects.mjs",
+      "repository": "development/app/runtime-cp50/src/action-subjects.mjs",
+      "sha256": "ac17177624bb641be26ae72aa6bdce3aa90d1eccc8539560ccb55db8dea13dbe",
+      "repository_sha256": "ac17177624bb641be26ae72aa6bdce3aa90d1eccc8539560ccb55db8dea13dbe"
+    },
+    {
+      "original": "app/runtime-cp50/src/response-markers.mjs",
+      "repository": "development/app/runtime-cp50/src/response-markers.mjs",
+      "sha256": "5ee96edb83001521d6bb4f4322e0b60aad51f3733808e6c95b921e9221bb16ba",
+      "repository_sha256": "5ee96edb83001521d6bb4f4322e0b60aad51f3733808e6c95b921e9221bb16ba"
+    },
+    {
+      "original": "app/runtime-cp50/src/music-circle.mjs",
+      "repository": "development/app/runtime-cp50/src/music-circle.mjs",
+      "sha256": "8df58ef967395cb9ff6fd86af69e80a5a6157aa070a71bd21af6e7bd162bdd85",
+      "repository_sha256": "8df58ef967395cb9ff6fd86af69e80a5a6157aa070a71bd21af6e7bd162bdd85"
+    },
+    {
+      "original": "app/runtime-cp50/src/group-view.mjs",
+      "repository": "development/app/runtime-cp50/src/group-view.mjs",
+      "sha256": "ef992b04897b2928f425258f7ae1f893c407592f44114d875354599424e6a4a3",
+      "repository_sha256": "ef992b04897b2928f425258f7ae1f893c407592f44114d875354599424e6a4a3"
+    },
+    {
+      "original": "app/runtime-cp50/src/fox-view.mjs",
+      "repository": "development/app/runtime-cp50/src/fox-view.mjs",
+      "sha256": "ce7c05c89c70c7f45948fbf5f75310ec28957751dd5cf0a0a454a3188a20c021",
+      "repository_sha256": "ce7c05c89c70c7f45948fbf5f75310ec28957751dd5cf0a0a454a3188a20c021"
+    },
+    {
+      "original": "app/runtime-cp50/src/explicit-scenes.mjs",
+      "repository": "development/app/runtime-cp50/src/explicit-scenes.mjs",
+      "sha256": "6439c7ac7ee2e632bb70b9357a2ecfe51d36e7f2d9e15100fc8e80dd7fec1a6a",
+      "repository_sha256": "6439c7ac7ee2e632bb70b9357a2ecfe51d36e7f2d9e15100fc8e80dd7fec1a6a"
+    },
+    {
+      "original": "app/runtime-cp50/src/town-response.mjs",
+      "repository": "development/app/runtime-cp50/src/town-response.mjs",
+      "sha256": "67c70d265cf6007eeed0e7f1a09d8c0d47b0d17f7275149bb32002099bd71050",
+      "repository_sha256": "67c70d265cf6007eeed0e7f1a09d8c0d47b0d17f7275149bb32002099bd71050"
+    },
+    {
+      "original": "app/runtime-cp50/src/scene-events.mjs",
+      "repository": "development/app/runtime-cp50/src/scene-events.mjs",
+      "sha256": "95296c6aeb559daee75267f97f58a3331fecc7d9f7908864f63e5ac134993a82",
+      "repository_sha256": "95296c6aeb559daee75267f97f58a3331fecc7d9f7908864f63e5ac134993a82"
+    },
+    {
+      "original": "app/runtime-cp50/src/response-signals.mjs",
+      "repository": "development/app/runtime-cp50/src/response-signals.mjs",
+      "sha256": "600f2be6cce2b31525770f4a90b421647b5cf52604ebbbc45284f1521fb020c6",
+      "repository_sha256": "600f2be6cce2b31525770f4a90b421647b5cf52604ebbbc45284f1521fb020c6"
+    },
+    {
+      "original": "app/runtime-cp50/src/i18n.mjs",
+      "repository": "development/app/runtime-cp50/src/i18n.mjs",
+      "sha256": "8f69f1d584b79368bf3fe0ce286bfb288c4577fcae8f6ccdcf7ebb444e3228c4",
+      "repository_sha256": "8f69f1d584b79368bf3fe0ce286bfb288c4577fcae8f6ccdcf7ebb444e3228c4"
+    },
+    {
+      "original": "app/runtime-cp50/src/resident-wardrobe.mjs",
+      "repository": "development/app/runtime-cp50/src/resident-wardrobe.mjs",
+      "sha256": "c2569c1b893a72e605ffed0b5e2857e0d39771829dbc9405924db649d6be6f99",
+      "repository_sha256": "c2569c1b893a72e605ffed0b5e2857e0d39771829dbc9405924db649d6be6f99"
+    },
+    {
+      "original": "app/runtime-cp50/src/art-direction.mjs",
+      "repository": "development/app/runtime-cp50/src/art-direction.mjs",
+      "sha256": "df803e51e8a346bdf746a8d516679f2f6c61a2e09081f81f53dff2ab343349cc",
+      "repository_sha256": "df803e51e8a346bdf746a8d516679f2f6c61a2e09081f81f53dff2ab343349cc"
+    },
+    {
+      "original": "app/runtime-cp50/src/boat-view.mjs",
+      "repository": "development/app/runtime-cp50/src/boat-view.mjs",
+      "sha256": "c4384aa05bac984a7b89fd6aebe1e5074156232f41e60c2cd5e15f114f43ee38",
+      "repository_sha256": "c4384aa05bac984a7b89fd6aebe1e5074156232f41e60c2cd5e15f114f43ee38"
+    },
+    {
+      "original": "app/runtime-cp50/src/action-availability.mjs",
+      "repository": "development/app/runtime-cp50/src/action-availability.mjs",
+      "sha256": "f118e23c1f30b5f63a20157e127defc59fa60b312c48f99016bc270b624021c6",
+      "repository_sha256": "f118e23c1f30b5f63a20157e127defc59fa60b312c48f99016bc270b624021c6"
+    },
+    {
+      "original": "app/runtime-cp50/src/motion.mjs",
+      "repository": "development/app/runtime-cp50/src/motion.mjs",
+      "sha256": "fe73f77407687ec5d372164a2b478dd03c4a76ff60afa9e38576dfe18e971efe",
+      "repository_sha256": "fe73f77407687ec5d372164a2b478dd03c4a76ff60afa9e38576dfe18e971efe"
+    },
+    {
+      "original": "app/runtime-cp50/src/view-director.mjs",
+      "repository": "development/app/runtime-cp50/src/view-director.mjs",
+      "sha256": "0a923f5f15e6dab3af8f674ac97d7f4e448a9dad68347cb9f35b543c285e5bb6",
+      "repository_sha256": "0a923f5f15e6dab3af8f674ac97d7f4e448a9dad68347cb9f35b543c285e5bb6"
+    },
+    {
+      "original": "app/runtime-cp50/src/craft-english.mjs",
+      "repository": "development/app/runtime-cp50/src/craft-english.mjs",
+      "sha256": "aa2d25a9e14b8a11975240207f40879392cda09becab9aaf27775b056e7581b7",
+      "repository_sha256": "aa2d25a9e14b8a11975240207f40879392cda09becab9aaf27775b056e7581b7"
+    },
+    {
+      "original": "app/runtime-cp50/src/event-sfx.mjs",
+      "repository": "development/app/runtime-cp50/src/event-sfx.mjs",
+      "sha256": "80b0555ac33e45896d6760b75f9fb72a1325d2e779ef54ed4411e23efb927977",
+      "repository_sha256": "80b0555ac33e45896d6760b75f9fb72a1325d2e779ef54ed4411e23efb927977"
+    },
+    {
+      "original": "app/runtime-cp50/src/paper-world.mjs",
+      "repository": "development/app/runtime-cp50/src/paper-world.mjs",
+      "sha256": "5846f6b435db914ad35b0ceff1c0730e43baf827af31aa672008590693187e5f",
+      "repository_sha256": "5846f6b435db914ad35b0ceff1c0730e43baf827af31aa672008590693187e5f"
+    },
+    {
+      "original": "app/runtime-cp50/src/firework-timbre.mjs",
+      "repository": "development/app/runtime-cp50/src/firework-timbre.mjs",
+      "sha256": "aaca5baf18b57436f35e9ada9c285d311695e7d432a7c30ef4297cfd35102915",
+      "repository_sha256": "aaca5baf18b57436f35e9ada9c285d311695e7d432a7c30ef4297cfd35102915"
+    },
+    {
+      "original": "app/runtime-cp50/src/boat-world.mjs",
+      "repository": "development/app/runtime-cp50/src/boat-world.mjs",
+      "sha256": "5407198ec7a7c5d9abc092cbead004ab47815aca9c5914b8f4642044cf65806e",
+      "repository_sha256": "5407198ec7a7c5d9abc092cbead004ab47815aca9c5914b8f4642044cf65806e"
+    },
+    {
+      "original": "app/runtime-cp50/src/interaction-sequence.mjs",
+      "repository": "development/app/runtime-cp50/src/interaction-sequence.mjs",
+      "sha256": "45f63efb21c3e2d419dadd13b0cd60aab6cf7f5549238d6cbd37f0bc57fe7b0d",
+      "repository_sha256": "45f63efb21c3e2d419dadd13b0cd60aab6cf7f5549238d6cbd37f0bc57fe7b0d"
+    },
+    {
+      "original": "app/runtime-cp50/src/foot-support.mjs",
+      "repository": "development/app/runtime-cp50/src/foot-support.mjs",
+      "sha256": "e366b3cce1d078686b8953c852046a582206bd714920c056c11629a184e74fbb",
+      "repository_sha256": "e366b3cce1d078686b8953c852046a582206bd714920c056c11629a184e74fbb"
+    },
+    {
+      "original": "app/runtime-cp50/src/life-plans.mjs",
+      "repository": "development/app/runtime-cp50/src/life-plans.mjs",
+      "sha256": "3920edf14a5bb002a1364f49193ce7cb465d7c38bccb9321864b89f9b49bccd5",
+      "repository_sha256": "3920edf14a5bb002a1364f49193ce7cb465d7c38bccb9321864b89f9b49bccd5"
+    },
+    {
+      "original": "app/runtime-cp50/src/firework-score.mjs",
+      "repository": "development/app/runtime-cp50/src/firework-score.mjs",
+      "sha256": "2cead36845561e5ba535b8e3fd87a75126f353379316836039d3143c0c279f68",
+      "repository_sha256": "2cead36845561e5ba535b8e3fd87a75126f353379316836039d3143c0c279f68"
+    },
+    {
+      "original": "app/runtime-cp50/src/wish-suggestions.mjs",
+      "repository": "development/app/runtime-cp50/src/wish-suggestions.mjs",
+      "sha256": "eba49d85a14e05bb590c7748f59580ad63079204038a0f9039759a7a7b5e383e",
+      "repository_sha256": "eba49d85a14e05bb590c7748f59580ad63079204038a0f9039759a7a7b5e383e"
+    },
+    {
+      "original": "app/runtime-cp50/src/resident-action-view.mjs",
+      "repository": "development/app/runtime-cp50/src/resident-action-view.mjs",
+      "sha256": "549bb78b0922cee2cba6a5ee4efc6833d2617175b68e928b56fbdc31b64f063f",
+      "repository_sha256": "549bb78b0922cee2cba6a5ee4efc6833d2617175b68e928b56fbdc31b64f063f"
+    },
+    {
+      "original": "app/runtime-cp50/src/fox-behavior.mjs",
+      "repository": "development/app/runtime-cp50/src/fox-behavior.mjs",
+      "sha256": "61acb0e7be966110ff926d6f3c596d02907d32ff1e75cccf50d30ef2e7561d1b",
+      "repository_sha256": "61acb0e7be966110ff926d6f3c596d02907d32ff1e75cccf50d30ef2e7561d1b"
+    },
+    {
+      "original": "app/runtime-cp50/src/deployment-config.mjs",
+      "repository": "development/app/runtime-cp50/src/deployment-config.mjs",
+      "sha256": "493cd0f38ec98d64f8398998230447aa627d218d409309b23134cd0d59725c59",
+      "repository_sha256": "493cd0f38ec98d64f8398998230447aa627d218d409309b23134cd0d59725c59"
+    },
+    {
+      "original": "app/runtime-cp50/src/gentle-reply.mjs",
+      "repository": "development/app/runtime-cp50/src/gentle-reply.mjs",
+      "sha256": "362a70e453de23199246bd246638fcb5c0ec24ed50715b3879886e2d39a746af",
+      "repository_sha256": "362a70e453de23199246bd246638fcb5c0ec24ed50715b3879886e2d39a746af"
+    },
+    {
+      "original": "app/runtime-cp50/src/prop-attachment.mjs",
+      "repository": "development/app/runtime-cp50/src/prop-attachment.mjs",
+      "sha256": "06dca8612fd4559590d33a22894d7d3895477f7c35bdbbbc88fa26509aaa32ee",
+      "repository_sha256": "06dca8612fd4559590d33a22894d7d3895477f7c35bdbbbc88fa26509aaa32ee"
+    },
+    {
+      "original": "app/runtime-cp50/src/navigation.mjs",
+      "repository": "development/app/runtime-cp50/src/navigation.mjs",
+      "sha256": "69e4705ed8403f1f755c64525e6ff44e8e4c317131f36a98b9f22ee98b88274e",
+      "repository_sha256": "69e4705ed8403f1f755c64525e6ff44e8e4c317131f36a98b9f22ee98b88274e"
+    },
+    {
+      "original": "app/runtime-cp50/src/intent-view.mjs",
+      "repository": "development/app/runtime-cp50/src/intent-view.mjs",
+      "sha256": "c1d009bc9ba9dcfed4ce2688d7fcc519b8457644d74d6f2070000d3ee6b4a379",
+      "repository_sha256": "c1d009bc9ba9dcfed4ce2688d7fcc519b8457644d74d6f2070000d3ee6b4a379"
+    },
+    {
+      "original": "app/runtime-cp50/src/object-actions.mjs",
+      "repository": "development/app/runtime-cp50/src/object-actions.mjs",
+      "sha256": "4b1d2b5e9bd0c9cf2e59093408b95e18286d82f2063211f83beb14bb7b619848",
+      "repository_sha256": "4b1d2b5e9bd0c9cf2e59093408b95e18286d82f2063211f83beb14bb7b619848"
+    },
+    {
+      "original": "app/runtime-cp50/src/i18n-en.mjs",
+      "repository": "development/app/runtime-cp50/src/i18n-en.mjs",
+      "sha256": "e7611db1ef5e99e04a3411788d91a4f5d7df9b332fb172d2d75ba0741e836b3d",
+      "repository_sha256": "e7611db1ef5e99e04a3411788d91a4f5d7df9b332fb172d2d75ba0741e836b3d"
+    },
+    {
+      "original": "app/runtime-cp50/src/paper-view.mjs",
+      "repository": "development/app/runtime-cp50/src/paper-view.mjs",
+      "sha256": "6350db830fec73eb540ef0e32ba36cf29abc93e902ff6590a44b3cf2801c5415",
+      "repository_sha256": "6350db830fec73eb540ef0e32ba36cf29abc93e902ff6590a44b3cf2801c5415"
+    },
+    {
+      "original": "app/runtime-cp50/src/resident-actions.mjs",
+      "repository": "development/app/runtime-cp50/src/resident-actions.mjs",
+      "sha256": "3d346b616062cb784de73b988f1852feb64e7ca90073a9cf266d16699efc8511",
+      "repository_sha256": "3d346b616062cb784de73b988f1852feb64e7ca90073a9cf266d16699efc8511"
+    },
+    {
+      "original": "app/runtime-cp50/src/event-space.mjs",
+      "repository": "development/app/runtime-cp50/src/event-space.mjs",
+      "sha256": "6f2986a7430e373362e67f144278292e3246efb17125cb77ba987b11abe1a454",
+      "repository_sha256": "6f2986a7430e373362e67f144278292e3246efb17125cb77ba987b11abe1a454"
+    },
+    {
+      "original": "app/runtime-cp50/src/small-props.mjs",
+      "repository": "development/app/runtime-cp50/src/small-props.mjs",
+      "sha256": "41512a9843ef94d8768556d68963c4ea390c71b5d40d14b3bb135ada6dc6b1c9",
+      "repository_sha256": "41512a9843ef94d8768556d68963c4ea390c71b5d40d14b3bb135ada6dc6b1c9"
+    },
+    {
+      "original": "app/runtime-cp50/src/group-crowd.mjs",
+      "repository": "development/app/runtime-cp50/src/group-crowd.mjs",
+      "sha256": "dd58aeb13e3c215a91b0e968cf89b7b06640d7b6cd6c439f1656d37a3aae80b5",
+      "repository_sha256": "dd58aeb13e3c215a91b0e968cf89b7b06640d7b6cd6c439f1656d37a3aae80b5"
+    },
+    {
+      "original": "app/runtime-cp50/src/fireworks.mjs",
+      "repository": "development/app/runtime-cp50/src/fireworks.mjs",
+      "sha256": "1d375258dd48cdf49e88bfe74390c4089480b93562d24b297032580f80b98ff1",
+      "repository_sha256": "1d375258dd48cdf49e88bfe74390c4089480b93562d24b297032580f80b98ff1"
+    },
+    {
+      "original": "app/runtime-cp50/src/catalog.mjs",
+      "repository": "development/app/runtime-cp50/src/catalog.mjs",
+      "sha256": "aeaaf7096cf617e04a3778cd87820916bbd524c6c72041cc08cdacd1ee91fbb1",
+      "repository_sha256": "aeaaf7096cf617e04a3778cd87820916bbd524c6c72041cc08cdacd1ee91fbb1"
+    },
+    {
+      "original": "app/runtime-cp50/src/lantern-view.mjs",
+      "repository": "development/app/runtime-cp50/src/lantern-view.mjs",
+      "sha256": "935f22d5ab0b040c28ba0929d5086afc55d1b6bf953ac9c296b9be974c9f6b24",
+      "repository_sha256": "935f22d5ab0b040c28ba0929d5086afc55d1b6bf953ac9c296b9be974c9f6b24"
+    },
+    {
+      "original": "app/runtime-cp50/src/local-cloud.mjs",
+      "repository": "development/app/runtime-cp50/src/local-cloud.mjs",
+      "sha256": "03c4cda4ccff75a50c8ad6bacbad2e0ff501885942b6c734d1d82b769327f1b5",
+      "repository_sha256": "03c4cda4ccff75a50c8ad6bacbad2e0ff501885942b6c734d1d82b769327f1b5"
+    },
+    {
+      "original": "app/runtime-cp50/src/life-view.mjs",
+      "repository": "development/app/runtime-cp50/src/life-view.mjs",
+      "sha256": "381973772b2a8d8e3b168689c223431a2ab12e5807e80deadd90824e7f4c5a0c",
+      "repository_sha256": "381973772b2a8d8e3b168689c223431a2ab12e5807e80deadd90824e7f4c5a0c"
+    },
+    {
+      "original": "app/runtime-cp50/src/environment-view.mjs",
+      "repository": "development/app/runtime-cp50/src/environment-view.mjs",
+      "sha256": "7ea10027caa8374843c7ee2a9cfbdb47c949a04df60b66c2cb1d0265f80da39d",
+      "repository_sha256": "7ea10027caa8374843c7ee2a9cfbdb47c949a04df60b66c2cb1d0265f80da39d"
+    },
+    {
+      "original": "app/runtime-cp50/src/event-design.mjs",
+      "repository": "development/app/runtime-cp50/src/event-design.mjs",
+      "sha256": "90dfb89972ac5507e38d5a74574ec1b9d9cedef1547e43f38dc38f336d2ea578",
+      "repository_sha256": "90dfb89972ac5507e38d5a74574ec1b9d9cedef1547e43f38dc38f336d2ea578"
+    },
+    {
+      "original": "app/runtime-cp50/src/arm-ik.mjs",
+      "repository": "development/app/runtime-cp50/src/arm-ik.mjs",
+      "sha256": "982aacb3cdcdbbff0a8d83624ef02c3c595907fbd71ed34229928706b0180bc4",
+      "repository_sha256": "982aacb3cdcdbbff0a8d83624ef02c3c595907fbd71ed34229928706b0180bc4"
+    },
+    {
+      "original": "app/runtime-cp50/src/local-walkers.mjs",
+      "repository": "development/app/runtime-cp50/src/local-walkers.mjs",
+      "sha256": "40372a8e08d003987cef9fa67929a5f7863b945be18b34938a23f399234e69a8",
+      "repository_sha256": "40372a8e08d003987cef9fa67929a5f7863b945be18b34938a23f399234e69a8"
+    },
+    {
+      "original": "app/runtime-cp50/src/passengers.mjs",
+      "repository": "development/app/runtime-cp50/src/passengers.mjs",
+      "sha256": "be00c390fe0f1d065e16cc1dd81dfdfef38f6c42516c332a32e17bff1f521d5d",
+      "repository_sha256": "be00c390fe0f1d065e16cc1dd81dfdfef38f6c42516c332a32e17bff1f521d5d"
+    },
+    {
+      "original": "app/runtime-cp50/src/reaction-plan.mjs",
+      "repository": "development/app/runtime-cp50/src/reaction-plan.mjs",
+      "sha256": "b2e0c42b831125a8bcc6d698cfe156232a28bdcbc718248d74814bfb9748e372",
+      "repository_sha256": "b2e0c42b831125a8bcc6d698cfe156232a28bdcbc718248d74814bfb9748e372"
+    },
+    {
+      "original": "app/runtime-cp50/src/atmosphere.mjs",
+      "repository": "development/app/runtime-cp50/src/atmosphere.mjs",
+      "sha256": "b9dfe54f05f42545c3ac35ee69f317b0d611299ec95ef09553848eae6b81d9b3",
+      "repository_sha256": "b9dfe54f05f42545c3ac35ee69f317b0d611299ec95ef09553848eae6b81d9b3"
+    },
+    {
+      "original": "app/runtime-cp50/src/simulation.mjs",
+      "repository": "development/app/runtime-cp50/src/simulation.mjs",
+      "sha256": "3a9699feb1a035ea471ec652d26772640b3c0af05f127c7553d55e84e54619a6",
+      "repository_sha256": "3a9699feb1a035ea471ec652d26772640b3c0af05f127c7553d55e84e54619a6"
+    },
+    {
+      "original": "app/runtime-cp50/src/fox-model.mjs",
+      "repository": "development/app/runtime-cp50/src/fox-model.mjs",
+      "sha256": "6932ef1326336b989b6bd485d8ea371c6c8dac5e6967d527fe1d5010017f2a8c",
+      "repository_sha256": "6932ef1326336b989b6bd485d8ea371c6c8dac5e6967d527fe1d5010017f2a8c"
+    },
+    {
+      "original": "app/runtime-cp50/src/fox-rendezvous.mjs",
+      "repository": "development/app/runtime-cp50/src/fox-rendezvous.mjs",
+      "sha256": "ed81be57356fccd6155eea401a22f0ac7122ceeadde98bb3493f878465c5e8e7",
+      "repository_sha256": "ed81be57356fccd6155eea401a22f0ac7122ceeadde98bb3493f878465c5e8e7"
+    },
+    {
+      "original": "app/runtime-cp50/src/event-props.mjs",
+      "repository": "development/app/runtime-cp50/src/event-props.mjs",
+      "sha256": "c2ff777936bfd29adb81e8742722f6c47bf6351214ad4ffad0e872ae198f5dc2",
+      "repository_sha256": "c2ff777936bfd29adb81e8742722f6c47bf6351214ad4ffad0e872ae198f5dc2"
+    },
+    {
+      "original": "app/runtime-cp50/src/neighborhood-labels.mjs",
+      "repository": "development/app/runtime-cp50/src/neighborhood-labels.mjs",
+      "sha256": "6113e317952a3136eb44ea13d9375324be187d0453a5079c1a19fbf19ce8aa24",
+      "repository_sha256": "6113e317952a3136eb44ea13d9375324be187d0453a5079c1a19fbf19ce8aa24"
+    },
+    {
+      "original": "app/runtime-cp50/src/style.css",
+      "repository": "development/app/runtime-cp50/src/style.css",
+      "sha256": "0f137c88a6667b60b1cb397022d03d26be59b0fda1f12762d9bd80a86466da8b",
+      "repository_sha256": "0f137c88a6667b60b1cb397022d03d26be59b0fda1f12762d9bd80a86466da8b"
+    },
+    {
+      "original": "app/runtime-cp50/src/main.mjs",
+      "repository": "development/app/runtime-cp50/src/main.mjs",
+      "sha256": "b72e8e61c100911f571a68443ace0f371ebcebd24f739eda87f5bb6716302f89",
+      "repository_sha256": "b72e8e61c100911f571a68443ace0f371ebcebd24f739eda87f5bb6716302f89"
+    },
+    {
+      "original": "app/runtime-cp50/src/input-session.mjs",
+      "repository": "development/app/runtime-cp50/src/input-session.mjs",
+      "sha256": "b44fcfc87584f20e5077f3befb9d38a1493529167b88b18a91cb02dfd95b3602",
+      "repository_sha256": "b44fcfc87584f20e5077f3befb9d38a1493529167b88b18a91cb02dfd95b3602"
+    },
+    {
+      "original": "app/runtime-cp50/src/lantern-scene.mjs",
+      "repository": "development/app/runtime-cp50/src/lantern-scene.mjs",
+      "sha256": "809942282b068e561e158600f30112c19aaead0ac5c200a81e9064469bda903d",
+      "repository_sha256": "809942282b068e561e158600f30112c19aaead0ac5c200a81e9064469bda903d"
+    },
+    {
+      "original": "app/runtime-cp50/src/event-travel.mjs",
+      "repository": "development/app/runtime-cp50/src/event-travel.mjs",
+      "sha256": "778c40fd131318575ea5406f2152af4934c146bdc8409e127f13d0e3d5a7ff74",
+      "repository_sha256": "778c40fd131318575ea5406f2152af4934c146bdc8409e127f13d0e3d5a7ff74"
+    },
+    {
+      "original": "app/runtime-cp50/src/explicit-intents.mjs",
+      "repository": "development/app/runtime-cp50/src/explicit-intents.mjs",
+      "sha256": "bc47972018271ffbe3f3dad645fc679d7bba3a8d6b9de8c2b643e03a680c0b6f",
+      "repository_sha256": "bc47972018271ffbe3f3dad645fc679d7bba3a8d6b9de8c2b643e03a680c0b6f"
+    },
+    {
+      "original": "app/runtime-cp50/src/actions.mjs",
+      "repository": "development/app/runtime-cp50/src/actions.mjs",
+      "sha256": "9abcf6e923f85e4d3e2b24d2bdb7760bdf350b09b3373cf520992db7cbdbaaf2",
+      "repository_sha256": "9abcf6e923f85e4d3e2b24d2bdb7760bdf350b09b3373cf520992db7cbdbaaf2"
+    },
+    {
+      "original": "app/runtime-cp50/src/presentation.mjs",
+      "repository": "development/app/runtime-cp50/src/presentation.mjs",
+      "sha256": "0a18106af79e4488a81ed380d43ba37a2a14161d4be02e8dd7d7f937a28f0857",
+      "repository_sha256": "0a18106af79e4488a81ed380d43ba37a2a14161d4be02e8dd7d7f937a28f0857"
+    },
+    {
+      "original": "app/runtime-cp50/src/snow-cover.mjs",
+      "repository": "development/app/runtime-cp50/src/snow-cover.mjs",
+      "sha256": "b9ce0527a589009d7c7c6bdb87e747247ffeb11e5b71ecd83ade80af1551b173",
+      "repository_sha256": "b9ce0527a589009d7c7c6bdb87e747247ffeb11e5b71ecd83ade80af1551b173"
+    },
+    {
+      "original": "app/runtime-cp50/src/craft-design.mjs",
+      "repository": "development/app/runtime-cp50/src/craft-design.mjs",
+      "sha256": "3af59ebce4a906231374da60c9ffca58c999f9dbaac2ea97e864d6b38d12e256",
+      "repository_sha256": "3af59ebce4a906231374da60c9ffca58c999f9dbaac2ea97e864d6b38d12e256"
+    },
+    {
+      "original": "app/runtime-cp50/src/chiptune-score.mjs",
+      "repository": "development/app/runtime-cp50/src/chiptune-score.mjs",
+      "sha256": "975aaec5cecc8edec8565d591811a0ae7ad1a5965cef80ca3d371aa96adf124b",
+      "repository_sha256": "975aaec5cecc8edec8565d591811a0ae7ad1a5965cef80ca3d371aa96adf124b"
+    },
+    {
+      "original": "app/runtime-cp50/src/community.mjs",
+      "repository": "development/app/runtime-cp50/src/community.mjs",
+      "sha256": "1ad34f4ac22cb92ab1c115bed1e8c40296840d4fc8ba16b379063b109e563228",
+      "repository_sha256": "1ad34f4ac22cb92ab1c115bed1e8c40296840d4fc8ba16b379063b109e563228"
+    },
+    {
+      "original": "app/runtime-cp50/src/neighborhood-view.mjs",
+      "repository": "development/app/runtime-cp50/src/neighborhood-view.mjs",
+      "sha256": "184b4cf0cdd5054acf57ad064065065986c65d16b937bf13a29a0a8a61ccbae0",
+      "repository_sha256": "184b4cf0cdd5054acf57ad064065065986c65d16b937bf13a29a0a8a61ccbae0"
+    },
+    {
+      "original": "app/runtime-cp50/src/quick-wishes.mjs",
+      "repository": "development/app/runtime-cp50/src/quick-wishes.mjs",
+      "sha256": "66ca741d891390ad0e1c6d80c56923b17ffa52f828f976ff06034f330d0fbbe8",
+      "repository_sha256": "66ca741d891390ad0e1c6d80c56923b17ffa52f828f976ff06034f330d0fbbe8"
+    },
+    {
+      "original": "app/runtime-cp50/src/diner-action-view.mjs",
+      "repository": "development/app/runtime-cp50/src/diner-action-view.mjs",
+      "sha256": "e7c5e41adef33500ba72ef552a98e2d90b8194c70fd4f6932295e5e4f59f509f",
+      "repository_sha256": "e7c5e41adef33500ba72ef552a98e2d90b8194c70fd4f6932295e5e4f59f509f"
+    },
+    {
+      "original": "app/runtime-cp50/src/event-travel-view.mjs",
+      "repository": "development/app/runtime-cp50/src/event-travel-view.mjs",
+      "sha256": "8bd5107c0c28865d18d7c54a8f05fae1c4f6cb056642aa70e37c1d1ffd7f021d",
+      "repository_sha256": "8bd5107c0c28865d18d7c54a8f05fae1c4f6cb056642aa70e37c1d1ffd7f021d"
+    },
+    {
+      "original": "app/runtime-cp50/src/train-journey.mjs",
+      "repository": "development/app/runtime-cp50/src/train-journey.mjs",
+      "sha256": "c72405c2a555c332315ee3be1dbbf22001a9d64fd1af642be24f6e3cd32a7d65",
+      "repository_sha256": "c72405c2a555c332315ee3be1dbbf22001a9d64fd1af642be24f6e3cd32a7d65"
+    },
+    {
+      "original": "app/runtime-cp50/src/craft-world.mjs",
+      "repository": "development/app/runtime-cp50/src/craft-world.mjs",
+      "sha256": "85b6e0032159b635a25c3efb16aa47b0a421c051df7640c1de260ab00a6ece55",
+      "repository_sha256": "85b6e0032159b635a25c3efb16aa47b0a421c051df7640c1de260ab00a6ece55"
+    },
+    {
+      "original": "app/runtime-cp50/src/craft-view.mjs",
+      "repository": "development/app/runtime-cp50/src/craft-view.mjs",
+      "sha256": "cfb105cbb3381e84fd468fb2b7ee4020dc38340e61c9a0edb7c774ca2bbf216f",
+      "repository_sha256": "cfb105cbb3381e84fd468fb2b7ee4020dc38340e61c9a0edb7c774ca2bbf216f"
+    },
+    {
+      "original": "app/runtime-cp50/src/passenger-view.mjs",
+      "repository": "development/app/runtime-cp50/src/passenger-view.mjs",
+      "sha256": "5526a676917f06eb7e70d41c007538b5a310cef62a454e9dc5b14d0954e10540",
+      "repository_sha256": "5526a676917f06eb7e70d41c007538b5a310cef62a454e9dc5b14d0954e10540"
+    },
+    {
+      "original": "app/runtime-cp50/src/local-cloud-view.mjs",
+      "repository": "development/app/runtime-cp50/src/local-cloud-view.mjs",
+      "sha256": "64626ee0102022921c31e3fded85b8af2d97938f83a2c122b0505523d1356279",
+      "repository_sha256": "64626ee0102022921c31e3fded85b8af2d97938f83a2c122b0505523d1356279"
+    },
+    {
+      "original": "app/runtime-cp50/src/fox-path.mjs",
+      "repository": "development/app/runtime-cp50/src/fox-path.mjs",
+      "sha256": "1a39ed27e06556147f1ae366a32259734b798aef39a2472c19f637036eabc443",
+      "repository_sha256": "1a39ed27e06556147f1ae366a32259734b798aef39a2472c19f637036eabc443"
+    },
+    {
+      "original": "app/runtime-cp50/src/object-action-view.mjs",
+      "repository": "development/app/runtime-cp50/src/object-action-view.mjs",
+      "sha256": "9f7831e8e83d6791b34eaf9ec15ac94ec158b6720081cb2abfd7afcbde328393",
+      "repository_sha256": "9f7831e8e83d6791b34eaf9ec15ac94ec158b6720081cb2abfd7afcbde328393"
+    },
+    {
+      "original": "app/runtime-cp50/src/sound.mjs",
+      "repository": "development/app/runtime-cp50/src/sound.mjs",
+      "sha256": "0d0aab910862ebb7e6d2aefa7c19abeb2022bfcbf80e8fe976dc8fa6bb4938cb",
+      "repository_sha256": "0d0aab910862ebb7e6d2aefa7c19abeb2022bfcbf80e8fe976dc8fa6bb4938cb"
+    },
+    {
+      "original": "app/runtime-cp50/src/celestial-phase.mjs",
+      "repository": "development/app/runtime-cp50/src/celestial-phase.mjs",
+      "sha256": "433c088aba69dd909a98505f41155c21d95d2c724472bbfbaa51d01116400d2b",
+      "repository_sha256": "433c088aba69dd909a98505f41155c21d95d2c724472bbfbaa51d01116400d2b"
+    },
+    {
+      "original": "app/runtime-cp50/tests/fox-naturalness.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/fox-naturalness.test.mjs",
+      "sha256": "e97764ff285356cffb5812748f05c6a73f0e906f608a287ec6c37d47c1b6a53e",
+      "repository_sha256": "e97764ff285356cffb5812748f05c6a73f0e906f608a287ec6c37d47c1b6a53e"
+    },
+    {
+      "original": "app/runtime-cp50/tests/core-depth.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/core-depth.test.mjs",
+      "sha256": "487a93b935281f6d0848dcce5c8c0f6eb52cda7148aa680f3f7c29e8e9fcba07",
+      "repository_sha256": "487a93b935281f6d0848dcce5c8c0f6eb52cda7148aa680f3f7c29e8e9fcba07"
+    },
+    {
+      "original": "app/runtime-cp50/tests/macro-confidence.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/macro-confidence.test.mjs",
+      "sha256": "393bd8c0a3f941a137d76161b5bda140931dfaa27cd6ff6cc016f14cbcb27270",
+      "repository_sha256": "393bd8c0a3f941a137d76161b5bda140931dfaa27cd6ff6cc016f14cbcb27270"
+    },
+    {
+      "original": "app/runtime-cp50/tests/expressive-life.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/expressive-life.test.mjs",
+      "sha256": "5379d2c9ddc1fedd0a4b5472663c928e9c9bcc9daa9431d5615900b6dfac83ff",
+      "repository_sha256": "5379d2c9ddc1fedd0a4b5472663c928e9c9bcc9daa9431d5615900b6dfac83ff"
+    },
+    {
+      "original": "app/runtime-cp50/tests/response-v26.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/response-v26.test.mjs",
+      "sha256": "94526bfed725b02e5fecc7e55823e5b7fefaaf3e1e4e97c0848f94e84cd6819e",
+      "repository_sha256": "94526bfed725b02e5fecc7e55823e5b7fefaaf3e1e4e97c0848f94e84cd6819e"
+    },
+    {
+      "original": "app/runtime-cp50/tests/fox-society.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/fox-society.test.mjs",
+      "sha256": "841a261b3924f9de985c8fbaaefaea0e2f3e1cd59ef312347d8343c70767fcb3",
+      "repository_sha256": "841a261b3924f9de985c8fbaaefaea0e2f3e1cd59ef312347d8343c70767fcb3"
+    },
+    {
+      "original": "app/runtime-cp50/tests/fox-gait-regression.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/fox-gait-regression.test.mjs",
+      "sha256": "a59f810dfe62aae02cc082db5d8c534e1d8abea96cd4988e94887775affa080c",
+      "repository_sha256": "a59f810dfe62aae02cc082db5d8c534e1d8abea96cd4988e94887775affa080c"
+    },
+    {
+      "original": "app/runtime-cp50/tests/input-session.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/input-session.test.mjs",
+      "sha256": "7327e82aa3589baf47d52af5a25770713d7526dc9d4a8b16d4fb1f3c535e71e8",
+      "repository_sha256": "7327e82aa3589baf47d52af5a25770713d7526dc9d4a8b16d4fb1f3c535e71e8"
+    },
+    {
+      "original": "app/runtime-cp50/tests/collective-weather.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/collective-weather.test.mjs",
+      "sha256": "ac398feefe0fd7b515f7a2bfd1f72e21cdbf27918074ab82c083a25e3e99148e",
+      "repository_sha256": "ac398feefe0fd7b515f7a2bfd1f72e21cdbf27918074ab82c083a25e3e99148e"
+    },
+    {
+      "original": "app/runtime-cp50/tests/simulation.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/simulation.test.mjs",
+      "sha256": "0b32d839e6ac0c0057564dd9798820fa72a96d35dc8da0c1ae439e7660a1feb6",
+      "repository_sha256": "0b32d839e6ac0c0057564dd9798820fa72a96d35dc8da0c1ae439e7660a1feb6"
+    },
+    {
+      "original": "app/runtime-cp50/tests/actions.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/actions.test.mjs",
+      "sha256": "38deb9858ef7606d6c12f02b470eec9c134ef84e7c50c4d0ccf92fbffdad4650",
+      "repository_sha256": "38deb9858ef7606d6c12f02b470eec9c134ef84e7c50c4d0ccf92fbffdad4650"
+    },
+    {
+      "original": "app/runtime-cp50/tests/foot-support.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/foot-support.test.mjs",
+      "sha256": "e76c140be21148ac9c74f3e1f6ffca29ef8644ab785e3c0e24770f5d48cb8149",
+      "repository_sha256": "e76c140be21148ac9c74f3e1f6ffca29ef8644ab785e3c0e24770f5d48cb8149"
+    },
+    {
+      "original": "app/runtime-cp50/tests/motion.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/motion.test.mjs",
+      "sha256": "7236e5499d9e4f2e06d149cdfb3fe8ceccc80e2e9788e5a3f9e6a6f98a692837",
+      "repository_sha256": "7236e5499d9e4f2e06d149cdfb3fe8ceccc80e2e9788e5a3f9e6a6f98a692837"
+    },
+    {
+      "original": "app/runtime-cp50/tests/craft-life.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/craft-life.test.mjs",
+      "sha256": "2a0435fe1bd2f21972ac88cbaa10ff6a42309b5bdc5895190e83ae1cf2b3da76",
+      "repository_sha256": "2a0435fe1bd2f21972ac88cbaa10ff6a42309b5bdc5895190e83ae1cf2b3da76"
+    },
+    {
+      "original": "app/runtime-cp50/tests/free-text-feedback.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/free-text-feedback.test.mjs",
+      "sha256": "c22437573ef5bb32e904467fda1b1e23e88f83a545b9ede921c240086f6837d7",
+      "repository_sha256": "c22437573ef5bb32e904467fda1b1e23e88f83a545b9ede921c240086f6837d7"
+    },
+    {
+      "original": "app/runtime-cp50/tests/response-signals.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/response-signals.test.mjs",
+      "sha256": "3745e68b59115a55b34cd79e19c889d2a263b110a4055f94d2cf8268b4f10de3",
+      "repository_sha256": "3745e68b59115a55b34cd79e19c889d2a263b110a4055f94d2cf8268b4f10de3"
+    },
+    {
+      "original": "app/runtime-cp50/tests/fox-paper-legs.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/fox-paper-legs.test.mjs",
+      "sha256": "f6c1663cccbd0c1eb3e9bb12f1c59fab1d4e2716e79f2bfe87a0900b2175fa32",
+      "repository_sha256": "f6c1663cccbd0c1eb3e9bb12f1c59fab1d4e2716e79f2bfe87a0900b2175fa32"
+    },
+    {
+      "original": "app/runtime-cp50/tests/causal-feedback.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/causal-feedback.test.mjs",
+      "sha256": "da0b471ff32015c1973bf7a20adbf9b282a2aaedb62ec02ae1c5476609e337cb",
+      "repository_sha256": "da0b471ff32015c1973bf7a20adbf9b282a2aaedb62ec02ae1c5476609e337cb"
+    },
+    {
+      "original": "app/runtime-cp50/tests/semantic-composition.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/semantic-composition.test.mjs",
+      "sha256": "df1956f1e1bf39a58e0767d88e89524d54a7141b0c22b9429978c97340657006",
+      "repository_sha256": "df1956f1e1bf39a58e0767d88e89524d54a7141b0c22b9429978c97340657006"
+    },
+    {
+      "original": "app/runtime-cp50/tests/response-v25.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/response-v25.test.mjs",
+      "sha256": "cbd2b47b3e3951f5b56b1ae388bbbb64437e051bba2f40604c1ea57dcaafe96f",
+      "repository_sha256": "cbd2b47b3e3951f5b56b1ae388bbbb64437e051bba2f40604c1ea57dcaafe96f"
+    },
+    {
+      "original": "app/runtime-cp50/tests/sound-cues.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/sound-cues.test.mjs",
+      "sha256": "bcaaaf5d004f40dc61d4389c74b44bea8ac5e5f81f9b9285ba5f49c57bda55f9",
+      "repository_sha256": "bcaaaf5d004f40dc61d4389c74b44bea8ac5e5f81f9b9285ba5f49c57bda55f9"
+    },
+    {
+      "original": "app/runtime-cp50/tests/reaction.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/reaction.test.mjs",
+      "sha256": "d18cca96c99dbb9e7e8c07e3e51b0cd0e423a3adbe702693871e831ae9571c09",
+      "repository_sha256": "d18cca96c99dbb9e7e8c07e3e51b0cd0e423a3adbe702693871e831ae9571c09"
+    },
+    {
+      "original": "app/runtime-cp50/tests/neighborhood.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/neighborhood.test.mjs",
+      "sha256": "e49324df29a036e9450aa09b32edeb1bbae719b47804f0e91f852e1c51d3823d",
+      "repository_sha256": "e49324df29a036e9450aa09b32edeb1bbae719b47804f0e91f852e1c51d3823d"
+    },
+    {
+      "original": "app/runtime-cp50/tests/event-travel.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/event-travel.test.mjs",
+      "sha256": "4db144d6167052fd6dfb5d994bf66450392297bfc0784033f095a8d97384b6b0",
+      "repository_sha256": "4db144d6167052fd6dfb5d994bf66450392297bfc0784033f095a8d97384b6b0"
+    },
+    {
+      "original": "app/runtime-cp50/tests/paper-reuse.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/paper-reuse.test.mjs",
+      "sha256": "89c460c4ea5e5cf2513f229aed7cc61ccf30ffc4366111cb31333bce232a1995",
+      "repository_sha256": "89c460c4ea5e5cf2513f229aed7cc61ccf30ffc4366111cb31333bce232a1995"
+    },
+    {
+      "original": "app/runtime-cp50/tests/intent-runtime.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/intent-runtime.test.mjs",
+      "sha256": "feb74d34f89f8733ceb710e70a74506c42a3174312633c1db0ba2ac19721c7b6",
+      "repository_sha256": "feb74d34f89f8733ceb710e70a74506c42a3174312633c1db0ba2ac19721c7b6"
+    },
+    {
+      "original": "app/runtime-cp50/tests/view-framing.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/view-framing.test.mjs",
+      "sha256": "8f858a82fc83f0ae6d6fe2c39294d467612f069963386613fb9de1d0ef87df2a",
+      "repository_sha256": "8f858a82fc83f0ae6d6fe2c39294d467612f069963386613fb9de1d0ef87df2a"
+    },
+    {
+      "original": "app/runtime-cp50/tests/train-readiness.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/train-readiness.test.mjs",
+      "sha256": "7216745574624f75852cc2683f9b3e57706c2c7a333ec2bc63c8ef3af4cdc4b7",
+      "repository_sha256": "7216745574624f75852cc2683f9b3e57706c2c7a333ec2bc63c8ef3af4cdc4b7"
+    },
+    {
+      "original": "app/runtime-cp50/tests/live-save-upgrade.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/live-save-upgrade.test.mjs",
+      "sha256": "dfc21d229672af1f25ab467b64a4145fba4c514f27a8c796371b4ab101555205",
+      "repository_sha256": "dfc21d229672af1f25ab467b64a4145fba4c514f27a8c796371b4ab101555205"
+    },
+    {
+      "original": "app/runtime-cp50/tests/lantern-night.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/lantern-night.test.mjs",
+      "sha256": "94e21275969681526de7b24b63689a111e8169b889baae8abb64f780863bd9cf",
+      "repository_sha256": "94e21275969681526de7b24b63689a111e8169b889baae8abb64f780863bd9cf"
+    },
+    {
+      "original": "app/runtime-cp50/tests/scene-events.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/scene-events.test.mjs",
+      "sha256": "8c016d3e949e02fc0b848d12a4563c9749286fde4f344839ec5a03a5cc7326b3",
+      "repository_sha256": "8c016d3e949e02fc0b848d12a4563c9749286fde4f344839ec5a03a5cc7326b3"
+    },
+    {
+      "original": "app/runtime-cp50/tests/community.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/community.test.mjs",
+      "sha256": "ebf2338de93d192b2dedc8b643df1033d96d35aa79ebd29b0f47ce8326c824f2",
+      "repository_sha256": "ebf2338de93d192b2dedc8b643df1033d96d35aa79ebd29b0f47ce8326c824f2"
+    },
+    {
+      "original": "app/runtime-cp50/tests/lantern-sequence.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/lantern-sequence.test.mjs",
+      "sha256": "d47a08f31683bd2f29141d4dffed59963eefc221020b4f459cd95bbe0183ec77",
+      "repository_sha256": "d47a08f31683bd2f29141d4dffed59963eefc221020b4f459cd95bbe0183ec77"
+    },
+    {
+      "original": "app/runtime-cp50/tests/explicit-scenes.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/explicit-scenes.test.mjs",
+      "sha256": "bc5d826c020f8e36cfd47838ab3018e61341d1b5c500ed207b31960332a53754",
+      "repository_sha256": "bc5d826c020f8e36cfd47838ab3018e61341d1b5c500ed207b31960332a53754"
+    },
+    {
+      "original": "app/runtime-cp50/tests/i18n-and-mood.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/i18n-and-mood.test.mjs",
+      "sha256": "12e673ff289abb3569e97f0cd8327dc51ef2d0a1071c9c4097071550e7bffd4f",
+      "repository_sha256": "12e673ff289abb3569e97f0cd8327dc51ef2d0a1071c9c4097071550e7bffd4f"
+    },
+    {
+      "original": "app/runtime-cp50/tests/firework-timbre.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/firework-timbre.test.mjs",
+      "sha256": "33a0268b0e28c3a65b0bbb5cbcd0fb1af551fd03ec92326bcdc9f1810fefc2b0",
+      "repository_sha256": "33a0268b0e28c3a65b0bbb5cbcd0fb1af551fd03ec92326bcdc9f1810fefc2b0"
+    },
+    {
+      "original": "app/runtime-cp50/tests/wish-suggestions.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/wish-suggestions.test.mjs",
+      "sha256": "5141072a6b34d4387527f68b0f5167827d55af212da4cb8df71827727612ab9f",
+      "repository_sha256": "5141072a6b34d4387527f68b0f5167827d55af212da4cb8df71827727612ab9f"
+    },
+    {
+      "original": "app/runtime-cp50/tests/rich-actions.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/rich-actions.test.mjs",
+      "sha256": "cefd27e4db18e6ce66411ab1015bd404a29991dce1fe1204015d494fad2ea9c2",
+      "repository_sha256": "cefd27e4db18e6ce66411ab1015bd404a29991dce1fe1204015d494fad2ea9c2"
+    },
+    {
+      "original": "app/runtime-cp50/tests/crowd-stability.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/crowd-stability.test.mjs",
+      "sha256": "1f2bd94a975f75ca4a1161882e475156c355587bb221cb869d9d720d7a4ba48b",
+      "repository_sha256": "1f2bd94a975f75ca4a1161882e475156c355587bb221cb869d9d720d7a4ba48b"
+    },
+    {
+      "original": "app/runtime-cp50/tests/default-preferences.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/default-preferences.test.mjs",
+      "sha256": "96b24e77abe19fb7aa55d4c7b41753aaf64a8ca6027bba025f6a7f9807c64b4b",
+      "repository_sha256": "96b24e77abe19fb7aa55d4c7b41753aaf64a8ca6027bba025f6a7f9807c64b4b"
+    },
+    {
+      "original": "app/runtime-cp50/tests/fox-approach.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/fox-approach.test.mjs",
+      "sha256": "55181b0bfb1d06de2ea87b3defea5f9e5079497ec6a4af19fdc00198976d2fd8",
+      "repository_sha256": "55181b0bfb1d06de2ea87b3defea5f9e5079497ec6a4af19fdc00198976d2fd8"
+    },
+    {
+      "original": "app/runtime-cp50/tests/event-feedback.test.mjs",
+      "repository": "development/app/runtime-cp50/tests/event-feedback.test.mjs",
+      "sha256": "25b8f0474931d37756e939d085265ed88d602361e0734760b7d38499dd62a79b",
+      "repository_sha256": "25b8f0474931d37756e939d085265ed88d602361e0734760b7d38499dd62a79b"
+    },
+    {
+      "original": "app/runtime-cp50/tests/fixtures/macro-confidence-regressions.json",
+      "repository": "development/app/runtime-cp50/tests/fixtures/macro-confidence-regressions.json",
+      "sha256": "08ccc62145ec02f62b3af5f363be556a07443cbe352ffa6316d2ae59fd4cb72d",
+      "repository_sha256": "08ccc62145ec02f62b3af5f363be556a07443cbe352ffa6316d2ae59fd4cb72d"
+    },
+    {
+      "original": "app/runtime-cp50/tests/fixtures/ui-source-strings.json",
+      "repository": "development/app/runtime-cp50/tests/fixtures/ui-source-strings.json",
+      "sha256": "c3de886c8b3e56e9c84e0b2a8f048fddaded6b75c66d3322f23ec0584a3a429e",
+      "repository_sha256": "c3de886c8b3e56e9c84e0b2a8f048fddaded6b75c66d3322f23ec0584a3a429e"
+    },
+    {
+      "original": "app/runtime-cp50/scripts/build.mjs",
+      "repository": "development/app/runtime-cp50/scripts/build.mjs",
+      "sha256": "6e3b5291a9dfa18165b2ac1f88a226ace4670327668a7d44dd78a3e661f5ba24",
+      "repository_sha256": "6e3b5291a9dfa18165b2ac1f88a226ace4670327668a7d44dd78a3e661f5ba24"
+    },
+    {
+      "original": "app/runtime-cp50/package.json",
+      "repository": "development/app/runtime-cp50/package.json",
+      "sha256": "053edef3308482d287b287ec0706dc7d3fba992258e1bf0945c3fc7ff584eabc",
+      "repository_sha256": "6f1a12e7f74587578a4f74baf14f2fa58e926aaf43fb41478d036fdd4374d67f"
+    },
+    {
+      "original": "app/runtime-cp50/package-lock.json",
+      "repository": "development/app/runtime-cp50/package-lock.json",
+      "sha256": "c8cc0f25042102e428016a7dc6be183022a2fd89c66c13a1cc27e91d870083e4",
+      "repository_sha256": "c8cc0f25042102e428016a7dc6be183022a2fd89c66c13a1cc27e91d870083e4"
+    },
+    {
+      "original": "app/runtime-cp50/index.html",
+      "repository": "development/app/runtime-cp50/index.html",
+      "sha256": "fe1d8840b98bff5b9247249e481c1d087817bac07f95421328792c71c711b574",
+      "repository_sha256": "fe1d8840b98bff5b9247249e481c1d087817bac07f95421328792c71c711b574"
+    },
+    {
+      "original": "app/runtime-cp50/semantic-contract.json",
+      "repository": "development/app/runtime-cp50/semantic-contract.json",
+      "sha256": "9213a64178edf027b906a86b893bb87fb39f0b62812c1a294c9f6be7fdf9f42e",
+      "repository_sha256": "9213a64178edf027b906a86b893bb87fb39f0b62812c1a294c9f6be7fdf9f42e"
+    },
+    {
+      "original": "app/runtime-cp50/server.mjs",
+      "repository": "development/app/runtime-cp50/server.mjs",
+      "sha256": "fb4627867a4124c4aa7fc26affee79e2a077c8f41926296f8ff5107e43174f30",
+      "repository_sha256": "fb4627867a4124c4aa7fc26affee79e2a077c8f41926296f8ff5107e43174f30"
+    },
+    {
+      "original": "app/runtime-cp50/decision-api.mjs",
+      "repository": "development/app/runtime-cp50/decision-api.mjs",
+      "sha256": "2d6f7931e76e05b2f31a5ec9481d17ec8781f3a08eb8a01e07b2181351d83c52",
+      "repository_sha256": "7da9aac38c6c53d52af55526ce068ebf6eecd9e7f60e74c4d50974cb4f559304"
+    },
+    {
+      "original": "app/runtime-cp50/qa-harness.mjs",
+      "repository": "development/app/runtime-cp50/qa-harness.mjs",
+      "sha256": "44e45d757966c45d961fa983dcb3c3c490fae685401815afc3da1ecfe524ff73",
+      "repository_sha256": "44e45d757966c45d961fa983dcb3c3c490fae685401815afc3da1ecfe524ff73"
+    },
+    {
       "original": "app/echoing-green-api/.gitignore",
       "repository": "development/api/.gitignore",
       "sha256": "5ca3c39bdc1288c108a1931b3f6bc5795464b6253e9457390617774259deed0c",
@@ -17793,22 +18645,46 @@
       "repository_sha256": "245f56fd6367a03c52892b1bdd190eb7a3a6440c9eacc3650e64a9a5f34fb872"
     },
     {
-      "original": "work/runtime-cp49/sync-public-source.py",
-      "repository": "development/work/runtime-cp49/sync-public-source.py",
-      "sha256": "6a6094075cd715636ffa5c6ee9f75ecdfededecbf4b4be380dc4457389dff797",
-      "repository_sha256": "6a6094075cd715636ffa5c6ee9f75ecdfededecbf4b4be380dc4457389dff797"
+      "original": "work/runtime-cp50/sync-public-source.py",
+      "repository": "development/work/runtime-cp50/sync-public-source.py",
+      "sha256": "1924a876fc206c48b8a9807eeba9d1a5650405f133196f696e40fb8cb2bfe208",
+      "repository_sha256": "1924a876fc206c48b8a9807eeba9d1a5650405f133196f696e40fb8cb2bfe208"
     },
     {
-      "original": "work/runtime-cp49/build-report.py",
-      "repository": "development/work/runtime-cp49/build-report.py",
-      "sha256": "ed84deadcd516677e957c65b65d7b288d1252f526195bc524c685f63984ca3df",
-      "repository_sha256": "ed84deadcd516677e957c65b65d7b288d1252f526195bc524c685f63984ca3df"
+      "original": "work/runtime-cp50/reproduce-fox.mjs",
+      "repository": "development/work/runtime-cp50/reproduce-fox.mjs",
+      "sha256": "c4faa6096de5e451c969fc167b3f881b96906f1c51f2e9d955ebdb6569b293a3",
+      "repository_sha256": "c4faa6096de5e451c969fc167b3f881b96906f1c51f2e9d955ebdb6569b293a3"
     },
     {
-      "original": "work/runtime-cp49/prepare-public.py",
-      "repository": "development/work/runtime-cp49/prepare-public.py",
-      "sha256": "adc0ef01a9075f60644b9d0a9e4d0a179c6fb97e16687390b3ed2cd294d95c39",
-      "repository_sha256": "adc0ef01a9075f60644b9d0a9e4d0a179c6fb97e16687390b3ed2cd294d95c39"
+      "original": "work/runtime-cp50/build-report.py",
+      "repository": "development/work/runtime-cp50/build-report.py",
+      "sha256": "fa9d9049e4ccb3193b924ef55485c6d2e4b5b1b16f5e6dce621610fe93bc204a",
+      "repository_sha256": "fa9d9049e4ccb3193b924ef55485c6d2e4b5b1b16f5e6dce621610fe93bc204a"
+    },
+    {
+      "original": "work/runtime-cp50/test-language.mjs",
+      "repository": "development/work/runtime-cp50/test-language.mjs",
+      "sha256": "41c8b415d7bd3d370620a490eb668101ac2ef4b3879445bbc06bb74cfa706d0f",
+      "repository_sha256": "41c8b415d7bd3d370620a490eb668101ac2ef4b3879445bbc06bb74cfa706d0f"
+    },
+    {
+      "original": "work/runtime-cp50/prepare-public.py",
+      "repository": "development/work/runtime-cp50/prepare-public.py",
+      "sha256": "ab8eff9a66c7dac71e559938b8adbb17624ea64800059613eec6a03558826e3e",
+      "repository_sha256": "ab8eff9a66c7dac71e559938b8adbb17624ea64800059613eec6a03558826e3e"
+    },
+    {
+      "original": "work/runtime-cp50/audit-utils.mjs",
+      "repository": "development/work/runtime-cp50/audit-utils.mjs",
+      "sha256": "665d82144fd88945a0dfb0c76b4781da7e66af99e0a0df536d49fd4d728f0518",
+      "repository_sha256": "665d82144fd88945a0dfb0c76b4781da7e66af99e0a0df536d49fd4d728f0518"
+    },
+    {
+      "original": "work/runtime-cp50/reproduce-browser.mjs",
+      "repository": "development/work/runtime-cp50/reproduce-browser.mjs",
+      "sha256": "00fae15eaa0b35c70e760b034d7b6b20652210bef262e72ac264d1d35d94cc2b",
+      "repository_sha256": "00fae15eaa0b35c70e760b034d7b6b20652210bef262e72ac264d1d35d94cc2b"
     }
   ],
   "omitted_nonruntime_metadata": [

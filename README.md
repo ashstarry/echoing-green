@@ -1,10 +1,10 @@
-# Echoing Green · 言外
+# Koyoi · 今宵
 
 A living, cut-paper miniature town. Current scene: Borrowed Wind Town / 借风町.
 
 English is the first-visit default. Music is enabled by default; browser autoplay rules may require your first click or keypress. Language and sound choices are saved locally.
 
-The town simulates life in your browser and pauses when you leave. Snow, rain, fireworks and market gatherings are short events with arrivals, a main scene, and a gentle closing. Self-propelled boat trips are retired. The fox walks with a continuous four-leg gait, approaches neighbors and gives paw greetings. A nearby neighbor can make room for a local greeting. Tram gifts are collected from a visible luggage tray and passed to a neighbor. Local protagonists carry a soft ground cue. Street paper lamps brighten one by one at a gentle pace. Children and the fox listen beside the guitarist; paper lamps are physically taken from stands and returned. See [the complete interaction verification](verification/) for all tested wishes. One user-triggered interaction runs at a time. Input and activity choices stay locked until it finishes. Activities continue while their visible response progresses and wind down when that response settles or stalls; there is no fixed 15-second cutoff. Tram greetings appear only when the tram and traveler are ready. Sparse event sounds accompany selected fireworks, market opening and closing; the master sound switch controls both music and effects. Use weather buttons, the Town journal and selectable actions to explore. Free-text wishes use a separately hosted secure Jev proxy; no provider credentials are included in this repository or in GitHub Pages.
+The town simulates life in your browser and pauses when you leave. Snow, rain, fireworks and market gatherings are short events with arrivals, a main scene, and a gentle closing. Self-propelled boat trips are retired. The fox has slender articulated paper legs, trots across open ground, then raises its front paws and nuzzles near a neighbor. A nearby neighbor can make room for a local greeting. Tram gifts are collected from a visible luggage tray and passed to a neighbor. Local protagonists are followed by a small breeze of folded cherry petals, with subtle warm fill. Street paper lamps brighten one by one at a gentle pace. Children and the fox listen beside the guitarist; paper lamps are physically taken from stands and returned. See [the complete interaction verification](verification/) for all tested wishes. One user-triggered interaction runs at a time. Input and activity choices stay locked until it finishes. Activities continue while their visible response progresses and wind down when that response settles or stalls; there is no fixed 15-second cutoff. Tram greetings appear only when the tram and traveler are ready. Sparse event sounds accompany selected fireworks, market opening and closing; the master sound switch controls both music and effects. Use weather buttons, the Town journal and selectable actions to explore. Free-text wishes use a separately hosted secure Jev proxy; no provider credentials are included in this repository or in GitHub Pages.
 
 ## Run locally
 
@@ -12,8 +12,7 @@ Serve this directory with any static HTTP server. No build step is required for 
 
 ## Sources and credits
 
-- The Chinese name draws on Mei Yaochen’s words recorded in Ouyang Xiu’s *Liuyi Shihua*: https://zh.wikisource.org/wiki/六一詩話
-- The English name draws on William Blake’s *The Echoing Green*: https://www.poetryfoundation.org/poems/56592/the-ecchoing-green
+- Koyoi means 今宵 / tonight in Japanese: https://kotobank.jp/word/今宵-505038
 - Three.js and its decoder libraries retain their bundled license notices under `vendor/`.
 - Default background music: the user-provided **灯火未眠 B — game loop**, played at its original speed and pitch.
 - Town models, scene design, behavior logic and original soft chiptune arrangements are project assets. No license grant is implied for these assets.

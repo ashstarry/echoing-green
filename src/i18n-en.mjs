@@ -1,4 +1,4 @@
-import {CRAFT_EN} from './craft-english.mjs?v=cp49-washi-focus-9ef126f2acb5';
+import {CRAFT_EN} from './craft-english.mjs?v=cp50-friendly-fox-e903b4ae61c3';
 // Source strings remain stable in the simulation and saves. Only presentation is translated.
 export const EN=Object.fromEntries(`
 言外=Echoing Green
@@ -1070,3 +1070,5 @@ Object.assign(EN,{"纸灯夜晚": "Paper lantern evening", "纸灯沿街亮起�
 Object.assign(EN,{'狐狸步态':'Fox walking animation'});
 
 Object.assign(EN,{'停一步，看看来打招呼的小狐狸':'Pausing to meet the little fox'});
+
+Object.assign(EN,{'今宵':'Koyoi','今宵，把心情说给小镇听。':'Koyoi — a little world moved by your words.','说一句话，让小镇回应你。':'A little world moved by your words.','Koyoi，今宵。名字取自日语「今宵」，意思是今夜。晚风、灯火与街坊的日常，组成一个会回应你话语的小世界。':'Koyoi means tonight in Japanese. An evening breeze, warm lights and neighbors going about their days: a little world moved by your words.','读一读“今宵” ↗':'The meaning of Koyoi ↗'});

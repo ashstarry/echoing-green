@@ -1,7 +1,8 @@
-import {inviteFoxNeighbor} from './fox-rendezvous.mjs?v=cp49-washi-focus-9ef126f2acb5';
-import {rainingAt} from './local-cloud.mjs?v=cp49-washi-focus-9ef126f2acb5';
-import {varied} from './cadence.mjs?v=cp49-washi-focus-9ef126f2acb5';
-import {foxCurve,foxBackstep,foxPathPose,foxFloor,foxTurnArc} from './fox-path.mjs?v=cp49-washi-focus-9ef126f2acb5';
+import {inviteFoxNeighbor,settleFoxMeeting} from './fox-rendezvous.mjs?v=cp50-friendly-fox-e903b4ae61c3';
+import {rainingAt} from './local-cloud.mjs?v=cp50-friendly-fox-e903b4ae61c3';
+import {makeRoom} from './event-travel.mjs?v=cp50-friendly-fox-e903b4ae61c3';
+import {varied} from './cadence.mjs?v=cp50-friendly-fox-e903b4ae61c3';
+import {foxCurve,foxBackstep,foxPathPose,foxFloor,foxTurnArc} from './fox-path.mjs?v=cp50-friendly-fox-e903b4ae61c3';
 const ID='animal.garden_fox',D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 // Fox half-width plus a resident's body radius, with a small margin.
 const PERSON_CLEARANCE=.38;
@@ -13,11 +14,11 @@ function separation(p,yaw,q){const dx=q[0]-p[0],dy=q[1]-p[1],c=Math.cos(yaw),n=M
 function settled(m,f,dt){f.velocity=0;m.speed=0;m.strideWeight+=(0-m.strideWeight)*Math.min(1,dt*7);m.intent=f.phase;}
 function pause(f,phase,seconds){f.phase=phase;f.clock=0;f.duration=seconds;f.path=[];f.route=null;f.velocity=0;}
 function beginWalk(s,data,m,f,goalMode){
- f.obstruction=null;const ps=people(s),neighbors=goalMode==='greet'?ps.filter(a=>D(m.p,a.p)<4.8&&!a.actor.interactionLock&&Math.abs(a.p[2]-m.p[2])<.5&&!a.id.includes('vendor')).sort((a,b)=>(D(m.p,a.p)-(a.id===f.invitedNeighbor?3:0)-(a.id.includes('child')?.45:0)+(s.residentActions?.[a.id]?.requested?.65:0))-(D(m.p,b.p)-(b.id===f.invitedNeighbor?3:0)-(b.id.includes('child')?.45:0)+(s.residentActions?.[b.id]?.requested?.65:0))).slice(0,5):[null];
+ f.obstruction=null;const ps=people(s),neighbors=goalMode==='greet'?ps.filter(a=>D(m.p,a.p)<6.2&&((f.greetingTravel||0)>1.7||D(m.p,a.p)>1.7||a.id===f.invitedNeighbor)&&!a.actor.interactionLock&&Math.abs(a.p[2]-m.p[2])<.5&&!a.id.includes('vendor')).sort((a,b)=>(Math.abs(D(m.p,a.p)-3.0)-(a.id===f.invitedNeighbor?4:0)-(a.id.includes('child')?.3:0)+(s.residentActions?.[a.id]?.requested?2:0))-(Math.abs(D(m.p,b.p)-3.0)-(b.id===f.invitedNeighbor?4:0)-(b.id.includes('child')?.3:0)+(s.residentActions?.[b.id]?.requested?2:0))).slice(0,9):[null];
  const leaf=goalMode==='leaf'?s.craftWorld?.leaves.find(p=>!p.collected&&D(p.center,m.p)<3.5):null,goals=goalMode==='aside'?[[5.15,1.7,.624],...data.nodes]:data.nodes;
  let chosen=null,neighbor=null;
  for(const near of neighbors){
-  const options=goals.map(p=>({p,d:D(p,m.p),turn:Math.abs(delta(m.yaw,Math.atan2(p[1]-m.p[1],p[0]-m.p[0])+Math.PI))})).filter(x=>x.d>(near?.70:.44)&&x.d<(near?3.3:2.5)&&(!near||D(x.p,near.p)>.85&&D(x.p,near.p)<1.5)&&(goalMode!=='shelter'||!rainingAt(s,x.p))).sort((a,b)=>{const score=x=>Math.abs(x.d-(near?1.5:1.25))+x.turn*.22+(near?Math.abs(D(x.p,near.p)-1.1)*.8:0)+(leaf?Math.abs(D(x.p,leaf.center)-.85):0)+(goalMode==='aside'?-x.p[0]*.45:0);if(goalMode==='aside'&&(a.p[0]>5||b.p[0]>5))return b.p[0]-a.p[0];return score(a)-score(b);});
+  const options=goals.map(p=>({p,d:D(p,m.p),turn:Math.abs(delta(m.yaw,Math.atan2(p[1]-m.p[1],p[0]-m.p[0])+Math.PI))})).filter(x=>x.d>(near?Math.max(.8,1.75-(f.greetingTravel||0)):.44)&&x.d<(near?3.5:2.5)&&(!near||D(x.p,near.p)>.78&&D(x.p,near.p)<1.1)&&(goalMode!=='shelter'||!rainingAt(s,x.p))).sort((a,b)=>{const score=x=>Math.abs(x.d-(near?2.25:1.25))+x.turn*.22+(near?Math.abs(D(x.p,near.p)-.88)*1.4:0)+(leaf?Math.abs(D(x.p,leaf.center)-.85):0)+(goalMode==='aside'?-x.p[0]*.45:0);if(goalMode==='aside'&&(a.p[0]>5||b.p[0]>5))return b.p[0]-a.p[0];return score(a)-score(b);});
   for(const x of options.slice(0,70)){
    const endYaw=goalMode==='aside'&&x.p[0]>5?Math.PI:near?Math.atan2(near.p[1]-x.p[1],near.p[0]-x.p[0])+Math.PI:Math.atan2(x.p[1]-m.p[1],x.p[0]-m.p[0])+Math.PI;
    search:for(const offset of(near?[0,.4,-.4,.85,-.85]:[0,.6,-.6,1.2,-1.2,1.8,-1.8,Math.PI]))for(const handle of[.27,.38,.62,.90]){
@@ -29,6 +30,16 @@ function beginWalk(s,data,m,f,goalMode){
    if(chosen)break;
   }
   if(chosen)break;
+ }
+ // When furniture/people split the promenade, first travel toward an open
+ // intermediate patch. A staging walk cannot be mistaken for the greeting.
+ if(!chosen&&goalMode==='greet'){
+  const near=neighbors.find(Boolean),stages=data.nodes.map(p=>({p,d:D(p,m.p)})).filter(x=>x.d>.75&&x.d<1.65&&(!near||D(x.p,near.p)<D(m.p,near.p)-.18)).sort((a,b)=>(near?D(a.p,near.p)-D(b.p,near.p):b.d-a.d));
+  outer:for(const x of stages.slice(0,60))for(const off of[0,.5,-.5,1,-1])for(const h of[.27,.42,.7]){
+   const heading=Math.atan2(x.p[1]-m.p[1],x.p[0]-m.p[0])+Math.PI+off,route=foxCurve(data,m.p,m.yaw,x.p,heading,h);if(!route)continue;
+   if(route.poses.some((p,i)=>i%3===0&&ps.some(a=>Math.abs(a.p[2]-p.p[2])<1&&separation(p.p,p.yaw,a.p)<PERSON_CLEARANCE&&separation(p.p,p.yaw,a.p)<separation(m.p,m.yaw,a.p)-.01)))continue;
+   chosen={...route,maneuver:'stage'};neighbor=near;break outer;
+  }
  }
  // Try a walking arc before backing up again. A single end-to-end cubic
  // cannot describe every safe U-turn in this narrow, irregular garden.
@@ -61,7 +72,7 @@ export function suspendFox(s){const f=ensureFoxBehavior(s);f.suspended=true;f.ve
 export function advanceFox(s,data,dt,requestGesture=()=>{},{clearing=false,nav=null}={}){
  const m=s.movers?.[ID];if(!m||!data?.nodes?.length)return false;const f=ensureFoxBehavior(s),c=s.objectControls?.[ID],key=c?c.action+':'+c.started:null;
  if(f.motionVersion!==2){f.motionVersion=2;f.route=null;f.path=[];if(f.phase==='walk')pause(f,'look',1.5);delete m.eventHome;}f.suspended=false;
- if(key!==f.seenControl){f.seenControl=key;f.completedControl=null;f.command=c?.action||null;f.reacted=false;f.greeted=false;f.neighbor=null;f.immediateGreeting=false;f.wasClearing=false;f.greetingBacksteps=0;f.greetingTurns=0;f.reverseCurveUsed=false;f.invitedNeighbor=null;if(c?.action==='play')pause(f,'bow',1.8);else if(c?.action==='greet'){beginWalk(s,data,m,f,'greet');}else if(c?.action==='stretch')pause(f,'stretch',5.5);else if(c?.action==='explore')beginWalk(s,data,m,f,'explore');else pause(f,c?.action||'look',3);}
+ if(key!==f.seenControl){f.seenControl=key;f.completedControl=null;f.command=c?.action||null;f.reacted=false;f.greeted=false;f.neighbor=null;f.immediateGreeting=false;f.wasClearing=false;f.greetingBacksteps=0;f.greetingTurns=0;f.reverseCurveUsed=false;f.invitedNeighbor=null;f.greetingTravel=0;f.greetingOrigin=m.p.slice();if(c?.action==='play')pause(f,'bow',1.8);else if(c?.action==='greet'){beginWalk(s,data,m,f,'greet');}else if(c?.action==='stretch')pause(f,'stretch',5.5);else if(c?.action==='explore')beginWalk(s,data,m,f,'explore');else pause(f,c?.action||'look',3);}
  if(f.command==='greet'&&(f.failedPlans||f.obstruction))inviteFoxNeighbor(s,nav,f.obstruction);
  const held=['sniff','look','rest'].includes(c?.action)?c.action:!c&&s.animals==='rest'?'rest':null;
  if(held){if(f.phase!==held)pause(f,held,20);f.clock+=dt;settled(m,f,dt);return true;}
@@ -71,11 +82,11 @@ export function advanceFox(s,data,dt,requestGesture=()=>{},{clearing=false,nav=n
  if(clearing&&D(m.p,[5.15,1.7])<.08){if(f.phase!=='look'||f.route)pause(f,'look',999);f.clock+=dt;settled(m,f,dt);f.wasClearing=true;return true;}if(!clearing&&f.wasClearing)pause(f,'look',2);if(clearing&&!f.wasClearing)beginWalk(s,data,m,f,'aside');f.wasClearing=clearing;f.clock+=dt;
  if(f.phase==='walk'&&f.route){const route=f.route,left=route.length-f.routeDistance,pose=foxPathPose(route,f.routeDistance),top=route.reverse?(f.command==='greet'?.32:.18):f.goalMode==='greet'?.64:f.goalMode==='play'?.55:.40;const wanted=Math.min(top,Math.sqrt(Math.max(0,left)*.32),(f.command==='greet'?1.15:.85)/Math.max(.01,pose.curvature));f.velocity+=clamp(wanted-f.velocity,-dt*.65,dt*.65);const move=Math.min(left,f.velocity*dt),next=foxPathPose(route,f.routeDistance+move),ps=people(s);
   const blocked=ps.some(a=>Math.abs(a.p[2]-next.p[2])<1&&separation(next.p,next.yaw,a.p)<PERSON_CLEARANCE&&separation(next.p,next.yaw,a.p)<separation(m.p,m.yaw,a.p)-1e-6)||Object.entries(s.movers).some(([id,b])=>id==='bicycle.street_bicycle'&&D(next.p,b.p)<1.20&&D(next.p,b.p)<D(m.p,b.p));
-  if(blocked){f.blocked+=dt;if(f.command==='greet'&&f.blocked>.4){const obstruction=ps.find(a=>separation(next.p,next.yaw,a.p)<.55);inviteFoxNeighbor(s,nav,obstruction?.id);} settled(m,f,dt);m.intent='yield';const neighbor=ps.filter(a=>D(m.p,a.p)<1.65&&Math.abs(delta(m.yaw,Math.atan2(a.p[1]-m.p[1],a.p[0]-m.p[0])+Math.PI))<1.1&&!a.id.includes('vendor')&&!a.actor.interactionLock).sort((a,b)=>D(m.p,a.p)-D(m.p,b.p))[0];if(f.command==='greet'&&!route.reverse&&neighbor&&f.routeDistance>.25){f.neighbor=neighbor.id;pause(f,'greet',3.8);return true;}if(f.blocked>(f.command==='greet'?.65:3.5))pause(f,'look',f.command==='greet'?.35:varied([2,4],ID,f.cycle++));return true;}
-  f.blocked=0;f.routeDistance+=move;m.p=next.p;m.yaw=next.yaw;m.distance+=move*(route.reverse?-1:1);m.speed=move/(dt*.52);m.intent=route.reverse?'step_back':['play','greet'].includes(f.goalMode)?'trot':'explore';m.strideWeight+=(Math.min(1,move/dt/.25)-m.strideWeight)*Math.min(1,dt*6);
-  if(left<.003||move>=left){const goal=f.goalMode,reverse=route.reverse,turning=route.maneuver==='turn';if(turning){pause(f,'look',.15);return true;}pause(f,reverse?'look':goal==='greet'?'greet':goal==='play'?'play':'sniff',reverse?(f.command==='greet'?.3:1.5):goal==='greet'?3.8:goal==='play'?4:varied([3,6],ID,f.cycle));}return true;}
+  if(blocked){f.blocked+=dt;if(f.command==='greet'&&!c?.preserveOthers&&f.blocked>.25&&s.time>(f.roomAt||0)){makeRoom(s,nav,{id:ID,p:m.p,interactionLock:true},next.p);f.roomAt=s.time+1;}if(f.command==='greet'&&f.blocked>.4){const obstruction=ps.find(a=>separation(next.p,next.yaw,a.p)<.55);inviteFoxNeighbor(s,nav,obstruction?.id);} settled(m,f,dt);m.intent='yield';const neighbor=ps.filter(a=>D(m.p,a.p)<1.18&&Math.abs(delta(m.yaw,Math.atan2(a.p[1]-m.p[1],a.p[0]-m.p[0])+Math.PI))<1.1&&!a.id.includes('vendor')&&!a.actor.interactionLock).sort((a,b)=>D(m.p,a.p)-D(m.p,b.p))[0];if(f.command==='greet'&&!route.reverse&&neighbor&&(f.greetingTravel||0)>1.7&&D(m.p,f.greetingOrigin||m.p)>1.2){f.neighbor=neighbor.id;pause(f,'greet',5.2);return true;}if(f.blocked>(f.command==='greet'?.65:3.5))pause(f,'look',f.command==='greet'?.35:varied([2,4],ID,f.cycle++));return true;}
+  f.blocked=0;f.routeDistance+=move;m.p=next.p;m.yaw=next.yaw;m.distance+=move*(route.reverse?-1:1);if(f.command==='greet')f.greetingTravel=(f.greetingTravel||0)+move;m.speed=Math.min(1,move/(dt*.52));m.intent=route.reverse?'step_back':['play','greet'].includes(f.goalMode)?'trot':'explore';m.strideWeight+=(Math.min(1,move/dt/.25)-m.strideWeight)*Math.min(1,dt*6);
+  if(left<.003||move>=left){const goal=f.goalMode,reverse=route.reverse,turning=route.maneuver==='turn';if(goal==='greet'&&!reverse&&!turning&&((f.greetingTravel||0)<1.7||D(m.p,f.greetingOrigin||m.p)<1.2)){pause(f,'look',.2);return true;}if(turning||route.maneuver==='stage'){pause(f,'look',.15);return true;}pause(f,reverse?'look':goal==='greet'?'greet':goal==='play'?'play':'sniff',reverse?(f.command==='greet'?.3:1.5):goal==='greet'?5.2:goal==='play'?4:varied([3,6],ID,f.cycle));}return true;}
  settled(m,f,dt);
- if(f.phase==='greet'&&f.neighbor){const a=people(s).find(a=>a.id===f.neighbor);if(a&&D(m.p,a.p)<2.4){f.greeted=true;if(!f.reacted&&!c?.preserveOthers&&!a.actor.interactionLock&&!s.residentActions[a.id]?.requested){const r=s.residentActions[a.id];if(r?.action&&r.action!=='greet')r.cancelRemaining=.25;a.actor.path=[];a.actor.target=null;a.actor.reservation=null;a.actor.wait=4.2;a.actor.mode='idle';a.actor.actualSpeed=0;a.actor.speed=0;requestGesture(a.id,'greet');f.reacted=true;}}}
+ if(f.phase==='greet'&&f.neighbor){const a=people(s).find(a=>a.id===f.neighbor);if(a&&D(m.p,a.p)>1.18&&!f.greeted){beginWalk(s,data,m,f,'greet');return true;}if(a&&D(m.p,a.p)<=1.18){f.greeted=true;if(!f.reacted&&!c?.preserveOthers&&!a.actor.interactionLock&&!s.residentActions[a.id]?.requested){const r=s.residentActions[a.id];if(r?.action&&r.action!=='greet')r.cancelRemaining=.25;a.actor.path=[];a.actor.target=null;a.actor.reservation=null;a.actor.wait=5.8;a.actor.mode='idle';a.actor.actualSpeed=0;a.actor.speed=0;settleFoxMeeting(s,a);requestGesture(a.id,'greet');f.reacted=true;}}}
  if(f.clock>=f.duration){if(f.phase==='bow'){beginWalk(s,data,m,f,'play');return true;}if(f.command==='play'&&f.phase!=='play'){beginWalk(s,data,m,f,'play');return true;}if(f.command==='greet'&&!f.greeted&&!f.immediateGreeting){beginWalk(s,data,m,f,'greet');return true;}
   if(f.command&&['play','greet','stretch'].includes(f.command)&&f.completedControl!==f.seenControl){f.completedControl=f.seenControl;f.completed++;f.command=null;pause(f,'look',varied([2,4],ID,f.cycle));return true;}
   f.cycle++;if(f.cycle%5===1)pause(f,'groom',3.4);else if(f.cycle%5===3)pause(f,'stretch',2.8);else beginWalk(s,data,m,f,clearing?'aside':'explore');}return true;
@@ -91,7 +102,7 @@ export function foxPose(s){
  return {headPitch:(f.phase==='sniff'?.24+.05*Math.sin(t*2.2):groom?.42+.10*Math.sin(t*6):stretch?.24:friendly?-.24:0)*soft,headTurn:(groom?-.25:look)*soft,
  tail:(friendly?Math.sin(t*6.8)*.48:f.phase==='walk'?Math.sin(s.time*4)*.12:f.phase==='rest'?.025*Math.sin(t):Math.sin(s.time*2.4)*.16)*soft,
  front:stretch?.28*Math.sin(Math.PI*clamp(t/f.duration,0,1)):0,back:stretch?-.07*Math.sin(Math.PI*clamp(t/f.duration,0,1)):0,
- paw:(friendly?1.12*Math.pow(Math.max(0,Math.sin(t*3.4)),2):groom?.9:0)*soft,groom:Number(groom)*soft,lift:friendly?.025*Math.max(0,Math.sin(t*3.4))*soft:0};
+ paw:(f.phase==='greet'?(1.06+.08*Math.sin(t*4.8))*Math.sin(Math.PI*clamp((t-.65)/3.9,0,1)):friendly?1.12*Math.pow(Math.max(0,Math.sin(t*3.4)),2):groom?.9:0)*soft,groom:Number(groom)*soft,lift:friendly?.025*Math.max(0,Math.sin(t*3.4))*soft:0};
 }
 export function validateFox(s,data){if(!s.foxBehavior)return;const f=s.foxBehavior;if(!['walk','look','sniff','rest','stretch','greet','play','bow','groom'].includes(f.phase)||![f.clock,f.duration,f.velocity,f.cycle,f.completed].every(Number.isFinite)||!Array.isArray(f.path)||f.path.some(i=>!Number.isInteger(i)||!data?.nodes[i])||f.command&&!modes.has(f.command))throw Error('Invalid fox behavior');if(f.route&&(!Number.isFinite(f.routeDistance)||!Number.isFinite(f.route.length)||f.route.poses.length>60||f.route.poses.length<2||f.route.poses.some(p=>!p.p.every(Number.isFinite)||!Number.isFinite(p.yaw)||!Number.isFinite(p.d))))throw Error('Invalid fox route');}
 export const FOX_PHASE_LABELS={walk:'沿花园空地走走',look:'抬头看看周围',sniff:'停下来认真闻一闻',rest:'安静歇一会',groom:'抬起前爪，低头舔一舔',stretch:'伸展前爪，舒展身体',greet:'朝附近居民摇尾打招呼',play:'停下摇尾，等邻居回应',bow:'压低前身，邀请一起玩'};

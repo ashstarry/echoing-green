@@ -1,9 +1,9 @@
-import {foxMeetingActive} from './fox-rendezvous.mjs?v=cp49-washi-focus-9ef126f2acb5';
-import {makeRoom} from './event-travel.mjs?v=cp49-washi-focus-9ef126f2acb5';
-import {groupPlaces} from './group-layout.mjs?v=cp49-washi-focus-9ef126f2acb5';
-import {pathTo,navigationGraph} from './navigation.mjs?v=cp49-washi-focus-9ef126f2acb5';
-import {moverBlocks} from './motion.mjs?v=cp49-washi-focus-9ef126f2acb5';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp49-washi-focus-9ef126f2acb5';
+import {foxMeetingActive} from './fox-rendezvous.mjs?v=cp50-friendly-fox-e903b4ae61c3';
+import {makeRoom} from './event-travel.mjs?v=cp50-friendly-fox-e903b4ae61c3';
+import {groupPlaces} from './group-layout.mjs?v=cp50-friendly-fox-e903b4ae61c3';
+import {pathTo,navigationGraph} from './navigation.mjs?v=cp50-friendly-fox-e903b4ae61c3';
+import {moverBlocks} from './motion.mjs?v=cp50-friendly-fox-e903b4ae61c3';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp50-friendly-fox-e903b4ae61c3';
 const D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 const angle=(a,b)=>Math.atan2(Math.sin(b-a),Math.cos(b-a));
@@ -20,7 +20,7 @@ export function advanceGroupCrowd(s,nav,dt){
  // Plan against actual bodies and static terrain. A nearby free point is never substituted for a queue position.
  for(const a of crowd){const goal=targetOf(s,a),target=nav.nodes[goal],g=s.eventGuests?.[a.id],e=s.sceneEvent;const home=a.guestReturnNode!==undefined;if(e?.kind==='music'&&a.crowd)a.crowd.waitFor=[];a.groupDrivenTick=s.tick;a.segment=0;a.reservation=goal;a.responseDestination=goal;a.localActionUntil=0;a.manualActivity=null;a.wait=0;a.task=foxMeetingActive(s,a)?'inspect':a.musicErrandNode!==undefined?'browse':a.interactionLock?(a.interactionTask||'inspect'):a.localRainTarget!==undefined?'shelter':home?'stroll':e?.kind==='music'?'listen':e?.kind==='quiet'?'rest':e?.kind==='festival'?'fireworks':['reunion','lantern'].includes(e?.kind)?'chat':'browse';a.lookTarget=foxMeetingActive(s,a)?[s.movers['animal.garden_fox'].p[0],s.movers['animal.garden_fox'].p[1],s.movers['animal.garden_fox'].p[2]+.45]:a.musicErrandNode!==undefined?[a.p[0],a.p[1]+1,1.4]:a.interactionLock?a.interactionLook:home?target:e?.kind==='music'?[-2.47,-1.45,1.25]:e?.kind==='quiet'?(a.p[0]>1.8?[7.7,-1.2,.7]:[-.3,-.5,1.4]):e?.kind==='festival'?FIREWORK_FOCUS:e?.queue?.[a.id]?nav.activities.spaces.residents[e.queue[a.id].vendor].position:[-.27,-.54,1.3];s.residents[a.id].activity=a.task;s.residents[a.id].lookTarget=a.lookTarget;
   if(e?.queue?.[a.id])a.workstation=e.queue[a.id].vendor;
-  if(e?.kind==='music'&&e.slots?.[a.id]!==undefined&&(e.musicStanding?.[a.id]||D(a.p,target)<.28)){e.musicStanding??={};e.musicStanding[a.id]??=a.p.slice();const n=nodeAt(nav,e.musicStanding[a.id])??goal;e.slots[a.id]=n;a.node=n;a.reservation=n;a.path=[];a.target=null;a.mode='idle';a.actualSpeed=0;a.speed=0;a.crowdV=[0,0];a.gaitWeight+=(0-a.gaitWeight)*Math.min(1,dt*10);turn(a,a.lookTarget,dt);continue;}
+  if(!foxMeetingActive(s,a)&&e?.kind==='music'&&e.slots?.[a.id]!==undefined&&(e.musicStanding?.[a.id]||D(a.p,target)<.28)){e.musicStanding??={};e.musicStanding[a.id]??=a.p.slice();const n=nodeAt(nav,e.musicStanding[a.id])??goal;e.slots[a.id]=n;a.node=n;a.reservation=n;a.path=[];a.target=null;a.mode='idle';a.actualSpeed=0;a.speed=0;a.crowdV=[0,0];a.gaitWeight+=(0-a.gaitWeight)*Math.min(1,dt*10);turn(a,a.lookTarget,dt);continue;}
 
   if(D(a.p,target)<.035){if(a.courtesyDestination!==undefined&&a.courtesyArrivedAt===null)a.courtesyArrivedAt=s.time;if(a.crowdArrivedGoal!==goal){s.stats.completed++;a.crowdArrivedGoal=goal;}a.crowdV=[0,0];a.p[0]=target[0];a.p[1]=target[1];a.p[2]+=clamp(target[2]-.02*a.scale+.006-a.p[2],-dt*.5,dt*.5);a.node=goal;a.path=[];a.target=null;a.mode='idle';a.actualSpeed=0;a.speed=0;a.gaitWeight+=(0-a.gaitWeight)*Math.min(1,dt*10);turn(a,a.lookTarget,dt);continue;}
   a.crowd??={goal:null,route:[],at:0,blocked:0,replan:0};const c=a.crowd;

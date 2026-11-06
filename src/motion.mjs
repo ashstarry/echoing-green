@@ -1,9 +1,9 @@
-import {advanceMusicFox,musicRoaming} from './music-circle.mjs?v=cp49-washi-focus-9ef126f2acb5';
-import {avoidBoat} from './boat-world.mjs?v=cp49-washi-focus-9ef126f2acb5';
-import {advanceFox} from './fox-behavior.mjs?v=cp49-washi-focus-9ef126f2acb5';
-import {needsClearPromenade} from './event-design.mjs?v=cp49-washi-focus-9ef126f2acb5';
-import {makeRoom} from './event-travel.mjs?v=cp49-washi-focus-9ef126f2acb5';
-import {CADENCE,varied} from './cadence.mjs?v=cp49-washi-focus-9ef126f2acb5';
+import {advanceMusicFox,musicRoaming} from './music-circle.mjs?v=cp50-friendly-fox-e903b4ae61c3';
+import {avoidBoat} from './boat-world.mjs?v=cp50-friendly-fox-e903b4ae61c3';
+import {advanceFox} from './fox-behavior.mjs?v=cp50-friendly-fox-e903b4ae61c3';
+import {needsClearPromenade} from './event-design.mjs?v=cp50-friendly-fox-e903b4ae61c3';
+import {makeRoom} from './event-travel.mjs?v=cp50-friendly-fox-e903b4ae61c3';
+import {CADENCE,varied} from './cadence.mjs?v=cp50-friendly-fox-e903b4ae61c3';
 export const TAU=Math.PI*2;
 export const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 export const ease=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};

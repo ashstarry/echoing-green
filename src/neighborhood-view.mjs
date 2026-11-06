@@ -1,9 +1,9 @@
-import {smallProps} from './small-props.mjs?v=cp49-washi-focus-9ef126f2acb5';
+import {smallProps} from './small-props.mjs?v=cp50-friendly-fox-e903b4ae61c3';
 import * as THREE from 'three';
-import {makeArmSolver} from './arm-ik.mjs?v=cp49-washi-focus-9ef126f2acb5';
-import {handWorldPoint} from './prop-attachment.mjs?v=cp49-washi-focus-9ef126f2acb5';
-import {interactionStep,INTERACTION_PRIMITIVES} from './interaction-sequence.mjs?v=cp49-washi-focus-9ef126f2acb5';
-import {HOME} from './neighborhood-world.mjs?v=cp49-washi-focus-9ef126f2acb5';
+import {makeArmSolver} from './arm-ik.mjs?v=cp50-friendly-fox-e903b4ae61c3';
+import {handWorldPoint} from './prop-attachment.mjs?v=cp50-friendly-fox-e903b4ae61c3';
+import {interactionStep,INTERACTION_PRIMITIVES} from './interaction-sequence.mjs?v=cp50-friendly-fox-e903b4ae61c3';
+import {HOME} from './neighborhood-world.mjs?v=cp50-friendly-fox-e903b4ae61c3';
 const ease=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};
 export function createNeighborhoodView({scene,entities,parts,sockets}){
  const shared=smallProps(scene);

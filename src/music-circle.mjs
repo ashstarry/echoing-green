@@ -1,5 +1,5 @@
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp49-washi-focus-9ef126f2acb5';
-import {makeRoom} from './event-travel.mjs?v=cp49-washi-focus-9ef126f2acb5';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp50-friendly-fox-e903b4ae61c3';
+import {makeRoom} from './event-travel.mjs?v=cp50-friendly-fox-e903b4ae61c3';
 
 export const MUSIC_CHILDREN=['resident.child_runner','resident.garden_child'];
 export const MUSIC_FOCUS=[-2.4684,-1.4537,1.1];
@@ -42,6 +42,6 @@ export function advanceMusicFox(s,nav,dt,gesture){
  w.speed+=clamp(.78-w.speed,-dt*.9,dt*.6);const move=Math.min(d,w.speed*dt*Math.max(.25,Math.cos(error))),p=m.p.map((v,k)=>v+(target[k]-v)*move/Math.max(d,.001));
  const obstruct=s.actors.find(a=>Math.abs(a.p[2]-p[2])<1&&distance(a.p,p)<.48&&distance(a.p,p)<distance(a.p,m.p)-.0001);
  if(obstruct){w.blocked+=dt;m.speed=0;m.strideWeight*=Math.max(0,1-dt*8);if(w.blocked>.7&&s.time>(w.yieldAt||0)){makeRoom(s,nav,{id:FOX,p:m.p},obstruct.p);w.yieldAt=s.time+1;}if(w.blocked>1.6){w.path=route(s,nav,m,[-3.04,.24]);w.at=1;w.blocked=0;}return true;}
- w.blocked=0;m.p=p;m.yaw+=clamp(error,-dt*1.8,dt*1.8);m.distance+=move;w.distance+=move;m.speed=move/(dt*.52);m.strideWeight+=(Math.min(1,move/dt/.25)-m.strideWeight)*Math.min(1,dt*7);
+ w.blocked=0;m.p=p;m.yaw+=clamp(error,-dt*1.8,dt*1.8);m.distance+=move;w.distance+=move;m.speed=Math.min(1,move/(dt*.52));m.strideWeight+=(Math.min(1,move/dt/.25)-m.strideWeight)*Math.min(1,dt*7);
  if(d<.06||move>=d)w.at++;return true;
 }
