@@ -3,7 +3,7 @@ export function foxBicycleGap(p,m){const dx=p[0]-m.p[0],dy=p[1]-m.p[1],c=Math.co
 const obstacleGap=(p,a)=>a.bike?foxBicycleGap(p,a.bike)-.56:D(p,a.p)-(a.radius||.54);
 const angle=(a,b)=>Math.atan2(Math.sin(b-a),Math.cos(b-a));
 const graphs=new WeakMap();
-function graph(data){let g=graphs.get(data);if(g)return g;const key=p=>Math.round(p[0]/.16)+','+Math.round(p[1]/.16),grid=new Map(data.nodes.map((p,i)=>[key(p),i]));const edges=data.nodes.map((p,i)=>{const x=Math.round(p[0]/.16),y=Math.round(p[1]/.16),out=[];for(const dx of[-1,0,1])for(const dy of[-1,0,1]){if(!dx&&!dy)continue;const n=grid.get((x+dx)+','+(y+dy));if(n===undefined||Math.abs(data.nodes[n][2]-p[2])>.10)continue;if(dx&&dy&&(!grid.has((x+dx)+','+y)||!grid.has(x+','+(y+dy))))continue;out.push(n);}return out;});g={edges};graphs.set(data,g);return g;}
+function graph(data){let g=graphs.get(data);if(g)return g;const origin=data.origin||data.nodes[0]||[0,0],key=p=>Math.round((p[0]-origin[0])/.16)+','+Math.round((p[1]-origin[1])/.16),grid=new Map(data.nodes.map((p,i)=>[key(p),i]));const edges=data.nodes.map((p,i)=>{const x=Math.round((p[0]-origin[0])/.16),y=Math.round((p[1]-origin[1])/.16),out=[];for(const dx of[-1,0,1])for(const dy of[-1,0,1]){if(!dx&&!dy)continue;const n=grid.get((x+dx)+','+(y+dy));if(n===undefined||Math.abs(data.nodes[n][2]-p[2])>.10)continue;if(dx&&dy&&(!grid.has((x+dx)+','+y)||!grid.has(x+','+(y+dy))))continue;out.push(n);}return out;});g={edges};graphs.set(data,g);return g;}
 // A fox can take small sideways/backward steps through an existing lane. This
 // fallback follows connected paving rather than requiring a car-like U-turn.
 export function foxGroundGreeting(data,m,neighbors,people,minimum=.8){

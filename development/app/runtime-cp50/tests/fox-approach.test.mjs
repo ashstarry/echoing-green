@@ -1,5 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';
-import {createWorld,step,serialize,restore} from '../src/simulation.mjs';import {queueIntent} from '../src/life-plans.mjs';import {runInput,inputBusy} from '../src/input-session.mjs';import {objectCatalog} from '../src/object-actions.mjs';import {foxPose} from '../src/fox-behavior.mjs';
+import {createWorld,step,serialize,restore} from '../src/simulation.mjs';import {queueIntent} from '../src/life-plans.mjs';import {runInput,inputBusy} from '../src/input-session.mjs';import {objectCatalog} from '../src/object-actions.mjs';import {foxPose} from '../src/fox-behavior.mjs';import {foxFloor} from '../src/fox-path.mjs';
 const read=n=>JSON.parse(readFileSync(new URL('../public/assets/'+n+'.json',import.meta.url)));
 function setup(seed,warm){const nav=read('navigation');nav.activities=read('motion-activities');for(const[k,n]of Object.entries({rail:'rail-path',diners:'diner-clips',spaces:'activity-spaces',cycleStopPose:'cycle-stop-pose',dinerGestures:'diner-gestures',diningProps:'dining-props',paving:'paving-support',localSupport:'local-support',sockets:'actor-sockets',localRoutes:'local-routes',boarding:'boarding-config',eventTrips:'event-trips',seatedRigs:'seated-rigs',eventSupport:'event-support'}))nav.activities[k]=read(n);nav.activities.objectCatalog=objectCatalog(read('runtime-registry'));const s=createWorld(nav,seed);for(let i=0;i<warm*20;i++)step(s,nav);return{s,nav};}
 for(const[seed,warm]of[[62417,10],[90210,120],[12345,2]])test('A greeting travels to its neighbor and preserves a resumable trot: '+seed,()=>{
@@ -7,10 +7,12 @@ for(const[seed,warm]of[[62417,10],[90210,120],[12345,2]])test('A greeting travel
  for(let n=0;n<1600&&inputBusy(s);n++){step(s,nav);const f=s.foxBehavior,m=s.movers[id],span=Math.hypot(m.p[0]-origin[0],m.p[1]-origin[1]);if(span>.02&&firstMove===null)firstMove=n*.05;assert(m.speed>=0&&m.speed<=1);if(!saved&&f.phase==='walk'&&n>40){assert.deepEqual(restore(serialize(s),nav),s);saved=true;}if(f.phase==='greet'){firstGreet??=n*.05;assert(f.greetingTravel>=1.7);assert(span>=1.2);maxPaw=Math.max(maxPaw,foxPose(s).paw);}}
  assert(firstMove<1.0);assert(firstGreet!==null);assert(firstGreet>firstMove+2);assert(maxPaw>.60);assert(saved);assert.equal(s.inputSession.outcome,'completed');
 });
-test('The old lower-left saved position recovers with real footsteps from eight headings',()=>{
- for(let heading=0;heading<8;heading++){
-  const{s,nav}=setup(62417,10),id='animal.garden_fox',origin=[-3.999818344772281,-2.7990821361673355,.624];Object.assign(s.movers[id],{p:origin.slice(),yaw:heading*Math.PI/4,speed:0});Object.assign(s.foxBehavior,{phase:'look',route:null,clock:0,duration:100,promenade:true});const items=[{kind:'object',target:id,action:'greet'}];runInput(s,items,()=>queueIntent(s,items,{},nav.activities.objectCatalog));let greeted=false,first=null,maxSpan=0,resumed=false;
+test('Two old lower-left saved positions recover with real footsteps from eight headings',()=>{
+ for(const origin of[[-3.999818344772281,-2.7990821361673355,.624],[-4.479816500855854,-3.2791579939335107,.5980017370032168]])for(let heading=0;heading<8;heading++){
+  const{s,nav}=setup(62417,10),id='animal.garden_fox';Object.assign(s.movers[id],{p:origin.slice(),yaw:heading*Math.PI/4,speed:0});Object.assign(s.foxBehavior,{phase:'look',route:null,clock:0,duration:100,promenade:true});const items=[{kind:'object',target:id,action:'greet'}];runInput(s,items,()=>queueIntent(s,items,{},nav.activities.objectCatalog));let greeted=false,first=null,maxSpan=0,resumed=false;
   for(let n=0;n<1800&&inputBusy(s);n++){step(s,nav);const m=s.movers[id],span=Math.hypot(m.p[0]-origin[0],m.p[1]-origin[1]);maxSpan=Math.max(maxSpan,span);if(span>.02&&first===null)first=n*.05;greeted||=s.foxBehavior.greeted;if(!resumed&&s.foxBehavior.route?.maneuver==='paving'&&n>20){assert.deepEqual(restore(serialize(s),nav),s);resumed=true;}}
   assert(first<1.5,'heading '+heading);assert(maxSpan>=1.2);assert(greeted,'heading '+heading);assert.equal(s.inputSession.outcome,'completed');
  }
 });
+
+test('Fox paving support preserves every tile when the grid origin has a half-cell offset',()=>{for(const origin of[[0,0],[-7.2,-3.6],[-7.187,-3.587]]){const nodes=[];for(let x=0;x<14;x++)for(let y=0;y<14;y++)nodes.push([origin[0]+x*.16,origin[1]+y*.16,.624]);for(const explicit of[true,false]){const data={nodes,...(explicit?{origin}:{})};for(const p of nodes)assert.equal(foxFloor(data,p),.624,JSON.stringify({p,origin,explicit}));}}});

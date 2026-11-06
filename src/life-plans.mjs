@@ -1,9 +1,9 @@
-import {eventKind} from './scene-events.mjs?v=cp50-friendly-fox-df77a529727b';
-import {stimulateTown} from './town-response.mjs?v=cp50-friendly-fox-df77a529727b';
-import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp50-friendly-fox-df77a529727b';
-import {requestPassengerAction} from './passengers.mjs?v=cp50-friendly-fox-df77a529727b';
-import {requestObjectAction} from './object-actions.mjs?v=cp50-friendly-fox-df77a529727b';
-import {validateDecision} from './catalog.mjs?v=cp50-friendly-fox-df77a529727b';
+import {eventKind} from './scene-events.mjs?v=cp50-friendly-fox-d3de906ee97b';
+import {stimulateTown} from './town-response.mjs?v=cp50-friendly-fox-d3de906ee97b';
+import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp50-friendly-fox-d3de906ee97b';
+import {requestPassengerAction} from './passengers.mjs?v=cp50-friendly-fox-d3de906ee97b';
+import {requestObjectAction} from './object-actions.mjs?v=cp50-friendly-fox-d3de906ee97b';
+import {validateDecision} from './catalog.mjs?v=cp50-friendly-fox-d3de906ee97b';
 
 // Compound goals reuse tested movements, with real completion/occupation checks between steps.
 export const LIFE_PLANS={

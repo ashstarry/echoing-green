@@ -1,8 +1,8 @@
-import {interactionStep} from './interaction-sequence.mjs?v=cp50-friendly-fox-df77a529727b';
-import {handWorldPoint} from './prop-attachment.mjs?v=cp50-friendly-fox-df77a529727b';
+import {interactionStep} from './interaction-sequence.mjs?v=cp50-friendly-fox-d3de906ee97b';
+import {handWorldPoint} from './prop-attachment.mjs?v=cp50-friendly-fox-d3de906ee97b';
 import * as THREE from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
-import {lanternDisplay,LANTERN_STATIONS} from './lantern-scene.mjs?v=cp50-friendly-fox-df77a529727b';
+import {lanternDisplay,LANTERN_STATIONS} from './lantern-scene.mjs?v=cp50-friendly-fox-d3de906ee97b';
 
 function paperLampGeometry(){
  const pieces=[];

@@ -1,6 +1,6 @@
-import {moverBlocks} from './motion.mjs?v=cp50-friendly-fox-df77a529727b';
-import {pathTo,navigationGraph} from './navigation.mjs?v=cp50-friendly-fox-df77a529727b';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp50-friendly-fox-df77a529727b';
+import {moverBlocks} from './motion.mjs?v=cp50-friendly-fox-d3de906ee97b';
+import {pathTo,navigationGraph} from './navigation.mjs?v=cp50-friendly-fox-d3de906ee97b';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp50-friendly-fox-d3de906ee97b';
 const dist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 const turn=(a,b,n)=>a+Math.max(-n,Math.min(n,Math.atan2(Math.sin(b-a),Math.cos(b-a))));
 const live=j=>!['done','cancelled','failed'].includes(j.status);
