@@ -1074,3 +1074,5 @@ Object.assign(EN,{'停一步，看看来打招呼的小狐狸':'Pausing to meet 
 Object.assign(EN,{'今宵':'Koyoi','今宵，把心情说给小镇听。':'Koyoi — a little world moved by your words.','说一句话，让小镇回应你。':'A little world moved by your words.','Koyoi，今宵。名字取自日语「今宵」，意思是今夜。晚风、灯火与街坊的日常，组成一个会回应你话语的小世界。':'Koyoi means tonight in Japanese. An evening breeze, warm lights and neighbors going about their days: a little world moved by your words.','读一读“今宵” ↗':'The meaning of Koyoi ↗'});
 
 Object.assign(EN,{'这一段先停在这里 · 可以再试一句':'This moment has settled · try another wish'});
+
+EN['写下一点谢意，亲手交给一位街坊。']='Write a little thanks and give it to a neighbor.';

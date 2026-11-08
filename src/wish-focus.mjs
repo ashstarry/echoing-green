@@ -1,4 +1,4 @@
-import {actionSubjects} from './action-subjects.mjs?v=cp51-vibe-response-67b273e60e03';
+import {actionSubjects} from './action-subjects.mjs?v=cp51-vibe-response-acb055878926';
 
 // Keep the overview unless the user chooses a closer view. For a small paper
 // or neighborhood task, that view should follow a real worker, not a landmark.

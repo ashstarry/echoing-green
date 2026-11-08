@@ -1,4 +1,4 @@
-import {foxFloor} from './fox-path.mjs?v=cp51-vibe-response-67b273e60e03';
+import {foxFloor} from './fox-path.mjs?v=cp51-vibe-response-acb055878926';
 const D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 export function foxBicycleGap(p,m){const dx=p[0]-m.p[0],dy=p[1]-m.p[1],c=Math.cos(m.yaw),n=Math.sin(m.yaw),u=dx*c+dy*n,v=-dx*n+dy*c;return Math.hypot(u-Math.max(-.75,Math.min(.75,u)),v);}
 const obstacleGap=(p,a)=>a.bike?foxBicycleGap(p,a.bike)-.56:D(p,a.p)-(a.radius||.54);

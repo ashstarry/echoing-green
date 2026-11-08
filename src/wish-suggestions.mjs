@@ -1,4 +1,4 @@
-import {actionAvailability} from './action-availability.mjs?v=cp51-vibe-response-67b273e60e03';
+import {actionAvailability} from './action-availability.mjs?v=cp51-vibe-response-acb055878926';
 // Curated examples use the same finite executor as the activity buttons.
 // Rotation changes only the grey hint; it never performs an activity on its own.
 const macro=(target,action)=>({kind:'macro',target,action});

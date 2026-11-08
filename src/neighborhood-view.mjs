@@ -1,9 +1,9 @@
-import {smallProps} from './small-props.mjs?v=cp51-vibe-response-67b273e60e03';
+import {smallProps} from './small-props.mjs?v=cp51-vibe-response-acb055878926';
 import * as THREE from 'three';
-import {makeArmSolver} from './arm-ik.mjs?v=cp51-vibe-response-67b273e60e03';
-import {handWorldPoint} from './prop-attachment.mjs?v=cp51-vibe-response-67b273e60e03';
-import {interactionStep,INTERACTION_PRIMITIVES} from './interaction-sequence.mjs?v=cp51-vibe-response-67b273e60e03';
-import {HOME} from './neighborhood-world.mjs?v=cp51-vibe-response-67b273e60e03';
+import {makeArmSolver} from './arm-ik.mjs?v=cp51-vibe-response-acb055878926';
+import {handWorldPoint} from './prop-attachment.mjs?v=cp51-vibe-response-acb055878926';
+import {interactionStep,INTERACTION_PRIMITIVES} from './interaction-sequence.mjs?v=cp51-vibe-response-acb055878926';
+import {HOME} from './neighborhood-world.mjs?v=cp51-vibe-response-acb055878926';
 const ease=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};
 export function createNeighborhoodView({scene,entities,parts,sockets}){
  const shared=smallProps(scene);

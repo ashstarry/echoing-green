@@ -1,9 +1,9 @@
-import {eventKind} from './scene-events.mjs?v=cp51-vibe-response-67b273e60e03';
-import {stimulateTown} from './town-response.mjs?v=cp51-vibe-response-67b273e60e03';
-import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp51-vibe-response-67b273e60e03';
-import {requestPassengerAction} from './passengers.mjs?v=cp51-vibe-response-67b273e60e03';
-import {requestObjectAction} from './object-actions.mjs?v=cp51-vibe-response-67b273e60e03';
-import {validateDecision} from './catalog.mjs?v=cp51-vibe-response-67b273e60e03';
+import {eventKind} from './scene-events.mjs?v=cp51-vibe-response-acb055878926';
+import {stimulateTown} from './town-response.mjs?v=cp51-vibe-response-acb055878926';
+import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp51-vibe-response-acb055878926';
+import {requestPassengerAction} from './passengers.mjs?v=cp51-vibe-response-acb055878926';
+import {requestObjectAction} from './object-actions.mjs?v=cp51-vibe-response-acb055878926';
+import {validateDecision} from './catalog.mjs?v=cp51-vibe-response-acb055878926';
 
 // Compound goals reuse tested movements, with real completion/occupation checks between steps.
 export const LIFE_PLANS={
