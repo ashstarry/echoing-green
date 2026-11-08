@@ -1,25 +1,26 @@
-import {inputBusy,beginInput,activateInput,abortInput,runInput} from './input-session.mjs?v=cp50-friendly-fox-bb1138b1f394';
-import {actionAvailability,resolveActionItems} from './action-availability.mjs?v=cp50-friendly-fox-bb1138b1f394';
-import {createWishRotation} from './wish-suggestions.mjs?v=cp50-friendly-fox-bb1138b1f394';
-import {CRAFT_NAMES} from './craft-design.mjs?v=cp50-friendly-fox-bb1138b1f394';
-import {FOX_PHASE_LABELS} from './fox-behavior.mjs?v=cp50-friendly-fox-bb1138b1f394';
-import {JOURNEY_PHASE_LABELS} from './train-journey.mjs?v=cp50-friendly-fox-bb1138b1f394';
-import {NEIGHBORHOOD_LABELS,WORK_LABELS} from './neighborhood-labels.mjs?v=cp50-friendly-fox-bb1138b1f394';
-import {INTERACTION_RECIPES} from './interaction-sequence.mjs?v=cp50-friendly-fox-bb1138b1f394';
-import {applyResidentWardrobe} from './resident-wardrobe.mjs?v=cp50-friendly-fox-bb1138b1f394';
-import {createSnowCover} from './snow-cover.mjs?v=cp50-friendly-fox-bb1138b1f394';
-import {writeText,writeAttribute,t,initializeI18n,getLocale,onLocaleChange} from './i18n.mjs?v=cp50-friendly-fox-bb1138b1f394';
-import {API_BASE} from './deployment-config.mjs?v=cp50-friendly-fox-bb1138b1f394';
+import {inputBusy,beginInput,activateInput,abortInput,runInput} from './input-session.mjs?v=cp51-vibe-response-67b273e60e03';
+import {liveWishFocus} from './wish-focus.mjs?v=cp51-vibe-response-67b273e60e03';
+import {actionAvailability,resolveActionItems} from './action-availability.mjs?v=cp51-vibe-response-67b273e60e03';
+import {createWishRotation} from './wish-suggestions.mjs?v=cp51-vibe-response-67b273e60e03';
+import {CRAFT_NAMES} from './craft-design.mjs?v=cp51-vibe-response-67b273e60e03';
+import {FOX_PHASE_LABELS} from './fox-behavior.mjs?v=cp51-vibe-response-67b273e60e03';
+import {JOURNEY_PHASE_LABELS} from './train-journey.mjs?v=cp51-vibe-response-67b273e60e03';
+import {NEIGHBORHOOD_LABELS,WORK_LABELS} from './neighborhood-labels.mjs?v=cp51-vibe-response-67b273e60e03';
+import {INTERACTION_RECIPES} from './interaction-sequence.mjs?v=cp51-vibe-response-67b273e60e03';
+import {applyResidentWardrobe} from './resident-wardrobe.mjs?v=cp51-vibe-response-67b273e60e03';
+import {createSnowCover} from './snow-cover.mjs?v=cp51-vibe-response-67b273e60e03';
+import {writeText,writeAttribute,t,initializeI18n,getLocale,onLocaleChange} from './i18n.mjs?v=cp51-vibe-response-67b273e60e03';
+import {API_BASE} from './deployment-config.mjs?v=cp51-vibe-response-67b273e60e03';
 const apiPath=path=>API_BASE?new URL(path,API_BASE).href:path;
-import {createResponseMarkers} from './response-markers.mjs?v=cp50-friendly-fox-bb1138b1f394';
-import {QUICK_WISHES,quickWishItems} from './quick-wishes.mjs?v=cp50-friendly-fox-bb1138b1f394';
-import {stimulateTown} from './town-response.mjs?v=cp50-friendly-fox-bb1138b1f394';
-import {LIFE_PLANS,queueIntent as queueIntentRaw,cancelIntentJobs} from './life-plans.mjs?v=cp50-friendly-fox-bb1138b1f394';
-import {createEnvironmentView} from './environment-view.mjs?v=cp50-friendly-fox-bb1138b1f394';
-import {createViewDirector} from './view-director.mjs?v=cp50-friendly-fox-bb1138b1f394';
-import {requestPassengerAction as requestPassengerActionRaw} from './passengers.mjs?v=cp50-friendly-fox-bb1138b1f394';
-import {objectCatalog,requestObjectAction} from './object-actions.mjs?v=cp50-friendly-fox-bb1138b1f394';
-import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,availableResidentActions,requestResidentAction} from './resident-actions.mjs?v=cp50-friendly-fox-bb1138b1f394';
+import {createResponseMarkers} from './response-markers.mjs?v=cp51-vibe-response-67b273e60e03';
+import {QUICK_WISHES,quickWishItems} from './quick-wishes.mjs?v=cp51-vibe-response-67b273e60e03';
+import {stimulateTown} from './town-response.mjs?v=cp51-vibe-response-67b273e60e03';
+import {LIFE_PLANS,queueIntent as queueIntentRaw,cancelIntentJobs} from './life-plans.mjs?v=cp51-vibe-response-67b273e60e03';
+import {createEnvironmentView} from './environment-view.mjs?v=cp51-vibe-response-67b273e60e03';
+import {createViewDirector} from './view-director.mjs?v=cp51-vibe-response-67b273e60e03';
+import {requestPassengerAction as requestPassengerActionRaw} from './passengers.mjs?v=cp51-vibe-response-67b273e60e03';
+import {objectCatalog,requestObjectAction} from './object-actions.mjs?v=cp51-vibe-response-67b273e60e03';
+import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,availableResidentActions,requestResidentAction} from './resident-actions.mjs?v=cp51-vibe-response-67b273e60e03';
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
@@ -27,16 +28,16 @@ import {DRACOLoader} from 'three/addons/loaders/DRACOLoader.js';
 import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
 import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
 import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
-import {createWorld,step,applyDecision,serialize,restore,DT,event,captureIntent,captureControls,restoreControls} from './simulation.mjs?v=cp50-friendly-fox-bb1138b1f394';
-import {DOMAINS,labels,ACTOR_DOMAINS,CHOICE_LABELS} from './catalog.mjs?v=cp50-friendly-fox-bb1138b1f394';
-import {createSound} from './sound.mjs?v=cp50-friendly-fox-bb1138b1f394';
-import {PROFILES,ACTIVITIES} from './community.mjs?v=cp50-friendly-fox-bb1138b1f394';
-import {interpolateWorld} from './presentation.mjs?v=cp50-friendly-fox-bb1138b1f394';
-import {createLifeView} from './life-view.mjs?v=cp50-friendly-fox-bb1138b1f394';
-import {ACTION_LIBRARY,beginAction} from './actions.mjs?v=cp50-friendly-fox-bb1138b1f394';
+import {createWorld,step,applyDecision,serialize,restore,DT,event,captureIntent,captureControls,restoreControls} from './simulation.mjs?v=cp51-vibe-response-67b273e60e03';
+import {DOMAINS,labels,ACTOR_DOMAINS,CHOICE_LABELS} from './catalog.mjs?v=cp51-vibe-response-67b273e60e03';
+import {createSound} from './sound.mjs?v=cp51-vibe-response-67b273e60e03';
+import {PROFILES,ACTIVITIES} from './community.mjs?v=cp51-vibe-response-67b273e60e03';
+import {interpolateWorld} from './presentation.mjs?v=cp51-vibe-response-67b273e60e03';
+import {createLifeView} from './life-view.mjs?v=cp51-vibe-response-67b273e60e03';
+import {ACTION_LIBRARY,beginAction} from './actions.mjs?v=cp51-vibe-response-67b273e60e03';
 import {GTAOPass} from 'three/addons/postprocessing/GTAOPass.js';
-import {createReactionFeedback} from './reaction-feedback.mjs?v=cp50-friendly-fox-bb1138b1f394';
-import {createArtDirection} from './art-direction.mjs?v=cp50-friendly-fox-bb1138b1f394';
+import {createReactionFeedback} from './reaction-feedback.mjs?v=cp51-vibe-response-67b273e60e03';
+import {createArtDirection} from './art-direction.mjs?v=cp51-vibe-response-67b273e60e03';
 import {OutputPass} from 'three/addons/postprocessing/OutputPass.js';
 initializeI18n();
 let viewDirector=null;
@@ -50,12 +51,12 @@ const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false,powerPreferen
 const scene=new THREE.Scene();scene.background=new THREE.Color('#27242d');
 const loader=new GLTFLoader();const draco=new DRACOLoader();draco.setDecoderPath('./vendor/three/examples/jsm/libs/draco/gltf/');loader.setDRACOLoader(draco);
 const boardingCandidate=true;
- const registry=await fetch('./assets/runtime-registry.json?v=cp50-friendly-fox-bb1138b1f394').then(r=>r.json());
+ const registry=await fetch('./assets/runtime-registry.json?v=cp51-vibe-response-67b273e60e03').then(r=>r.json());
 const movableCatalog=objectCatalog(registry);
- const nav=await fetch('./assets/navigation.json?v=cp50-friendly-fox-bb1138b1f394').then(r=>r.json());const activities=await fetch('./assets/motion-activities.json?v=cp50-friendly-fox-bb1138b1f394').then(r=>r.json());activities.rail=await fetch('./assets/rail-path.json?v=cp50-friendly-fox-bb1138b1f394').then(r=>r.json());activities.diners=await fetch('./assets/diner-clips.json?v=cp50-friendly-fox-bb1138b1f394').then(r=>r.json());activities.spaces=await fetch('./assets/activity-spaces.json?v=cp50-friendly-fox-bb1138b1f394').then(r=>r.json());activities.cycleStopPose=await fetch('./assets/cycle-stop-pose.json?v=cp50-friendly-fox-bb1138b1f394').then(r=>r.json());activities.dinerGestures=await fetch('./assets/diner-gestures.json?v=cp50-friendly-fox-bb1138b1f394').then(r=>r.json());activities.diningProps=await fetch('./assets/dining-props.json?v=cp50-friendly-fox-bb1138b1f394').then(r=>r.json());activities.paving=await fetch('./assets/paving-support.json?v=cp50-friendly-fox-bb1138b1f394').then(r=>r.json());activities.localSupport=await fetch('./assets/local-support.json?v=cp50-friendly-fox-bb1138b1f394').then(r=>r.json());activities.sockets=await fetch('./assets/actor-sockets.json?v=cp50-friendly-fox-bb1138b1f394').then(r=>r.json());activities.localRoutes=await fetch('./assets/local-routes.json?v=cp50-friendly-fox-bb1138b1f394').then(r=>r.json());activities.eventTrips=await fetch('./assets/event-trips.json?v=cp50-friendly-fox-bb1138b1f394').then(r=>r.json());activities.seatedRigs=await fetch('./assets/seated-rigs.json?v=cp50-friendly-fox-bb1138b1f394').then(r=>r.json());activities.eventSupport=await fetch('./assets/event-support.json?v=cp50-friendly-fox-bb1138b1f394').then(r=>r.json());if(boardingCandidate)activities.boarding=await fetch('./assets/boarding-config.json?v=cp50-friendly-fox-bb1138b1f394').then(r=>r.json());nav.activities=activities;activities.objectCatalog=movableCatalog;for(const a of nav.actors){const r=registry.entities.find(e=>e.id===a.id);if(r)r.runtime_yaw=a.yaw;}
+ const nav=await fetch('./assets/navigation.json?v=cp51-vibe-response-67b273e60e03').then(r=>r.json());const activities=await fetch('./assets/motion-activities.json?v=cp51-vibe-response-67b273e60e03').then(r=>r.json());activities.rail=await fetch('./assets/rail-path.json?v=cp51-vibe-response-67b273e60e03').then(r=>r.json());activities.diners=await fetch('./assets/diner-clips.json?v=cp51-vibe-response-67b273e60e03').then(r=>r.json());activities.spaces=await fetch('./assets/activity-spaces.json?v=cp51-vibe-response-67b273e60e03').then(r=>r.json());activities.cycleStopPose=await fetch('./assets/cycle-stop-pose.json?v=cp51-vibe-response-67b273e60e03').then(r=>r.json());activities.dinerGestures=await fetch('./assets/diner-gestures.json?v=cp51-vibe-response-67b273e60e03').then(r=>r.json());activities.diningProps=await fetch('./assets/dining-props.json?v=cp51-vibe-response-67b273e60e03').then(r=>r.json());activities.paving=await fetch('./assets/paving-support.json?v=cp51-vibe-response-67b273e60e03').then(r=>r.json());activities.localSupport=await fetch('./assets/local-support.json?v=cp51-vibe-response-67b273e60e03').then(r=>r.json());activities.sockets=await fetch('./assets/actor-sockets.json?v=cp51-vibe-response-67b273e60e03').then(r=>r.json());activities.localRoutes=await fetch('./assets/local-routes.json?v=cp51-vibe-response-67b273e60e03').then(r=>r.json());activities.eventTrips=await fetch('./assets/event-trips.json?v=cp51-vibe-response-67b273e60e03').then(r=>r.json());activities.seatedRigs=await fetch('./assets/seated-rigs.json?v=cp51-vibe-response-67b273e60e03').then(r=>r.json());activities.eventSupport=await fetch('./assets/event-support.json?v=cp51-vibe-response-67b273e60e03').then(r=>r.json());if(boardingCandidate)activities.boarding=await fetch('./assets/boarding-config.json?v=cp51-vibe-response-67b273e60e03').then(r=>r.json());nav.activities=activities;activities.objectCatalog=movableCatalog;for(const a of nav.actors){const r=registry.entities.find(e=>e.id===a.id);if(r)r.runtime_yaw=a.yaw;}
 const SAVE='borrowed-wind-cp24-v2';let state=createWorld(nav);try{const saved=localStorage.getItem(SAVE);if(saved)state=restore(saved,nav);}catch{localStorage.removeItem(SAVE);}
 stimulateTown(state,[],{id:'visit-'+state.tick,opening:true});
-const gltf=await loader.loadAsync('./assets/town.glb?v=cp50-friendly-fox-bb1138b1f394',e=>{if(e.total)writeText(document.querySelector('#loadText'),`展开模型 ${Math.round(e.loaded/e.total*100)}%`);});scene.add(gltf.scene);const camera=gltf.cameras[0];camera.updateMatrixWorld(true);const sourceCamera={position:camera.position.clone(),quaternion:camera.quaternion.clone(),left:camera.left,right:camera.right,top:camera.top,bottom:camera.bottom};
+const gltf=await loader.loadAsync('./assets/town.glb?v=cp51-vibe-response-67b273e60e03',e=>{if(e.total)writeText(document.querySelector('#loadText'),`展开模型 ${Math.round(e.loaded/e.total*100)}%`);});scene.add(gltf.scene);const camera=gltf.cameras[0];camera.updateMatrixWorld(true);const sourceCamera={position:camera.position.clone(),quaternion:camera.quaternion.clone(),left:camera.left,right:camera.right,top:camera.top,bottom:camera.bottom};
 const controls=new OrbitControls(camera,renderer.domElement);controls.enableRotate=false;controls.enableDamping=true;controls.dampingFactor=.12;controls.minZoom=.9;controls.maxZoom=innerWidth<650?8:4;controls.screenSpacePanning=true;controls.mouseButtons.LEFT=THREE.MOUSE.PAN;controls.touches.ONE=THREE.TOUCH.PAN;controls.touches.TWO=THREE.TOUCH.DOLLY_PAN;const look=camera.getWorldDirection(new THREE.Vector3());controls.target.copy(camera.position).addScaledVector(look,camera.position.y/Math.max(.1,-look.y));const sourceTarget=controls.target.clone();controls.update();
 const entities=new Map(),parts=new Map();gltf.scene.traverse(o=>{if(o.userData.entity_id)entities.set(o.userData.entity_id,o);if(o.userData.part_id)parts.set(`${o.userData.owner_entity}/${o.userData.part_id}`,o);if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});
 const wardrobe=applyResidentWardrobe({entities,parts});
@@ -65,7 +66,7 @@ function resize(){controls.maxZoom=innerWidth<650?8:4;camera.zoom=Math.min(camer
 resize();addEventListener('resize',resize);
 function setRenderQuality(value){renderQuality=value;const ratio=Math.min(devicePixelRatio,value==='fine'?1.25:1);renderer.setPixelRatio(ratio);composer.setPixelRatio(ratio);resize();for(const b of document.querySelectorAll('[data-quality]'))b.setAttribute('aria-pressed',String(b.dataset.quality===value));try{localStorage.setItem('borrowed-wind-cp24-render-quality',value);}catch{}}
 for(const b of document.querySelectorAll('[data-quality]')){b.setAttribute('aria-pressed',String(b.dataset.quality===renderQuality));b.onclick=()=>setRenderQuality(b.dataset.quality);}
-const weatherSupport=await fetch('./assets/weather-support.json?v=cp50-friendly-fox-bb1138b1f394').then(r=>r.json());
+const weatherSupport=await fetch('./assets/weather-support.json?v=cp51-vibe-response-67b273e60e03').then(r=>r.json());
 const life=createLifeView({scene,entities,parts,registry,lights:localLights,weatherSupport,renderer,camera,activities,nav});
 const environment=createEnvironmentView({scene,art,entities,camera});
 const snowCover=createSnowCover({scene,asset:gltf.scene,renderer});
@@ -114,7 +115,7 @@ document.querySelectorAll('[data-wish]').forEach(b=>b.onclick=()=>{wishRotation.
 function command(d,{silent=false}={}){if(d.journey==='deliver')pendingCraftFocus={afterId:state.craftWorld?.eventId,action:'deliver'};if(d.craft&&!['keep','rest'].includes(d.craft))pendingCraftFocus={afterId:state.craftWorld?.eventId,action:d.craft};const before=structuredClone(state);lastUndo=captureControls(state);runInput(state,Object.entries(d).filter(([,action])=>action!=='keep').map(([target,action])=>({kind:'macro',target,action})),()=>applyDecision(state,d));cancelIntentJobs(state,Object.keys(d));if(!silent)stimulateTown(state,Object.entries(d).map(([target,action])=>({kind:'macro',target,action})),{id:'menu-'+state.revision});undo.disabled=false;if(!silent){const reaction=feedback.accept(before,state,d,{source:'choice'});if(reaction.kind==='change')event(state,'你带来的变化：'+reaction.summary+'。');}save();updateEvents();}
 let selectedEntity=null,selectedObject=null,selectedMemory=null;
 const focusButton=document.createElement('button');focusButton.id='focusSuggestion';focusButton.type='button';focusButton.hidden=true;document.body.append(focusButton);let focusSuggestedId=null,pendingCraftFocus=null;
-function updateFocusButton(){const v=viewDirector?.state();if(!v)return;const back=v.away||v.returning;focusButton.hidden=!back&&!focusSuggestedId;const label=back?'回到全图':focusSuggestedId?'看近一点 · '+(PROFILES[focusSuggestedId]?.label||'这处变化'):'';if(focusButton.dataset.copy!==label)writeText(focusButton,label);focusButton.dataset.view=back?'overview':'focus';focusButton.disabled=v.returning;}
+function updateFocusButton(){const v=viewDirector?.state();if(!v)return;if(!v.away&&!v.returning)focusSuggestedId=liveWishFocus(state,focusSuggestedId);const back=v.away||v.returning;focusButton.hidden=!back&&!focusSuggestedId;const label=back?'回到全图':focusSuggestedId?'看近一点 · '+(PROFILES[focusSuggestedId]?.label||'这处变化'):'';if(focusButton.dataset.copy!==label)writeText(focusButton,label);focusButton.dataset.view=back?'overview':'focus';focusButton.disabled=v.returning;}
 function focusOn(id){if(viewDirector.focus(id)){focusSuggestedId=id;document.querySelector('#panel').hidden=true;updateFocusButton();}}
 function showFocusSuggestion(id){focusSuggestedId=id;updateFocusButton();}
 focusButton.onclick=()=>{const v=viewDirector.state();if(v.away||v.returning)viewDirector.overview();else if(focusSuggestedId)focusOn(focusSuggestedId);document.querySelector('#panel').hidden=true;updateFocusButton();};

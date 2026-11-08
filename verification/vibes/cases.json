@@ -1,0 +1,1195 @@
+[
+  {
+    "id": "D01",
+    "split": "development",
+    "text": "今天的心事有点多，不想一个人把晚饭吃完。",
+    "mood": "陪伴",
+    "plan": "集体生活：集体用餐",
+    "items": [
+      [
+        "occasion",
+        "supper"
+      ]
+    ],
+    "effect": "餐厅摊前出现排队、等热食的街坊",
+    "scope": "餐厅聚拢",
+    "participants": 23,
+    "first_sim_seconds": 0.75,
+    "outcome": "settled",
+    "api_ms": 469,
+    "interpretation_source": "literal-selection"
+  },
+  {
+    "id": "D02",
+    "split": "development",
+    "text": "热闹从我身边经过，可我还是像个落单的人。",
+    "mood": "陪伴",
+    "plan": "让邻居们慢慢找到彼此。",
+    "items": [
+      [
+        "occasion",
+        "reunion"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "effect": "街坊走近彼此，停下交谈",
+    "scope": "整镇相聚",
+    "participants": 23,
+    "first_sim_seconds": 0.75,
+    "outcome": "settled",
+    "api_ms": 321,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "D03",
+    "split": "development",
+    "text": "希望这个地方有一种，你来了就有人抬起头的感觉。",
+    "mood": "温柔与欢迎",
+    "plan": "让街巷暖一点，让彼此靠近一点。",
+    "items": [
+      [
+        "light",
+        "warm"
+      ],
+      [
+        "breeze",
+        "gentle"
+      ],
+      [
+        "occasion",
+        "reunion"
+      ]
+    ],
+    "effect": "街坊走近彼此，停下交谈",
+    "scope": "整镇相聚",
+    "participants": 23,
+    "first_sim_seconds": 0.75,
+    "outcome": "settled",
+    "api_ms": 289,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "D04",
+    "split": "development",
+    "text": "把赶路的劲头放在镇外吧，我想喘口气。",
+    "mood": "松弛与休息",
+    "plan": "集体生活：安静休息看景",
+    "items": [
+      [
+        "occasion",
+        "quiet"
+      ]
+    ],
+    "effect": "居民分散到树荫和水边，放慢脚步、歇息",
+    "scope": "安静休息",
+    "participants": 10,
+    "first_sim_seconds": 0.7,
+    "outcome": "settled",
+    "api_ms": 286,
+    "interpretation_source": "literal-selection"
+  },
+  {
+    "id": "D05",
+    "split": "development",
+    "text": "脑子像打了结，想在这里慢慢松开。",
+    "mood": "松弛与休息",
+    "plan": "让脚步和风都慢一点，留一会儿安静。",
+    "items": [
+      [
+        "occasion",
+        "quiet"
+      ],
+      [
+        "light",
+        "soft"
+      ],
+      [
+        "breeze",
+        "calm"
+      ]
+    ],
+    "effect": "居民分散到树荫和水边，放慢脚步、歇息",
+    "scope": "安静休息",
+    "participants": 10,
+    "first_sim_seconds": 0.7,
+    "outcome": "settled",
+    "api_ms": 306,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "D06",
+    "split": "development",
+    "text": "今晚不用争分夺秒，连脚步也可以松弛些。",
+    "mood": "松弛与休息",
+    "plan": "集体生活：安静休息看景；街坊的整体活动方向：大家走到合适位置后停步休息、看景",
+    "items": [
+      [
+        "occasion",
+        "quiet"
+      ],
+      [
+        "street",
+        "quiet"
+      ]
+    ],
+    "effect": "居民分散到树荫和水边，放慢脚步、歇息",
+    "scope": "安静休息",
+    "participants": 10,
+    "first_sim_seconds": 0.7,
+    "outcome": "settled",
+    "api_ms": 273,
+    "interpretation_source": "literal-selection"
+  },
+  {
+    "id": "D07",
+    "split": "development",
+    "text": "最近不太顺，可我还想相信明天会好一点。",
+    "mood": "希望与新开始",
+    "plan": "把春天带进街角，让花和晚风先动起来。",
+    "items": [
+      [
+        "neighborhood",
+        "spring"
+      ],
+      [
+        "light",
+        "warm"
+      ],
+      [
+        "breeze",
+        "gentle"
+      ]
+    ],
+    "effect": "三位街坊搬放花盆、展开纸花",
+    "scope": "局部春意",
+    "participants": 3,
+    "first_sim_seconds": 0.55,
+    "outcome": "settled",
+    "api_ms": 303,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "D08",
+    "split": "development",
+    "text": "给这个有些疲倦的地方一点重新开始的勇气。",
+    "mood": "希望与新开始",
+    "plan": "把春天带进街角，让花和晚风先动起来。",
+    "items": [
+      [
+        "neighborhood",
+        "spring"
+      ],
+      [
+        "light",
+        "warm"
+      ],
+      [
+        "breeze",
+        "gentle"
+      ]
+    ],
+    "effect": "三位街坊搬放花盆、展开纸花",
+    "scope": "局部春意",
+    "participants": 3,
+    "first_sim_seconds": 0.55,
+    "outcome": "settled",
+    "api_ms": 296,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "D09",
+    "split": "development",
+    "text": "空气里有那种事情快要好起来的味道。",
+    "mood": "希望与新开始",
+    "plan": "把春天带进街角，让花和晚风先动起来。",
+    "items": [
+      [
+        "neighborhood",
+        "spring"
+      ],
+      [
+        "light",
+        "warm"
+      ],
+      [
+        "breeze",
+        "gentle"
+      ]
+    ],
+    "effect": "三位街坊搬放花盆、展开纸花",
+    "scope": "局部春意",
+    "participants": 3,
+    "first_sim_seconds": 0.55,
+    "outcome": "settled",
+    "api_ms": 315,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "D10",
+    "split": "development",
+    "text": "想要一种刚洗完澡、被干净被子裹住的安心。",
+    "mood": "温柔与欢迎",
+    "plan": "让街巷暖一点，让彼此靠近一点。",
+    "items": [
+      [
+        "light",
+        "warm"
+      ],
+      [
+        "breeze",
+        "gentle"
+      ],
+      [
+        "occasion",
+        "reunion"
+      ]
+    ],
+    "effect": "街坊走近彼此，停下交谈",
+    "scope": "整镇相聚",
+    "participants": 23,
+    "first_sim_seconds": 0.75,
+    "outcome": "settled",
+    "api_ms": 297,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "D11",
+    "split": "development",
+    "text": "冷冰冰的日子过够了，今晚能不能像被好好招待一样。",
+    "mood": "温柔与欢迎",
+    "plan": "街边的小日子：开蒸笼、倒一杯热茶，递给一位走近的客人",
+    "items": [
+      [
+        "craft",
+        "tea"
+      ]
+    ],
+    "effect": "相关街坊取热茶点心、带到对方面前",
+    "scope": "热茶与招待",
+    "participants": 2,
+    "first_sim_seconds": 1.45,
+    "outcome": "completed",
+    "api_ms": 292,
+    "interpretation_source": "literal-selection"
+  },
+  {
+    "id": "D12",
+    "split": "development",
+    "text": "好想钻进那种不需要解释自己也被欢迎的地方。",
+    "mood": "温柔与欢迎",
+    "plan": "让街巷暖一点，让彼此靠近一点。",
+    "items": [
+      [
+        "light",
+        "warm"
+      ],
+      [
+        "breeze",
+        "gentle"
+      ],
+      [
+        "occasion",
+        "reunion"
+      ]
+    ],
+    "effect": "街坊走近彼此，停下交谈",
+    "scope": "整镇相聚",
+    "participants": 23,
+    "first_sim_seconds": 0.75,
+    "outcome": "settled",
+    "api_ms": 295,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "D13",
+    "split": "development",
+    "text": "胃里空空的，想念有人做饭时那股烟火气。",
+    "mood": "饭香与招待",
+    "plan": "把热食摆上柜台，让街坊来吃点东西。",
+    "items": [
+      [
+        "occasion",
+        "supper"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "effect": "餐厅摊前出现排队、等热食的街坊",
+    "scope": "餐厅聚拢",
+    "participants": 23,
+    "first_sim_seconds": 0.75,
+    "outcome": "settled",
+    "api_ms": 307,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "D14",
+    "split": "development",
+    "text": "Something cozy is missing. I wish this place felt like a kitchen after a long day.",
+    "mood": "饭香与招待",
+    "plan": "把热食摆上柜台，让街坊来吃点东西。",
+    "items": [
+      [
+        "occasion",
+        "supper"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "effect": "餐厅摊前出现排队、等热食的街坊",
+    "scope": "餐厅聚拢",
+    "participants": 23,
+    "first_sim_seconds": 0.75,
+    "outcome": "settled",
+    "api_ms": 282,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "D15",
+    "split": "development",
+    "text": "云朵像棉花糖，看得我肚子咕噜咕噜。",
+    "mood": "饭香与招待",
+    "plan": "把热食摆上柜台，让街坊来吃点东西。",
+    "items": [
+      [
+        "occasion",
+        "supper"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "effect": "餐厅摊前出现排队、等热食的街坊",
+    "scope": "餐厅聚拢",
+    "participants": 23,
+    "first_sim_seconds": 0.75,
+    "outcome": "settled",
+    "api_ms": 303,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "D16",
+    "split": "development",
+    "text": "像书读到最后一页，舍不得合上，想再做一小会儿梦。",
+    "mood": "柔软梦境",
+    "plan": "让夜色、灯火和晚风一起放轻。",
+    "items": [
+      [
+        "day_phase",
+        "night"
+      ],
+      [
+        "light",
+        "soft"
+      ],
+      [
+        "breeze",
+        "calm"
+      ],
+      [
+        "occasion",
+        "quiet"
+      ]
+    ],
+    "effect": "居民分散到树荫和水边，放慢脚步、歇息",
+    "scope": "安静休息",
+    "participants": 10,
+    "first_sim_seconds": 0.7,
+    "outcome": "settled",
+    "api_ms": 313,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "D17",
+    "split": "development",
+    "text": "Could this little world feel like the gentle part of a half-remembered dream?",
+    "mood": "柔软梦境",
+    "plan": "让夜色、灯火和晚风一起放轻。",
+    "items": [
+      [
+        "day_phase",
+        "night"
+      ],
+      [
+        "light",
+        "soft"
+      ],
+      [
+        "breeze",
+        "calm"
+      ],
+      [
+        "occasion",
+        "quiet"
+      ]
+    ],
+    "effect": "居民分散到树荫和水边，放慢脚步、歇息",
+    "scope": "安静休息",
+    "participants": 10,
+    "first_sim_seconds": 0.7,
+    "outcome": "settled",
+    "api_ms": 290,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "D18",
+    "split": "development",
+    "text": "有些话发不出去，只好让风替我保存。",
+    "mood": "思念",
+    "plan": "把想念写成一笺，留在树边的风里。",
+    "items": [
+      [
+        "paper",
+        "hang"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "effect": "一位街坊取纸、写笺、折好并挂到树边",
+    "scope": "树边留笺",
+    "participants": 1,
+    "first_sim_seconds": 2.35,
+    "outcome": "completed",
+    "api_ms": 286,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "D19",
+    "split": "development",
+    "text": "I miss someone whose window is far beyond this little place.",
+    "mood": "思念",
+    "plan": "把想念写成一笺，留在树边的风里。",
+    "items": [
+      [
+        "paper",
+        "hang"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "effect": "一位街坊取纸、写笺、折好并挂到树边",
+    "scope": "树边留笺",
+    "participants": 1,
+    "first_sim_seconds": 2.35,
+    "outcome": "completed",
+    "api_ms": 350,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "D20",
+    "split": "development",
+    "text": "今天终于有件好事，想把这点开心分给路过的人。",
+    "mood": "谢意",
+    "plan": "写下一点谢意，亲手交给邻居。",
+    "items": [
+      [
+        "paper",
+        "share"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "effect": "两位街坊靠近，写折纸笺，再当面递交",
+    "scope": "两人递笺",
+    "participants": 2,
+    "first_sim_seconds": 0.6,
+    "outcome": "completed",
+    "api_ms": 273,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "D21",
+    "split": "development",
+    "text": "No special reason. I just want tonight to feel worth remembering with other people.",
+    "mood": "陪伴",
+    "plan": "集体生活：邻里聚集聊天",
+    "items": [
+      [
+        "occasion",
+        "reunion"
+      ]
+    ],
+    "effect": "街坊走近彼此，停下交谈",
+    "scope": "整镇相聚",
+    "participants": 23,
+    "first_sim_seconds": 0.75,
+    "outcome": "settled",
+    "api_ms": 310,
+    "interpretation_source": "literal-selection"
+  },
+  {
+    "id": "D22",
+    "split": "development",
+    "text": "有人曾经把我从很糟的一天里接住，想把这份好意传下去。",
+    "mood": "谢意",
+    "plan": "写下一点谢意，亲手交给邻居。",
+    "items": [
+      [
+        "paper",
+        "share"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "effect": "两位街坊靠近，写折纸笺，再当面递交",
+    "scope": "两人递笺",
+    "participants": 2,
+    "first_sim_seconds": 0.6,
+    "outcome": "completed",
+    "api_ms": 358,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "D23",
+    "split": "development",
+    "text": "A tiny kindness deserves somewhere to land. Pass it gently from hand to hand.",
+    "mood": "谢意",
+    "plan": "写下一点谢意，亲手交给邻居。",
+    "items": [
+      [
+        "paper",
+        "share"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "effect": "两位街坊靠近，写折纸笺，再当面递交",
+    "scope": "两人递笺",
+    "participants": 2,
+    "first_sim_seconds": 0.6,
+    "outcome": "completed",
+    "api_ms": 298,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "D24",
+    "split": "development",
+    "text": "My shoulders are still at work, even though the day is over. Help them let go.",
+    "mood": "松弛与休息",
+    "plan": "让脚步和风都慢一点，留一会儿安静。",
+    "items": [
+      [
+        "occasion",
+        "quiet"
+      ],
+      [
+        "light",
+        "soft"
+      ],
+      [
+        "breeze",
+        "calm"
+      ]
+    ],
+    "effect": "居民分散到树荫和水边，放慢脚步、歇息",
+    "scope": "安静休息",
+    "participants": 10,
+    "first_sim_seconds": 0.7,
+    "outcome": "settled",
+    "api_ms": 298,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "H01",
+    "split": "holdout",
+    "text": "有个能一起发呆的人，今晚就没有白过。",
+    "mood": "陪伴",
+    "plan": "让邻居们慢慢找到彼此。",
+    "items": [
+      [
+        "occasion",
+        "reunion"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "effect": "街坊走近彼此，停下交谈",
+    "scope": "整镇相聚",
+    "participants": 23,
+    "first_sim_seconds": 0.75,
+    "outcome": "settled",
+    "api_ms": 286,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "H02",
+    "split": "holdout",
+    "text": "I want to feel expected, as if someone saved a small place for me.",
+    "mood": "温柔与欢迎",
+    "plan": "让街巷暖一点，让彼此靠近一点。",
+    "items": [
+      [
+        "light",
+        "warm"
+      ],
+      [
+        "breeze",
+        "gentle"
+      ],
+      [
+        "occasion",
+        "reunion"
+      ]
+    ],
+    "effect": "街坊走近彼此，停下交谈",
+    "scope": "整镇相聚",
+    "participants": 23,
+    "first_sim_seconds": 0.75,
+    "outcome": "settled",
+    "api_ms": 368,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "H03",
+    "split": "holdout",
+    "text": "把今天的刺慢慢收起来吧，谁也不用逞强。",
+    "mood": "松弛与休息",
+    "plan": "让脚步和风都慢一点，留一会儿安静。",
+    "items": [
+      [
+        "occasion",
+        "quiet"
+      ],
+      [
+        "light",
+        "soft"
+      ],
+      [
+        "breeze",
+        "calm"
+      ]
+    ],
+    "effect": "居民分散到树荫和水边，放慢脚步、歇息",
+    "scope": "安静休息",
+    "participants": 10,
+    "first_sim_seconds": 0.7,
+    "outcome": "settled",
+    "api_ms": 328,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "H04",
+    "split": "holdout",
+    "text": "Let the whole place stop holding its breath.",
+    "mood": "松弛与休息",
+    "plan": "让脚步和风都慢一点，留一会儿安静。",
+    "items": [
+      [
+        "occasion",
+        "quiet"
+      ],
+      [
+        "light",
+        "soft"
+      ],
+      [
+        "breeze",
+        "calm"
+      ]
+    ],
+    "effect": "居民分散到树荫和水边，放慢脚步、歇息",
+    "scope": "安静休息",
+    "participants": 10,
+    "first_sim_seconds": 0.7,
+    "outcome": "settled",
+    "api_ms": 304,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "H05",
+    "split": "holdout",
+    "text": "像旧信纸翻到空白那面，往后的日子还有地方可写。",
+    "mood": "希望与新开始",
+    "plan": "把春天带进街角，让花和晚风先动起来。",
+    "items": [
+      [
+        "neighborhood",
+        "spring"
+      ],
+      [
+        "light",
+        "warm"
+      ],
+      [
+        "breeze",
+        "gentle"
+      ]
+    ],
+    "effect": "三位街坊搬放花盆、展开纸花",
+    "scope": "局部春意",
+    "participants": 3,
+    "first_sim_seconds": 0.55,
+    "outcome": "settled",
+    "api_ms": 312,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "H06",
+    "split": "holdout",
+    "text": "There is still a little courage left in me. Can the town keep it company?",
+    "mood": "陪伴",
+    "plan": "让邻居们慢慢找到彼此。",
+    "items": [
+      [
+        "occasion",
+        "reunion"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "effect": "街坊走近彼此，停下交谈",
+    "scope": "整镇相聚",
+    "participants": 23,
+    "first_sim_seconds": 0.75,
+    "outcome": "settled",
+    "api_ms": 343,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "H07",
+    "split": "holdout",
+    "text": "如果幸福有气味，我希望它是有人等你吃饭的味道。",
+    "mood": "饭香与招待",
+    "plan": "把热食摆上柜台，让街坊来吃点东西。",
+    "items": [
+      [
+        "occasion",
+        "supper"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "effect": "餐厅摊前出现排队、等热食的街坊",
+    "scope": "餐厅聚拢",
+    "participants": 23,
+    "first_sim_seconds": 0.75,
+    "outcome": "settled",
+    "api_ms": 326,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "H08",
+    "split": "holdout",
+    "text": "想让远方的人知道，他在这个晚上被轻轻惦记过。",
+    "mood": "思念",
+    "plan": "把想念写成一笺，留在树边的风里。",
+    "items": [
+      [
+        "paper",
+        "hang"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "effect": "一位街坊取纸、写笺、折好并挂到树边",
+    "scope": "树边留笺",
+    "participants": 1,
+    "first_sim_seconds": 2.35,
+    "outcome": "completed",
+    "api_ms": 308,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "H09",
+    "split": "holdout",
+    "text": "不必很隆重，把一句谢谢递到某个人手里就好。",
+    "mood": "谢意",
+    "plan": "写下一点谢意，亲手交给一位街坊。",
+    "items": [
+      [
+        "paper",
+        "share"
+      ]
+    ],
+    "effect": "两位街坊靠近，写折纸笺，再当面递交",
+    "scope": "两人递笺",
+    "participants": 2,
+    "first_sim_seconds": 0.6,
+    "outcome": "completed",
+    "api_ms": 286,
+    "interpretation_source": "jev-gentle-reply"
+  },
+  {
+    "id": "H10",
+    "split": "holdout",
+    "text": "My heart is humming today. Let a little of that joy spill into the streets.",
+    "mood": "喜悦",
+    "plan": "把这份欢喜带到树下，让街坊和琴声一起热闹起来。",
+    "items": [
+      [
+        "neighborhood",
+        "prepare"
+      ],
+      [
+        "music",
+        "play"
+      ],
+      [
+        "light",
+        "warm"
+      ],
+      [
+        "breeze",
+        "lively"
+      ]
+    ],
+    "effect": "街坊分工搬小凳、摆点心、递纸灯",
+    "scope": "分工筹备",
+    "participants": 4,
+    "first_sim_seconds": 0.5,
+    "outcome": "settled",
+    "api_ms": 282,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "H11",
+    "split": "holdout",
+    "text": "夜像一块柔软的布，想把这里轻轻盖好。",
+    "mood": "温柔与欢迎",
+    "plan": "日夜：夜幕星空",
+    "items": [
+      [
+        "day_phase",
+        "night"
+      ]
+    ],
+    "effect": "相关人物做出已有动作",
+    "scope": "lantern",
+    "participants": 2,
+    "first_sim_seconds": 0.7,
+    "outcome": "settled",
+    "api_ms": 320,
+    "interpretation_source": "literal-selection"
+  },
+  {
+    "id": "H12",
+    "split": "holdout",
+    "text": "There should be room here for people who have had a difficult day.",
+    "mood": "温柔与欢迎",
+    "plan": "让街巷暖一点，让彼此靠近一点。",
+    "items": [
+      [
+        "light",
+        "warm"
+      ],
+      [
+        "breeze",
+        "gentle"
+      ],
+      [
+        "occasion",
+        "reunion"
+      ]
+    ],
+    "effect": "街坊走近彼此，停下交谈",
+    "scope": "整镇相聚",
+    "participants": 23,
+    "first_sim_seconds": 0.75,
+    "outcome": "settled",
+    "api_ms": 287,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "C01",
+    "split": "control",
+    "text": "我只是夸一下这个小镇，什么都不要改。",
+    "mood": "保留",
+    "plan": "小镇会保持现在的安排，继续自己的生活。",
+    "items": [],
+    "effect": "保持原样，不强行安排动作",
+    "scope": "尊重边界",
+    "participants": 0,
+    "first_sim_seconds": null,
+    "outcome": null,
+    "api_ms": 329,
+    "interpretation_source": "literal-selection"
+  },
+  {
+    "id": "C02",
+    "split": "control",
+    "text": "如果下雪，大家会怎么办？先别演，我只是问问。",
+    "mood": "保留",
+    "plan": "小镇会保持现在的安排，继续自己的生活。",
+    "items": [],
+    "effect": "保持原样，不强行安排动作",
+    "scope": "尊重边界",
+    "participants": 0,
+    "first_sim_seconds": null,
+    "outcome": null,
+    "api_ms": 318,
+    "interpretation_source": "literal-selection"
+  },
+  {
+    "id": "C03",
+    "split": "control",
+    "text": "不要放烟花，给这里一点安稳就好。",
+    "mood": "松弛与休息",
+    "plan": "集体生活：安静休息看景；让脚步和风都慢一点，留一会儿安静。",
+    "items": [
+      [
+        "occasion",
+        "quiet"
+      ],
+      [
+        "light",
+        "soft"
+      ],
+      [
+        "breeze",
+        "calm"
+      ]
+    ],
+    "effect": "居民分散到树荫和水边，放慢脚步、歇息",
+    "scope": "安静休息",
+    "participants": 10,
+    "first_sim_seconds": 0.7,
+    "outcome": "settled",
+    "api_ms": 274,
+    "interpretation_source": "jev-composed"
+  },
+  {
+    "id": "C04",
+    "split": "control",
+    "text": "只有那只狐狸好像缺个朋友，别人照常就好。",
+    "mood": "陪伴",
+    "plan": "小狐狸摇摇尾巴，和附近的街坊打招呼。",
+    "items": [
+      [
+        "animal.garden_fox",
+        "greet"
+      ]
+    ],
+    "effect": "只有小狐狸走近街坊并抬爪、摇尾；其他人照常",
+    "scope": "局部狐狸",
+    "participants": 0,
+    "first_sim_seconds": 1.9,
+    "outcome": "completed",
+    "api_ms": 292,
+    "interpretation_source": "named-local-feeling"
+  },
+  {
+    "id": "C05",
+    "split": "control",
+    "text": "把小镇变成巴黎，再造一座铁塔。",
+    "mood": "喜悦",
+    "plan": "这件事小镇暂时做不到。街坊听见了，向你挥挥手。",
+    "items": [
+      [
+        "resident.vendor_flower",
+        "greet"
+      ]
+    ],
+    "effect": "诚实说明或简短招呼；不假装造出铁塔，也不强开庆典",
+    "scope": "有限回应",
+    "participants": 1,
+    "first_sim_seconds": null,
+    "outcome": "completed",
+    "api_ms": 281,
+    "interpretation_source": "jev-gentle-reply"
+  },
+  {
+    "id": "C06",
+    "split": "control",
+    "text": "That was lovely. Please leave everything exactly as it is. ",
+    "mood": "保留",
+    "plan": "小镇会保持现在的安排，继续自己的生活。",
+    "items": [],
+    "effect": "保持原样，不强行安排动作",
+    "scope": "尊重边界",
+    "participants": 0,
+    "first_sim_seconds": null,
+    "outcome": null,
+    "api_ms": 285,
+    "interpretation_source": "literal-selection"
+  },
+  {
+    "id": "C07",
+    "split": "control",
+    "text": "blorpy zzzz 123 ???",
+    "mood": "柔软梦境",
+    "plan": "这件事小镇暂时做不到。街坊听见了，向你挥挥手。",
+    "items": [
+      [
+        "resident.vendor_flower",
+        "greet"
+      ]
+    ],
+    "effect": "诚实说明或简短招呼；不假装造出铁塔，也不强开庆典",
+    "scope": "有限回应",
+    "participants": 1,
+    "first_sim_seconds": null,
+    "outcome": "completed",
+    "api_ms": 274,
+    "interpretation_source": "jev-gentle-reply"
+  },
+  {
+    "id": "F01",
+    "split": "final_holdout",
+    "text": "Kindness should keep travelling, one pair of hands at a time.",
+    "mood": "谢意",
+    "plan": "写下一点谢意，亲手交给邻居。",
+    "items": [
+      [
+        "paper",
+        "share"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "effect": "两位街坊靠近，写折纸笺，再当面递交",
+    "scope": "两人递笺",
+    "participants": 2,
+    "first_sim_seconds": 0.6,
+    "outcome": "completed",
+    "api_ms": 281,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "F02",
+    "split": "final_holdout",
+    "text": "我收到过一点微光，也想交给一个正在难过的人。",
+    "mood": "谢意",
+    "plan": "写下一点谢意，亲手交给邻居。",
+    "items": [
+      [
+        "paper",
+        "share"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "effect": "两位街坊靠近，写折纸笺，再当面递交",
+    "scope": "两人递笺",
+    "participants": 2,
+    "first_sim_seconds": 0.6,
+    "outcome": "completed",
+    "api_ms": 283,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "F03",
+    "split": "final_holdout",
+    "text": "给留在远方的那个人留一句没说出口的话吧。",
+    "mood": "思念",
+    "plan": "纸笺与心意：写下思念、祝愿或留言，折好后挂到树边留下",
+    "items": [
+      [
+        "paper",
+        "hang"
+      ]
+    ],
+    "effect": "一位街坊取纸、写笺、折好并挂到树边",
+    "scope": "树边留笺",
+    "participants": 1,
+    "first_sim_seconds": 2.35,
+    "outcome": "completed",
+    "api_ms": 327,
+    "interpretation_source": "literal-selection"
+  },
+  {
+    "id": "F04",
+    "split": "final_holdout",
+    "text": "Make the tired parts of this evening feel cared for.",
+    "mood": "温柔与欢迎",
+    "plan": "让街巷暖一点，让彼此靠近一点。",
+    "items": [
+      [
+        "light",
+        "warm"
+      ],
+      [
+        "breeze",
+        "gentle"
+      ],
+      [
+        "occasion",
+        "reunion"
+      ]
+    ],
+    "effect": "街坊走近彼此，停下交谈",
+    "scope": "整镇相聚",
+    "participants": 23,
+    "first_sim_seconds": 0.75,
+    "outcome": "settled",
+    "api_ms": 340,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "F05",
+    "split": "final_holdout",
+    "text": "今天心里亮了一点点，愿意和路过的人分一半。",
+    "mood": "谢意",
+    "plan": "写下一点谢意，亲手交给邻居。",
+    "items": [
+      [
+        "paper",
+        "share"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "effect": "两位街坊靠近，写折纸笺，再当面递交",
+    "scope": "两人递笺",
+    "participants": 2,
+    "first_sim_seconds": 0.6,
+    "outcome": "completed",
+    "api_ms": 290,
+    "interpretation_source": "jev-atmosphere"
+  },
+  {
+    "id": "F06",
+    "split": "final_holdout",
+    "text": "The evening smells like a meal I did not have to eat alone.",
+    "mood": "陪伴",
+    "plan": "让邻居们慢慢找到彼此。",
+    "items": [
+      [
+        "occasion",
+        "reunion"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "effect": "街坊走近彼此，停下交谈",
+    "scope": "整镇相聚",
+    "participants": 23,
+    "first_sim_seconds": 0.75,
+    "outcome": "settled",
+    "api_ms": 331,
+    "interpretation_source": "jev-atmosphere"
+  }
+]
