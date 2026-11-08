@@ -1,6 +1,6 @@
-import {EVENT_GAZE_PITCH} from './event-design.mjs?v=cp51-vibe-response-acb055878926';
+import {EVENT_GAZE_PITCH} from './event-design.mjs?v=cp51-vibe-response-d7c8487e50b4';
 import * as THREE from 'three';
-import {PROFILES,ACTIVITIES} from './community.mjs?v=cp51-vibe-response-acb055878926';
+import {PROFILES,ACTIVITIES} from './community.mjs?v=cp51-vibe-response-d7c8487e50b4';
 const X=new THREE.Vector3(1,0,0),Y=new THREE.Vector3(0,1,0),SIDE=new THREE.Vector3(0,0,-1);
 export function createIntentView({entities,parts,registry,spaces,scene,localRoutes={}}){
  const blends=new Map();const can=entities.get('watering_can.garden_can'),canBase=can?.quaternion.clone();

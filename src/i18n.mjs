@@ -1,4 +1,4 @@
-import {EN} from './i18n-en.mjs?v=cp51-vibe-response-acb055878926';
+import {EN} from './i18n-en.mjs?v=cp51-vibe-response-d7c8487e50b4';
 let locale='en';try{const saved=localStorage.getItem('afterwords.locale.v1');if(saved==='zh'||saved==='en')locale=saved;}catch{}
 const cache=new Map(),keys=Object.keys(EN).sort((a,b)=>b.length-a.length),listeners=new Set();
 export const getLocale=()=>locale;

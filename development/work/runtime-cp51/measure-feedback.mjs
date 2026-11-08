@@ -1,5 +1,5 @@
 import {readFileSync,writeFileSync} from 'node:fs';
-import {setup,step,runInput,inputBusy,queueIntent} from '../runtime-cp50/audit-utils.mjs';
+import {setup,step,runInput,inputBusy,queueIntent} from './audit-utils.mjs';
 const out='outputs/runtime-checkpoint-51/';
 const name=process.argv[2]||'final';
 const rows=JSON.parse(readFileSync(out+name+'.json'));
@@ -9,7 +9,7 @@ for(const row of rows){
  const initial=Object.fromEntries(s.actors.map(a=>[a.id,a.p.slice()]));
  const affected=new Set(),changed=new Set(),trips={},deviations={},jobs=new Map(),scenes=new Set();let first=null,maxSnow=0,maxRain=0,foxDistance=0,props=0;
  if(!row.plan?.items.length){output.push({id:row.id,items:[],noChange:true});continue;}
- try{runInput(s,row.plan.items,()=>queueIntent(s,row.plan.items,{source:'words',sourceText:row.text},nav.activities.objectCatalog));}catch(e){output.push({id:row.id,error:e.message});continue;}
+ try{runInput(s,row.plan.items,()=>queueIntent(s,row.plan.items,{source:'words',sourceText:row.text,preserveOthers:row.plan.resolution?.scopeGuard==='explicit-others-unchanged'},nav.activities.objectCatalog));}catch(e){output.push({id:row.id,error:e.message});continue;}
  for(let i=0;i<3200&&inputBusy(s);i++){
   step(s,nav);step(control.s,control.nav);
   const age=s.time-start,e=s.sceneEvent,q=s.inputSession;

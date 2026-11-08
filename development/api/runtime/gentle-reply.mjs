@@ -54,5 +54,6 @@ export function withGentleReply(plan,answers,text){
  if(primary!=='rain'&&primary!=='snow'&&primary!=='festival'&&macros.neighborhood==='prepare'&&/(?:大家|街坊|一起|everyone|together).{0,12}(?:准备|筹备|prepare)|prepare.{0,35}(?:together|everyone)/i.test(text))primary='prepare';
  const removed=primary?p.items.filter(i=>episodeOf(i)&&episodeOf(i)!==primary):[];
  if(removed.length){const items=p.items.filter(i=>!removed.includes(i));p={...p,items,skipped:[...p.skipped,...removed.map(i=>({...i,reason:'用这一场具体活动表达心愿，不同时启动另一场活动。'}))],summary:[...new Set(items.map(i=>i.label).filter(Boolean))].slice(0,3).join('；'),resolution:{...p.resolution,primaryScene:primary}};}
+ if(p.items.length&&keepsOtherActivity(text))p={...p,resolution:{...p.resolution,scopeGuard:'explicit-others-unchanged'}};
  return p;
 }

@@ -1,4 +1,4 @@
-import {CRAFT_EN} from './craft-english.mjs?v=cp51-vibe-response-acb055878926';
+import {CRAFT_EN} from './craft-english.mjs?v=cp51-vibe-response-d7c8487e50b4';
 // Source strings remain stable in the simulation and saves. Only presentation is translated.
 export const EN=Object.fromEntries(`
 言外=Echoing Green

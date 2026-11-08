@@ -1,5 +1,5 @@
-import {createEventSfx} from './event-sfx.mjs?v=cp51-vibe-response-acb055878926';
-import {writeText} from './i18n.mjs?v=cp51-vibe-response-acb055878926';
+import {createEventSfx} from './event-sfx.mjs?v=cp51-vibe-response-d7c8487e50b4';
+import {writeText} from './i18n.mjs?v=cp51-vibe-response-d7c8487e50b4';
 
 // User-approved loop master, played unchanged. Keep the same track across events.
 export function createSound(button){

@@ -68,5 +68,5 @@ export function composeAtmosphere(literal, answers, {utterance=""}={}){
 // An explicit local-only request takes precedence over a guessed town-wide mood.
 export function keepsOtherActivity(text){
  const t=String(text||'').normalize('NFKC');
- return /(?:其他|其余|其它|别的)(?:人|居民|街坊|东西|部分)?(?:都|也)?(?:照旧|保持(?:不变|原样|原状)|不用(?:理(?:我|它|他|她)|回应|改变|改|动|管(?:我|它|他|她))|别(?:回应|改|动)|不要(?:回应|改|动))|大家(?:都)?照旧/u.test(t)||/(?:everyone|everything)(?: else)?\s+(?:can |should )?(?:carry on|stay unchanged|keep (?:going|doing)|remain as)|(?:leave|keep)\s+(?:everyone|everything|the rest)(?: else)?\s+(?:alone|unchanged|as (?:it|they) (?:is|are))/i.test(t);
+ return /(?:其他|其余|其它|别的|别人|旁人)(?:人|居民|街坊|东西|部分)?(?:都|也)?(?:照旧|照常|保持(?:不变|原样|原状)|不用(?:理(?:我|它|他|她)|回应|改变|改|动|管(?:我|它|他|她))|别(?:回应|改|动)|不要(?:回应|改|动))|大家(?:都)?照旧/u.test(t)||/(?:everyone|everything)(?: else)?\s+(?:can |should )?(?:carry on|stay unchanged|keep (?:going|doing)|remain as)|(?:the\s+)?others\s+(?:can |should )?(?:carry on|stay unchanged|keep (?:going|doing))|(?:leave|keep)\s+(?:everyone|everything|the rest)(?: else)?\s+(?:alone|unchanged|as (?:it|they) (?:is|are))/i.test(t);
 }

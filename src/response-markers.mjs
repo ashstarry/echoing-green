@@ -1,7 +1,7 @@
 import * as THREE from 'three';
-import {createPavingSupport} from './foot-support.mjs?v=cp51-vibe-response-acb055878926';
-import {actionSubjects,subjectAlpha} from './action-subjects.mjs?v=cp51-vibe-response-acb055878926';
-import {createResponseSignals,responseGlowAlpha,GLOW_SECONDS,MAX_GLOWS} from './response-signals.mjs?v=cp51-vibe-response-acb055878926';
+import {createPavingSupport} from './foot-support.mjs?v=cp51-vibe-response-d7c8487e50b4';
+import {actionSubjects,subjectAlpha} from './action-subjects.mjs?v=cp51-vibe-response-d7c8487e50b4';
+import {createResponseSignals,responseGlowAlpha,GLOW_SECONDS,MAX_GLOWS} from './response-signals.mjs?v=cp51-vibe-response-d7c8487e50b4';
 const supported=new Set(['animal','duck','fish','boat','bicycle','parked_bicycle','tram','windmill','door','plant','tree','water_lantern']);
 export function createResponseMarkers({scene,entities,parts=new Map(),registry={entities:[]},nav}){
  const paving=createPavingSupport(nav?.activities?.paving);let lastTime=-1;const signals=createResponseSignals(),marks=new Map(),rows=new Map(registry.entities.map(e=>[e.id,e])),anchors=new Map();

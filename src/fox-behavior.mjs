@@ -1,9 +1,9 @@
-import {inviteFoxNeighbor,settleFoxMeeting} from './fox-rendezvous.mjs?v=cp51-vibe-response-acb055878926';
-import {rainingAt} from './local-cloud.mjs?v=cp51-vibe-response-acb055878926';
-import {foxGroundGreeting,foxBicycleGap} from './fox-ground-path.mjs?v=cp51-vibe-response-acb055878926';
-import {makeRoom} from './event-travel.mjs?v=cp51-vibe-response-acb055878926';
-import {varied} from './cadence.mjs?v=cp51-vibe-response-acb055878926';
-import {foxCurve,foxBackstep,foxPathPose,foxFloor,foxTurnArc} from './fox-path.mjs?v=cp51-vibe-response-acb055878926';
+import {inviteFoxNeighbor,settleFoxMeeting} from './fox-rendezvous.mjs?v=cp51-vibe-response-d7c8487e50b4';
+import {rainingAt} from './local-cloud.mjs?v=cp51-vibe-response-d7c8487e50b4';
+import {foxGroundGreeting,foxBicycleGap} from './fox-ground-path.mjs?v=cp51-vibe-response-d7c8487e50b4';
+import {makeRoom} from './event-travel.mjs?v=cp51-vibe-response-d7c8487e50b4';
+import {varied} from './cadence.mjs?v=cp51-vibe-response-d7c8487e50b4';
+import {foxCurve,foxBackstep,foxPathPose,foxFloor,foxTurnArc} from './fox-path.mjs?v=cp51-vibe-response-d7c8487e50b4';
 const ID='animal.garden_fox',D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 // Fox half-width plus a resident's body radius, with a small margin.
 const PERSON_CLEARANCE=.38;

@@ -19,6 +19,15 @@ test('An emotionally meaningful metaphor can still be interpreted when its liter
  const p=plan('Let my tangled thoughts find somewhere to rest',{intent_status:'unsupported',mood_intent:'mood',atmosphere:'quiet',gentle_reply:'quiet'});
  assert(p.items.some(i=>i.target==='occasion'&&i.action==='quiet'));
 });
+test('Local wishes protect people described as 别人、旁人 or the others carrying on',()=>{
+ for(const text of ['只有狐狸想找个朋友，别人照常就好。','小狐狸有点孤单，旁人不用回应。','The little fox seems lonely; let the others carry on.']){
+  for(const intent of ['mood','literal']){
+   const p=plan(text,{mood_intent:intent,atmosphere:'together',gentle_reply:'fox'});
+   assert.deepEqual(p.items.map(i=>[i.target,i.action]),[['animal.garden_fox','greet']]);
+   assert.equal(p.resolution.scopeGuard,'explicit-others-unchanged');
+  }
+ }
+});
 test('All implemented communal episodes are exposed to language decisions',()=>{assert.deepEqual(Object.keys(contract.fields.occasion.choices).sort(),Object.keys(DOMAINS.occasion.choices).sort());});
 test('Poetic supper and dawn remain concrete requests even when mood classification disagrees',()=>{
  for(const [target,action,mood]of[['occasion','supper','together'],['day_phase','dawn','hopeful']]){

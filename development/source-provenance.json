@@ -1,6 +1,6 @@
 {
   "active": "app/runtime-cp51",
-  "api_source_commit": "5981a0fa74df08d390efa79239ddcd0bd6977123",
+  "api_source_commit": "781451ed4b63455b7c7c226ccfd324682bd3608d",
   "files": [
     {
       "original": "app/runtime-cp17/src/catalog.mjs",
@@ -18005,8 +18005,8 @@
     {
       "original": "app/runtime-cp51/src/gentle-reply.mjs",
       "repository": "development/app/runtime-cp51/src/gentle-reply.mjs",
-      "sha256": "2a80e0b0ef452e53d3a2d95fbfd4c9fd88caed68e1aaa875f83c086d097f4e7c",
-      "repository_sha256": "2a80e0b0ef452e53d3a2d95fbfd4c9fd88caed68e1aaa875f83c086d097f4e7c"
+      "sha256": "dc0d3dad1172f7b7bc9388abb6b789a8256518cc6de6cc66f80bc9caa7fef7cd",
+      "repository_sha256": "dc0d3dad1172f7b7bc9388abb6b789a8256518cc6de6cc66f80bc9caa7fef7cd"
     },
     {
       "original": "app/runtime-cp51/src/fox-ground-path.mjs",
@@ -18143,8 +18143,8 @@
     {
       "original": "app/runtime-cp51/src/atmosphere.mjs",
       "repository": "development/app/runtime-cp51/src/atmosphere.mjs",
-      "sha256": "7b9a5d942f6fd33496246c06a7fef1ddf68ecf3aa6baf7660b786438636ad361",
-      "repository_sha256": "7b9a5d942f6fd33496246c06a7fef1ddf68ecf3aa6baf7660b786438636ad361"
+      "sha256": "55d093104168f27b6e37a18b33f8444d12058dafed4355bbbdf03634ea2915d4",
+      "repository_sha256": "55d093104168f27b6e37a18b33f8444d12058dafed4355bbbdf03634ea2915d4"
     },
     {
       "original": "app/runtime-cp51/src/simulation.mjs",
@@ -18443,8 +18443,8 @@
     {
       "original": "app/runtime-cp51/tests/semantic-composition.test.mjs",
       "repository": "development/app/runtime-cp51/tests/semantic-composition.test.mjs",
-      "sha256": "771ab50e9c2f70023c759a135b32a78164985debf970704aa98db750d3598d3d",
-      "repository_sha256": "771ab50e9c2f70023c759a135b32a78164985debf970704aa98db750d3598d3d"
+      "sha256": "3ad7bdc4f4d8d8c719a655a8751f6c82e05796aba10679102fcd93116056a57d",
+      "repository_sha256": "3ad7bdc4f4d8d8c719a655a8751f6c82e05796aba10679102fcd93116056a57d"
     },
     {
       "original": "app/runtime-cp51/tests/response-v25.test.mjs",
@@ -19193,8 +19193,8 @@
     {
       "original": "app/echoing-green-api/runtime/atmosphere.mjs",
       "repository": "development/api/runtime/atmosphere.mjs",
-      "sha256": "7b9a5d942f6fd33496246c06a7fef1ddf68ecf3aa6baf7660b786438636ad361",
-      "repository_sha256": "7b9a5d942f6fd33496246c06a7fef1ddf68ecf3aa6baf7660b786438636ad361"
+      "sha256": "55d093104168f27b6e37a18b33f8444d12058dafed4355bbbdf03634ea2915d4",
+      "repository_sha256": "55d093104168f27b6e37a18b33f8444d12058dafed4355bbbdf03634ea2915d4"
     },
     {
       "original": "app/echoing-green-api/runtime/boat-world.mjs",
@@ -19271,8 +19271,8 @@
     {
       "original": "app/echoing-green-api/runtime/gentle-reply.mjs",
       "repository": "development/api/runtime/gentle-reply.mjs",
-      "sha256": "2a80e0b0ef452e53d3a2d95fbfd4c9fd88caed68e1aaa875f83c086d097f4e7c",
-      "repository_sha256": "2a80e0b0ef452e53d3a2d95fbfd4c9fd88caed68e1aaa875f83c086d097f4e7c"
+      "sha256": "dc0d3dad1172f7b7bc9388abb6b789a8256518cc6de6cc66f80bc9caa7fef7cd",
+      "repository_sha256": "dc0d3dad1172f7b7bc9388abb6b789a8256518cc6de6cc66f80bc9caa7fef7cd"
     },
     {
       "original": "app/echoing-green-api/runtime/group-layout.mjs",
@@ -19505,8 +19505,8 @@
     {
       "original": "app/echoing-green-api/tests/gentle-feedback.test.mjs",
       "repository": "development/api/tests/gentle-feedback.test.mjs",
-      "sha256": "7769d1117c0a60fba589073cb256c7892946410a79aab55557b0e86de4e6f10f",
-      "repository_sha256": "7769d1117c0a60fba589073cb256c7892946410a79aab55557b0e86de4e6f10f"
+      "sha256": "ae8fadc147f75a66058bb2f5c9329ce8fde47ff0858616033f007e40fd65fcf7",
+      "repository_sha256": "ae8fadc147f75a66058bb2f5c9329ce8fde47ff0858616033f007e40fd65fcf7"
     },
     {
       "original": "app/echoing-green-api/tests/local-feedback.test.mjs",
@@ -19577,14 +19577,14 @@
     {
       "original": "work/runtime-cp51/measure-feedback.mjs",
       "repository": "development/work/runtime-cp51/measure-feedback.mjs",
-      "sha256": "5a7aba52aef5bed528f10d647d3b5f577875a2b2936842125249a812ff31d058",
-      "repository_sha256": "5a7aba52aef5bed528f10d647d3b5f577875a2b2936842125249a812ff31d058"
+      "sha256": "b914ca811a816428d1320ec743c961617b3f217e02eb873c7259ffb68cc604b2",
+      "repository_sha256": "b914ca811a816428d1320ec743c961617b3f217e02eb873c7259ffb68cc604b2"
     },
     {
       "original": "work/runtime-cp51/build-report.py",
       "repository": "development/work/runtime-cp51/build-report.py",
-      "sha256": "359d01df2c26c31be6ea028ba5e188b9ae83bb8f0435fd79a75867d5383b8d0d",
-      "repository_sha256": "359d01df2c26c31be6ea028ba5e188b9ae83bb8f0435fd79a75867d5383b8d0d"
+      "sha256": "f604f5c288c3a41a8b48fa807d7fed7e1cc6729a5f065345cfd126ab41da62b1",
+      "repository_sha256": "f604f5c288c3a41a8b48fa807d7fed7e1cc6729a5f065345cfd126ab41da62b1"
     },
     {
       "original": "work/runtime-cp51/prepare-public.py",
@@ -19593,10 +19593,16 @@
       "repository_sha256": "f88d676fc673e23d48a39bb0b667b720538e7c542e6dfaa6ee43ef97e1ad3e00"
     },
     {
+      "original": "work/runtime-cp51/audit-utils.mjs",
+      "repository": "development/work/runtime-cp51/audit-utils.mjs",
+      "sha256": "b5f8c7a8e06b9008650ac033fed1c9096c0dc17dcd3f1b1fd7066740722d6d9d",
+      "repository_sha256": "b5f8c7a8e06b9008650ac033fed1c9096c0dc17dcd3f1b1fd7066740722d6d9d"
+    },
+    {
       "original": "work/runtime-cp51/run-language.mjs",
       "repository": "development/work/runtime-cp51/run-language.mjs",
-      "sha256": "4e22576ab1556e09db145d2f7328babcd74308741ecbb95e45905a870782a542",
-      "repository_sha256": "4e22576ab1556e09db145d2f7328babcd74308741ecbb95e45905a870782a542"
+      "sha256": "38dedda7ab5bc1f47bef4dbbccdbd966db4ac38560b8c39e68aecea73223f30a",
+      "repository_sha256": "38dedda7ab5bc1f47bef4dbbccdbd966db4ac38560b8c39e68aecea73223f30a"
     }
   ],
   "omitted_nonruntime_metadata": [
