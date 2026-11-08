@@ -3,7 +3,7 @@ from pathlib import Path
 import json,html,shutil,statistics
 root=Path.cwd();out=root/'outputs/runtime-checkpoint-51';dest=root/'publish/echoing-green/verification/vibes';dest.mkdir(parents=True,exist_ok=True)
 rows=json.loads((out/'final.json').read_text());measure={r['id']:r for r in json.loads((out/'final-feedback-measurements.json').read_text())}
-scenes={'reunion':('街坊走近彼此，停下交谈','整镇相聚'),'quiet':('居民分散到树荫和水边，放慢脚步、歇息','安静休息'),'supper':('餐厅摊前出现排队、等热食的街坊','餐厅聚拢'),'spring':('三位街坊搬放花盆、展开纸花','局部春意'),'prepare':('街坊分工搬小凳、摆点心、递纸灯','分工筹备'),'paper_hang':('一位街坊取纸、写笺、折好并挂到树边','树边留笺'),'paper_share':('两位街坊靠近，写折纸笺，再当面递交','两人递笺'),'tea_service':('相关街坊取热茶点心、带到对方面前','热茶与招待')}
+scenes={'lantern':('沿街纸灯逐盏亮起，两位居民提灯走过街边','提灯夜晚'),'reunion':('街坊走近彼此，停下交谈','整镇相聚'),'quiet':('居民分散到树荫和水边，放慢脚步、歇息','安静休息'),'supper':('餐厅摊前出现排队、等热食的街坊','餐厅聚拢'),'spring':('三位街坊搬放花盆、展开纸花','局部春意'),'prepare':('街坊分工搬小凳、摆点心、递纸灯','分工筹备'),'paper_hang':('一位街坊取纸、写笺、折好并挂到树边','树边留笺'),'paper_share':('两位街坊靠近，写折纸笺，再当面递交','两人递笺'),'tea_service':('相关街坊取热茶点心、带到对方面前','热茶与招待')}
 tags={'tender':'温柔与欢迎','together':'陪伴','quiet':'松弛与休息','hopeful':'希望与新开始','hearth':'饭香与招待','longing':'思念','gratitude':'谢意','dream':'柔软梦境','celebration':'喜悦','keep':'保留'}
 for image in ['D02-clean','D13-clean','D05-clean','kindness-handoff']:
  shutil.copy2(out/'visual'/f'{image}.png',dest/f'{image}.png')
@@ -12,7 +12,8 @@ for r in rows:
  m=measure[r['id']];kind=next(iter(m.get('scene',[])),None)
  if not r['plan']['items']:effect='保持原样，不强行安排动作';scope='尊重边界'
  elif r['id']=='C04':effect='只有小狐狸走近街坊并抬爪、摇尾；其他人照常';scope='局部狐狸'
- elif r['id'] in ['C05','C07']:effect='诚实说明或简短招呼；不假装造出铁塔，也不强开庆典';scope='有限回应'
+ elif r['id']=='C05':effect='诚实说明做不到建造铁塔，再做简短招呼，不强开庆典';scope='有限回应'
+ elif r['id']=='C07':effect='街坊做一个简短招呼，不虚构具体事件';scope='有限回应'
  else:effect,scope=scenes.get(kind,('相关人物做出已有动作',kind or '局部'))
  public.append({'id':r['id'],'split':r['split'],'text':r['text'],'mood':tags.get(r.get('rawAtmosphere',{}).get('choice'),r.get('rawAtmosphere',{}).get('choice')),'plan':r['plan']['summary'],'items':[[i['target'],i['action']] for i in r['plan']['items']],'effect':effect,'scope':scope,'participants':m.get('participants',0),'first_sim_seconds':m.get('firstPhysicalDifference'),'outcome':m.get('outcome'),'api_ms':r.get('ms'),'interpretation_source':(r['plan'].get('resolution') or {}).get('source','literal-selection')})
 (dest/'cases.json').write_text(json.dumps(public,ensure_ascii=False,indent=2)+'\n')

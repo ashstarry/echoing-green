@@ -879,8 +879,8 @@
         "night"
       ]
     ],
-    "effect": "相关人物做出已有动作",
-    "scope": "lantern",
+    "effect": "沿街纸灯逐盏亮起，两位居民提灯走过街边",
+    "scope": "提灯夜晚",
     "participants": 2,
     "first_sim_seconds": 0.7,
     "outcome": "settled",
@@ -1005,7 +1005,7 @@
         "greet"
       ]
     ],
-    "effect": "诚实说明或简短招呼；不假装造出铁塔，也不强开庆典",
+    "effect": "诚实说明做不到建造铁塔，再做简短招呼，不强开庆典",
     "scope": "有限回应",
     "participants": 1,
     "first_sim_seconds": null,
@@ -1040,7 +1040,7 @@
         "greet"
       ]
     ],
-    "effect": "诚实说明或简短招呼；不假装造出铁塔，也不强开庆典",
+    "effect": "街坊做一个简短招呼，不虚构具体事件",
     "scope": "有限回应",
     "participants": 1,
     "first_sim_seconds": null,
