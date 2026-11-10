@@ -1,3 +1,4 @@
+import {EXPRESSION_QUESTION,normalizeExperienceContext,varyMoodPlan} from '../runtime/experience-choices.mjs';
 import {REPLY_QUESTION,withGentleReply} from '../runtime/gentle-reply.mjs';
 import {explicitScene} from '../runtime/explicit-scenes.mjs';
 import {ATMOSPHERE_QUESTIONS,composeAtmosphere} from '../runtime/atmosphere.mjs';
@@ -1024,7 +1025,8 @@ export const contract={
         "putaway": "拿起最近的一件纪念，读过后收好",
         "laundry": "取布展开、挂在屋檐边随风，再收下折好",
         "bring_in": "把正在晾晒的布收下来折好",
-        "rest": "收好手里的东西，停止新的小活动"
+        "rest": "收好手里的东西，停止新的小活动",
+        "company": "两位街坊结伴走过一段水边，停下来招呼、交谈，不需要借伞"
       },
       "kind": "macro",
       "available": true
@@ -20339,12 +20341,13 @@ export function normalizeState(input={}){
  if(typeof input.train_at_station==='boolean')s.train_at_station=input.train_at_station;
  if(typeof input.traveler_available==='boolean')s.traveler_available=input.traveler_available;
  if(['open','closed'].includes(input.reader_book))s.reader_book=input.reader_book;if(typeof input.festival_auto==='boolean')s.festival_auto=input.festival_auto;
+ s.experience_context=normalizeExperienceContext(input.experience_context);
  s.individual_overrides={light:input.individual_overrides?.light===true,breeze:input.individual_overrides?.breeze===true};return s;
 }
 function baseRequest(text,state={},variant='v5'){
  if(typeof text!=='string'||!text.trim()||text.length>600)throw Error('请输入1–600字');
  const s=normalizeState(state),questions={};
- for(const [key,d]of Object.entries(contract.fields))questions[key]={type:'choice',instructions:`只判断${d.label}。遵守state中的rules。`,criteria:d.choices};
+ for(const [key,d]of Object.entries(contract.fields))questions[key]={type:'choice',instructions:`只判断${d.label}。遵守state中的rules。`,criteria:{...d.choices}};
  questions.intent_status.instructions='判断整句能否由给出的清单规划。日夜可规划但未做画面。问题本身若是礼貌的请求仍算安排。';
  if(variant!=='v1'){
   for(const [key,d]of Object.entries(contract.fields)){
@@ -20380,7 +20383,7 @@ export function makeRequest(text,state={}){
  const current=normalizeState(state),questions={};
  const common='这是借风町的许愿输入，陈述、比喻、诗句也可以是要求。只改变原话指向的对象，未涉及的项keep。最后改口和否定优先，回顾赞美/假设并非新安排。问题独立回答，不读其它问题的答案。代词只对应current.selected_entity；多名红衣人、多个店员不可混同。天气及集体事件的居民反应交给本地引擎；大家排队、集体避雨、走到广场站定看烟花都是这些事件已经实现的部分，属于可执行的宏观请求，不需要再逐人选择，也不是不支持的额外动作。23位有通路的居民可以参加集体活动，桥边、露台、车站的居民包含在内。鸟不能归巢/落地，船只能在已有池塘内航行，不能远航或载人，读者可以随集体活动下露台再返回，单独任意地点移动未开放，普通人不能任意进屋，但邮居门前留灯、开门、回家迎接已经通过neighborhood.homecoming实现；不能以相似动作替代。只有准备出行的旅客可以坐车。单动作请求不擅自扩展成完整生活片段。角色整组请求（孩子们玩、花房工作）可以安排组内每位有能力的人，不要求逐个名字。纸笺是已有组件：取纸、写字、折叠、走近、悬挂/递交、阅读/收起均已实现，由paper负责；把思念或祝愿留在树上不是造新物件。';
  for(const[key,d]of Object.entries(contract.fields)){
-  questions[key]={type:'choice',instructions:`原话对「${d.label}」的独立愿望；明确要求继续某动作也选该动作。没涉及/做不到keep。`,criteria:d.choices};
+  questions[key]={type:'choice',instructions:`原话对「${d.label}」的独立愿望；明确要求继续某动作也选该动作。没涉及/做不到keep。`,criteria:{...d.choices}};
   if(d.kind==='meta')continue;
   const instructions=d.kind==='resident'?`本句有没有安排「${d.label}」做事？陈述某人做某事也是要求，无需请/让。按aliases认同义称呼；别混同相似人物，代词见selected_label。`:d.kind==='macro'?`本句是否希望「${d.label}」改变？陈述或诗句同样可表达愿望；只提个别物件不改变全镇。`:`本句是否独立安排「${d.label}」做什么？仅全镇天气/气氛/别人的动作联想不算。`;
   questions['scope:'+key]={type:'choice',instructions,criteria:d.kind==='object'?{no:'未指向此物件',group:'指本组/单一物件',selected:'只指已选中的此组物件',unclear:'想指定其中一个却无法确定'}:{no:'未要求改变此项',yes:'原话有针对本项的愿望',unclear:'不能确定所指'}};
@@ -20452,6 +20455,10 @@ export function makeRequest(text,state={}){
   questions.selected_object={type:'choice',instructions:'只判断用户选中的这个物件。明确指这件物件才改变，未指向它keep。',criteria:{keep:'不改此物件',...Object.fromEntries(selected.actions.map(a=>[a.id,a.label]))}};
   questions['scope:selected_object']={type:'choice',instructions:'用户已点选current.selected_object。这个/这只/这里/这边可指该物件及其工作位置；单独安排它选yes，只说全镇或全体选no。',criteria:{no:'未单独指向选中物件',yes:'单独指向选中物件',unclear:'指代不明确'}};
  }
+ questions.mood_expression=structuredClone(EXPRESSION_QUESTION);
+ if(!current.experience_context)delete questions.craft.criteria.company;
+ questions.craft.instructions+=' 两位街坊无须借伞、一起散步聊天、结伴走过水边属于company。只邀请陪伴但没有指定做法，仍可由氛围问题选择。';
+ questions['scope:craft'].instructions+=' 明确一起散步、结伴走一小段也选yes。';
  questions.mood_intent=structuredClone(ATMOSPHERE_QUESTIONS.intent);questions.atmosphere=structuredClone(ATMOSPHERE_QUESTIONS.atmosphere);
  return {model:MODEL,state:JSON.stringify({user_utterance:text,current,resident_index,aliases,object_index,role_groups:roleGroups,rules:common+" Specific meanings such as meals, postal rounds and time of day still belong to the literal questions even if phrased poetically. Independently requested overall moods belong to mood_intent/atmosphere; those two questions may interpret implicit feelings without named objects. Literal object scopes above do not prohibit atmosphere interpretation. Praise, past memories, hypotheses and explicit keep-as-is still mean no change."}),questions,provider:{allow_fallbacks:false}};
 }
@@ -20499,5 +20506,5 @@ export function parsePlan(raw,request){
  const executionKey=item=>{if(item.kind==='macro'&&item.target==='music')return 'resident.musician:'+(item.action==='play'?'play_music':'rest_music');if(item.kind!=='object')return item.target+':'+item.action;const o=selectedCatalog[item.target],a=o?.actions.find(a=>a.id===item.action);if(a?.owner)return a.owner+':'+item.action;if(o?.kind==='watering_can')return 'resident.gardener:'+(item.action==='pour'?'water_plants':'inspect_leaf');if(o?.kind==='instrument')return 'resident.musician:'+(item.action==='play'?'play_music':'rest_music');return item.target+':'+item.action;};
  const seen=new Set();for(let i=items.length-1;i>=0;i--){const k=executionKey(items[i]);if(seen.has(k))items.splice(i,1);else seen.add(k);}
  const literal={status,items,skipped,resolution:explicit?{source:explicit.rule,raw_weather:raw.answers.weather.choice,raw_scope:raw.answers['scope:weather'].choice}:null,summary:!items.length&&skipped.some(x=>x.reason==='树边还没有纸笺，先留一张吧。')?'树边还没有纸笺，先留一张吧。':items.length?[...new Map(items.map(i=>[i.field||i.target,`${i.target_label}：${i.label}`])).values()].slice(0,3).join('；'):status==='no_change'?'小镇会保持现在的安排，继续自己的生活。':status==='clarify'?'先点选你指的居民，再说一次。':status==='unsupported'||status==='partial'?'这句话包含还不能做到的事，我先不替你安排近似动作。':skipped.length&&skipped.every(x=>x.reason==='已经是这个状态')?'已经在按这个安排进行，可以继续观察小镇。':'这句话我还没有理解成可执行的变化，可以换个说法或点选一个对象。'};
- return explicit?literal:withGentleReply(composeAtmosphere(literal,raw.answers,{utterance:input.user_utterance}),raw.answers,input.user_utterance);
+ return explicit?literal:varyMoodPlan(withGentleReply(composeAtmosphere(literal,raw.answers,{utterance:input.user_utterance}),raw.answers,input.user_utterance),raw.answers,state);
 }

@@ -1,0 +1,4 @@
+import test from'node:test';import assert from'node:assert/strict';import{readFileSync}from'node:fs';import{parsePlan,makeRequest}from'../decision-api.mjs';
+const fixtures=JSON.parse(readFileSync(new URL('./fixtures/macro-confidence-regressions.json',import.meta.url)));
+for(const f of fixtures)test('Previously rejected real request: '+f.text,()=>{const p=parsePlan(f.raw,f.request);assert(p.items.some(i=>i.target===f.expected[0]&&i.action===f.expected[1]));});
+test('No-change and unsupported statuses still prevent low-confidence macro changes',()=>{for(const status of['no_change','unsupported','clarify','partial']){const f=fixtures[0],raw=structuredClone(f.raw);raw.answers.intent_status.choice=status;raw.answers.mood_intent.choice='literal';raw.answers.mood_intent.probabilities=Object.fromEntries(Object.keys(raw.answers.mood_intent.probabilities).map(k=>[k,k==='literal'?1:0]));assert(!parsePlan(raw,f.request).items.some(i=>i.kind==='macro'));}});

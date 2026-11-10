@@ -1,4 +1,4 @@
-import {CRAFT_EN} from './craft-english.mjs?v=cp51-vibe-response-d7c8487e50b4';
+import {CRAFT_EN} from './craft-english.mjs?v=cp52-living-variations-0f9817dcf3a8';
 // Source strings remain stable in the simulation and saves. Only presentation is translated.
 export const EN=Object.fromEntries(`
 言外=Echoing Green
@@ -1076,3 +1076,22 @@ Object.assign(EN,{'今宵':'Koyoi','今宵，把心情说给小镇听。':'Koyoi
 Object.assign(EN,{'这一段先停在这里 · 可以再试一句':'This moment has settled · try another wish'});
 
 EN['写下一点谢意，亲手交给一位街坊。']='Write a little thanks and give it to a neighbor.';
+
+Object.assign(EN,{
+ '结伴走一段':'A little walk together',
+ '一起走过一段晚风':'Sharing a little evening walk',
+ '两位街坊相互招呼，结伴走过水边，停下来聊一会儿':'Two neighbors greet, walk together by the water and stop to chat',
+ '两位街坊结伴走过一段水边，停下来招呼、交谈，不需要借伞':'Two neighbors take a little walk by the water, then stop and chat',
+ '两位街坊聊过这一段晚风，互相道别，回到各自的日常。':'The neighbors share the breeze, say goodbye, and return to their day.',
+ '水边暂时没有合适的并肩位置，街坊先各自歇一会儿。':'There is no room for a shared walk just now; the neighbors take a little rest.',
+ '一份记在心里的好意，这次由我回赠':'A remembered kindness, gently returned',
+ '街坊从不同的角落走近，找个地方陪彼此聊一会儿。':'Neighbors come from different corners to keep one another company.',
+ '两位街坊相互招呼，结伴走过水边，再停下来聊一会儿。':'Two neighbors greet, walk together by the water, and pause for a chat.',
+ '有人走向热茶摊，接过一杯茶，和招待自己的街坊聊一会儿。':'A neighbor walks over for warm tea and a little conversation.',
+ '把这一刻交给一杯温热的茶，街坊慢慢走近、接过、喝下。':'Let this moment settle into a warm cup of tea, offered and slowly enjoyed.',
+ '晚归的街坊走向家门，暖窗亮起，窗边的人招呼他回来。':'A neighbor comes home to a warm window and a welcoming wave.',
+ '把温柔写成一张小纸笺，交到另一位街坊手里。':'Write a little kindness on paper and place it in a neighbor’s hands.',
+ '街坊分头搬来小凳、点心和纸灯，认真准备一个开心的晚上。':'Neighbors bring stools, treats and paper lanterns to prepare a happy evening.',
+ '孩子们围到吉他手身边，小狐狸也循着琴声跑来听一段。':'Children gather beside the guitarist, and the little fox comes to listen.',
+ '摊主揭开热蒸笼，把一份点心递给走近的街坊，分享一点开心。':'The shopkeeper opens the steamer and shares a warm treat and a little joy.'
+});

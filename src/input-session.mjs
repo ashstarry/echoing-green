@@ -1,16 +1,16 @@
-import {lanternDisplay} from './lantern-scene.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {actionAvailability} from './action-availability.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {requestSceneEvent,eventKind} from './scene-events.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {requestCloud} from './local-cloud.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {interactionStep} from './interaction-sequence.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {RESIDENT_ACTIONS} from './resident-actions.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {PROFILES} from './community.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {FIREWORK_BURSTS,FIREWORK_FLIGHT} from './firework-score.mjs?v=cp51-vibe-response-d7c8487e50b4';
+import {lanternDisplay} from './lantern-scene.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {actionAvailability} from './action-availability.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {requestSceneEvent,eventKind} from './scene-events.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {requestCloud} from './local-cloud.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {interactionStep} from './interaction-sequence.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {RESIDENT_ACTIONS} from './resident-actions.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {PROFILES} from './community.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {FIREWORK_BURSTS,FIREWORK_FLIGHT} from './firework-score.mjs?v=cp52-living-variations-0f9817dcf3a8';
 const terminal=j=>['done','cancelled','failed'].includes(j.status);
 export const INPUT_IDLE_SECONDS=2.8;
 export const inputBusy=s=>['listening','running','closing'].includes(s.inputSession?.phase);
 export function beginInput(s,items=[],{source='menu',listening=false}={}){if(inputBusy(s))return{accepted:false,reason:'busy'};for(const item of items){const a=actionAvailability(s,item);if(!a.available)throw Error(a.reason);}for(const item of items)if(item.kind==='resident'&&RESIDENT_ACTIONS[item.action]?.pose){const a=s.actors.find(a=>a.id===item.target),r=s.residentActions[item.target];if(a?.mobile&&!s.eventGuests?.[item.target]?.active){a.path=[];a.speed=0;a.actualSpeed=0;a.wait=.2;a.mode='idle';a.reservation=a.node;a.localActionUntil=0;a.manualActivity=null;}if(r?.action&&!RESIDENT_ACTIONS[r.action]?.route&&!RESIDENT_ACTIONS[r.action]?.navTask)r.cancelRemaining=.45;}const id='input-'+s.tick+'-'+s.revision;s.inputSession={id,source,phase:listening?'listening':'running',started:s.time,activeAt:s.time,lastProgress:s.time,lastSample:s.time-.25,items:structuredClone(items),observed:{},tracked:{},progressSamples:0,requestIds:[],baseStops:s.movers?.['bicycle.street_bicycle']?.completedStops||0};return{accepted:true,id};}
-export function activateInput(s,items,requestId){const q=s.inputSession;if(!q)return;q.phase='running';q.activeAt=s.time;q.lastProgress=s.time;q.items=structuredClone(items);const kind=eventKind(Object.fromEntries(items.filter(i=>i.kind==='macro').map(i=>[i.target,i.action])));q.expectedSceneKind=kind;if(kind&&s.sceneEvent?.kind===kind)q.sceneId=s.sceneEvent.id;else if(kind&&s.sceneEvent?.next?.kind===kind){q.sceneId=s.sceneEvent.next.id;q.transitionId=s.sceneEvent.id;}if(requestId)q.requestIds.push(requestId);}
+export function activateInput(s,items,requestId){const q=s.inputSession;if(!q)return;q.phase='running';q.activeAt=s.time;q.lastProgress=s.time;q.items=structuredClone(items);const kind=eventKind(Object.fromEntries(items.filter(i=>i.kind==='macro').map(i=>[i.target,i.action])));q.expectedSceneKind=kind;if(kind&&s.sceneEvent?.next?.kind===kind){q.sceneId=s.sceneEvent.next.id;q.transitionId=s.sceneEvent.id;}else if(kind&&s.sceneEvent?.kind===kind&&!['closing','release'].includes(s.sceneEvent.phase))q.sceneId=s.sceneEvent.id;if(requestId)q.requestIds.push(requestId);}
 export function abortInput(s,reason='not_applied'){if(s.inputSession){s.inputSession.phase='done';s.inputSession.ended=s.time;s.inputSession.outcome=reason;}}
 export function runInput(s,items,run,options={}){const opened=beginInput(s,items,options);if(!opened.accepted)throw Error('小镇还在回应上一句话，请等这一段结束。');try{const result=run();if(result?.accepted===false){abortInput(s,result.reason);return result;}activateInput(s,items,result?.receipt?.id);return result;}catch(error){abortInput(s,'not_applied');throw error;}}
 function stopOwned(s,q){
@@ -68,13 +68,13 @@ function hasWork(s,q){const macro=new Set(q.items.filter(i=>i.kind==='macro').ma
  for(const i of q.items)if(i.kind==='resident'&&i.action==='trial'){const r=s.residentActions[i.target],a=s.actors.find(a=>a.id===i.target);if(r?.requested||r?.queuedByUser)return true;if(a?.manualActivity&&s.time-q.activeAt<8)return true;}
  if(q.requestIds.some(id=>s.intentRuntime.jobs.some(j=>j.requestId===id&&!terminal(j))))return true;
  for(const w of[s.paperWorld,s.neighborhoodWorld,s.craftWorld])if(w&&q.sceneId===w.eventId&&(w.jobs.some(j=>j.status==='running')||w.pending))return true;
- const e=s.sceneEvent;if(e&&q.transitionId&&e.id===q.transitionId&&e.next?.id===q.sceneId)return true;if(e&&e.id===q.sceneId){if(['paper_','memory_','laundry_','tea_','umbrella_','leaf_','parcel_'].some(p=>e.kind.startsWith(p))){return[s.paperWorld,s.craftWorld].some(w=>w?.eventId===e.id&&w.jobs.some(j=>j.status==='running'));}return !['release'].includes(e.phase);}
+ const e=s.sceneEvent;if(e&&q.transitionId&&e.id===q.transitionId&&e.next?.id===q.sceneId)return true;if(e&&e.id===q.sceneId){if(['paper_','memory_','laundry_','tea_','umbrella_','company_','leaf_','parcel_'].some(p=>e.kind.startsWith(p))){return[s.paperWorld,s.craftWorld].some(w=>w?.eventId===e.id&&w.jobs.some(j=>j.status==='running'));}return !['release'].includes(e.phase);}
  if(macro.has('dining')&&Object.values(s.diners).some(d=>['enter','exit','turn'].includes(d.phase)||d.policy==='inside'&&d.phase!=='inside'||d.policy==='dine'&&d.phase!=='dine'))return true;
  if(macro.has('cycling')&&s.movers['bicycle.street_bicycle'].tripState!=='parked'&&s.movers['bicycle.street_bicycle'].completedStops<=q.baseStops)return true;
  return false;
 }
 export function advanceInput(s,nav){const q=s.inputSession;if(!inputBusy(s)||q.phase==='listening')return;
- if(q.phase==='running'&&!q.sceneId){const e=s.sceneEvent,kind=q.expectedSceneKind??eventKind(Object.fromEntries(q.items.filter(i=>i.kind==='macro').map(i=>[i.target,i.action])));if(kind&&e?.kind===kind)q.sceneId=e.id;else if(kind&&e?.next?.kind===kind){q.sceneId=e.next.id;q.transitionId=e.id;}else if(e?.phase==='closing'&&q.items.some(i=>i.kind==='macro'&&['weather','festival','occasion'].includes(i.target)&&['clear','quiet','ordinary'].includes(i.action)))q.sceneId=e.id;}
+ if(q.phase==='running'&&!q.sceneId){const e=s.sceneEvent,kind=q.expectedSceneKind??eventKind(Object.fromEntries(q.items.filter(i=>i.kind==='macro').map(i=>[i.target,i.action])));if(kind&&e?.next?.kind===kind){q.sceneId=e.next.id;q.transitionId=e.id;}else if(kind&&e?.kind===kind&&!['closing','release'].includes(e.phase))q.sceneId=e.id;else if(e?.phase==='closing'&&q.items.some(i=>i.kind==='macro'&&['weather','festival','occasion'].includes(i.target)&&['clear','quiet','ordinary'].includes(i.action)))q.sceneId=e.id;}
 
  if(q.phase==='closing'){const packing=[s.paperWorld,s.neighborhoodWorld,s.craftWorld].some(w=>w?.jobs.some(j=>j.status==='running'&&j.cancelClock<2.5));const cloud=q.items.some(i=>i.target==='cloud')&&s.localCloud.phase!=='home',sky=q.sceneId&&s.festivalUntil>s.time,weather=q.sceneId&&Math.max(s.eventWeather.rain,s.eventWeather.snow)>.04,lantern=q.sceneId===s.sceneEvent?.id&&s.sceneEvent?.kind==='lantern'&&s.sceneEvent.phase==='closing';if(s.time-q.closingAt>2.6&&!packing&&!cloud&&!sky&&!weather&&!lantern){q.phase='done';q.ended=s.time;for(const a of s.actors)if(a.interactionLock&&!s.craftWorld.jobs.some(j=>j.id===a.interactionLock&&j.status==='running')){delete a.interactionLock;delete a.interactionDestination;}}return;}
  if(s.time-q.lastSample<.2)return;q.lastSample=s.time;const values=sample(s,q);let changed=false;for(const[k,v]of Object.entries(values)){if(q.observed[k]!==undefined&&Math.abs(v-q.observed[k])>(k.includes('actor.')||['boat0','boat1','fox0','fox1'].includes(k)?.025:.015))changed=true;}q.observed=values;if(changed){q.lastProgress=s.time;q.progressSamples++;}

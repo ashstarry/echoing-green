@@ -4,9 +4,9 @@ The repository root remains the published GitHub Pages site. This directory cont
 
 | Directory | Contents |
 | --- | --- |
-| `app/runtime-cp51/` | Current frontend, local decision server, tests, contract and build script. Start here. |
+| `app/runtime-cp52/` | Current frontend, local decision server, tests, contract and build script. Start here. |
 | `api/` | Source mirror of the deployed Sites Jev proxy, including its gateway, tests and deployment configuration. |
-| `app/runtime-cp17/` … `app/runtime-cp50/` | Earlier runtime source checkpoints, for project history and compatibility testing. |
+| `app/runtime-cp17/` … `app/runtime-cp51/` | Earlier runtime source checkpoints, for project history and compatibility testing. |
 | `work/` | Project-authored Blender modeling, lighting, rig/export, simulation, evaluation and release scripts. |
 | `source-provenance.json` | Original paths and hashes; the API mirror identifies its source commit. |
 
@@ -15,7 +15,7 @@ The repository root remains the published GitHub Pages site. This directory cont
 Use Node.js 22.13 or newer (Node.js 24 is recommended for the API project).
 
 ```sh
-cd development/app/runtime-cp51
+cd development/app/runtime-cp52
 npm ci
 npm run dev
 ```

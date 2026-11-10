@@ -1,6 +1,6 @@
-import {actionAvailability} from './action-availability.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {ensureCraft,addCraftProp,craftProp} from './craft-world.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {passengerPose,requestPassengerAction} from './passengers.mjs?v=cp51-vibe-response-d7c8487e50b4';
+import {actionAvailability} from './action-availability.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {ensureCraft,addCraftProp,craftProp} from './craft-world.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {passengerPose,requestPassengerAction} from './passengers.mjs?v=cp52-living-variations-0f9817dcf3a8';
 const traveler='resident.station_traveler';
 export function ensureJourney(s){return s.trainJourney??={mode:'rest',phase:'idle',started:0,phaseAt:0,baselineTrips:0,sequence:0,flags:{}};}
 export function requestJourney(s,mode,emit=()=>{}){const j=ensureJourney(s),p=s.passengers[traveler];if(!p)return;const availability=actionAvailability(s,{target:'journey',action:mode});if(!availability.available)throw Error(availability.reason);

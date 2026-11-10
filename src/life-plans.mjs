@@ -1,9 +1,10 @@
-import {eventKind} from './scene-events.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {stimulateTown} from './town-response.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {requestPassengerAction} from './passengers.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {requestObjectAction} from './object-actions.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {validateDecision} from './catalog.mjs?v=cp51-vibe-response-d7c8487e50b4';
+import {beginExperience} from './wish-memory.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {eventKind} from './scene-events.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {stimulateTown} from './town-response.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {RESIDENT_ACTIONS,RESIDENT_CAPABILITIES,requestResidentAction} from './resident-actions.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {requestPassengerAction} from './passengers.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {requestObjectAction} from './object-actions.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {validateDecision} from './catalog.mjs?v=cp52-living-variations-0f9817dcf3a8';
 
 // Compound goals reuse tested movements, with real completion/occupation checks between steps.
 export const LIFE_PLANS={
@@ -36,7 +37,7 @@ export function queueIntent(s,items,{id=`local-plan-${s.revision+1}-${s.intentRu
  const receipt={id,source,started:s.time,targets:items.map(x=>x.target),count:items.length};
  for(const item of items){for(const j of s.intentRuntime.jobs)if(j.target===item.target&&!['done','cancelled','failed'].includes(j.status))j.status='cancelled';const definition=LIFE_PLANS[item.action];s.intentRuntime.jobs.push({...item,id:`${id}/${++s.intentRuntime.sequence}`,requestId:id,status:'pending',step:0,steps:definition?structuredClone(definition.steps):[item.action],started:s.time,updated:s.time,source,selectedMemory,preserveOthers:!!preserveOthers,sourceText:String(sourceText||'').slice(0,160),reason:'等当前动作安全结束'});}
  s.intentRuntime.jobs=[...s.intentRuntime.jobs.filter(j=>['done','cancelled','failed'].includes(j.status)&&s.time-j.updated<90).slice(-80),...s.intentRuntime.jobs.filter(j=>!['done','cancelled','failed'].includes(j.status))];
- if(source!=='day_rhythm'){s.intentRuntime.lastReceipt=receipt;s.revision++;if(!eventKind(Object.fromEntries(items.filter(i=>i.kind==='macro').map(i=>[i.target,i.action]))))stimulateTown(s,items,{id});}return{accepted:true,receipt};
+ if(source!=='day_rhythm'){s.intentRuntime.lastReceipt=receipt;beginExperience(s,items,receipt);s.revision++;if(!eventKind(Object.fromEntries(items.filter(i=>i.kind==='macro').map(i=>[i.target,i.action]))))stimulateTown(s,items,{id});}return{accepted:true,receipt};
 }
 function startResident(s,j,action,apply){const id=j.target;
  if(['inside','dine'].includes(action)){const d=s.diners[id];d.manualPolicy=action;d.policy=action;d.effectivePolicy=action;d.wait=Math.min(d.wait,1.0);return{type:'diner',value:action==='inside'?'inside':'dine'};}

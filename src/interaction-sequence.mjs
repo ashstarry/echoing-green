@@ -4,6 +4,7 @@ export const INTERACTION_PRIMITIVES=Object.freeze({
  approach:{kind:'move'},take:{kind:'pose',seconds:1.2},write:{kind:'pose',seconds:4.8},fold:{kind:'pose',seconds:2.1},hang:{kind:'pose',seconds:2.7},offer:{kind:'pose',seconds:3},read:{kind:'pose',seconds:3.2},collect:{kind:'pose',seconds:1.6},stow:{kind:'pose',seconds:1.6},receive:{kind:'pose',seconds:3.2},carry:{kind:'move'},place:{kind:'pose',seconds:2.4},wipe:{kind:'pose',seconds:4.4},open:{kind:'pose',seconds:1.7},welcome:{kind:'pose',seconds:4.2},wait_for:{kind:'pose',seconds:.2},unfold:{kind:'pose',seconds:3.2},admire:{kind:'pose',seconds:1.2},pack:{kind:'pose',seconds:2.5},pour:{kind:'pose',seconds:3.4},sip:{kind:'pose',seconds:4.5},taste:{kind:'pose',seconds:4.5},sweep:{kind:'pose',seconds:6},dry:{kind:'pose',seconds:1.4},pair_walk:{kind:'move'},close:{kind:'pose',seconds:2.1}
 });
 export const INTERACTION_RECIPES=Object.freeze({
+ company_companion:[{action:'approach',target:'supply'},{action:'welcome',waitFor:'recipient',seconds:2.2},{action:'pair_walk',target:'destination'},{action:'welcome',seconds:3.5},{action:'admire',seconds:1.6}],
  home_return:[{action:'approach',target:'destination'},{action:'open'},{action:'welcome'},{action:'admire'}],
  carry_lantern:[{action:'approach',target:'supply'},{action:'take'},{action:'open'},{action:'carry',target:'destination'},{action:'welcome',seconds:2},{action:'carry',target:'supply'},{action:'place',target:'supply'}],
  return_lantern:[{action:'carry',target:'supply'},{action:'place',target:'supply'}],

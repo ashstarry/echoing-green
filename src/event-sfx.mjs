@@ -1,5 +1,5 @@
-import {renderFirework} from './firework-timbre.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {createCueTracker} from './sound-cues.mjs?v=cp51-vibe-response-d7c8487e50b4';
+import {renderFirework} from './firework-timbre.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {createCueTracker} from './sound-cues.mjs?v=cp52-living-variations-0f9817dcf3a8';
 
 const fireworkCache=new WeakMap();
 function fireworkBuffer(ctx,cue){

@@ -1,4 +1,4 @@
-import {requestResidentAction} from './resident-actions.mjs?v=cp51-vibe-response-d7c8487e50b4';
+import {requestResidentAction} from './resident-actions.mjs?v=cp52-living-variations-0f9817dcf3a8';
 const definitions={
  kite:{fly:['牵稳线放风筝',1],calm:['让风筝平稳下来',.12]},
  windmill:{slow:['慢慢转',.20],brisk:['轻快地转',.70],stop:['慢慢停住',0],follow_wind:['跟随晚风',null]},

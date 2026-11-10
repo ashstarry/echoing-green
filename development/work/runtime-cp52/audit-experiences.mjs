@@ -1,0 +1,12 @@
+import{writeFileSync}from'node:fs';
+import{setup,execute,step}from'./audit-utils.mjs';
+import{EXPERIENCES,chooseExperience}from'../../app/runtime-cp52/src/experience-choices.mjs';
+import{experienceContext}from'../../app/runtime-cp52/src/wish-memory.mjs';
+const rows=[];
+for(const seed of [62417,90210,1127])for(const[id,v]of Object.entries(EXPERIENCES)){
+ const{s,nav}=setup(seed,seed===62417?10:120);if(experienceContext(s,nav).available[v.need]===false){rows.push({seed,id,available:false,reason:'No suitable participants or short route in this town state'});writeFileSync('outputs/runtime-checkpoint-52/experiences-final.json',JSON.stringify(rows,null,2));console.log(JSON.stringify({seed,id,available:false}));continue;}const positions=Object.fromEntries(s.actors.map(a=>[a.id,a.p.slice()]));
+ const items=Object.entries(v.changes).map(([target,action])=>({kind:'macro',target,action,experience:{variant:id,theme:v.theme}}));
+ const execution=execute(s,nav,items,v.label);const row={seed,id,execution,memory:s.wishMemory,pair:s.craftWorld.pair&&{done:s.craftWorld.pair.done,at:s.craftWorld.pair.at,steps:s.craftWorld.pair.route.length,actors:s.craftWorld.pair.ids.map(id=>({id,travel:Math.hypot(s.actors.find(a=>a.id===id).p[0]-positions[id][0],s.actors.find(a=>a.id===id).p[1]-positions[id][1])}))}};
+ rows.push(row);writeFileSync('outputs/runtime-checkpoint-52/experiences-final.json',JSON.stringify(rows,null,2));console.log(JSON.stringify({seed,id,outcome:execution.outcome,seconds:execution.seconds,progress:execution.progress,jobs:execution.recipes?.map(j=>[j.recipe,j.status]),memory:s.wishMemory.recent.length,pair:row.pair}));
+}
+const repetitions=[];for(const theme of ['together','tender','celebration']){const{s,nav}=setup();const played=[];for(let i=0;i<5;i++){const[id,v]=chooseExperience(theme,experienceContext(s,nav),'open',new Set(),s.day_phase);const result=execute(s,nav,Object.entries(v.changes).map(([target,action])=>({kind:'macro',target,action,experience:{theme,variant:id}})),v.label);played.push({id,outcome:result.outcome,seconds:result.seconds,care:s.wishMemory.care.slice(),jobs:result.recipes});for(let n=0;n<40;n++)step(s,nav);}repetitions.push({theme,played,recent:s.wishMemory.recent});}writeFileSync('outputs/runtime-checkpoint-52/repetitions-final.json',JSON.stringify(repetitions,null,2));console.log(JSON.stringify(repetitions.map(r=>({theme:r.theme,variants:r.played.map(p=>p.id)}))));

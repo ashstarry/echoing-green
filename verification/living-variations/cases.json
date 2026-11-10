@@ -1,0 +1,701 @@
+[
+  {
+    "id": "company-zh",
+    "round": 1,
+    "text": "像有个人愿意陪我待一会儿，就已经很好了。",
+    "variant": "company_walk",
+    "performance": "结伴散步",
+    "items": [
+      [
+        "craft",
+        "company"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "ms": 560,
+    "outcome": "completed",
+    "recent_before": []
+  },
+  {
+    "id": "company-zh",
+    "round": 2,
+    "text": "像有个人愿意陪我待一会儿，就已经很好了。",
+    "variant": "company_tea",
+    "performance": "热茶与陪伴",
+    "items": [
+      [
+        "craft",
+        "tea"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "ms": 315,
+    "outcome": "completed",
+    "recent_before": [
+      "company_walk"
+    ]
+  },
+  {
+    "id": "company-zh",
+    "round": 3,
+    "text": "像有个人愿意陪我待一会儿，就已经很好了。",
+    "variant": "company_walk",
+    "performance": "结伴散步",
+    "items": [
+      [
+        "craft",
+        "company"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "ms": 319,
+    "outcome": "completed",
+    "recent_before": [
+      "company_walk",
+      "company_tea"
+    ]
+  },
+  {
+    "id": "company-en",
+    "round": 1,
+    "text": "I could use a little company this evening.",
+    "variant": "company_walk",
+    "performance": "结伴散步",
+    "items": [
+      [
+        "craft",
+        "company"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "ms": 324,
+    "outcome": "completed",
+    "recent_before": []
+  },
+  {
+    "id": "company-en",
+    "round": 2,
+    "text": "I could use a little company this evening.",
+    "variant": "company_tea",
+    "performance": "热茶与陪伴",
+    "items": [
+      [
+        "craft",
+        "tea"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "ms": 306,
+    "outcome": "completed",
+    "recent_before": [
+      "company_walk"
+    ]
+  },
+  {
+    "id": "company-en",
+    "round": 3,
+    "text": "I could use a little company this evening.",
+    "variant": "company_walk",
+    "performance": "结伴散步",
+    "items": [
+      [
+        "craft",
+        "company"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "ms": 321,
+    "outcome": "completed",
+    "recent_before": [
+      "company_walk",
+      "company_tea"
+    ]
+  },
+  {
+    "id": "comfort-zh",
+    "round": 1,
+    "text": "想让这个地方像一个可以安心靠近的怀抱。",
+    "variant": "comfort_home",
+    "performance": "家门迎接",
+    "items": [
+      [
+        "neighborhood",
+        "homecoming"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "ms": 314,
+    "outcome": "settled",
+    "recent_before": []
+  },
+  {
+    "id": "comfort-zh",
+    "round": 2,
+    "text": "想让这个地方像一个可以安心靠近的怀抱。",
+    "variant": "comfort_tea",
+    "performance": "一杯暖茶",
+    "items": [
+      [
+        "craft",
+        "tea"
+      ],
+      [
+        "light",
+        "warm"
+      ],
+      [
+        "breeze",
+        "gentle"
+      ]
+    ],
+    "ms": 298,
+    "outcome": "completed",
+    "recent_before": [
+      "comfort_home"
+    ]
+  },
+  {
+    "id": "comfort-zh",
+    "round": 3,
+    "text": "想让这个地方像一个可以安心靠近的怀抱。",
+    "variant": "comfort_note",
+    "performance": "安慰与回笺",
+    "items": [
+      [
+        "paper",
+        "share"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "ms": 336,
+    "outcome": "completed",
+    "recent_before": [
+      "comfort_home",
+      "comfort_tea"
+    ]
+  },
+  {
+    "id": "comfort-en",
+    "round": 1,
+    "text": "This evening needs a little gentleness.",
+    "variant": "comfort_home",
+    "performance": "家门迎接",
+    "items": [
+      [
+        "neighborhood",
+        "homecoming"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "ms": 320,
+    "outcome": "settled",
+    "recent_before": []
+  },
+  {
+    "id": "comfort-en",
+    "round": 2,
+    "text": "This evening needs a little gentleness.",
+    "variant": "comfort_tea",
+    "performance": "一杯暖茶",
+    "items": [
+      [
+        "craft",
+        "tea"
+      ],
+      [
+        "light",
+        "warm"
+      ],
+      [
+        "breeze",
+        "gentle"
+      ]
+    ],
+    "ms": 290,
+    "outcome": "completed",
+    "recent_before": [
+      "comfort_home"
+    ]
+  },
+  {
+    "id": "comfort-en",
+    "round": 3,
+    "text": "This evening needs a little gentleness.",
+    "variant": "comfort_note",
+    "performance": "安慰与回笺",
+    "items": [
+      [
+        "paper",
+        "share"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "ms": 334,
+    "outcome": "completed",
+    "recent_before": [
+      "comfort_home",
+      "comfort_tea"
+    ]
+  },
+  {
+    "id": "joy-zh",
+    "round": 1,
+    "text": "愿这个晚上有一点轻快的雀跃。",
+    "variant": "joy_prepare",
+    "performance": "分工筹备",
+    "items": [
+      [
+        "neighborhood",
+        "prepare"
+      ],
+      [
+        "music",
+        "play"
+      ],
+      [
+        "light",
+        "warm"
+      ],
+      [
+        "breeze",
+        "lively"
+      ]
+    ],
+    "ms": 292,
+    "outcome": "settled",
+    "recent_before": []
+  },
+  {
+    "id": "joy-zh",
+    "round": 2,
+    "text": "愿这个晚上有一点轻快的雀跃。",
+    "variant": "joy_music",
+    "performance": "孩子与狐狸听琴",
+    "items": [
+      [
+        "music",
+        "play"
+      ],
+      [
+        "street",
+        "gather"
+      ],
+      [
+        "light",
+        "warm"
+      ],
+      [
+        "breeze",
+        "gentle"
+      ]
+    ],
+    "ms": 335,
+    "outcome": "completed",
+    "recent_before": [
+      "joy_prepare"
+    ]
+  },
+  {
+    "id": "joy-zh",
+    "round": 3,
+    "text": "愿这个晚上有一点轻快的雀跃。",
+    "variant": "joy_snack",
+    "performance": "分享热食",
+    "items": [
+      [
+        "craft",
+        "snack"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "ms": 291,
+    "outcome": "completed",
+    "recent_before": [
+      "joy_prepare",
+      "joy_music"
+    ]
+  },
+  {
+    "id": "joy-en",
+    "round": 1,
+    "text": "I feel unexpectedly happy. Let that feeling find a place here.",
+    "variant": "joy_prepare",
+    "performance": "分工筹备",
+    "items": [
+      [
+        "neighborhood",
+        "prepare"
+      ],
+      [
+        "music",
+        "play"
+      ],
+      [
+        "light",
+        "warm"
+      ],
+      [
+        "breeze",
+        "lively"
+      ]
+    ],
+    "ms": 490,
+    "outcome": "settled",
+    "recent_before": []
+  },
+  {
+    "id": "joy-en",
+    "round": 2,
+    "text": "I feel unexpectedly happy. Let that feeling find a place here.",
+    "variant": "joy_music",
+    "performance": "孩子与狐狸听琴",
+    "items": [
+      [
+        "music",
+        "play"
+      ],
+      [
+        "street",
+        "gather"
+      ],
+      [
+        "light",
+        "warm"
+      ],
+      [
+        "breeze",
+        "gentle"
+      ]
+    ],
+    "ms": 316,
+    "outcome": "completed",
+    "recent_before": [
+      "joy_prepare"
+    ]
+  },
+  {
+    "id": "joy-en",
+    "round": 3,
+    "text": "I feel unexpectedly happy. Let that feeling find a place here.",
+    "variant": "joy_snack",
+    "performance": "分享热食",
+    "items": [
+      [
+        "craft",
+        "snack"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "ms": 297,
+    "outcome": "completed",
+    "recent_before": [
+      "joy_prepare",
+      "joy_music"
+    ]
+  },
+  {
+    "id": "fixed-tea",
+    "round": 1,
+    "text": "给一位街坊倒一杯茶，我只想看这个。",
+    "variant": null,
+    "performance": "街边的小日子：开蒸笼、倒一杯热茶，递给一位走近的客人",
+    "items": [
+      [
+        "craft",
+        "tea"
+      ]
+    ],
+    "ms": 287,
+    "outcome": "completed",
+    "recent_before": []
+  },
+  {
+    "id": "fixed-snow",
+    "round": 1,
+    "text": "下雪了。",
+    "variant": null,
+    "performance": "天气：飘纸雪",
+    "items": [
+      [
+        "weather",
+        "snow"
+      ]
+    ],
+    "ms": 296,
+    "outcome": "completed",
+    "recent_before": []
+  },
+  {
+    "id": "fixed-music",
+    "round": 1,
+    "text": "不要烟花，让孩子们去听吉他。",
+    "variant": null,
+    "performance": "树下的琴声：让乐手演奏、琴声响起，适合相伴听琴；街坊的整体活动方向：大家去树下听琴，聚拢成为听众",
+    "items": [
+      [
+        "music",
+        "play"
+      ],
+      [
+        "street",
+        "gather"
+      ]
+    ],
+    "ms": 377,
+    "outcome": "completed",
+    "recent_before": []
+  },
+  {
+    "id": "fixed-fox",
+    "round": 1,
+    "text": "小狐狸找人打个招呼，别人照常就好。",
+    "variant": null,
+    "performance": "花园的小狐狸：走近花园旁可达的居民，摇尾打招呼",
+    "items": [
+      [
+        "animal.garden_fox",
+        "greet"
+      ]
+    ],
+    "ms": 318,
+    "outcome": "completed",
+    "recent_before": []
+  },
+  {
+    "id": "walk-zh",
+    "round": 1,
+    "text": "让两个街坊结伴走过水边，再停下来聊聊。",
+    "variant": null,
+    "performance": "街边的小日子：两位街坊结伴走过一段水边，停下来招呼、交谈，不需要借伞",
+    "items": [
+      [
+        "craft",
+        "company"
+      ]
+    ],
+    "ms": 339,
+    "outcome": "completed",
+    "recent_before": []
+  },
+  {
+    "id": "walk-en",
+    "round": 1,
+    "text": "Let two neighbors take a little walk together and stop to chat.",
+    "variant": null,
+    "performance": "街边的小日子：两位街坊结伴走过一段水边，停下来招呼、交谈，不需要借伞",
+    "items": [
+      [
+        "craft",
+        "company"
+      ]
+    ],
+    "ms": 289,
+    "outcome": "completed",
+    "recent_before": []
+  },
+  {
+    "id": "small-zh",
+    "round": 1,
+    "text": "有点孤单，找一两位街坊作伴就好，不要叫全镇过来。",
+    "variant": "company_walk",
+    "performance": "结伴散步",
+    "items": [
+      [
+        "craft",
+        "company"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "ms": 467,
+    "outcome": "completed",
+    "recent_before": []
+  },
+  {
+    "id": "small-en",
+    "round": 1,
+    "text": "A quiet little comfort for a few neighbors, not a town-wide gathering.",
+    "variant": "comfort_home",
+    "performance": "家门迎接",
+    "items": [
+      [
+        "neighborhood",
+        "homecoming"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "ms": 323,
+    "outcome": "settled",
+    "recent_before": []
+  },
+  {
+    "id": "town-zh",
+    "round": 1,
+    "text": "让全镇都高兴一点，街坊们都一起参与。",
+    "variant": "company_meet",
+    "performance": "街坊相聚",
+    "items": [
+      [
+        "occasion",
+        "reunion"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "ms": 322,
+    "outcome": "settled",
+    "recent_before": []
+  },
+  {
+    "id": "no-music",
+    "round": 1,
+    "text": "给大家一点开心，但吉他先歇着，别弹琴。",
+    "variant": null,
+    "performance": "树下的乐手：停下来歇息；街边的小日子：收好手里的东西，停止新的小活动；让邻居们慢慢找到彼此。",
+    "items": [
+      [
+        "resident.musician",
+        "rest_music"
+      ],
+      [
+        "craft",
+        "rest"
+      ],
+      [
+        "occasion",
+        "reunion"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "ms": 360,
+    "outcome": "settled",
+    "recent_before": []
+  },
+  {
+    "id": "preserve",
+    "round": 1,
+    "text": "现在这样很好，请什么都不要改变。",
+    "variant": null,
+    "performance": "小镇会保持现在的安排，继续自己的生活。",
+    "items": [],
+    "ms": 295,
+    "outcome": "no_change",
+    "recent_before": []
+  },
+  {
+    "id": "impossible",
+    "round": 1,
+    "text": "建一座太空港，把小镇搬到火星。",
+    "variant": null,
+    "performance": "这件事小镇暂时做不到。街坊听见了，向你挥挥手。",
+    "items": [
+      [
+        "resident.vendor_flower",
+        "greet"
+      ]
+    ],
+    "ms": 299,
+    "outcome": "completed",
+    "recent_before": []
+  },
+  {
+    "id": "return-note",
+    "round": 1,
+    "text": "把收到的好意轻轻还给别人。",
+    "variant": null,
+    "performance": "写下一点谢意，亲手交给一位街坊。",
+    "items": [
+      [
+        "paper",
+        "share"
+      ]
+    ],
+    "ms": 347,
+    "outcome": "completed",
+    "recent_before": []
+  },
+  {
+    "id": "longing",
+    "round": 1,
+    "text": "给远处的那个人留一点没有说完的思念。",
+    "variant": null,
+    "performance": "把这份心意写成纸笺，留在树边。",
+    "items": [
+      [
+        "paper",
+        "hang"
+      ]
+    ],
+    "ms": 290,
+    "outcome": "completed",
+    "recent_before": []
+  },
+  {
+    "id": "small-zh",
+    "round": 2,
+    "text": "有点孤单，找一两位街坊作伴就好，不要叫全镇过来。",
+    "variant": "company_tea",
+    "performance": "热茶与陪伴",
+    "items": [
+      [
+        "craft",
+        "tea"
+      ],
+      [
+        "light",
+        "warm"
+      ]
+    ],
+    "ms": 288,
+    "outcome": "completed",
+    "recent_before": [
+      "company_walk"
+    ]
+  }
+]

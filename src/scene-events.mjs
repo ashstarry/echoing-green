@@ -1,15 +1,15 @@
-import {MUSIC_CHILDREN,prepareMusicSpace} from './music-circle.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {CRAFT_KINDS,CRAFT_TIMING,CRAFT_NAMES} from './craft-design.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {ensureCraft} from './craft-world.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {NEIGHBORHOOD_KINDS,ensureNeighborhood} from './neighborhood-world.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {ensurePaperWorld} from './paper-world.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {assignGroup,GROUP_KINDS} from './group-layout.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {eventGuestCandidates,ensureEventTravel} from './event-travel.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {stableUnit} from './cadence.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {stimulateTown} from './town-response.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {moverBlocks} from './motion.mjs?v=cp51-vibe-response-d7c8487e50b4';
+import {MUSIC_CHILDREN,prepareMusicSpace} from './music-circle.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {CRAFT_KINDS,CRAFT_TIMING,CRAFT_NAMES} from './craft-design.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {ensureCraft} from './craft-world.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {NEIGHBORHOOD_KINDS,ensureNeighborhood} from './neighborhood-world.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {ensurePaperWorld} from './paper-world.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {assignGroup,GROUP_KINDS} from './group-layout.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {eventGuestCandidates,ensureEventTravel} from './event-travel.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {stableUnit} from './cadence.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {stimulateTown} from './town-response.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {moverBlocks} from './motion.mjs?v=cp52-living-variations-0f9817dcf3a8';
 
 export const EVENT_TIMING={...CRAFT_TIMING,homecoming:{gather:28,active:65,closing:7},prepare:{gather:28,active:70,closing:7},reopen:{gather:20,active:60,closing:7},spring:{gather:24,active:65,closing:7},paper_read:{gather:12,active:18,closing:5},paper_collect:{gather:12,active:22,closing:5},paper_hang:{gather:22,active:45,closing:7},paper_share:{gather:22,active:45,closing:7},snow:{gather:0,active:38,closing:7},rain:{gather:0,active:42,closing:7},lantern:{gather:22,active:32,closing:8},festival:{gather:24,active:38,closing:7},market:{gather:22,active:38,closing:8},supper:{gather:22,active:38,closing:8},reunion:{gather:22,active:34,closing:7},delivery:{gather:3,active:28,closing:5},music:{gather:20,active:18,closing:4},quiet:{gather:16,active:28,closing:6}};
 const live=j=>!['done','failed','cancelled'].includes(j.status);
@@ -27,7 +27,7 @@ export function ensureSceneEvents(s){
  }
  s.eventSequence??=0;s.eventWeather??={rain:s.weather==='rain'?1:0,snow:s.weather==='snow'?1:0,cover:0};
 }
-export function eventKind(d){if(d.festival==='fireworks')return 'festival';if(d.weather==='snow'||d.weather==='rain')return d.weather;const craft={tea:'tea_service',snack:'tea_service',umbrella:'umbrella_walk',leaves:'leaf_sweep',remember:'memory_keep',recall:'memory_read',putaway:'memory_putaway',laundry:'laundry_hang',bring_in:'laundry_collect',parcel:'parcel_handoff'}[d.craft];if(craft)return craft;if(NEIGHBORHOOD_KINDS.has(d.neighborhood))return d.neighborhood;if(d.paper==='hang')return 'paper_hang';if(d.paper==='share')return 'paper_share';if(d.paper==='read')return 'paper_read';if(d.paper==='collect')return 'paper_collect';if(EVENT_TIMING[d.occasion])return d.occasion;if(d.street==='gather')return 'music';if(d.street==='quiet')return 'quiet';if(d.day_phase==='night'&&(!d.occasion||d.occasion==='keep')&&(!d.festival||d.festival==='keep')&&(!d.weather||['keep','clear'].includes(d.weather)))return 'lantern';return null;}
+export function eventKind(d){if(d.festival==='fireworks')return 'festival';if(d.weather==='snow'||d.weather==='rain')return d.weather;const craft={company:'company_walk',tea:'tea_service',snack:'tea_service',umbrella:'umbrella_walk',leaves:'leaf_sweep',remember:'memory_keep',recall:'memory_read',putaway:'memory_putaway',laundry:'laundry_hang',bring_in:'laundry_collect',parcel:'parcel_handoff'}[d.craft];if(craft)return craft;if(NEIGHBORHOOD_KINDS.has(d.neighborhood))return d.neighborhood;if(d.paper==='hang')return 'paper_hang';if(d.paper==='share')return 'paper_share';if(d.paper==='read')return 'paper_read';if(d.paper==='collect')return 'paper_collect';if(EVENT_TIMING[d.occasion])return d.occasion;if(d.street==='gather')return 'music';if(d.street==='quiet')return 'quiet';if(d.day_phase==='night'&&(!d.occasion||d.occasion==='keep')&&(!d.festival||d.festival==='keep')&&(!d.weather||['keep','clear'].includes(d.weather)))return 'lantern';return null;}
 function clearPulse(s){s.townResponse=null;for(const a of s.actors){a.responseUntil=0;a.responseDestination=null;a.responseReplan=false;}}
 function finishSky(s){if(s.festivalUntil>s.time){s.festivalStop=s.time;s.festivalUntil=Math.min(s.festivalUntil,s.time+5.5);}s.worldEvent={kind:'ordinary',phase:'ongoing',started:s.time,until:0,revision:s.worldEvent.revision+1};}
 function closeEvent(s,e,emit,next=null){

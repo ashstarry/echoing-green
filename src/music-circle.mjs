@@ -1,5 +1,5 @@
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {makeRoom} from './event-travel.mjs?v=cp51-vibe-response-d7c8487e50b4';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {makeRoom} from './event-travel.mjs?v=cp52-living-variations-0f9817dcf3a8';
 
 export const MUSIC_CHILDREN=['resident.child_runner','resident.garden_child'];
 export const MUSIC_FOCUS=[-2.4684,-1.4537,1.1];

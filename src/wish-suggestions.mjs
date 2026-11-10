@@ -1,4 +1,4 @@
-import {actionAvailability} from './action-availability.mjs?v=cp51-vibe-response-d7c8487e50b4';
+import {actionAvailability} from './action-availability.mjs?v=cp52-living-variations-0f9817dcf3a8';
 // Curated examples use the same finite executor as the activity buttons.
 // Rotation changes only the grey hint; it never performs an activity on its own.
 const macro=(target,action)=>({kind:'macro',target,action});
@@ -9,6 +9,7 @@ export const WISH_SUGGESTIONS=[
  ['tea','让一双手被一杯热茶暖一暖。','Warm a neighbor’s hands with a cup of tea.',[macro('craft','tea')],'component.restaurant_steamer'],
  ['paper','把思念挂在树上，留一张随风的纸笺。','Leave a little wish in the lantern tree.',[macro('paper','hang')],'tree.lantern_tree'],
  ['umbrella','这把伞，分一半给身旁的人吧。','Share an umbrella and a little walk.',[macro('craft','umbrella')]],
+ ['company','把晚风分成两份，陪街坊走一小段。','Share the evening breeze with a little walk together.',[macro('craft','company')]],
  ['homecoming','留一盏灯，等晚归的人。','Leave a light for someone coming home.',[macro('neighborhood','homecoming'),macro('light','warm')],'component.home_welcome_door'],
  ['spring','让春天走进街角，花也伸个懒腰。','Let spring unfold in the corners of town.',[macro('neighborhood','spring'),macro('breeze','gentle')],'tree.lantern_tree'],
  ['fox','小狐狸，去和附近的街坊打个招呼吧。','Let the little fox say hello to a neighbor.',[object('animal.garden_fox','greet')],'animal.garden_fox'],

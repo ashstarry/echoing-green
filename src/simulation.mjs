@@ -1,28 +1,29 @@
-import {advanceInput,recoverInput} from './input-session.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {ensureBoat,advanceBoat,validateBoat} from './boat-world.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {ensureCloud,requestCloud,advanceCloud,validateCloud} from './local-cloud.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {ensureCraft,advanceCraft,validateCraft} from './craft-world.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {ensureJourney,requestJourney,advanceJourney,validateJourney} from './train-journey.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {ensureFoxBehavior,validateFox} from './fox-behavior.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {ensureNeighborhood,advanceNeighborhood,validateNeighborhood} from './neighborhood-world.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {ensurePaperWorld,advancePaperWorld,validatePaperWorld} from './paper-world.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {advanceGroupCrowd} from './group-crowd.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {eventPose} from './group-layout.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {ensureEventTravel,advanceEventTravel,eventGuestPositions,syncGuestActors,makeRoom,validateEventTravel} from './event-travel.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {FIREWORK_FOCUS} from './event-design.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {requestSceneEvent,sceneTask,holdsEventPlace,validateSceneEvents,EVENT_TIMING} from './scene-events.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {eventCenter,eventScore} from './event-space.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {stimulateTown,advanceTownResponse,validateTownResponse} from './town-response.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {createIntentRuntime,advanceIntentRuntime,validateIntentRuntime} from './life-plans.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {createPassengers,advancePassengers,validatePassengers,requestPassengerAction} from './passengers.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {advanceObjectControls,validateObjectControls} from './object-actions.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {createLocalWalkers,advanceLocalWalkers,validateLocalWalkers} from './local-walkers.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {createResidentActions,advanceResidentActions,validateResidentActions,requestResidentAction,RESIDENT_CAPABILITIES} from './resident-actions.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {createCommunity,updateDirector,updateResidents,wantedTask,routineTask,setResidentTask,ACTIVITIES,PROFILES,requestFestival} from './community.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {CADENCE,varied,stableUnit} from './cadence.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {createTrain,stepTrain,clamp,createMovers,advanceMovers,createDiners,advanceDiners,moverBlocks} from './motion.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {validateDecision,labels,ACTOR_DOMAINS} from './catalog.mjs?v=cp51-vibe-response-d7c8487e50b4';
+import {advanceInput,recoverInput} from './input-session.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {ensureBoat,advanceBoat,validateBoat} from './boat-world.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {ensureCloud,requestCloud,advanceCloud,validateCloud} from './local-cloud.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {ensureWishMemory,advanceWishMemory,validateWishMemory} from './wish-memory.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {ensureCraft,advanceCraft,validateCraft} from './craft-world.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {ensureJourney,requestJourney,advanceJourney,validateJourney} from './train-journey.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {ensureFoxBehavior,validateFox} from './fox-behavior.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {ensureNeighborhood,advanceNeighborhood,validateNeighborhood} from './neighborhood-world.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {ensurePaperWorld,advancePaperWorld,validatePaperWorld} from './paper-world.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {advanceGroupCrowd} from './group-crowd.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {eventPose} from './group-layout.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {ensureEventTravel,advanceEventTravel,eventGuestPositions,syncGuestActors,makeRoom,validateEventTravel} from './event-travel.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {FIREWORK_FOCUS} from './event-design.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {requestSceneEvent,sceneTask,holdsEventPlace,validateSceneEvents,EVENT_TIMING} from './scene-events.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {eventCenter,eventScore} from './event-space.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {stimulateTown,advanceTownResponse,validateTownResponse} from './town-response.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {createIntentRuntime,advanceIntentRuntime,validateIntentRuntime} from './life-plans.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {createPassengers,advancePassengers,validatePassengers,requestPassengerAction} from './passengers.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {advanceObjectControls,validateObjectControls} from './object-actions.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {createLocalWalkers,advanceLocalWalkers,validateLocalWalkers} from './local-walkers.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {createResidentActions,advanceResidentActions,validateResidentActions,requestResidentAction,RESIDENT_CAPABILITIES} from './resident-actions.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {createCommunity,updateDirector,updateResidents,wantedTask,routineTask,setResidentTask,ACTIVITIES,PROFILES,requestFestival} from './community.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {CADENCE,varied,stableUnit} from './cadence.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {createTrain,stepTrain,clamp,createMovers,advanceMovers,createDiners,advanceDiners,moverBlocks} from './motion.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {validateDecision,labels,ACTOR_DOMAINS} from './catalog.mjs?v=cp52-living-variations-0f9817dcf3a8';
 export const VERSION=13, DT=.05;
 const distance=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 export function createWorld(nav,seed=62417){
@@ -31,7 +32,7 @@ export function createWorld(nav,seed=62417){
  for(const a of nav.actors){s.actors.push({manual:false,task:'stroll',taskRevision:0,reservation:null,lookTarget:null,walked:0,speed:0,actualSpeed:0,gaitWeight:0,intent:'wander',eventOnly:!!a.eventOnly,mobile:!a.eventOnly&&!!a.entry?.length,id:a.id,p:[...a.position],yaw:a.yaw,scale:a.scale[2],node:a.entry.at(-1)??a.nearest[0],path:[],segment:0,target:null,mode:'idle',wait:['resident.garden_child','resident.kite_child','resident.child_parent'].includes(a.id)?.7+s.actors.length*.16:1.3+(s.actors.length*1.2)%6.2,phase:s.actors.length*.8,entry:a.entry,atHome:true,blocked:0});}
  const first=['resident.garden_child','resident.kite_child','resident.child_runner','resident.child_parent'];s.actors.sort((a,b)=>(first.includes(a.id)?first.indexOf(a.id):99)-(first.includes(b.id)?first.indexOf(b.id):99));
  for(const a of s.actors)if(a.mobile){a.wait=.15+stableUnit(a.id)*1.8;s.residentActions[a.id].nextAt=8+stableUnit(a.id)*3;}stimulateTown(s,[],{opening:true});
- ensureBoat(s,nav.activities?.boatRoute);ensureCloud(s);ensureCraft(s);ensureJourney(s);ensureFoxBehavior(s);ensureNeighborhood(s);ensurePaperWorld(s);ensureEventTravel(s,nav);event(s,'晚风里，小镇开始了自己的日常。');return s;
+ ensureWishMemory(s);ensureBoat(s,nav.activities?.boatRoute);ensureCloud(s);ensureCraft(s);ensureJourney(s);ensureFoxBehavior(s);ensureNeighborhood(s);ensurePaperWorld(s);ensureEventTravel(s,nav);event(s,'晚风里，小镇开始了自己的日常。');return s;
 }
 export function random(s){let x=s.seed;x^=x<<13;x^=x>>>17;x^=x<<5;s.seed=x>>>0;return s.seed/4294967296;}
 export function event(s,text){s.events.unshift({t:Math.round(s.time),text});s.events=s.events.slice(0,24);}
@@ -98,7 +99,7 @@ export function step(s,nav,dt=DT){if(s.paused)return;if(dt!==DT)throw Error('模
  a.blocked=0;a.mode='walk';a.speed=Math.min(speed,a.speed+dt*1.2);a.walked+=travel;a.actualSpeed=travel/dt;const wanted=Math.atan2(target[1]-a.p[1],target[0]-a.p[0])+Math.PI/2;let delta=Math.atan2(Math.sin(wanted-a.yaw),Math.cos(wanted-a.yaw));a.yaw+=Math.max(-dt*3,Math.min(dt*3,delta));a.p=candidate;const ix=Math.round((a.p[0]-nav.origin[0])/nav.step),iy=Math.round((a.p[1]-nav.origin[1])/nav.step),floorNode=nav.grid[`${ix},${iy}`];if(floorNode!==undefined){a.p[2]=nav.nodes[floorNode][2]-.02*a.scale+.006;a.node=floorNode;}s.stats.moves++;
  if(d<=travel+.00001){a.node=n;a.segment++;if(a.segment>=a.path.length){a.path=[];a.target=null;a.mode='idle';if(a.detouring){a.detouring=false;a.wait=a.eventYieldUntil>s.time?3.5:.2;a.reservation=a.responseDestination??null;continue;}a.wait=varied((a.responseUntil||0)>s.time&&!['shelter','fireworks'].includes(a.task)?[3,6]:(ACTIVITIES[a.task]?.range||CADENCE.rest),a.id,s.residents[a.id].cycle);const r=s.residents[a.id];r.started=s.time;r.until=s.time+a.wait;r.reason=a.task==='shelter'?(nav.activities.spaces.nodes[a.node].covered?'在屋檐下等雨小些':'在门前撑伞，等雨小些'):'已经到了，'+(ACTIVITIES[a.task]?.label||'休息一会');a.lookTarget=a.task==='kite'?[2.5,-1,4]:a.task==='follow'?(s.actors.find(b=>b.id==='resident.kite_child')?.p||null):a.task==='fireworks'?FIREWORK_FOCUS.slice():a.task==='lotus'?[8,-1.5,.7]:a.task==='listen'?[-2.47,-1.45,1.2]:a.task==='browse'?(nav.activities.spaces.residents[a.workstation]?.position||[-1,3,1.2]):null;if(a.task==='chat'){const other=s.actors.filter(b=>b!==a).sort((b,c)=>distance(a.p,b.p)-distance(a.p,c.p))[0];a.lookTarget=other?.p?.slice()||null;}r.needs[a.task==='chat'?'social':a.task==='rest'?'rest':'curiosity']=.1;s.stats.completed++;}}
  }
- syncGuestActors(s);advanceInput(s,nav);
+ syncGuestActors(s);advanceInput(s,nav);advanceWishMemory(s);
 }
 export function serialize(s){return JSON.stringify(s);}
 export function restore(raw,nav){const s=typeof raw==='string'?JSON.parse(raw):structuredClone(raw);if(['cruise','dock','row'].includes(s.objectControls?.['boat.pond_boat']?.action)){delete s.objectControls['boat.pond_boat'];if(s.boatJourney&&nav.activities?.boatRoute)Object.assign(s.boatJourney,{retiredCruise:true,phase:'moored',p:nav.activities.boatRoute.home.slice(),distance:0,speed:0,fold:0,tether:1,blocked:0});}
@@ -124,7 +125,7 @@ export function restore(raw,nav){const s=typeof raw==='string'?JSON.parse(raw):s
  if(!s.residents||Object.keys(s.residents).length!==Object.keys(PROFILES).length||!s.worldEvent||!['ordinary','festival'].includes(s.worldEvent.kind)||!['ongoing','prepare','show','linger','postponed'].includes(s.worldEvent.phase)||!Number.isFinite(s.planRevision))throw Error('居民意图存档无效');
  for(const[id,r]of Object.entries(s.residents)){if(!Object.hasOwn(PROFILES,id)||!Object.hasOwn(ACTIVITIES,r.activity)||!Number.isFinite(r.until)||!Number.isFinite(r.started)||!Number.isFinite(r.umbrellaOpen)||r.umbrellaOpen<0||r.umbrellaOpen>1||!r.lookTarget?.every(Number.isFinite))throw Error('居民活动存档无效');}
  for(const[id,r]of Object.entries(s.roleOverrides||{}))if(!Object.hasOwn(PROFILES,id)||!Object.hasOwn(ACTIVITIES,r.activity)||!Number.isFinite(r.until))throw Error('角色活动存档无效');
- validateBoat(s,nav.activities?.boatRoute);validateCloud(s,nav);validateCraft(s,nav);validateJourney(s);ensureFoxBehavior(s);validateFox(s,nav.activities.foxRoaming);validateNeighborhood(s,nav);validatePaperWorld(s,nav);validateEventTravel(s,nav);validateSceneEvents(s,nav);validateTownResponse(s);validateIntentRuntime(s);validateDecision({day_phase:s.day_phase});if(!s.dayWeights||Object.values(s.dayWeights).some(x=>!Number.isFinite(x)||x<0||x>1))throw Error('日夜存档无效');validatePassengers(s,nav.activities?.boarding);validateObjectControls(s);validateResidentActions(s);validateLocalWalkers(s,nav.activities?.localRoutes);recoverInput(s);return s;}
+ validateBoat(s,nav.activities?.boatRoute);validateCloud(s,nav);validateCraft(s,nav);validateJourney(s);ensureFoxBehavior(s);validateFox(s,nav.activities.foxRoaming);validateNeighborhood(s,nav);validatePaperWorld(s,nav);validateEventTravel(s,nav);validateSceneEvents(s,nav);validateTownResponse(s);validateIntentRuntime(s);validateDecision({day_phase:s.day_phase});if(!s.dayWeights||Object.values(s.dayWeights).some(x=>!Number.isFinite(x)||x<0||x>1))throw Error('日夜存档无效');validatePassengers(s,nav.activities?.boarding);validateObjectControls(s);validateResidentActions(s);validateLocalWalkers(s,nav.activities?.localRoutes);recoverInput(s);validateWishMemory(s);return s;}
 
 export function captureIntent(s){return {...Object.fromEntries(['weather','breeze','light','music','street','birds','dining','pond','animals','cycling','occasion','day_phase'].map(k=>[k,s[k]])),train:s.trainPolicy,festival:s.festivalAuto?'auto':s.festivalUntil>s.time?'fireworks':'quiet',...Object.fromEntries(Object.entries(ACTOR_DOMAINS).map(([k,id])=>[k,s.actors.find(a=>a.id===id)?.intent||'keep']))};}
 

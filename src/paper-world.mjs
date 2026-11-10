@@ -1,5 +1,7 @@
-import {createInteraction,advanceInteraction,interactionStep,INTERACTION_RECIPES} from './interaction-sequence.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {navigationGraph,pathTo} from './navigation.mjs?v=cp51-vibe-response-d7c8487e50b4';
+import {recentParticipationPenalty,returnKindness} from './wish-memory.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {moverBlocks} from './motion.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {createInteraction,advanceInteraction,interactionStep,INTERACTION_RECIPES} from './interaction-sequence.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {navigationGraph,pathTo} from './navigation.mjs?v=cp52-living-variations-0f9817dcf3a8';
 export const PAPER_MODES=new Set(['paper_hang','paper_share','paper_read','paper_collect']);
 export const PAPER_LIMIT=6;
 const STATIONS=[{write:[-2.88,-.56],hang:[-2.72,.24],receive:[-2.4,.88]},{write:[1.92,2],hang:[2.24,.24],receive:[2.88,.72]},{write:[3.04,-.08],hang:[1.44,-1.68],receive:[2.08,-1.68]}];
@@ -8,8 +10,8 @@ const D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 export function ensurePaperWorld(s){s.paperWorld??={next:1,notes:[],jobs:[],eventId:null,pending:null};return s.paperWorld;}
 function nearest(nav,p){const graph=navigationGraph(nav),main=graph.components[nav.actors[0].entry.at(-1)];return nav.nodes.map((q,i)=>({i,d:D(q,p)})).filter(x=>graph.components[x.i]===main).sort((a,b)=>a.d-b.d)[0].i;}
 export function paperAnchor(nav,station,slot,scale=1.08){const p=nav.nodes[nearest(nav,STATIONS[station].hang)],dx=-.2347-p[0],dy=-.6956-p[1],d=Math.hypot(dx,dy),side=slot%2?1:-1;return[p[0]+dx/d*.23-dy/d*.14*side,p[1]+dy/d*.23+dx/d*.14*side,p[2]+1.06*scale];}
-function unlock(s,job,e){const a=s.actors.find(a=>a.id===job.actor);if(!a)return;delete a.interactionLock;delete a.interactionLook;delete a.interactionTask;if(e?.slots)delete e.slots[a.id];a.path=[];a.reservation=null;a.target=null;a.taskRevision=-1;a.wait=.4;if(s.residentActions[a.id])s.residentActions[a.id].nextAt=s.time+1;}
-function lock(s,job,e,targetName){const a=s.actors.find(a=>a.id===job.actor),node=job.context[targetName+'Node'];if(!a||node===undefined)return;a.interactionLock=job.id;a.interactionLook=(targetName==='destination'?job.context.look:job.context.writeLook).slice();a.interactionTask=interactionStep(job)?.action==='approach'?'stroll':'inspect';e.slots[a.id]=node;a.reservation=node;a.localActionUntil=0;a.manualActivity=null;}
+function unlock(s,job,e){const a=s.actors.find(a=>a.id===job.actor);if(!a)return;delete a.interactionLock;delete a.interactionLook;delete a.interactionTask;delete a.interactionStand;if(e?.slots)delete e.slots[a.id];a.path=[];a.reservation=null;a.target=null;a.taskRevision=-1;a.wait=.4;if(s.residentActions[a.id])s.residentActions[a.id].nextAt=s.time+1;}
+function lock(s,job,e,targetName){const a=s.actors.find(a=>a.id===job.actor),node=job.context[targetName+'Node'];if(!a||node===undefined)return;a.interactionLock=job.id;a.interactionLook=(targetName==='destination'?job.context.look:job.context.writeLook).slice();a.interactionTask=interactionStep(job)?.action==='approach'?'stroll':'inspect';if(a.interactionTask==='stroll')delete a.interactionStand;e.slots[a.id]=node;a.reservation=node;a.localActionUntil=0;a.manualActivity=null;}
 function startPaper(s,nav,e){
  const w=ensurePaperWorld(s);w.eventId=e.id;w.jobs=[];e.slotsAssigned=true;e.slots={};e.paperStarted=true;e.openRideLane=true;
  const used=new Set(),candidates=s.actors.filter(a=>ELIGIBLE.includes(a.id)&&a.mobile&&!a.manual&&!e.protectedIds?.includes(a.id)&&!s.residentActions[a.id]?.requested);
@@ -19,16 +21,19 @@ function startPaper(s,nav,e){
    const job=createInteraction({id:e.id+':'+actor.id,recipe:e.kind==='paper_read'?'read_note':'collect_note',actor:actor.id,prop:note.id,context});w.jobs.push(job);actor.path=[];actor.wait=.1;actor.reservation=null;actor.taskRevision=-1;const r=s.residentActions[actor.id];r.action=null;r.queued=null;lock(s,job,e,'destination');
   }return;
  }
+ const care=e.kind==='paper_share'?returnKindness(s,candidates):null;
  const count=e.kind==='paper_share'?Math.min(1,Math.floor(candidates.length/2)):Math.min(1,candidates.length);
  const routeLength=(a,b)=>{const route=pathTo(nav,a,b);return route.length?route.reduce((v,n,i)=>v+(i?D(nav.nodes[route[i-1]],nav.nodes[n]):0),0):Infinity;};
- const stations=STATIONS.map((c,station)=>{const write=nearest(nav,c.write),hang=nearest(nav,c.hang);return{station,score:Math.min(...candidates.map(a=>routeLength(a.node,write)))+routeLength(write,hang)+s.actors.filter(a=>D(a.p,nav.nodes[hang])<.9).length};}).sort((a,b)=>a.score-b.score).slice(0,count);
+ const occupied=p=>Object.entries(s.movers||{}).some(([id,m])=>['ride','creature_walk'].includes(nav.activities?.clips[id]?.motion)&&moverBlocks(p,m,nav.activities.clips[id],.24));
+ const stations=STATIONS.map((c,station)=>{const write=nearest(nav,c.write),hang=nearest(nav,c.hang),receive=nearest(nav,c.receive);return{station,score:Math.min(...candidates.map(a=>routeLength(a.node,write)))+routeLength(write,hang)+s.actors.filter(a=>D(a.p,nav.nodes[hang])<.9).length+([write,hang,...(e.kind==='paper_share'?[receive]:[])].some(n=>occupied(nav.nodes[n]))?100:0)};}).sort((a,b)=>a.score-b.score).slice(0,count);
  for(const {station} of stations){
   const config=STATIONS[station],writingNode=nearest(nav,config.write),destinationNode=nearest(nav,config.hang);
-  const actor=candidates.filter(a=>!used.has(a.id)).sort((a,b)=>D(a.p,nav.nodes[writingNode])-D(b.p,nav.nodes[writingNode]))[0];if(!actor)continue;used.add(actor.id);
+  const actor=(care&&candidates.find(a=>a.id===care.to&&D(a.p,nav.nodes[writingNode])<6))||candidates.filter(a=>!used.has(a.id)).sort((a,b)=>D(a.p,nav.nodes[writingNode])+recentParticipationPenalty(s,a.id)-D(b.p,nav.nodes[writingNode])-recentParticipationPenalty(s,b.id))[0];if(!actor)continue;used.add(actor.id);
   const ids=w.notes.filter(n=>n.location==='anchor').map(n=>n.slot),options=[station*2,station*2+1],slot=options.find(x=>!ids.includes(x))??options.sort((a,b)=>(w.notes.find(n=>n.location==='anchor'&&n.slot===a)?.placedAt||0)-(w.notes.find(n=>n.location==='anchor'&&n.slot===b)?.placedAt||0))[0];
   const old=w.notes.find(n=>n.location==='anchor'&&n.slot===slot),id='paper-note-'+w.next++,anchor=paperAnchor(nav,station,slot,actor.scale),note={id,purpose:e.kind,author:actor.id,owner:actor.id,side:'left',location:'supply',stage:'blank',color:(w.next-2)%6,message:String(e.sourceText||'').slice(0,160),created:s.time,slot:null,anchor:null,station};
   w.notes.push(note);let recipient=null,recipientNode=null;
-  if(e.kind==='paper_share'){recipient=candidates.filter(a=>!used.has(a.id)).sort((a,b)=>D(a.p,nav.nodes[destinationNode])-D(b.p,nav.nodes[destinationNode]))[0];if(!recipient)continue;used.add(recipient.id);const p=nav.nodes[destinationNode];recipientNode=nearest(nav,config.receive);}
+  if(e.kind==='paper_share'){recipient=(care&&actor.id===care.to&&candidates.find(a=>a.id===care.from&&!used.has(a.id)))||candidates.filter(a=>!used.has(a.id)).sort((a,b)=>D(a.p,nav.nodes[destinationNode])-D(b.p,nav.nodes[destinationNode]))[0];if(!recipient)continue;used.add(recipient.id);const p=nav.nodes[destinationNode];recipientNode=nearest(nav,config.receive);}
+  if(care&&actor.id===care.to&&recipient?.id===care.from)e.returningKindness=true;
   const context={eventId:e.id,pace:s.inputSession?.phase==='running'?1.18:1,writingNode,destinationNode,station,slot,anchor,oldNote:old?.id||null,occupied:!!old,recipient:recipient?.id||null,writeLook:[nav.nodes[writingNode][0],nav.nodes[writingNode][1]-1,.9],look:recipient?nav.nodes[recipientNode].slice(0,3):anchor};
   w.jobs.push(createInteraction({id:e.id+':'+actor.id,recipe:recipient?'share_note':'hang_note',actor:actor.id,prop:id,context}));
   if(recipient){w.jobs.push(createInteraction({id:e.id+':'+recipient.id,recipe:'receive_note',actor:recipient.id,prop:id,context:{...context,writingNode:recipientNode,destinationNode:recipientNode,look:nav.nodes[destinationNode].slice(0,3),sender:actor.id,occupied:false}}));}
@@ -46,7 +51,7 @@ export function advancePaperWorld(s,nav,dt,startDeferred){
    condition(key){if(key==='occupied')return job.context.occupied;if(key==='received')return note.owner===job.actor&&note.location==='hand';if(key==='recipient'){const r=w.jobs.find(j=>j.actor===job.context.recipient);const b=s.actors.find(x=>x.id===job.context.recipient);return r&&b&&b.node===r.context.destinationNode&&!b.path.length&&D(a.p,b.p)<1.2;}return false;},
    enter(step){lock(s,job,e,step.target||((job.step<4&&job.recipe!=='receive_note')?'writing':'destination'));},
    move(target){lock(s,job,e,target);},
-   arrived(target){return a.node===job.context[target+'Node']&&!a.path.length&&a.mode==='idle'&&D(a.p,nav.nodes[job.context[target+'Node']])<.08;},
+   arrived(target){const goal=job.context[target+'Node'],partnerId=job.context.recipient||job.context.sender,other=w.jobs.find(j=>j.actor===partnerId),b=s.actors.find(a=>a.id===partnerId),partnerPoint=other?(other.step>=(other.recipe==='share_note'?5:1)&&b?.interactionStand?b.interactionStand:nav.nodes[other.context.destinationNode]):null,closeEnough=target!=='destination'||!partnerPoint||D(a.p,partnerPoint)<1.14;if((target==='writing'||['share_note','receive_note'].includes(job.recipe))&&D(a.p,nav.nodes[goal])<.22&&closeEnough){const actual=nearest(nav,a.p);job.context[target+'Node']=actual;a.node=actual;a.path=[];a.mode='idle';a.actualSpeed=0;a.speed=0;a.interactionStand=a.p.slice();e.slots[a.id]=actual;a.reservation=actual;return true;}return a.node===goal&&!a.path.length&&a.mode==='idle'&&D(a.p,nav.nodes[goal])<.08;},
    commit(step){
     if(step.action==='take'){note.location='hand';note.owner=job.actor;}
     if(step.action==='write')note.stage='written';

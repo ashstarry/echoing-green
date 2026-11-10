@@ -1,7 +1,7 @@
 import * as THREE from 'three';
-import {createPavingSupport} from './foot-support.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {refineFoxModel} from './fox-model.mjs?v=cp51-vibe-response-d7c8487e50b4';
-import {foxPose} from './fox-behavior.mjs?v=cp51-vibe-response-d7c8487e50b4';
+import {createPavingSupport} from './foot-support.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {refineFoxModel} from './fox-model.mjs?v=cp52-living-variations-0f9817dcf3a8';
+import {foxPose} from './fox-behavior.mjs?v=cp52-living-variations-0f9817dcf3a8';
 const PITCH=new THREE.Vector3(0,0,-1),UP=new THREE.Vector3(0,1,0);
 // Four joined, flat-shaded paper folds replace the single rigid triangular tail.
 // Each next segment is attached at its predecessor's end, so bends never tear.
